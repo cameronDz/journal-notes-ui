@@ -1,0 +1,295 @@
+{
+    "todo": { 
+        "list": [
+            {
+                "name": "Save Audible bookes",
+                "type": 1,
+                "status": 3
+            },
+            {
+                "name": "Update Finances",
+                "type": 2,
+                "status": 2,
+                "list": [
+                    {
+                        "name": "Cancel Audible",
+                        "type": 1,
+                        "status": 3
+                    },
+                    {
+                        "name": "Count coins",
+                        "type": 1,
+                        "status": 3
+                    },
+                    {
+                        "name": "Deposit Connex check",
+                        "type": 1,
+                        "status": 3
+                    },
+                    {
+                        "name": "Check medical bills",
+                        "type": 1,
+                        "status": 3
+                    },
+                    {
+                        "name": "Pay Discover card",
+                        "type": 1,
+                        "status": 3
+                    },
+                    {
+                        "name": "Pay American Express card",
+                        "type": 1,
+                        "status": 3
+                    },
+                    {
+                        "name": "Audit Discover account",
+                        "type": 1,
+                        "status": 1
+                    },
+                    {
+                        "name": "Create budget",
+                        "type": 1,
+                        "status": 1
+                    },
+                    {
+                        "name": "Go to North Haven clinic to pay bill",
+                        "type": 1,
+                        "status": 1
+                    }
+                ]
+            },
+            {
+                "name": "Put out recycling",
+                "type": 1,
+                "status": 3
+            },
+            {
+                "name": "Put out trash",
+                "type": 1,
+                "status": 3
+            },
+            {
+                "name": "Clean dishes",
+                "type": 1,
+                "status": 2
+            },
+            {
+                "name": "Purchase candles",
+                "type": 1,
+                "status": 3
+            },
+            {
+                "name": "Review personal notebook",
+                "type": 1,
+                "status": 1
+            },
+            {
+                "name": "Write birthday cards",
+                "type": 2,
+                "status": 2,
+                "list": [
+                    {
+                        "name": "Write July cards",
+                        "type": 1,
+                        "status": 3
+                    },
+                    {
+                        "name": "Write August cards",
+                        "type": 1,
+                        "status": 1
+                    },
+                    {
+                        "name": "Write September cards",
+                        "type": 1,
+                        "status": 1
+                    },
+                    {
+                        "name": "Purchase new cards",
+                        "type": 1,
+                        "status": 3
+                    },
+                    {
+                        "name": "Purchase stamps",
+                        "type": 1,
+                        "status": 3
+                    }
+                ]
+            },
+            {
+                "name": "Purchase Plan",
+                "type": 2,
+                "status": 1,
+                "list": [
+                    {
+                        "name": "PC",
+                        "type": 1,
+                        "status": 1
+                    },
+                    {
+                        "name": "Laptop",
+                        "type": 1,
+                        "status": 1
+                    },
+                    {
+                        "name": "PS4",
+                        "type": 1,
+                        "status": 1
+                    },
+                    {
+                        "name": "Home Server",
+                        "type": 1,
+                        "status": 1
+                    }
+                ]
+            },
+            {
+                "name": "Organize bathroom sink",
+                "type": 1,
+                "status": 1
+            },
+            {
+                "name": "Set up wall mounts for bed",
+                "type": 1,
+                "status": 1
+            },
+            {
+                "name": "Set up liquor shelves",
+                "type": 1,
+                "status": 1
+            }
+        ],
+        "metadata": {
+            "verison": "1.0.0",
+            "types": {
+                "task": 1,
+                "list": 2
+            },
+            "statuses": {
+                "created": 1,
+                "inProgress": 2,
+                "complete": 3
+            }
+        }
+    },
+    "goals": {
+        "fitness": {
+            "list": [
+                { "name": "325# squat" },
+                { "name": "225# clean and press (or jerk)" },
+                { "name": "12% body fat at 175#" }
+            ]
+        },
+        "software": {
+            "raspberryPi": {
+                "type": 2,
+                "list": [
+                    {
+                        "name": "function",
+                        "description": "create functional OS cards"
+                    },
+                    {
+                        "name": "clean up project",
+                        "description": "clean project and make workable"
+                    },
+                    {
+                        "name": "screen",
+                        "description": "setup mini screen for permanant use"
+                    }
+                ]
+            },
+            "augmented": {
+                "type": 2,
+                "list": [
+                    {
+                        "name": "reorganized project structure",
+                        "description": "folder structure reorganization of source code"
+                    },
+                    {
+                        "name": "redesign frontend",
+                        "description": "make frontend user friendly for none creator users"
+                    },
+                    {
+                        "name": "heroku issues",
+                        "description": "figure out issue with connecting Spring boot project to AWS database with heroku"
+                    },
+                    {
+                        "name": "stretching section",
+                        "description": "create frontend and backend capability to tracking stretching"
+                    }
+                ]
+            },
+            "twitchPlugin": {
+                "type": 1,
+                "name": "Twitch Plugin",
+                "description": "create a usable plugin for twitch"
+            },
+            "shiftScheduler": {
+                "type": 1,
+                "name": "Shift Scheduler Application",
+                "description": "create application for scheduling shifts"
+            }
+        },
+        "majorPurchases": {
+            "general": {
+                "list": [
+                    {
+                        "name": "home server",
+                        "price": 1000
+                    },
+                    {
+                        "name": "desktop pc",
+                        "price": 1500
+                    },
+                    {
+                        "name": "laptop",
+                        "price": 1000
+                    },
+                    {
+                        "name": "ps4",
+                        "price": 500
+                    }
+                ]
+            }
+        }
+    },
+    "fashion": {
+        "list": [
+            {
+                "name": "mvmt watch",
+                "url": "https://www.mvmtwatches.com/collections/classic/products/white-black-tan-leather"
+            },
+            {
+                "name": "All Sport shirts",
+                "description": "workout shirts made in USA"
+            }
+        ]
+    },
+    "art": {
+        "videoGames": {
+            "list": [
+                "gauntlet dark legacy",
+                "final fantasy xii",
+                "metal gear solid 4"
+            ]
+        },
+        "movies": {
+            "list": [
+                "Akira",
+                "Princess Mononoke",
+                "My Neighbor Totoro"
+            ]
+        },
+        "paintings": {
+            "list": [
+                {
+                    "name": "Lady Godiva",
+                    "artist": "John Collier",
+                    "description": "originally 1898 painting by English artist"
+                },
+                {
+                    "instagram": "@kevinboudreau_"
+                }
+            ]
+        }
+    }
+}

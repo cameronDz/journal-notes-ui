@@ -1,0 +1,27 @@
+{
+    "author": "Chris Blakely",
+    "comments": [{
+        "comment": "Suggested resource;  Clean Code: A Handbook of Agile Software Craftsmanship by Robert C Martin.",
+        "createdDate": "2019-08-14"
+    }],
+    "description": "Advice for JR devs on how to produce decent code.",
+    "publishDate": "2019-03-28",
+    "publisher": "Free Code Camp",
+    "quotes": [{
+        "quote": "Clean code is focused — Each function, each class, and module should do one thing and do it well.",
+        "createdDate": "2019-08-14"
+    }, {
+        "quote": "It should be elegant — Clean code should be simple to read. Reading it should make you smile. It should leave you thinking “I know exactly what this code is doing”",
+        "createdDate": "2019-08-14"
+    }, {
+        "quote": "To make your code clear and easy to read, make sure the indentation, line breaks, and formatting are consistent.",
+        "createdDate": "2019-08-14"
+    }, {
+        "quote": "...if you can’t name your function or method, then that function is doing too much.",
+        "createdDate": "2019-08-14"
+    }],
+    "tags": ["clean-code", "resources", "software"],
+    "title": "The junior developer’s guide to writing super clean and readable code",
+    "url": "https://medium.com/free-code-camp/the-junior-developers-guide-to-writing-super-clean-and-readable-code-cd2568e08aae",
+    "createdDate": "2019-08-14"
+}

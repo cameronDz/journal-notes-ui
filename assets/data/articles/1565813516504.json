@@ -1,0 +1,27 @@
+{
+    "author": "Indrek Lasn",
+    "comments": [{
+        "comment": "Trello Clone; drag and drop between boards, client side save options, server side CRUD actions.",
+        "createdDate": "2019-08-14"
+    }, {
+        "comment": "Cryptocurrency Tracker (native app); using mobile simulators, fetching from 3rd party APIs, native app development.",
+        "createdDate": "2019-08-14"
+    }, {
+        "comment": "Hacker News clone; use Hacker News API, creating SPA, implement - comments, profiles, views, up/down votes.",
+        "createdDate": "2019-08-14"
+    }, {
+        "comment": "Todo app; front end validation, filtering..",
+        "createdDate": "2019-08-14"
+    }],
+    "description": "Covers 8 different ideas for portfolio projects.",
+    "publishDate": "2017-12-01",
+    "publisher": "Better Programming",
+    "quotes": [{
+        "quote": "...pick something and just build it!",
+        "createdDate": "2019-08-14"
+    }],
+    "tags": ["portfolio", "software"],
+    "title": "The Secret to Being a Top Developer Is Building Things! Here’s a List of Fun Apps to Build!",
+    "url": "https://medium.com/better-programming/the-secret-to-being-a-top-developer-is-building-things-heres-a-list-of-fun-apps-to-build-aac61ac0736c",
+    "createdDate": "2019-08-14"
+}

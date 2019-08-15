@@ -1,0 +1,33 @@
+{
+    "author": " Ravi Shankar Rajan",
+    "comments": [{
+        "comment": "Suggested resource/reference: \"A handbook of Agile Software Craftsmanship\" - Robert Martin.",
+        "createdDate": "2019-08-14"
+    }],
+    "description": "General tips on clean code.",
+    "publishDate": "2019-08-05",
+    "publisher": "Towards Data Science",
+    "quotes": [{
+        "quote": "...the first thoughts of any developer are hardly clear. The code will be probably a clutter of muddy ideas and syntax. It will be essentially the first draft.",
+        "createdDate": "2019-08-14"
+    }, {
+        "quote": "Always remember, the name of any variable, function or class should answer three big questions; why it exists, what it does and what it is used.",
+        "createdDate": "2019-08-14"
+    }, {
+        "quote": "Comments do not make up for bad code... Comments are like a double-edged knife. Nothing can be more helpful than a well-placed comment. On the other hand, nothing can clutter up more than frivolous, useless comments that consume space. ",
+        "createdDate": "2019-08-14"
+    }, {
+        "quote": "A formatted code is a window to your mind. We want people to be impressed by our orderliness, attention to detail and clarity of thought. ",
+        "createdDate": "2019-08-14"
+    }, {
+        "quote": "If you are thinking that \"getting it working\" is the first order of business for the professional developer, you cannot be further away from the truth.",
+        "createdDate": "2019-08-14"
+    }, {
+        "quote": "Write your \"try-catch-finally\" statement first.",
+        "createdDate": "2019-08-14"
+    }],
+    "tags": ["clean-code", "resources", "software"],
+    "title": "How To Write Clean Code That Reduces Headaches.",
+    "url": "https://towardsdatascience.com/how-to-write-clean-code-that-reduces-headaches-23ff6d933fdd",
+    "createdDate": "2019-08-14"
+}
