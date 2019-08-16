@@ -1,0 +1,30 @@
+{
+    "author": "Corbin March",
+    "comments": [{
+        "comment": "Suggested resource; 'Teach Yourself Programming in Ten Years' by Peter Norvig.",
+        "createdDate": "2019-08-15"
+    }, {
+        "comment": "Going to tech user groups is a good way to become a more social programmer while learning.",
+        "createdDate": "2019-08-15"
+    }],
+    "description": "Tips for learning and developing as a programmer early in your career.",
+    "publishDate": "2019-05-06",
+    "publisher": "The Software Guild",
+    "quotes": [{
+        "quote": "Up-to-date knowledge on technology and a willingness to learn make a passionate Junior Developer an incredibly valuable thing, far more than a professed expert who is stuck in their ways.",
+        "createdDate": "2019-08-15"
+    }, {
+        "quote": "...new concepts changed the way I thought about my existing tools, which further changed the way I thought about new tools.",
+        "createdDate": "2019-08-15"
+    }, {
+        "quote": "Tech user groups are full of people who love to meet face to face, share the projects they’re working on, and talk about ways to improve.",
+        "createdDate": "2019-08-15"
+    }, {
+        "quote": "We need to be comfortable starting with the basics and making mistakes. Your first project won’t be as good as those that follow.",
+        "createdDate": "2019-08-15"
+    }],
+    "tags": ["resources", "career-advice", "software", "programming"],
+    "title": "How I Learned Programming in Ten Short Years, Thanks to Peter Norvig",
+    "url": "https://medium.com/the-software-guild-blog/how-i-learned-programming-in-ten-short-years-thanks-to-peter-norvig-8dd0b365b87f",
+    "createdDate": "2019-08-15"
+}
