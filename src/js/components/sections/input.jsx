@@ -116,7 +116,7 @@ const input = () => {
         <h4>Add Quote</h4>
         <label forHtml="quote">Quotes: {renderArray(quotes, 'quote')}</label>
         <p>
-          <textarea name="quote" onChange={event => setQuote(event.target.value)} value={quote}></textarea>
+          <input name="quote" onChange={event => setQuote(event.target.value)} value={quote} />
         </p>
         <button onClick={handleAddQuote}>Add a new Quote</button>
         <button onClick={handleRemoveQuote}>Clear last Quote</button>
