@@ -116,7 +116,7 @@ const input = () => {
         <h4>Add Quote</h4>
         <label forHtml="quote">Quotes: {renderArray(quotes, 'quote')}</label>
         <p>
-          <input name="quote" onChange={event => setQuote(event.target.value)} value={quote} />
+          <textarea name="quote" onChange={event => setQuote(event.target.value)} value={quote}></textarea>
         </p>
         <button onClick={handleAddQuote}>Add a new Quote</button>
         <button onClick={handleRemoveQuote}>Clear last Quote</button>
@@ -125,7 +125,7 @@ const input = () => {
         <h4>Add Tag</h4>
         <label forHtml="tag">Tag: {renderArray(tags)}</label>
         <p>
-          <textarea name="tag" onChange={event => setTag(event.target.value)} value={tag}></textarea>
+          <input name="tag" onChange={event => setTag(event.target.value)} value={tag} />
         </p>
         <button onClick={handleAddTag}>Add a new Tag</button>
         <button onClick={handleRemoveTag}>Clear last Tag</button>
