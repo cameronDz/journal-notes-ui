@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { downloadJson } from '../../libs/download';
+import { generateDateString } from '../../libs/date';
 
 const input = () => {
 
@@ -19,14 +20,6 @@ const input = () => {
   const [tags, setTags] = useState([]);
 
   const [payload, setPayload] = useState('');
-
-  const getLocalDateString = () => {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = (date.getMonth() < 9) ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1);
-    const day = (date.getDate() < 10) ? "0" + date.getDate() : date.getDate();
-    return year + '-' + month + '-' + day;
-  };
 
   const handleClearClick = () => {
     setAuthor('');
@@ -48,21 +41,21 @@ const input = () => {
     handleAddComment();
     handleAddQuote();
     handleAddTag();
-    const obj = { author, comments, description, publishDate, publisher, quotes, tags, title, url, "createdDate": getLocalDateString() };
+    const obj = { author, comments, description, publishDate, publisher, quotes, tags, title, url, "createdDate": generateDateString() };
     downloadJson(obj);
     setPayload(JSON.stringify(obj));
   };
 
   const handleAddComment = () => {
     if (!!comment) {
-      setComments([...comments, { comment, "createdDate": getLocalDateString() }]);
+      setComments([...comments, { comment, "createdDate": generateDateString() }]);
       setComment('');
     }
   };
 
   const handleAddQuote = () => {
     if (!!quote) {
-      setQuotes([...quotes, { quote, "createdDate": getLocalDateString() }]);
+      setQuotes([...quotes, { quote, "createdDate": generateDateString() }]);
       setQuote('');
     }
   };
