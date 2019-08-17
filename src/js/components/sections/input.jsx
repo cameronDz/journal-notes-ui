@@ -28,6 +28,22 @@ const input = () => {
     return year + '-' + month + '-' + day;
   };
 
+  const handleClearClick = () => {
+    setAuthor('');
+    setDescription('');
+    setPublishDate('');
+    setPublisher('');
+    setTitle('');
+    setUrl('');
+    setComment('');
+    setComments([]);
+    setQuote('');
+    setQuotes([]);
+    setTag('');
+    setTags([]);
+    setPayload('');
+  };
+
   const handleCreateClick = () => {
     handleAddComment();
     handleAddQuote();
@@ -126,6 +142,7 @@ const input = () => {
           <button onClick={handleCreateClick}>Create JSON</button>
           {` Payload: ` + payload}
         </p>
+        <button onClick={handleClearClick}>Clear Payload</button>
       </Grid>
     </Grid>);
 };
