@@ -10,13 +10,13 @@ const article = props => {
   const [publishDate, setPublishDate] = useState('');
   const [publisher, setPublisher] = useState('');
   const [quotes, setQuotes] = useState([]);
+  const [showFull, setShowFull] = useState(false);
   const [tags, setTags] = useState([]);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
 
   useEffect(() => {
-    const { author, comments, createdDate, description, publishDate, publisher, quotes, tags, title, url } = props;
-    console.log('props', props);
+    const { author, comments, createdDate, description, publishDate, publisher, quotes, showFull, tags, title, url } = props;
     setAuthor(author);
     setComments(comments);
     setCreatedDate(createdDate);
@@ -24,10 +24,11 @@ const article = props => {
     setPublishDate(publishDate);
     setPublisher(publisher);
     setQuotes(quotes);
+    setShowFull(showFull);
     setTags(tags);
     setTitle(title);
     setUrl(url);
-  }, []);
+  }, [props]);
 
   const renderTags = () => {
     const includeComma = index => { return (index !== tags.length -1) ? ', ' : ''};
@@ -52,15 +53,29 @@ const article = props => {
       </React.Fragment>);
   };
 
+  const renderTopSection = () => {
+    return (
+      <React.Fragment>
+        <div style={{'font-size':'24px'}}>{title}</div>
+        <div style={{'font-size':'12px'}}>{author}, <i>Source</i>: <a href={url}>{publisher}</a>. ({publishDate})</div>
+        <div style={{'font-size':'18px'}}>{description}</div>
+      </React.Fragment>);
+  };
+
+  const renderBottomSection = () => {
+    return !! showFull && (
+      <React.Fragment>
+        <p>{renderArray(quotes, 'quote', "Quotes")}</p>
+        <p>{renderArray(comments, 'comment', "Comments")}</p>
+        <p><strong>Tags</strong>: {renderTags()}</p>
+        <p><strong>Resource added</strong>: <i>{createdDate}</i></p>
+      </React.Fragment>);
+  };
+
   return (
     <React.Fragment>
-      <div style={{'font-size':'24px'}}>{title}</div>
-      <div style={{'font-size':'12px'}}>{author}, <i>Source</i>: <a href={url}>{publisher}</a>. ({publishDate})</div>
-      <div style={{'font-size':'18px'}}>{description}</div>
-      <p>{renderArray(quotes, 'quote', "Quotes")}</p>
-      <p>{renderArray(comments, 'comment', "Comments")}</p>
-      <p><strong>Tags</strong>: {renderTags()}</p>
-      <p><strong>Resource added</strong>: <i>{createdDate}</i></p>
+      {renderTopSection()}
+      {renderBottomSection()}
     </React.Fragment>);
 };
 

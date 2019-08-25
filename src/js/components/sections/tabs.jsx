@@ -6,6 +6,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import InputSection from './input';
+import LandingSeciton from './landing';
+import ArticleSection from '../lists/articles';
 
 // example added from https://material-ui.com/components/tabs/
 function TabPanel({ children, value, index, ...other }) {
@@ -27,13 +30,6 @@ TabPanel.propTypes = {
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
 };
-
-function a11yProps(index) {
-  return {
-    id: `nav-tab-${index}`,
-    'aria-controls': `nav-tabpanel-${index}`,
-  };
-}
 
 function LinkTab(props) {
   return (
@@ -65,25 +61,24 @@ export default function NavTabs() {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Tabs
-          variant="fullWidth"
-          value={value}
+        <Tabs aria-label="nav tabs example"
           onChange={handleChange}
-          aria-label="nav tabs example"
+          value={value}
+          variant="fullWidth"
         >
-          <LinkTab label="Page One" href="/drafts" {...a11yProps(0)} />
-          <LinkTab label="Page Two" href="/trash" {...a11yProps(1)} />
-          <LinkTab label="Page Three" href="/spam" {...a11yProps(2)} />
+          <LinkTab label="Home" />
+          <LinkTab label="Articles" />
+          <LinkTab label="Input" />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        Page One
+        <LandingSeciton /> 
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Page Two
+        <ArticleSection />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Page Three
+        <InputSection />
       </TabPanel>
     </div>
   );
