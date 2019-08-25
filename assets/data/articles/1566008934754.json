@@ -1,0 +1,27 @@
+{
+    "author": "Joe Cardillo",
+    "comments": [{
+        "comment": "If a var variable is not defined within a function, it is defined at window, or global, scope.",
+        "createdDate": "2019-08-16"
+    }, {
+        "comment": "Defining variables with let/const will not be assigned to window.",
+        "createdDate": "2019-08-16"
+    }],
+    "description": "Basic Javascript feature explanation for variable scoping.",
+    "publishDate": "2018-06-05",
+    "publisher": "Medium",
+    "quotes": [{
+        "quote": "var variables are 'function scope.' What does this mean? It means they are only available inside the function they’re created in, or if not created inside a function, they are 'globally scoped.'",
+        "createdDate": "2019-08-16"
+    }, {
+        "quote": "Rather than being scoped to the function [let and const] are scoped to the block.",
+        "createdDate": "2019-08-16"
+    }, {
+        "quote": "A block is a set of opening and closing curly brackets.",
+        "createdDate": "2019-08-16"
+    }],
+    "tags": ["javascript", "programming", "software-engineering", "es6"],
+    "title": "The Difference Between Function and Block Scope in JavaScript",
+    "url": "https://medium.com/@josephcardillo/the-difference-between-function-and-block-scope-in-javascript-4296b2322abe",
+    "createdDate": "2019-08-16"
+}

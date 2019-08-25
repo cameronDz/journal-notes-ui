@@ -1,0 +1,36 @@
+{
+    "author": " Adnan Ahmed",
+    "comments": [{
+        "comment": "Package managers for popular languages; PHP: Composer, Node.JS: NPM, Python: Pip, Ruby: RubyGems, Java: Maven.",
+        "createdDate": "2019-08-23"
+    }, {
+        "comment": "Try to implement best practices refactors in open source projects on Github.",
+        "createdDate": "2019-08-23"
+    }, {
+        "comment": "Should learn to implement Redis and Memcached.",
+        "createdDate": "2019-08-23"
+    }, {
+        "comment": "Several types of authentication to look into; Token, OAuth, JWT.",
+        "createdDate": "2019-08-23"
+    }, {
+        "comment": "For Message Brokers; RabbitMQ and Kafka are dominant in industry.",
+        "createdDate": "2019-08-23"
+    }],
+    "description": "List of steps to building out skills as a backend developer.",
+    "publishDate": "2018-04-03",
+    "publisher": "tajawal",
+    "quotes": [{
+        "quote": "If you have some frontend knowledge, you might find Node.js to be quite easier plus there is a big job market for that.",
+        "createdDate": "2019-08-23"
+    }, {
+        "quote": "If you have already been doing backend development and know some scripting language, I would recommend you to not pick another scripting language and pick something from the \"Functional\" or \"Multiparadigm\" section.",
+        "createdDate": "2019-08-23"
+    }, {
+        "quote": "Read the OWASP guidelines and understand different security issues and how to avoid them in language of your choice.",
+        "createdDate": "2019-08-23"
+    }],
+    "tags": ["programming", "career", "software"],
+    "title": "Learn to become a Backend Developer",
+    "url": "https://medium.com/tech-tajawal/modern-backend-developer-in-2018-6b3f7b5f8b9",
+    "createdDate": "2019-08-23"
+}

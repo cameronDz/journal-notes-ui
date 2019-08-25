@@ -1,6 +1,6 @@
 {
   "name": "logs-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Keep logs and notes on personal trackers.",
   "main": "index.js",
   "author": "cameronDz",
@@ -28,6 +28,7 @@
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@material-ui/core": "^4.3.2",
     "lodash.get": "^4.4.2",
+    "prop-types": "^15.7.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-router-dom": "^4.3.1",

@@ -2,6 +2,12 @@
 
 Create and track logs for various personal activities. Added a basic input section for creating article reviews in JSON format, and downloading that article locally.
 
+## TODO List ##
+- [ ] Add JSS
+- [ ] Add page routing
+- [ ] Implement API/storage plan
+- [ ] Finish README
+
 ### Sample Article JSON ###
 ```javascript
 {

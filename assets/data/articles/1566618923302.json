@@ -1,0 +1,21 @@
+{
+    "author": "Onejohi",
+    "comments": [{
+        "comment": "Good tool for testing is PostMan.",
+        "createdDate": "2019-08-23"
+    }],
+    "description": "Walk through on how to set up a Restful API using Node.",
+    "publishDate": "2018-06-28",
+    "publisher": "Medium",
+    "quotes": [{
+        "quote": "The reason they’re called static files is because they are not changed by the server nor run, they’re merely sent back as files for your browser to parse through.",
+        "createdDate": "2019-08-23"
+    }, {
+        "quote": "REST stands for REpresentational State Transfer.",
+        "createdDate": "2019-08-23"
+    }],
+    "tags": ["software", "node-js", "express", "api", "programming"],
+    "title": "Building a simple REST API with NodeJS and Express.",
+    "url": "https://medium.com/@onejohi/building-a-simple-rest-api-with-nodejs-and-express-da6273ed7ca9",
+    "createdDate": "2019-08-23"
+}
