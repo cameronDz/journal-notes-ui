@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const article = props => {
 
+  // this may be a candidate for use redux
   const [author, setAuthor] = useState('');
   const [comments, setComments] = useState([]);
   const [createdDate, setCreatedDate] = useState('');
