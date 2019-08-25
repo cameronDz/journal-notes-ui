@@ -1,6 +1,6 @@
 {
   "name": "logs-app",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Keep logs and notes on personal trackers.",
   "main": "index.js",
   "author": "cameronDz",

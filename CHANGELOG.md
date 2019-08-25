@@ -6,9 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.2] - 2019-08-25
+## [1.0.3] - 2019-08-25
 ### Changed
-- Added file extension to change log.
+
+## [1.0.2] - 2019-08-25
+### Added
+- Added the reverse sort orders for articles; titles, create date, and publish date.
+
+### Changed
+- Clicking the sort of the articles that is already selected will invert the order of the sort.
 
 ## [1.0.1] - 2019-08-25
 ### Added

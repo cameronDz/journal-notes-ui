@@ -22,10 +22,18 @@ const sortByCreatedDate = (a = '', b = '') => {
   return sortByDate(aValue, bValue);
 };
 
+const sortByReverseCreatedDate = (a, b) => {
+  return sortByCreatedDate(b, a);
+};
+
 const sortByPublishDate = (a, b) => {
   const aValue = get(a, 'publishDate', '');
   const bValue = get(b, 'publishDate', '');
   return sortByDate(aValue, bValue);
+};
+
+const sortByReversePublishDate = (a, b) => {
+  return sortByPublishDate(b, a);
 };
 
 const sortByTitle = (a, b) => {
@@ -39,8 +47,15 @@ const sortByTitle = (a, b) => {
   return 0;
 };
 
+const sortByReverseTitle = (a, b) => {
+  return sortByTitle(b, a);
+};
+
 export {
   sortByCreatedDate,
   sortByPublishDate,
-  sortByTitle
+  sortByTitle,
+  sortByReverseCreatedDate,
+  sortByReversePublishDate,
+  sortByReverseTitle
 };
