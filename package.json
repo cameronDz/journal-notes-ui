@@ -45,6 +45,7 @@
   "scripts": {
     "build-dev": "webpack --config webpack/dev.babel.js",
     "build-prod": "webpack --config webpack/prod.babel.js",
+    "lint": "eslint ./src/js/**/* ./webpack",
     "start": "webpack-dev-server --open --config webpack/dev.babel.js"
   },
   "version": "1.4.0"
