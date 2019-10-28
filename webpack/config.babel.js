@@ -3,7 +3,8 @@ import HtmlWebPackPlugin from 'html-webpack-plugin';
 module.exports = {
   devServer: {
     contentBase: './dist',
-    hot: true
+    hot: true,
+    watchContentBase: true
   },
   entry: './src/index.js',
   mode: 'production',
