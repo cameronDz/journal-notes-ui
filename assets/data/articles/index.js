@@ -18,6 +18,7 @@ import * as seventeen from './1566616586747.json';
 import * as eightteen from './1566617656481.json';
 import * as nineteen from './1566618923302.json';
 import * as twenty from './1566620107833.json';
+import * as twentyone from './1572226995082.json';
 
 const data = [
   one,
@@ -39,7 +40,8 @@ const data = [
   seventeen,
   eightteen,
   nineteen,
-  twenty
+  twenty,
+  twentyone
 ];
 
 export default data;
