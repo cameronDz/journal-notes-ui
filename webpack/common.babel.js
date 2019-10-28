@@ -2,18 +2,6 @@ import HtmlWebPackPlugin from 'html-webpack-plugin';
 
 module.exports = {
   entry: './src/index.js',
-  output: {
-    filename: 'bundle.js',
-    path: __dirname + '/../dist',
-    publicPath: '/'
-  },
-  resolve: {
-    extensions: ['*', '.js', '.jsx']
-  },
-  devServer: {
-    contentBase: './dist',
-    hot: true
-  },
   module: {
     rules: [{
       test: /\.(js|jsx)$/,
@@ -28,10 +16,18 @@ module.exports = {
       }
     }]
   },
+  output: {
+    filename: 'bundle.js',
+    path: __dirname + '/../dist',
+    publicPath: '/'
+  },
   plugins: [
     new HtmlWebPackPlugin({
       template: './src/index.html',
       filename: './index.html'
     })
-  ]
+  ],
+  resolve: {
+    extensions: ['*', '.js', '.jsx']
+  }
 };

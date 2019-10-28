@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2019-10-27
+### Added
+- Webpack builds for different environments
+
+### Changed
+- Fresh install of all packages/dependencies
+
 ## [1.0.3] - 2019-08-25
 ### Added
 - Added the reverse sort orders for articles; titles, create date, and publish date.
