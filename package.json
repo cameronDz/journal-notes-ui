@@ -1,5 +1,8 @@
 {
-  "author": "cameronDz",
+  "author": {
+    "email": "camerondziurgot@gmail.com",
+    "name": "cameronDz"
+  },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@material-ui/core": "^4.3.2",
@@ -29,7 +32,7 @@
   "name": "logs-app",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/cameronDz/notes.git"
   },
   "scripts": {
     "build": "webpack --config webpack/common.babel.js",
