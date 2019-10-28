@@ -32,8 +32,8 @@
     "url": ""
   },
   "scripts": {
-    "build": "webpack --config webpack/config.babel.js",
-    "start": "webpack-dev-server --open --config webpack/config.babel.js"
+    "build": "webpack --config webpack/common.babel.js",
+    "start": "webpack-dev-server --open --config webpack/common.babel.js"
   },
   "version": "1.0.3"
 }
