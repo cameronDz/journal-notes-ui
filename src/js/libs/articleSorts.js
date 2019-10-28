@@ -1,19 +1,19 @@
 import get from 'lodash.get';
 
 const sortByDate = (a = '', b = '') => {
-  let aDate, bDate;
+  let sortValue = 0;
   try {
-    aDate = new Date(a);
-    bDate = new Date(b);
-  } catch(error) {
-    return 0;
+    const aDate = new Date(a);
+    const bDate = new Date(b);
+    if (aDate > bDate) {
+      sortValue = -1;
+    } else if (aDate < bDate) {
+      sortValue = 1;
+    }
+  } catch (error) {
+    console.error('could not get date value', error);
   }
-  if (aDate > bDate) {
-    return -1;
-  } else if (aDate < bDate) {
-    return 1;
-  }
-  return 0;
+  return sortValue;
 };
 
 const sortByCreatedDate = (a = '', b = '') => {
@@ -39,12 +39,13 @@ const sortByReversePublishDate = (a, b) => {
 const sortByTitle = (a, b) => {
   const aValue = get(a, 'title', '');
   const bValue = get(b, 'title', '');
+  let sortValue = 0;
   if (aValue < bValue) {
-    return -1;
+    sortValue = -1;
   } else if (aValue > bValue) {
-    return 1;
+    sortValue = 1;
   }
-  return 0;
+  return sortValue;
 };
 
 const sortByReverseTitle = (a, b) => {

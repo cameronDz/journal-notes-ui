@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Card from '../card';
-import data from '../../../../assets/data/articles';
+import _data from '../../../../assets/data/articles';
 import * as _sorts from '../../libs/articleSorts';
 
 const articles = () => {
-
   const SORT_TITLE = 1;
   const SORT_CREATE_DATE = 2;
   const SORT_PUBLISH_DATE = 3;
@@ -54,7 +53,7 @@ const articles = () => {
   };
 
   const renderData = () => {
-    return data.sort(sortFunction).map((key, index) => {
+    return _data.sort(sortFunction).map((key, index) => {
       return (
         <Grid key={index} sm={12} md={6}>
           <Card articleData={key} />

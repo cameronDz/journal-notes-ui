@@ -1,7 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
+import PropType from 'prop-types';
+
+const propTypes = {
+  author: PropType.string,
+  comments: PropType.array,
+  createdDate: PropType.string,
+  description: PropType.string,
+  publishDate: PropType.string,
+  publisher: PropType.string,
+  quotes: PropType.array,
+  showFull: PropType.bool,
+  tags: PropType.array,
+  title: PropType.string,
+  url: PropType.string
+};
 
 const article = props => {
-
   // this may be a candidate for use redux
   const [author, setAuthor] = useState('');
   const [comments, setComments] = useState([]);
@@ -31,52 +45,53 @@ const article = props => {
   }, [props]);
 
   const renderTags = () => {
-    const includeComma = index => { return (index !== tags.length -1) ? ', ' : ''};
-    return !!tags.length
-      ? tags.map((key, index) => { return <i key={index}>{key}{includeComma(index)}</i> })
+    const includeComma = index => { return (index !== tags.length - 1) ? ', ' : ''; };
+    return tags.length
+      ? tags.map((key, index) => { return <i key={index}>{key}{includeComma(index)}</i>; })
       : <i>No associated tags.</i>;
   };
 
   const renderArrayConent = (array = [], identifier = '') => {
     const bullet = <span>&#8226;</span>;
-    return !! (!!identifier && !!array.length)
-      ? array.map((key = {}, index) => { return <div key={index}>{bullet} {key[identifier]}</div> })
-      : "No content."
+    return !!identifier && !!array.length
+      ? array.map((key = {}, index) => { return <div key={index}>{bullet} {key[identifier]}</div>; })
+      : 'No content.';
   };
 
-  const renderArray = (array = [], identifier = '', title = '')  => {
-    const header = <strong style={{'font-size':'16px'}}>{title}</strong>;
+  const renderArray = (array = [], identifier = '', title = '') => {
+    const header = <strong style={{ 'font-size': '16px' }}>{title}</strong>;
     return (
-      <React.Fragment>
+      <Fragment>
         <div>{header}</div>
         {renderArrayConent(array, identifier)}
-      </React.Fragment>);
+      </Fragment>);
   };
 
   const renderTopSection = () => {
     return (
-      <React.Fragment>
-        <div style={{'font-size':'24px'}}>{title}</div>
-        <div style={{'font-size':'12px'}}>{author}, <i>Source</i>: <a href={url}>{publisher}</a>. ({publishDate})</div>
-        <div style={{'font-size':'18px'}}>{description}</div>
-      </React.Fragment>);
+      <Fragment>
+        <div style={{ 'font-size': '24px' }}>{title}</div>
+        <div style={{ 'font-size': '12px' }}>{author}, <i>Source</i>: <a href={url}>{publisher}</a>. ({publishDate})</div>
+        <div style={{ 'font-size': '18px' }}>{description}</div>
+      </Fragment>);
   };
 
   const renderBottomSection = () => {
-    return !! showFull && (
-      <React.Fragment>
-        <p>{renderArray(quotes, 'quote', "Quotes")}</p>
-        <p>{renderArray(comments, 'comment', "Comments")}</p>
+    return !!showFull && (
+      <Fragment>
+        <p>{renderArray(quotes, 'quote', 'Quotes')}</p>
+        <p>{renderArray(comments, 'comment', 'Comments')}</p>
         <p><strong>Tags</strong>: {renderTags()}</p>
         <p><strong>Resource added</strong>: <i>{createdDate}</i></p>
-      </React.Fragment>);
+      </Fragment>);
   };
 
   return (
-    <React.Fragment>
+    <Fragment>
       {renderTopSection()}
       {renderBottomSection()}
-    </React.Fragment>);
+    </Fragment>);
 };
 
+article.propTypes = propTypes;
 export default article;

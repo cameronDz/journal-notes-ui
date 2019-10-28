@@ -1,0 +1,30 @@
+{
+    "author": "Indrek Lasn",
+    "comments": [
+        {
+            "comment": "Credit Card Form - Includes number formatting, validation, and automatic card-type detection. Fully responsive with Vue.js.",
+            "createdDate": "2019-10-27"
+        },
+        {
+            "comment": "GitHub Repositories With Search Functionality - Use GitHub API to fetch repos by user.",
+            "createdDate": "2019-10-27"
+        },
+        {
+            "comment": "Stripe-Style Navigation - What’s unique about this navigation is the popover container morphs to fit the content. There’s an elegance to this transition versus the traditional behavior of opening and closing a new popover entirely.",
+            "createdDate": "2019-10-27"
+        }
+    ],
+    "description": "List of front end apps to learn while creating.",
+    "publishDate": "2019-10-23",
+    "publisher": "Better Programming",
+    "quotes": [],
+    "tags": [
+        "portfolio",
+        "software",
+        "programming",
+        "frontend"
+    ],
+    "title": "Here Are 6 Front-End Challenges to Code",
+    "url": "https://medium.com/better-programming/here-are-6-frontend-challenges-to-code-9952190c97cc",
+    "createdDate": "2019-10-27"
+}
