@@ -5,8 +5,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.5.0] - 2019-10-28
 ### Added
-- Linter dependencies
+- Linter dependencies with script for running
+- Deploy script for deploying to S3 bucket
+
+### Changed
+- Formatting changes as par new linter
+
+### Fixed
+- Added props validation in several components missing
 
 ## [1.4.0] - 2019-10-27
 ### Added
