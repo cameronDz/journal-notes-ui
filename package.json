@@ -35,8 +35,9 @@
     "url": "https://github.com/cameronDz/notes.git"
   },
   "scripts": {
-    "build": "webpack --config webpack/common.babel.js",
-    "start": "webpack-dev-server --open --config webpack/common.babel.js"
+    "build-dev": "webpack --config webpack/dev.babel.js",
+    "build-prod": "webpack --config webpack/prod.babel.js",
+    "start": "webpack-dev-server --open --config webpack/dev.babel.js"
   },
   "version": "1.0.3"
 }
