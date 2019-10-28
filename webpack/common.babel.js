@@ -1,4 +1,5 @@
 import HtmlWebPackPlugin from 'html-webpack-plugin';
+import { resolve } from 'path';
 
 module.exports = {
   entry: './src/index.js',
@@ -18,7 +19,7 @@ module.exports = {
   },
   output: {
     filename: 'bundle.js',
-    path: __dirname + '/../dist',
+    path: resolve(__dirname, '..', './dist'),
     publicPath: '/'
   },
   plugins: [
