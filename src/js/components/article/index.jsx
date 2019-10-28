@@ -1,4 +1,19 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import PropType from 'prop-types';
+
+const propTypes = {
+  author: PropType.string,
+  comments: PropType.array,
+  createdDate: PropType.string,
+  description: PropType.string,
+  publishDate: PropType.string,
+  publisher: PropType.string,
+  quotes: PropType.array,
+  showFull: PropType.bool,
+  tags: PropType.array,
+  title: PropType.string,
+  url: PropType.string
+};
 
 const article = props => {
   // this may be a candidate for use redux
@@ -78,4 +93,5 @@ const article = props => {
     </Fragment>);
 };
 
+article.propTypes = propTypes;
 export default article;
