@@ -39,5 +39,5 @@
     "build-prod": "webpack --config webpack/prod.babel.js",
     "start": "webpack-dev-server --open --config webpack/dev.babel.js"
   },
-  "version": "1.0.3"
+  "version": "1.4.0"
 }
