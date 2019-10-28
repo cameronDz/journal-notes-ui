@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import get from 'lodash.get';
 import * as indexData from '../../../../assets/data/index.json';
 
@@ -14,15 +14,15 @@ const todo = () => {
       const { list, name, status, type } = key;
       return (type === 2)
         // render a list when type is 2
-        ? <React.Fragment key={index}>
+        ? <Fragment key={index}>
             <h3>{name}</h3>
             <p>Status: {status}</p>
             {renderList(list)}
-          </React.Fragment>
+          </Fragment>
         // render all other types as todo
-        : <React.Fragment key={index}>
+        : <Fragment key={index}>
             {renderTodo(key)}
-          </React.Fragment>;
+          </Fragment>;
     });
   };
 

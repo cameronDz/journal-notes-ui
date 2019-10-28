@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 const article = props => {
 
@@ -47,36 +47,36 @@ const article = props => {
   const renderArray = (array = [], identifier = '', title = '')  => {
     const header = <strong style={{'font-size':'16px'}}>{title}</strong>;
     return (
-      <React.Fragment>
+      <Fragment>
         <div>{header}</div>
         {renderArrayConent(array, identifier)}
-      </React.Fragment>);
+      </Fragment>);
   };
 
   const renderTopSection = () => {
     return (
-      <React.Fragment>
+      <Fragment>
         <div style={{'font-size':'24px'}}>{title}</div>
         <div style={{'font-size':'12px'}}>{author}, <i>Source</i>: <a href={url}>{publisher}</a>. ({publishDate})</div>
         <div style={{'font-size':'18px'}}>{description}</div>
-      </React.Fragment>);
+      </Fragment>);
   };
 
   const renderBottomSection = () => {
     return !! showFull && (
-      <React.Fragment>
+      <Fragment>
         <p>{renderArray(quotes, 'quote', "Quotes")}</p>
         <p>{renderArray(comments, 'comment', "Comments")}</p>
         <p><strong>Tags</strong>: {renderTags()}</p>
         <p><strong>Resource added</strong>: <i>{createdDate}</i></p>
-      </React.Fragment>);
+      </Fragment>);
   };
 
   return (
-    <React.Fragment>
+    <Fragment>
       {renderTopSection()}
       {renderBottomSection()}
-    </React.Fragment>);
+    </Fragment>);
 };
 
 export default article;

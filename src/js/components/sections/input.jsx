@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { downloadJson } from '../../libs/download';
 import { generateDateString } from '../../libs/date';
@@ -75,7 +75,7 @@ const input = () => {
     return array.map((key, index) => {
       const comma = (index !== array.length -1) ? ', ' : '';
       const display = (!!identifier) ? key[identifier] : key;
-      return (<React.Fragment key={index}>{display}{comma}</React.Fragment>);
+      return (<Fragment key={index}>{display}{comma}</Fragment>);
     });
   };
 
