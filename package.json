@@ -45,6 +45,7 @@
   "scripts": {
     "build-dev": "webpack --config webpack/dev.babel.js",
     "build-prod": "webpack --config webpack/prod.babel.js",
+    "deploy": "aws s3 cp --recursive ./dist s3://log-notes-app",
     "lint": "eslint ./src/js/**/* ./webpack",
     "lint-fix": "eslint --fix ./src/js/**/* ./webpack",
     "start": "webpack-dev-server --open --config webpack/dev.babel.js"
