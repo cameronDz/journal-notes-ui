@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 
 const grid = props => {
-
   const [section, setSection] = useState('');
   const [title, setTitle] = useState('');
 

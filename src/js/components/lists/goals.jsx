@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; 
+import React, { useEffect, useState } from 'react';
 import get from 'lodash.get';
 import * as indexData from '../../../../assets/data/index.json';
 
@@ -22,6 +22,6 @@ const goals = props => {
   };
 
   return getList();
-}
+};
 
 export default goals;

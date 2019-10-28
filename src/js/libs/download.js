@@ -1,7 +1,7 @@
 const downloadJson = (object = '') => {
   if (!object) { return; }
   const filename = new Date().getTime() + '.json';
-  
+
   // fake a click to download file
   const element = document.createElement('a');
   element.download = filename;

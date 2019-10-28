@@ -11,8 +11,7 @@ import LandingSeciton from './landing';
 import ArticleSection from '../lists/articles';
 
 // example added from https://material-ui.com/components/tabs/
-function TabPanel({ children, value, index, ...other }) {
-
+function TabPanel ({ children, value, index, ...other }) {
   return (
     <Typography aria-labelledby={`nav-tab-${index}`}
       component="div"
@@ -28,10 +27,10 @@ function TabPanel({ children, value, index, ...other }) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired
 };
 
-function LinkTab(props) {
+function LinkTab (props) {
   return (
     <Tab
       component="a"
@@ -46,15 +45,15 @@ function LinkTab(props) {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper
+  }
 }));
 
-export default function NavTabs() {
+export default function NavTabs () {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
-  function handleChange(event, newValue) {
+  function handleChange (event, newValue) {
     setValue(newValue);
   }
 
@@ -72,7 +71,7 @@ export default function NavTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <LandingSeciton /> 
+        <LandingSeciton />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <ArticleSection />

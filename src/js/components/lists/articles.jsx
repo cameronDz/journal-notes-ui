@@ -6,7 +6,6 @@ import data from '../../../../assets/data/articles';
 import * as _sorts from '../../libs/articleSorts';
 
 const articles = () => {
-
   const SORT_TITLE = 1;
   const SORT_CREATE_DATE = 2;
   const SORT_PUBLISH_DATE = 3;
