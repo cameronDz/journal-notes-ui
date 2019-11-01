@@ -44,3 +44,14 @@ Create and track logs for various personal activities. Added a basic input secti
     "updatedDate": xxx
 }
 ```
+
+## S3 Bucket Sample Configuration ##
+```
+<CORSConfiguration>
+  <CORSRule>
+    <AllowedOrigin>*</AllowedOrigin>
+    <AllowedMethod>GET</AllowedMethod>
+    <AllowedHeader>*</AllowedHeader>
+  </CORSRule>
+</CORSConfiguration>
+```
