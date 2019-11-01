@@ -32,10 +32,7 @@ const articles = () => {
     for (let inc = 0; inc < list.length; inc++) {
       const url = baseUrl + list[inc] + '.json';
       axios.get(url, config)
-        .then(payload => {
-          console.log('article payload', payload.data);
-          console.log('articles', articles);
-          setArticles([...articles, payload.data]); })
+        .then(payload => { setArticles([...articles, payload.data]); })
         .catch(error => { console.error(error); });
     }
   };
@@ -79,7 +76,7 @@ const articles = () => {
   const renderData = () => {
     return articles.sort(sortFunction).map((key, index) => {
       return (
-        <Grid key={index} sm={12} md={6}>
+        <Grid key={index} item sm={12} md={6}>
           <Card articleData={key} />
         </Grid>);
     });
@@ -87,7 +84,7 @@ const articles = () => {
 
   return (
     <Grid container spacing={0}>
-      <Grid xs={12}>
+      <Grid item xs={12}>
         <Button onClick={() => handleSortClick(SORT_TITLE)} size="small">Order by Title</Button>
         <Button onClick={() => handleSortClick(SORT_CREATE_DATE)} size="small">Order by Created Date</Button>
         <Button onClick={() => handleSortClick(SORT_PUBLISH_DATE)} size="small">Order by Publish Date</Button>
