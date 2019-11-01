@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] - 2019-10-31
+### Added
+- Redux for global state management
+
+### Changed
+- All axios calls to S3 moved to action/reducer and payloads stored in redux
+
+### Fixed
+- Inline style formatting
+- Added item to MUI Grid components
+- Issue with p tags containing div tags in article component
+- Formatting issued and prop validation caught by linter
+
+### Removed
+- Extra directory layer for components with no extra state or children components
+- Article JSONs in assets directory that are now in S3 and maintained in own repo
+
 ## [1.5.0] - 2019-10-28
 ### Added
 - Linter dependencies with script for running

@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import PropType from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Card from '../card';
-import _data from '../../../../assets/data/articles';
-import * as _sorts from '../../libs/articleSorts';
+import Card from '../../card';
+import * as _sorts from '../../../libs/articleSorts';
+import { fetchArticles } from './state/actions';
 
-const articles = () => {
+const propTypes = {
+  articles: PropType.array,
+  fetchArticles: PropType.func
+};
+
+const articles = ({ articles, fetchArticles }) => {
   const SORT_TITLE = 1;
   const SORT_CREATE_DATE = 2;
   const SORT_PUBLISH_DATE = 3;
@@ -15,6 +22,10 @@ const articles = () => {
 
   const [sortFunction, setSortFunction] = useState(() => _sorts.sortByTitle);
   const [currentSortOrder, setCurrentSortOrder] = useState(SORT_TITLE);
+
+  useEffect(() => {
+    fetchArticles();
+  }, []);
 
   const handleSortClick = (sortOrder = -1) => {
     switch (sortOrder) {
@@ -53,9 +64,9 @@ const articles = () => {
   };
 
   const renderData = () => {
-    return _data.sort(sortFunction).map((key, index) => {
+    return !!articles && articles.sort(sortFunction).map((key, index) => {
       return (
-        <Grid key={index} sm={12} md={6}>
+        <Grid key={index} item sm={12} md={6}>
           <Card articleData={key} />
         </Grid>);
     });
@@ -63,7 +74,7 @@ const articles = () => {
 
   return (
     <Grid container spacing={0}>
-      <Grid xs={12}>
+      <Grid item xs={12}>
         <Button onClick={() => handleSortClick(SORT_TITLE)} size="small">Order by Title</Button>
         <Button onClick={() => handleSortClick(SORT_CREATE_DATE)} size="small">Order by Created Date</Button>
         <Button onClick={() => handleSortClick(SORT_PUBLISH_DATE)} size="small">Order by Publish Date</Button>
@@ -72,4 +83,6 @@ const articles = () => {
     </Grid>);
 };
 
-export default articles;
+articles.propTypes = propTypes;
+const mapStateToProps = state => ({ articles: state.articles.list });
+export default connect(mapStateToProps, { fetchArticles })(articles);
