@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import Article from '../article';
+import Article from './article';
 
 const propTypes = { articleData: PropType.object };
 const card = ({ articleData }) => {
