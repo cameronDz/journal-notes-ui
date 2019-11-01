@@ -79,8 +79,10 @@ const article = props => {
   const renderBottomSection = () => {
     return !!showFull && (
       <Fragment>
-        <p>{renderArray(quotes, 'quote', 'Quotes')}</p>
-        <p>{renderArray(comments, 'comment', 'Comments')}</p>
+        <br/>
+        <div>{renderArray(quotes, 'quote', 'Quotes')}</div>
+        <br/>
+        <div>{renderArray(comments, 'comment', 'Comments')}</div>
         <p><strong>Tags</strong>: {renderTags()}</p>
         <p><strong>Resource added</strong>: <i>{createdDate}</i></p>
       </Fragment>);
