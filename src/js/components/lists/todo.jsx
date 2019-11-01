@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import get from 'lodash.get';
-import * as indexData from '../../../../assets/data/index.json';
+import * as indexData from '../../../../assets/index.json';
 
 const todo = () => {
   const renderTodo = (todo = {}) => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import get from 'lodash.get';
-import * as indexData from '../../../../assets/data/index.json';
+import * as indexData from '../../../../assets/index.json';
 
 const goals = props => {
   const [listPath, setListPath] = useState('');
