@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Card from '../card';
-import _data from '../../../../assets/data/articles';
 import * as _sorts from '../../libs/articleSorts';
 
 const articles = () => {
@@ -13,8 +13,32 @@ const articles = () => {
   const SORT_CREATE_DATE_REVERSE = 5;
   const SORT_PUBLISH_DATE_REVERSE = 6;
 
+  const config = { header: { 'Content-Type': 'application/json' } };
+  const baseUrl = 'https://log-notes-assets.s3.amazonaws.com/';
+
+  const [articles, setArticles] = useState([]);
   const [sortFunction, setSortFunction] = useState(() => _sorts.sortByTitle);
   const [currentSortOrder, setCurrentSortOrder] = useState(SORT_TITLE);
+
+  useEffect(() => {
+    const url = baseUrl + 'index.json';
+    axios.get(url, config)
+      .then(payload => { processIndexPayload(payload) })
+      .catch(error => { console.error(error); });
+  }, []);
+
+  const processIndexPayload = payload => {
+    const { list } = payload.data;
+    for (let inc = 0; inc < list.length; inc++) {
+      const url = baseUrl + list[inc] + '.json';
+      axios.get(url, config)
+        .then(payload => {
+          console.log('article payload', payload.data);
+          console.log('articles', articles);
+          setArticles([...articles, payload.data]); })
+        .catch(error => { console.error(error); });
+    }
+  };
 
   const handleSortClick = (sortOrder = -1) => {
     switch (sortOrder) {
@@ -53,7 +77,7 @@ const articles = () => {
   };
 
   const renderData = () => {
-    return _data.sort(sortFunction).map((key, index) => {
+    return articles.sort(sortFunction).map((key, index) => {
       return (
         <Grid key={index} sm={12} md={6}>
           <Card articleData={key} />
