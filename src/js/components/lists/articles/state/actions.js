@@ -34,7 +34,7 @@ export const fetchArticles = () => {
   return dispatch => {
     const url = baseS3Url + 'index.json';
     return axios.get(url, config)
-      .then(payload => { dispatch(processArticleListPayload(payload)) })
+      .then(payload => { dispatch(processArticleListPayload(payload)); })
       .catch(error => { console.error(error); });
   };
 };

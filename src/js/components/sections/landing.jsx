@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 const landing = () => {
   return (
     <Fragment>
-      <h2 style={{ 'alignItems': 'center', 'justifyContent': 'center' }}>
+      <h2 style={{ alignItems: 'center', justifyContent: 'center' }}>
         Article Overview Application
       </h2>
       <div>
