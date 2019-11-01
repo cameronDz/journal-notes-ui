@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import PropType from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Card from '../../card';
 import * as _sorts from '../../../libs/articleSorts';
 import { fetchArticles } from './state/actions';
 
-const articles = props => {
+const propTypes = {
+  articles: PropType.array,
+  fetchArticles: PropType.func
+};
+
+const articles = ({ articles, fetchArticles }) => {
   const SORT_TITLE = 1;
   const SORT_CREATE_DATE = 2;
   const SORT_PUBLISH_DATE = 3;
@@ -18,7 +24,7 @@ const articles = props => {
   const [currentSortOrder, setCurrentSortOrder] = useState(SORT_TITLE);
 
   useEffect(() => {
-    props.fetchArticles();
+    fetchArticles();
   }, []);
 
   const handleSortClick = (sortOrder = -1) => {
@@ -58,7 +64,7 @@ const articles = props => {
   };
 
   const renderData = () => {
-    return !!props.articles && props.articles.sort(sortFunction).map((key, index) => {
+    return !!articles && articles.sort(sortFunction).map((key, index) => {
       return (
         <Grid key={index} item sm={12} md={6}>
           <Card articleData={key} />
@@ -77,5 +83,6 @@ const articles = props => {
     </Grid>);
 };
 
+articles.propTypes = propTypes;
 const mapStateToProps = state => ({ articles: state.articles.list });
 export default connect(mapStateToProps, { fetchArticles })(articles);
