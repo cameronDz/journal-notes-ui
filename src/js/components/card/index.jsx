@@ -22,10 +22,10 @@ const card = ({ articleData }) => {
 
   return (
     <Card style={{ margin: '6px' }}>
-      <CardContent style={{ margin: '6px', 'min-height': '200px' }}>
+      <CardContent style={{ margin: '6px', 'minHeight': '200px' }}>
         <Article {...articleData} showFull={showFull} />
       </CardContent>
-      <CardActions style={{ 'align-items': 'center', 'justify-content': 'center' }}>
+      <CardActions style={{ 'alignItems': 'center', 'justifyContent': 'center' }}>
         <Button onClick={() => switchExpand()} size="small">{cardActionText}</Button>
       </CardActions>
     </Card>);

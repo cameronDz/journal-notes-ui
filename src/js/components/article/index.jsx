@@ -59,7 +59,7 @@ const article = props => {
   };
 
   const renderArray = (array = [], identifier = '', title = '') => {
-    const header = <strong style={{ 'font-size': '16px' }}>{title}</strong>;
+    const header = <strong style={{ 'fontSize': '16px' }}>{title}</strong>;
     return (
       <Fragment>
         <div>{header}</div>
@@ -70,9 +70,9 @@ const article = props => {
   const renderTopSection = () => {
     return (
       <Fragment>
-        <div style={{ 'font-size': '24px' }}>{title}</div>
-        <div style={{ 'font-size': '12px' }}>{author}, <i>Source</i>: <a href={url}>{publisher}</a>. ({publishDate})</div>
-        <div style={{ 'font-size': '18px' }}>{description}</div>
+        <div style={{ 'fontSize': '24px' }}>{title}</div>
+        <div style={{ 'fontSize': '12px' }}>{author}, <i>Source</i>: <a href={url}>{publisher}</a>. ({publishDate})</div>
+        <div style={{ 'fontSize': '18px' }}>{description}</div>
       </Fragment>);
   };
 
