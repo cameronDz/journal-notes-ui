@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Card from '../card';
-import * as _sorts from '../../libs/articleSorts';
+import Card from '../../card';
+import * as _sorts from '../../../libs/articleSorts';
 
 const articles = () => {
   const SORT_TITLE = 1;
