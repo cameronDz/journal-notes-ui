@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.1] - 2019-11-01
+### Fixed
+- Added meta tag to index html for correct encoding format
+
 ## [1.6.0] - 2019-10-31
 ### Added
 - Redux for global state management
