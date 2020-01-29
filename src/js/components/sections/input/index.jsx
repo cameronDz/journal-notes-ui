@@ -41,17 +41,17 @@ const input = ({ uploadArticle }) => {
   };
 
   const handleUploadClick = () => {
-    if (!!payload) {
+    if (payload) {
       console.log('should upload: ', payload);
       uploadArticle(payload);
     }
   };
 
   const handleDownloadClick = () => {
-    if (!!payload) {
+    if (payload) {
       downloadJson(JSON.parse(payload));
     }
-  }
+  };
 
   const handleCreateClick = () => {
     handleAddComment();

@@ -7,7 +7,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.SUCCESS_ARTICLE_UPLOAD:
       newState = { ...state };
-      console.log('SUCCESS_ARTICLE_UPLOAD: ', action);
+      break;
     default:
       newState = state;
   }

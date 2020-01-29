@@ -7,7 +7,6 @@ const baseS3Url = 'https://log-notes-assets.s3.amazonaws.com/';
 const baseHerokuUrl = 'https://log-notes-assets-api.herokuapp.com/';
 const config = { header: { 'Content-Type': 'application/json' } };
 
-
 const recieveSingleArticle = article => {
   return { article, type: _types.RECIEVE_SINGLE_ARTICLE };
 };
