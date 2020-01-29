@@ -2,7 +2,12 @@ import * as _types from './types';
 import axios from 'axios';
 
 const baseS3Url = 'https://log-notes-assets.s3.amazonaws.com/';
+const baseHerokuUrl = 'https://log-notes-assets-api.herokuapp.com/';
 const config = { header: { 'Content-Type': 'application/json' } };
+
+const processSuccessfulUpload = payload => {
+  return { payload, type: _types.SUCCESS_ARTICLE_UPLOAD };
+}
 
 const recieveSingleArticle = article => {
   return { article, type: _types.RECIEVE_SINGLE_ARTICLE };
@@ -37,4 +42,13 @@ export const fetchArticles = () => {
       .then(payload => { dispatch(processArticleListPayload(payload)); })
       .catch(error => { console.error(error); });
   };
+};
+
+export const uploadArticle = (content) => {
+  return dispatch => {
+    const url = baseHerokuUrl + 'upload';
+    return axios.post(url, content, config)
+      .then(payload => { dispatch(processSuccessfulUpload(payload)) })
+      .catch(error => { console.error(error); });
+  }
 };
