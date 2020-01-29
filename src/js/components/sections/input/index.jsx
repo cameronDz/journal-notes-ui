@@ -42,7 +42,6 @@ const input = ({ uploadArticle }) => {
 
   const handleUploadClick = () => {
     if (payload) {
-      console.log('should upload: ', payload);
       uploadArticle(payload);
     }
   };

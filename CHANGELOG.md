@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.0] - 2020-01-29
+### Added
+- Using new Heroku API endpoint for uploading new article summaries
+- Using editorconfig file for easier file formatting
+
+### Changed
+- Getting article list index through API instead of directly from S3
+
+### Fixed
+- Package security vulnerability flagged by GitHub
+
 ## [1.6.1] - 2019-11-01
 ### Fixed
 - Added meta tag to index html for correct encoding format
