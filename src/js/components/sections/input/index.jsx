@@ -1,9 +1,13 @@
 import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
+import PropType from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import { uploadArticle } from './state/actions';
 import { downloadJson } from '../../../libs/download';
 import { generateDateString } from '../../../libs/date';
 
-const input = () => {
+const propTypes = { uploadArticle: PropType.func };
+const input = ({ uploadArticle }) => {
   const [author, setAuthor] = useState('');
   const [description, setDescription] = useState('');
   const [publishDate, setPublishDate] = useState('');
@@ -39,6 +43,7 @@ const input = () => {
   const handleUploadClick = () => {
     if (!!payload) {
       console.log('should upload: ', payload);
+      uploadArticle(payload);
     }
   };
 
@@ -152,4 +157,6 @@ const input = () => {
     </Grid>);
 };
 
-export default input;
+input.propTypes = propTypes;
+const mapStateToProps = null;
+export default connect(mapStateToProps, { uploadArticle })(input);
