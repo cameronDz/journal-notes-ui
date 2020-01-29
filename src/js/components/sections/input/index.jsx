@@ -1,9 +1,13 @@
 import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
+import PropType from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import { downloadJson } from '../../libs/download';
-import { generateDateString } from '../../libs/date';
+import { uploadArticle } from './state/actions';
+import { downloadJson } from '../../../libs/download';
+import { generateDateString } from '../../../libs/date';
 
-const input = () => {
+const propTypes = { uploadArticle: PropType.func };
+const input = ({ uploadArticle }) => {
   const [author, setAuthor] = useState('');
   const [description, setDescription] = useState('');
   const [publishDate, setPublishDate] = useState('');
@@ -36,12 +40,23 @@ const input = () => {
     setPayload('');
   };
 
+  const handleUploadClick = () => {
+    if (payload) {
+      uploadArticle(payload);
+    }
+  };
+
+  const handleDownloadClick = () => {
+    if (payload) {
+      downloadJson(JSON.parse(payload));
+    }
+  };
+
   const handleCreateClick = () => {
     handleAddComment();
     handleAddQuote();
     handleAddTag();
     const obj = { author, comments, description, publishDate, publisher, quotes, tags, title, url, createdDate: generateDateString() };
-    downloadJson(obj);
     setPayload(JSON.stringify(obj));
   };
 
@@ -134,9 +149,13 @@ const input = () => {
           <button onClick={handleCreateClick}>Create JSON</button>
           {' Payload: ' + payload}
         </p>
-        <button onClick={handleClearClick}>Clear Payload</button>
+        <p><button onClick={handleDownloadClick}>Download JSON Payload</button></p>
+        <p><button onClick={handleUploadClick}>Upload JSON to S3</button></p>
+        <p><button onClick={handleClearClick}>Clear Payload</button></p>
       </Grid>
     </Grid>);
 };
 
-export default input;
+input.propTypes = propTypes;
+const mapStateToProps = null;
+export default connect(mapStateToProps, { uploadArticle })(input);

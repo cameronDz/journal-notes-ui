@@ -35,6 +35,7 @@
     "react-redux": "^7.1.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
+    "serialize-javascript": ">=2.1.1",
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.1",
     "webpack-merge": "^4.2.2"
@@ -54,5 +55,5 @@
     "lint-fix": "eslint --fix ./src/js/**/* ./webpack",
     "start": "webpack-dev-server --open --config webpack/dev.babel.js"
   },
-  "version": "1.6.1"
+  "version": "1.7.0"
 }

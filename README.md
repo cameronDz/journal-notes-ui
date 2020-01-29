@@ -5,7 +5,6 @@ Create and track logs for various personal activities. Added a basic input secti
 ## TODO List ##
 - [ ] Add JSS
 - [ ] Add page routing
-- [ ] Implement API/storage plan
 - [ ] Finish README
 
 ### Sample Article JSON ###
