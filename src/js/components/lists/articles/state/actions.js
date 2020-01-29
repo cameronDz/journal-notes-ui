@@ -1,7 +1,10 @@
 import * as _types from './types';
 import axios from 'axios';
+import get from 'lodash.get';
 
+// get index from heroku, get jsons from s3 directly
 const baseS3Url = 'https://log-notes-assets.s3.amazonaws.com/';
+const baseHerokuUrl = 'https://log-notes-assets-api.herokuapp.com/';
 const config = { header: { 'Content-Type': 'application/json' } };
 
 
@@ -24,8 +27,9 @@ const fetchSingleArticle = (articleId = 0) => {
 
 const processArticleListPayload = payload => {
   return dispatch => {
-    const { list } = payload.data;
-    for (let inc = 0; inc < list.length; inc++) {
+    const list = get(payload, 'data.payload.list', []);
+    const length = Array.isArray(list) ? list.length : -1;
+    for (let inc = 0; inc < length; inc++) {
       dispatch(fetchSingleArticle(list[inc]));
     }
   };
@@ -33,7 +37,7 @@ const processArticleListPayload = payload => {
 
 export const fetchArticles = () => {
   return dispatch => {
-    const url = baseS3Url + 'index.json';
+    const url = baseHerokuUrl + 'index';
     return axios.get(url, config)
       .then(payload => { dispatch(processArticleListPayload(payload)); })
       .catch(error => { console.error(error); });
