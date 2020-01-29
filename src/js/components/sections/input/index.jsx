@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
-import { downloadJson } from '../../libs/download';
-import { generateDateString } from '../../libs/date';
+import { downloadJson } from '../../../libs/download';
+import { generateDateString } from '../../../libs/date';
 
 const input = () => {
   const [author, setAuthor] = useState('');
@@ -36,12 +36,23 @@ const input = () => {
     setPayload('');
   };
 
+  const handleUploadClick = () => {
+    if (!!payload) {
+      console.log('should upload: ', payload);
+    }
+  };
+
+  const handleDownloadClick = () => {
+    if (!!payload) {
+      downloadJson(JSON.parse(payload));
+    }
+  }
+
   const handleCreateClick = () => {
     handleAddComment();
     handleAddQuote();
     handleAddTag();
     const obj = { author, comments, description, publishDate, publisher, quotes, tags, title, url, createdDate: generateDateString() };
-    downloadJson(obj);
     setPayload(JSON.stringify(obj));
   };
 
@@ -134,7 +145,9 @@ const input = () => {
           <button onClick={handleCreateClick}>Create JSON</button>
           {' Payload: ' + payload}
         </p>
-        <button onClick={handleClearClick}>Clear Payload</button>
+        <p><button onClick={handleDownloadClick}>Download JSON Payload</button></p>
+        <p><button onClick={handleUploadClick}>Upload JSON to S3</button></p>
+        <p><button onClick={handleClearClick}>Clear Payload</button></p>
       </Grid>
     </Grid>);
 };
