@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.1] - 2020-01-29
+### Fixed
+- Set HTML meta tag to adjust for mobile views
+
 ## [1.7.0] - 2020-01-29
 ### Added
 - Using new Heroku API endpoint for uploading new article summaries
