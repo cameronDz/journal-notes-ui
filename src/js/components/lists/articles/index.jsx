@@ -57,9 +57,9 @@ const articles = ({ articles, fetchArticles }) => {
         }
         break;
       default:
-        console.error('Invalid sort order selected, not sorting list.');
-        setSortFunction(undefined);
-        setCurrentSortOrder(undefined);
+        console.log('Invalid sort order selected, not sorting list.');
+        setSortFunction(null);
+        setCurrentSortOrder(null);
     };
   };
 

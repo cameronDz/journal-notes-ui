@@ -13,6 +13,6 @@ export const uploadArticle = (content) => {
     const url = baseHerokuUrl + 'upload?index=true';
     return axios.post(url, JSON.parse(content), config)
       .then(payload => { dispatch(processSuccessfulUpload(payload)); })
-      .catch(error => { console.error(error); });
+      .catch(error => { console.log('error::', error); });
   };
 };
