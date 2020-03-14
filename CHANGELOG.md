@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Set console out puts all to be logs
 
 ## [1.7.1] - 2020-01-29
+### Changed
+- Updated Webpack version
+
 ### Fixed
 - Set HTML meta tag to adjust for mobile views
 
