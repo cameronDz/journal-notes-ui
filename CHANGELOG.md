@@ -5,8 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Updated minor and patch version of dependencies
+
 ### Fixed
 - Set console out puts all to be logs
+- Updated vulnerable version of minimist package
 
 ## [1.7.1] - 2020-01-29
 ### Changed
