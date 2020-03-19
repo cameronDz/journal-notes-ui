@@ -16,7 +16,7 @@ const fetchArticle = articleId => {
     const endpoint = baseS3Url + articleId + '.json';
     return axios.get(endpoint, config)
       .then(payload => dispatch(recieveSingleArticle(payload.data)))
-      .catch(error => console.error('could not process data', error));
+      .catch(error => console.log('could not process data', error));
   };
 };
 
@@ -39,6 +39,6 @@ export const fetchArticles = () => {
     const url = baseHerokuUrl + 'index';
     return axios.get(url, config)
       .then(payload => { dispatch(processArticleListPayload(payload)); })
-      .catch(error => { console.error(error); });
+      .catch(error => { console.log('error::', error); });
   };
 };

@@ -11,7 +11,7 @@ const sortByDate = (a = '', b = '') => {
       sortValue = 1;
     }
   } catch (error) {
-    console.error('could not get date value', error);
+    console.log('could not get date value', error);
   }
   return sortValue;
 };
