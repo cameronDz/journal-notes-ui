@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated minor and patch version of dependencies
 
 ### Fixed
+- Added props validation in grid component
 - Set console out puts all to be logs
 - Updated vulnerable version of minimist package
 
