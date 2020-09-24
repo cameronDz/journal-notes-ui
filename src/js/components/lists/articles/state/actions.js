@@ -7,38 +7,54 @@ const baseS3Url = 'https://log-notes-assets.s3.amazonaws.com/';
 const baseHerokuUrl = 'https://log-notes-assets-api.herokuapp.com/';
 const config = { header: { 'Content-Type': 'application/json' } };
 
-const recieveSingleArticle = article => {
-  return { article, type: _types.RECIEVE_SINGLE_ARTICLE };
-};
-
 const fetchArticle = articleId => {
   return dispatch => {
     const endpoint = baseS3Url + articleId + '.json';
     return axios.get(endpoint, config)
-      .then(payload => dispatch(recieveSingleArticle(payload.data)))
-      .catch(error => console.log('could not process data', error));
+      .then(payload => {
+        return dispatch({ article: payload.data, type: _types.SUCCESSFUL_SINGLE_ARTICLE_GET_REQUEST })
+      })
+      .catch(error => {
+        console.log('could not process data', error);
+        return dispatch({ error: error, type: _types.FAILED_SINGLE_ARTICLE_GET_REQUEST });
+      })
+      .finally(() => {
+        return dispatch({ type: _types.END_SINGLE_ARTICLE_GET_REQUEST });
+      });
   };
 };
 
-const fetchSingleArticle = (articleId = 0) => {
-  return dispatch => dispatch(fetchArticle(articleId));
+const fetchSingleArticle = (dispatch, articleId = 0) => {
+  return dispatch(fetchArticle(articleId));
 };
 
-const processArticleListPayload = payload => {
-  return dispatch => {
-    const list = get(payload, 'data.payload.list', []);
-    const length = Array.isArray(list) ? list.length : -1;
-    for (let inc = 0; inc < length; inc++) {
-      dispatch(fetchSingleArticle(list[inc]));
-    }
-  };
+const processArticleListPayload = (dispatch, list) => {
+  const length = Array.isArray(list) ? list.length : -1;
+  for (let inc = 0; inc < length; inc++) {
+    fetchSingleArticle(dispatch, list[inc]);
+  }
+};
+
+const startListGetRequest = () => {
+  return { type: _types.START_ARTICLE_LIST_GET_REQUEST };
 };
 
 export const fetchArticles = () => {
   return dispatch => {
     const url = baseHerokuUrl + 'index';
+    dispatch(startListGetRequest());
     return axios.get(url, config)
-      .then(payload => { dispatch(processArticleListPayload(payload)); })
-      .catch(error => { console.log('error::', error); });
+      .then(payload => {
+        const list = get(payload, 'data.payload.list', []);
+        processArticleListPayload(dispatch, list);
+        return dispatch({ index: list, type: _types.SUCCESSFUL_ARTICLE_LIST_GET_REQUEST });
+      })
+      .catch(error => {
+        console.log('error::', error);
+        return dispatch({ error: error, type: _types.FAILED_ARTICLE_LIST_GET_REQUEST });
+      })
+      .finally(() => {
+        return dispatch({ type: _types.END_ARTICLE_LIST_GET_REQUEST });
+      });
   };
 };
