@@ -2,9 +2,15 @@ import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import PropType from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+
+import Card from '../../card';
+
 import { uploadArticle } from './state/actions';
 import { downloadJson } from '../../../libs/download';
 import { generateDateString } from '../../../libs/date';
+
+const PREVIEW_CARD_TITLE = 'Click to Preview Card';
+const REMOVE_CARD_TITLE = 'Click to Remove Preview';
 
 const propTypes = { uploadArticle: PropType.func };
 const input = ({ uploadArticle }) => {
@@ -23,6 +29,8 @@ const input = ({ uploadArticle }) => {
   const [tags, setTags] = useState([]);
 
   const [payload, setPayload] = useState('');
+  const [previewTitle, setPreviewTitle] = useState(PREVIEW_CARD_TITLE);
+  const [isPreviewing, setIsPreviewing] = useState(false);
 
   const handleClearClick = () => {
     setAuthor('');
@@ -60,6 +68,13 @@ const input = ({ uploadArticle }) => {
     setPayload(JSON.stringify(obj));
   };
 
+  const handlePreviewClick = () => {
+    const previewing = !isPreviewing;
+    const title = previewing ? REMOVE_CARD_TITLE : PREVIEW_CARD_TITLE;
+    setIsPreviewing(previewing);
+    setPreviewTitle(title);
+  };
+
   const handleAddComment = () => {
     if (comment) {
       setComments([...comments, { comment, createdDate: generateDateString() }]);
@@ -84,6 +99,21 @@ const input = ({ uploadArticle }) => {
   const handleRemoveComment = () => { setComments([...comments.splice(0, comments.length - 1)]); };
   const handleRemoveQuote = () => { setQuotes([...quotes.splice(0, quotes.length - 1)]); };
   const handleRemoveTag = () => { setTags([...tags.splice(0, tags.length - 1)]); };
+
+  const getPreview = () => {
+    const content = (!!title && (comments.length || quotes.length))
+      ? getCard()
+      : <div>No preview availabe without a title and a comment/quote from article.</div>;
+    return !!isPreviewing && (
+      <Grid item sm={12}>
+        {content}
+      </Grid>);
+  };
+
+  const getCard = () => {
+    const key = { author, comments, description, publishDate, publisher, quotes, tags, title, url };
+    return <Card articleData={key} />;
+  };
 
   const renderArray = (array = [], identifier = '') => {
     return array.map((key, index) => {
@@ -144,14 +174,19 @@ const input = ({ uploadArticle }) => {
           <button style={{ marginBottom: '8px' }} onClick={handleRemoveQuote}>Clear last Quote</button>
         </Grid>
       </Grid>
+      <Grid style={{ border: '1px solid grey', padding: '4px' }} item xs={12}>
+        <button style={{ marginRight: '16px', marginBottom: '8px' }} onClick={handleDownloadClick}>Download JSON Payload</button>
+        <button style={{ marginRight: '16px', marginBottom: '8px' }} onClick={handleUploadClick}>Upload JSON to S3</button>
+        <button style={{ marginRight: '16px', marginBottom: '8px' }} onClick={handleClearClick}>Clear Payload</button>
+        <Grid item md={3} sm={6} xs={12}></Grid>
+        <Grid item md={3} sm={6} xs={12}><button onClick={handleCreateClick}>Create JSON</button></Grid>
+        <Grid item xs={12}><p>{' Payload: ' + payload}</p></Grid>
+      </Grid>
       <Grid item xs={12}>
-        <p>
-          <button onClick={handleCreateClick}>Create JSON</button>
-          {' Payload: ' + payload}
-        </p>
-        <p><button onClick={handleDownloadClick}>Download JSON Payload</button></p>
-        <p><button onClick={handleUploadClick}>Upload JSON to S3</button></p>
-        <p><button onClick={handleClearClick}>Clear Payload</button></p>
+        <button style={{ marginRight: '16px', marginBottom: '8px' }} onClick={handlePreviewClick}>{previewTitle}</button>
+      </Grid>
+      <Grid item xs={12}>
+        {getPreview()}
       </Grid>
     </Grid>);
 };
