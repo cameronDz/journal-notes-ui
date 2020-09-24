@@ -6,13 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Display option to preview card on input screen
 - Loading indicator for loading article summaries
 
 ### Changed
 - Initial tab is article display tab
+- No longer displays articles that has no title or comments/quotes
+- Updated publisher information on card display for cleaner look when information is missing
 
 ### Fixed
 - Update vulnerable package version for dependencies: http-proxy, node-force, serialize-javascript
+- Date sort order for invalid dates
 
 ## [1.8.1] - 2020-03-19
 ### Fixed
