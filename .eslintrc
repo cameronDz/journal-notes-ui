@@ -15,7 +15,8 @@
         "before": false,
         "after": true
       }
-    ]
+    ],
+    "no-self-compare": 0
   },
   "settings": {
     "react": {
