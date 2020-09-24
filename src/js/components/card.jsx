@@ -22,7 +22,7 @@ const card = ({ articleData }) => {
 
   return (
     <Card style={{ margin: '6px' }}>
-      <CardContent style={{ margin: '6px', minHeight: '200px' }}>
+      <CardContent style={{ margin: '6px', minHeight: '180px' , maxHeight: '240px', paddingBottom: '6px' }}>
         <Article {...articleData} showFull={showFull} />
       </CardContent>
       <CardActions style={{ alignItems: 'center', justifyContent: 'center' }}>
