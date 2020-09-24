@@ -11,7 +11,9 @@ import { fetchArticles } from './state/actions';
 
 const propTypes = {
   articles: PropType.array,
-  fetchArticles: PropType.func
+  articlesLoading: PropType.number,
+  fetchArticles: PropType.func,
+  loadingIndex: PropType.bool
 };
 
 const articles = ({ articles, articlesLoading, fetchArticles, loadingIndex }) => {
@@ -89,16 +91,16 @@ const articles = ({ articles, articlesLoading, fetchArticles, loadingIndex }) =>
 
   return (
     <Fragment>
-    {displayProgressBar()}
+      {displayProgressBar()}
 
-    <Grid container  spacing={0}>
-      <Grid item sm={12}>
-        <Button onClick={() => handleSortClick(SORT_TITLE)} size="small">Order by Title</Button>
-        <Button onClick={() => handleSortClick(SORT_CREATE_DATE)} size="small">Order by Created Date</Button>
-        <Button onClick={() => handleSortClick(SORT_PUBLISH_DATE)} size="small">Order by Publish Date</Button>
+      <Grid container spacing={0}>
+        <Grid item sm={12}>
+          <Button onClick={() => handleSortClick(SORT_TITLE)} size="small">Order by Title</Button>
+          <Button onClick={() => handleSortClick(SORT_CREATE_DATE)} size="small">Order by Created Date</Button>
+          <Button onClick={() => handleSortClick(SORT_PUBLISH_DATE)} size="small">Order by Publish Date</Button>
+        </Grid>
+        {renderData()}
       </Grid>
-      {renderData()}
-    </Grid>
     </Fragment>);
 };
 
