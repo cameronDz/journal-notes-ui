@@ -1,9 +1,11 @@
 {
   "author": {
     "email": "camerondziurgot@gmail.com",
-    "name": "cameronDz"
+    "name": "Cam Dziurgot",
+    "url": "http://camdziurgot.io"
   },
-  "dependencies": {
+  "description": "Keep logs and notes on personal trackers.",
+  "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@material-ui/core": "^4.9.7",
     "axios": "^0.19.2",
@@ -12,10 +14,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^4.3.1",
-    "webpack": "^4.42.0"
-  },
-  "description": "Keep logs and notes on personal trackers.",
-  "devDependencies": {
+    "webpack": "^4.42.0",
     "@babel/core": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
