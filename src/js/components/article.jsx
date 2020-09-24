@@ -68,10 +68,17 @@ const article = props => {
   };
 
   const renderTopSection = () => {
+    const publishLink = url
+      ? <Fragment><a href={url}>{publisher || url}</a>.</Fragment>
+      : !!publisher && <Fragment>{publisher}.</Fragment>;
+    const publishLinkDisplay = !!publishLink && <Fragment><i>Source</i>: {publishLink}</Fragment>;
+    const publishDateDisplay = !!publishDate && <Fragment>({publishDate})</Fragment>;
+    const authorComma = (!!author && (!!publishLinkDisplay || !!publishDateDisplay)) && ',';
+    const authorDisplay = !!author && <Fragment>{author}{authorComma}</Fragment>;
     return (
       <Fragment>
         <div style={{ fontSize: '24px' }}>{title}</div>
-        <div style={{ fontSize: '12px' }}>{author}, <i>Source</i>: <a href={url}>{publisher}</a>. ({publishDate})</div>
+        <div style={{ fontSize: '12px' }}>{authorDisplay} {publishLinkDisplay} {publishDateDisplay}</div>
         <div style={{ fontSize: '18px' }}>{description}</div>
       </Fragment>);
   };
