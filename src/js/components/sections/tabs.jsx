@@ -6,6 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+
 import InputSection from './input';
 import LandingSeciton from './landing';
 import ArticleSection from '../lists/articles';
@@ -51,7 +52,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function NavTabs () {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
 
   function handleChange (event, newValue) {
     setValue(newValue);
