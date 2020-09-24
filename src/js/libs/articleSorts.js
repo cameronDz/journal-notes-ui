@@ -60,10 +60,10 @@ const sortByReverseTitle = (a, b) => {
 const sortByBooleanValues = (a, b) => {
   let sortValue = NEUTRAL;
   if (!!a !== !!b) {
-    sortValue = !!a ? FIRST_VALUE_GREATER : SECOND_VALUE_GREATER;
+    sortValue = a ? FIRST_VALUE_GREATER : SECOND_VALUE_GREATER;
   }
   return sortValue;
-}
+};
 
 const sortNaNValues = (a, b) => {
   let sortValue = NEUTRAL;
@@ -73,11 +73,11 @@ const sortNaNValues = (a, b) => {
     sortValue = SECOND_VALUE_GREATER;
   }
   return sortValue;
-}
+};
 
 const isNaN = (value) => {
-  return (typeof value === 'number' && value !== value)
-}
+  return (typeof value === 'number' && value !== value);
+};
 
 export {
   sortByCreatedDate,

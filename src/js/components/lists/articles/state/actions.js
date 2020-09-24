@@ -12,7 +12,7 @@ const fetchArticle = articleId => {
     const endpoint = baseS3Url + articleId + '.json';
     return axios.get(endpoint, config)
       .then(payload => {
-        return dispatch({ article: payload.data, type: _types.SUCCESSFUL_SINGLE_ARTICLE_GET_REQUEST })
+        return dispatch({ article: payload.data, type: _types.SUCCESSFUL_SINGLE_ARTICLE_GET_REQUEST });
       })
       .catch(error => {
         console.log('could not process data', error);
