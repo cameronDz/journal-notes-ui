@@ -1,17 +1,22 @@
 import get from 'lodash.get';
 
+const NEUTRAL = 0;
+const FIRST_VALUE_GREATER = -1;
+const SECOND_VALUE_GREATER = 1;
+
 const sortByDate = (a = '', b = '') => {
-  let sortValue = 0;
-  try {
-    const aDate = new Date(a);
-    const bDate = new Date(b);
-    if (aDate > bDate) {
-      sortValue = -1;
-    } else if (aDate < bDate) {
-      sortValue = 1;
+  let sortValue = sortByBooleanValues(a, b);
+  if (!sortValue) {
+    const aTime = new Date(a).getTime();
+    const bTime = new Date(b).getTime();
+    sortValue = sortNaNValues(aTime, bTime);
+    if (!sortValue) {
+      if (aTime > bTime) {
+        sortValue = FIRST_VALUE_GREATER;
+      } else if (aTime < bTime) {
+        sortValue = SECOND_VALUE_GREATER;
+      }
     }
-  } catch (error) {
-    console.log('could not get date value', error);
   }
   return sortValue;
 };
@@ -39,11 +44,11 @@ const sortByReversePublishDate = (a, b) => {
 const sortByTitle = (a, b) => {
   const aValue = get(a, 'title', '');
   const bValue = get(b, 'title', '');
-  let sortValue = 0;
+  let sortValue = NEUTRAL;
   if (aValue < bValue) {
-    sortValue = -1;
+    sortValue = SECOND_VALUE_GREATER;
   } else if (aValue > bValue) {
-    sortValue = 1;
+    sortValue = FIRST_VALUE_GREATER;
   }
   return sortValue;
 };
@@ -51,6 +56,28 @@ const sortByTitle = (a, b) => {
 const sortByReverseTitle = (a, b) => {
   return sortByTitle(b, a);
 };
+
+const sortByBooleanValues = (a, b) => {
+  let sortValue = NEUTRAL;
+  if (!!a !== !!b) {
+    sortValue = !!a ? FIRST_VALUE_GREATER : SECOND_VALUE_GREATER;
+  }
+  return sortValue;
+}
+
+const sortNaNValues = (a, b) => {
+  let sortValue = NEUTRAL;
+  if (!isNaN(a) && isNaN(b)) {
+    sortValue = FIRST_VALUE_GREATER;
+  } else if (isNaN(a) && !isNaN(b)) {
+    sortValue = SECOND_VALUE_GREATER;
+  }
+  return sortValue;
+}
+
+const isNaN = (value) => {
+  return (typeof value === 'number' && value !== value)
+}
 
 export {
   sortByCreatedDate,
