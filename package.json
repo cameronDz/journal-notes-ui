@@ -47,7 +47,7 @@
   "name": "logs-app",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cameronDz/notes.git"
+    "url": "https://github.com/cameronDz/md-notes-ui.git"
   },
   "scripts": {
     "build-dev": "webpack --config webpack/dev.babel.js",
