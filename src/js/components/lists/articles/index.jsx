@@ -27,7 +27,7 @@ const articles = ({ articles, articlesLoading, fetchArticles, loadingIndex }) =>
 
   const defaultButtonStyles = { marginRight: '12px' };
   const selectedButtonStyles = { ...defaultButtonStyles, backgroundColor: 'lightgrey' };
-  const defaultTriangleStyles = {height: '18px', marginLeft: '12px'};
+  const defaultTriangleStyles = { height: '18px', marginLeft: '12px' };
   const reverseTriangleStyles = { ...defaultTriangleStyles, transform: 'rotate(180deg)' };
 
   const [sortFunction, setSortFunction] = useState(() => _sorts.sortByTitle);
@@ -127,7 +127,7 @@ const articles = ({ articles, articlesLoading, fetchArticles, loadingIndex }) =>
 
       <Grid container spacing={0}>
         <Grid item style={{ marginTop: '8px' }} sm={12}>
-          <span style={{ fontWeight: 600, marginRight: '12px' }}>{`Order by: `}</span>
+          <span style={{ fontWeight: 600, marginRight: '12px' }}>{'Order by: '}</span>
           <Button style={titleStyle} onClick={() => handleSortClick(SORT_TITLE)} size="small">
             Title
             {(currentSortOrder === SORT_TITLE || currentSortOrder === SORT_TITLE_REVERSE) && sortTriangle}
