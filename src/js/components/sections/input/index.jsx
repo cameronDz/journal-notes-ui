@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropType from 'prop-types';
 import Button from '@material-ui/core/Button';
@@ -57,7 +57,7 @@ const input = ({ uploadArticle }) => {
     handleAddQuote();
     handleAddTag();
     return generateCardPayload();
-  }
+  };
 
   const generateCardPayload = () => {
     return { author, comments, description, publishDate, publisher, quotes, tags, title, url, createdDate: generateDateString() };
@@ -105,7 +105,7 @@ const input = ({ uploadArticle }) => {
           <TextField fullWidth label="Title" onChange={event => setTitle(event.target.value)} value={title}></TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth label="Author" onChange={event => setAuthor(event.target.value)}  value={author}></TextField>
+          <TextField fullWidth label="Author" onChange={event => setAuthor(event.target.value)} value={author}></TextField>
         </Grid>
         <Grid item xs={12}>
           <TextField
@@ -118,36 +118,36 @@ const input = ({ uploadArticle }) => {
           </TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth label="Publisher" onChange={event => setPublisher(event.target.value)}  value={publisher}></TextField>
+          <TextField fullWidth label="Publisher" onChange={event => setPublisher(event.target.value)} value={publisher}></TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth label="URL" onChange={event => setUrl(event.target.value)}  value={url}></TextField>
+          <TextField fullWidth label="URL" onChange={event => setUrl(event.target.value)} value={url}></TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth label="Tag" onChange={event => setTag(event.target.value)}  value={tag}></TextField>
+          <TextField fullWidth label="Tag" onChange={event => setTag(event.target.value)} value={tag}></TextField>
           <Button style={{ marginRight: '16px' }} onClick={handleAddTag} disabled={!tag}>Add Tag</Button>
           <Button onClick={handleRemoveTag} disabled={!tags.length}>Remove Tag</Button>
         </Grid>
       </Grid>
       <Grid item xs={12} sm={1}>
-        </Grid>
+      </Grid>
       <Grid item xs={12} sm={7}>
         <Grid item xs={12}>
-          <TextField fullWidth multiline label="Description" onChange={event => setDescription(event.target.value)}  value={description}></TextField>
+          <TextField fullWidth multiline label="Description" onChange={event => setDescription(event.target.value)} value={description}></TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth multiline label="Comments" onChange={event => setComment(event.target.value)}  value={comment}></TextField>
+          <TextField fullWidth multiline label="Comments" onChange={event => setComment(event.target.value)} value={comment}></TextField>
           <Button style={{ marginRight: '16px' }} onClick={handleAddComment} disabled={!comment}>Add Comment</Button>
           <Button onClick={handleRemoveComment} disabled={!comments.length}>Remove Comment</Button>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth multiline label="Quotes" onChange={event => setQuote(event.target.value)}  value={quote}></TextField>
+          <TextField fullWidth multiline label="Quotes" onChange={event => setQuote(event.target.value)} value={quote}></TextField>
           <Button style={{ marginRight: '16px' }} onClick={handleAddQuote} disabled={!quote}>Add Quote</Button>
           <Button onClick={handleRemoveQuote} disabled={!quotes.length}>Remove Quote</Button>
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        <div style={{ fontSize: '20px', marginBottom: '12px'}}>Card Preview</div>
+        <div style={{ fontSize: '20px', marginBottom: '12px' }}>Card Preview</div>
         {getPreview()}
       </Grid>
       <Grid style={{ marginTop: '12px', padding: '4px' }} item xs={12}>

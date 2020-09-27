@@ -15,7 +15,7 @@ const card = ({ articleData, show }) => {
   const [showFull, setShowFull] = useState(false);
 
   useEffect(() => {
-    const text = !!show ? RETRACT : EXPAND;
+    const text = show ? RETRACT : EXPAND;
     setCardActionText(text);
     setShowFull(!!show);
   }, []);
