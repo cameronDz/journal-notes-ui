@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.10.0] 2020-09-26
+### Added
+- Indicators for which sort is being used and sort order
+- Webpack configuration for loading files/images
+
+### Removed
+- Repeated text in sort buttons
+
 ## [1.9.1] 2020-09-25
 ### Fixed
 - Styling issue with card max height
