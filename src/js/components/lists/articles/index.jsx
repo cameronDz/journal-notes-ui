@@ -8,6 +8,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Card from '../../card';
 import * as _sorts from '../../../libs/articleSorts';
 import { fetchArticles } from './state/actions';
+import triangle from '../../../../../assets/black-sort-triangle.png';
 
 const propTypes = {
   articles: PropType.array,
@@ -24,9 +25,19 @@ const articles = ({ articles, articlesLoading, fetchArticles, loadingIndex }) =>
   const SORT_CREATE_DATE_REVERSE = 5;
   const SORT_PUBLISH_DATE_REVERSE = 6;
 
+  const defaultButtonStyles = { marginRight: '12px' };
+  const selectedButtonStyles = { ...defaultButtonStyles, backgroundColor: 'lightgrey' };
+  const defaultTriangleStyles = {height: '18px', marginLeft: '12px'};
+  const reverseTriangleStyles = { ...defaultTriangleStyles, transform: 'rotate(180deg)' };
+
   const [sortFunction, setSortFunction] = useState(() => _sorts.sortByTitle);
   const [currentSortOrder, setCurrentSortOrder] = useState(SORT_TITLE);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [titleStyle, setTitleStyle] = useState(selectedButtonStyles);
+  const [createdDateStyle, setCreatedDateStyle] = useState(defaultButtonStyles);
+  const [publishedDateStyle, setPublishedDateStyle] = useState(defaultButtonStyles);
+  const [triangleStyle, setTriangleStyle] = useState(defaultTriangleStyles);
 
   useEffect(() => {
     fetchArticles();
@@ -42,33 +53,52 @@ const articles = ({ articles, articlesLoading, fetchArticles, loadingIndex }) =>
         if (currentSortOrder !== SORT_TITLE) {
           setSortFunction(() => _sorts.sortByTitle);
           setCurrentSortOrder(SORT_TITLE);
+          setTriangleStyle(defaultTriangleStyles);
         } else {
           setSortFunction(() => _sorts.sortByReverseTitle);
           setCurrentSortOrder(SORT_TITLE_REVERSE);
+          setTriangleStyle(reverseTriangleStyles);
         }
+        setTitleStyle(selectedButtonStyles);
+        setCreatedDateStyle(defaultButtonStyles);
+        setPublishedDateStyle(defaultButtonStyles);
         break;
       case (SORT_CREATE_DATE):
         if (currentSortOrder !== SORT_CREATE_DATE) {
           setSortFunction(() => _sorts.sortByCreatedDate);
           setCurrentSortOrder(SORT_CREATE_DATE);
+          setTriangleStyle(defaultTriangleStyles);
         } else {
           setSortFunction(() => _sorts.sortByReverseCreatedDate);
           setCurrentSortOrder(SORT_CREATE_DATE_REVERSE);
+          setTriangleStyle(reverseTriangleStyles);
         }
+        setTitleStyle(defaultButtonStyles);
+        setCreatedDateStyle(selectedButtonStyles);
+        setPublishedDateStyle(defaultButtonStyles);
         break;
       case (SORT_PUBLISH_DATE):
         if (currentSortOrder !== SORT_PUBLISH_DATE) {
           setSortFunction(() => _sorts.sortByPublishDate);
           setCurrentSortOrder(SORT_PUBLISH_DATE);
+          setTriangleStyle(defaultTriangleStyles);
         } else {
           setSortFunction(() => _sorts.sortByReversePublishDate);
           setCurrentSortOrder(SORT_PUBLISH_DATE_REVERSE);
+          setTriangleStyle(reverseTriangleStyles);
         }
+        setTitleStyle(defaultButtonStyles);
+        setCreatedDateStyle(defaultButtonStyles);
+        setPublishedDateStyle(selectedButtonStyles);
         break;
       default:
         console.log('Invalid sort order selected, not sorting list.');
         setSortFunction(null);
         setCurrentSortOrder(null);
+        setTitleStyle(defaultButtonStyles);
+        setCreatedDateStyle(defaultButtonStyles);
+        setPublishedDateStyle(defaultButtonStyles);
+        setTriangleStyle(defaultTriangleStyles);
     };
   };
 
@@ -89,15 +119,27 @@ const articles = ({ articles, articlesLoading, fetchArticles, loadingIndex }) =>
     return !!isLoading && (<LinearProgress />);
   };
 
+  const sortTriangle = <img src={triangle} style={triangleStyle}></img>;
+
   return (
     <Fragment>
       {displayProgressBar()}
 
       <Grid container spacing={0}>
-        <Grid item sm={12}>
-          <Button onClick={() => handleSortClick(SORT_TITLE)} size="small">Order by Title</Button>
-          <Button onClick={() => handleSortClick(SORT_CREATE_DATE)} size="small">Order by Created Date</Button>
-          <Button onClick={() => handleSortClick(SORT_PUBLISH_DATE)} size="small">Order by Publish Date</Button>
+        <Grid item style={{ marginTop: '8px' }} sm={12}>
+          <span style={{ fontWeight: 600, marginRight: '12px' }}>{`Order by: `}</span>
+          <Button style={titleStyle} onClick={() => handleSortClick(SORT_TITLE)} size="small">
+            Title
+            {(currentSortOrder === SORT_TITLE || currentSortOrder === SORT_TITLE_REVERSE) && sortTriangle}
+          </Button>
+          <Button style={createdDateStyle} onClick={() => handleSortClick(SORT_CREATE_DATE)} size="small">
+            Created Date
+            {(currentSortOrder === SORT_CREATE_DATE || currentSortOrder === SORT_CREATE_DATE_REVERSE) && sortTriangle}
+          </Button>
+          <Button style={publishedDateStyle} onClick={() => handleSortClick(SORT_PUBLISH_DATE)} size="small">
+            Publish Date
+            {(currentSortOrder === SORT_PUBLISH_DATE || currentSortOrder === SORT_PUBLISH_DATE_REVERSE) && sortTriangle}
+          </Button>
         </Grid>
         {renderData()}
       </Grid>
