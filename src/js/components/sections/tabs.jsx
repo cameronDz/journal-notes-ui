@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function NavTabs () {
   const classes = useStyles();
-  const [value, setValue] = React.useState(1);
+  const [value, setValue] = React.useState(0);
 
   function handleChange (event, newValue) {
     setValue(newValue);
