@@ -1,3 +1,4 @@
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebPackPlugin from 'html-webpack-plugin';
 import { resolve } from 'path';
 
@@ -28,6 +29,18 @@ module.exports = {
     publicPath: '/'
   },
   plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: resolve(__dirname, '..', './src/assets/images'),
+          to: 'images'
+        },
+        {
+          from: resolve(__dirname, '..', './src/favicon.ico'),
+          to: 'favicon.ico'
+        }
+      ]
+    }),
     new HtmlWebPackPlugin({
       template: './src/index.html',
       filename: './index.html'
