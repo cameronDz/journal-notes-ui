@@ -5,8 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Webpack copy module for moving images and favicon on build
+- Favicon to src directory
+
 ### Changed
 - Updated babel, eslint, react, and webpack minor versions
+- Images moved to assets directory
 
 ## [1.11.0]  2020-09-27
 ### Changed

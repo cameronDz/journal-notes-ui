@@ -6,9 +6,8 @@ import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 import Card from '../../card';
-import * as _sorts from '../../../libs/articleSorts';
 import { fetchArticles } from './state/actions';
-import triangle from '../../../../../assets/black-sort-triangle.png';
+import * as _sorts from '../../../libs/articleSorts';
 
 const propTypes = {
   articles: PropType.array,
@@ -119,7 +118,7 @@ const articles = ({ articles, articlesLoading, fetchArticles, loadingIndex }) =>
     return !!isLoading && (<LinearProgress />);
   };
 
-  const sortTriangle = <img src={triangle} style={triangleStyle}></img>;
+  const sortTriangle = <img src="images/black-sort-triangle.png" style={triangleStyle}></img>;
 
   return (
     <Fragment>

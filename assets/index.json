@@ -1,5 +1,5 @@
 {
-    "todo": { 
+    "todo": {
         "list": [
             {
                 "name": "Save Audible bookes",
@@ -254,10 +254,6 @@
     },
     "fashion": {
         "list": [
-            {
-                "name": "mvmt watch",
-                "url": "https://www.mvmtwatches.com/collections/classic/products/white-black-tan-leather"
-            },
             {
                 "name": "All Sport shirts",
                 "description": "workout shirts made in USA"
