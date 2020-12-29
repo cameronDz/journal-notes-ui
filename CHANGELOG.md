@@ -8,10 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Webpack copy module for moving images and favicon on build
 - Favicon to src directory
+- Enter key feature for Comments, Quotes, and Tag input fields
 
 ### Changed
 - Updated babel, eslint, react, and webpack minor versions
 - Images moved to assets directory
+
+### Fixed
+- Issue with parsing payload on download/upload of article note
 
 ## [1.11.0]  2020-09-27
 ### Changed

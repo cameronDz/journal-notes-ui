@@ -49,7 +49,7 @@ const input = ({ uploadArticle }) => {
 
   const handleDownloadClick = () => {
     const payload = generatePayload();
-    downloadJson(JSON.parse(payload));
+    downloadJson(JSON.stringify(payload));
   };
 
   const generatePayload = () => {
@@ -88,6 +88,18 @@ const input = ({ uploadArticle }) => {
   const handleRemoveQuote = () => { setQuotes([...quotes.splice(0, quotes.length - 1)]); };
   const handleRemoveTag = () => { setTags([...tags.splice(0, tags.length - 1)]); };
 
+  const handleKeyDown = (event, field) => {
+    if (event && event.key === 'Enter') {
+      if (field === 'Tag') {
+        handleAddTag();
+      } else if (field === 'Comments') {
+        handleAddComment();
+      } else if (field === 'Quotes') {
+        handleAddQuote();
+      }
+    }
+  };
+
   const getPreview = () => {
     return (
       <Grid item sm={12}>
@@ -124,7 +136,7 @@ const input = ({ uploadArticle }) => {
           <TextField fullWidth label="URL" onChange={event => setUrl(event.target.value)} value={url}></TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth label="Tag" onChange={event => setTag(event.target.value)} value={tag}></TextField>
+          <TextField fullWidth label="Tag" onChange={event => setTag(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Tag')} value={tag}></TextField>
           <Button style={{ marginRight: '16px' }} onClick={handleAddTag} disabled={!tag}>Add Tag</Button>
           <Button onClick={handleRemoveTag} disabled={!tags.length}>Remove Tag</Button>
         </Grid>
@@ -136,12 +148,12 @@ const input = ({ uploadArticle }) => {
           <TextField fullWidth multiline label="Description" onChange={event => setDescription(event.target.value)} value={description}></TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth multiline label="Comments" onChange={event => setComment(event.target.value)} value={comment}></TextField>
+          <TextField fullWidth multiline label="Comments" onChange={event => setComment(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Comments')} value={comment}></TextField>
           <Button style={{ marginRight: '16px' }} onClick={handleAddComment} disabled={!comment}>Add Comment</Button>
           <Button onClick={handleRemoveComment} disabled={!comments.length}>Remove Comment</Button>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth multiline label="Quotes" onChange={event => setQuote(event.target.value)} value={quote}></TextField>
+          <TextField fullWidth multiline label="Quotes" onChange={event => setQuote(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Quotes')} value={quote}></TextField>
           <Button style={{ marginRight: '16px' }} onClick={handleAddQuote} disabled={!quote}>Add Quote</Button>
           <Button onClick={handleRemoveQuote} disabled={!quotes.length}>Remove Quote</Button>
         </Grid>
