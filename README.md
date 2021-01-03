@@ -3,9 +3,12 @@
 Create and track logs for various personal activities. Added a basic input section for creating article reviews in JSON format, and downloading that article locally.
 
 ## TODO List ##
-- [ ] Add JSS
 - [ ] Add page routing
+  - [ ] Set "src="/bundle.js" to not include "/"
+  - [ ] Include a ```<base>``` tag element for configuring ```href``` attribute
 - [ ] Finish README
+- [ ] Update naming convention to be included in NSSD
+- [ ] Add JSS
 - [x] Arrow indicators on sort
 - [x] Material UI on Form
 
