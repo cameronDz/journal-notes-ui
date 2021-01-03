@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropType from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import TextField from '@material-ui/core/TextField';
-
 import Card from '../../card';
 
-import { uploadArticle } from './state/actions';
+import { uploadArticle, updateIndex } from './state/actions';
 import { downloadJson } from '../../../libs/download';
 import { generateDateString } from '../../../libs/date';
 
-const propTypes = { uploadArticle: PropType.func };
-const input = ({ uploadArticle }) => {
+const propTypes = {
+  index: PropType.arrayOf(PropType.number | PropType.string),
+  isProcessing: PropType.bool,
+  latestUploadKey: PropType.string,
+  uploadArticle: PropType.func
+};
+
+const input = ({ index, isProcessing, latestUploadKey, uploadArticle, updateIndex }) => {
   const [author, setAuthor] = useState('');
   const [description, setDescription] = useState('');
   const [publishDate, setPublishDate] = useState('');
@@ -26,6 +32,19 @@ const input = ({ uploadArticle }) => {
   const [quotes, setQuotes] = useState([]);
   const [tag, setTag] = useState('');
   const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    if (!isProcessing && !!latestUploadKey) {
+      addUploadToIndex();
+    }
+  }, [isProcessing]);
+
+  const addUploadToIndex = () => {
+    if (!!index && !!index.length && !index.includes(latestUploadKey)) {
+      const newIndex = [...index, latestUploadKey];
+      updateIndex(newIndex);
+    }
+  };
 
   const handleClearClick = () => {
     setAuthor('');
@@ -107,6 +126,10 @@ const input = ({ uploadArticle }) => {
       </Grid>);
   };
 
+  const getProcessIndicator = () => {
+    return !!isProcessing && (<LinearProgress />);
+  };
+
   return (
     <Grid container spacing={0}>
       <Grid item xs={12}>
@@ -145,31 +168,34 @@ const input = ({ uploadArticle }) => {
       </Grid>
       <Grid item xs={12} sm={7}>
         <Grid item xs={12}>
-          <TextField fullWidth multiline label="Description" onChange={event => setDescription(event.target.value)} value={description}></TextField>
+          <TextField fullWidth multiline rows={3} label="Description" onChange={event => setDescription(event.target.value)} value={description}></TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth multiline label="Comments" onChange={event => setComment(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Comments')} value={comment}></TextField>
+          <TextField fullWidth multiline rows={3} label="Comments" onChange={event => setComment(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Comments')} value={comment}></TextField>
           <Button style={{ marginRight: '16px' }} onClick={handleAddComment} disabled={!comment}>Add Comment</Button>
           <Button onClick={handleRemoveComment} disabled={!comments.length}>Remove Comment</Button>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth multiline label="Quotes" onChange={event => setQuote(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Quotes')} value={quote}></TextField>
+          <TextField fullWidth multiline rows={3} label="Quotes" onChange={event => setQuote(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Quotes')} value={quote}></TextField>
           <Button style={{ marginRight: '16px' }} onClick={handleAddQuote} disabled={!quote}>Add Quote</Button>
           <Button onClick={handleRemoveQuote} disabled={!quotes.length}>Remove Quote</Button>
         </Grid>
+      </Grid>
+      <Grid item xs={12}>
+        {getProcessIndicator()}
       </Grid>
       <Grid item xs={12}>
         <div style={{ fontSize: '20px', marginBottom: '12px' }}>Card Preview</div>
         {getPreview()}
       </Grid>
       <Grid style={{ marginTop: '12px', padding: '4px' }} item xs={12}>
-        <Button variant="outlined" style={{ marginRight: '16px', marginBottom: '8px' }} onClick={handleDownloadClick}>Download form Data</Button>
-        <Button variant="outlined" style={{ marginRight: '16px', marginBottom: '8px' }} onClick={handleUploadClick}>Upload form Data to S3</Button>
-        <Button variant="outlined" style={{ marginRight: '16px', marginBottom: '8px' }} onClick={handleClearClick}>Clear Form</Button>
+        <Button variant="outlined" disabled={isProcessing} style={{ marginRight: '16px', marginBottom: '8px' }} onClick={handleDownloadClick}>Download form Data</Button>
+        <Button variant="outlined" disabled={isProcessing} style={{ marginRight: '16px', marginBottom: '8px' }} onClick={handleUploadClick}>Upload form Data to S3</Button>
+        <Button variant="outlined" disabled={isProcessing} style={{ marginRight: '16px', marginBottom: '8px' }} onClick={handleClearClick}>Clear Form</Button>
       </Grid>
     </Grid>);
 };
 
 input.propTypes = propTypes;
-const mapStateToProps = null;
-export default connect(mapStateToProps, { uploadArticle })(input);
+const mapStateToProps = state => ({ index: state.articles.index, isProcessing: state.input.processingUpload, latestUploadKey: state.input.latestUploadKey });
+export default connect(mapStateToProps, { uploadArticle, updateIndex })(input);

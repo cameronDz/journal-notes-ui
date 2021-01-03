@@ -91,7 +91,6 @@ const articles = ({ articles, articlesLoading, fetchArticles, loadingIndex }) =>
         setPublishedDateStyle(selectedButtonStyles);
         break;
       default:
-        console.log('Invalid sort order selected, not sorting list.');
         setSortFunction(null);
         setCurrentSortOrder(null);
         setTitleStyle(defaultButtonStyles);

@@ -77,9 +77,10 @@ const article = props => {
     const authorDisplay = !!author && <Fragment>{author}{authorComma}</Fragment>;
     return (
       <Fragment>
-        <div style={{ fontSize: '24px' }}>{title}</div>
+        <div style={{ fontSize: '24px', lineHeight: '28px' }}>{title}</div>
         <div style={{ fontSize: '12px' }}>{authorDisplay} {publishLinkDisplay} {publishDateDisplay}</div>
-        <div style={{ fontSize: '18px' }}>{description}</div>
+        <div style={{ fontSize: '12px' }}><strong>Resource added</strong>: <i>{createdDate}</i></div>
+        <div style={{ fontSize: '18px', lineHeight: '24px' }}>{description}</div>
       </Fragment>);
   };
 
@@ -91,7 +92,6 @@ const article = props => {
         <br/>
         <div>{renderArray(comments, 'comment', 'Comments')}</div>
         <p><strong>Tags</strong>: {renderTags()}</p>
-        <p><strong>Resource added</strong>: <i>{createdDate}</i></p>
       </Fragment>);
   };
 

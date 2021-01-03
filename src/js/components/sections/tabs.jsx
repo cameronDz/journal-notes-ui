@@ -66,7 +66,7 @@ export default function NavTabs () {
           value={value}
           variant="fullWidth"
         >
-          <LinkTab label="Home" />
+          <LinkTab label="Overview" />
           <LinkTab label="Articles" />
           <LinkTab label="Input" />
         </Tabs>

@@ -5,17 +5,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.12.0]  2021-01-03
 ### Added
-- Webpack copy module for moving images and favicon on build
-- Favicon to src directory
+- Display latest article overview card on landing tab 
 - Enter key feature for Comments, Quotes, and Tag input fields
+- Updating index after succesful article upload
+- Favicon to src directory included in build artifacts
+- Webpack copy module for moving images and favicon on build
 
 ### Changed
+- Using new Heroku API deploy URLs - using s3-acces-api@v1.0.1
+- Moved Article Resource Added display to top section of card
+- Disable form buttons while processing an article upload
+- Styling on top of article card, added both dates to be included in compressed mode
 - Updated babel, eslint, react, and webpack minor versions
 - Images moved to assets directory
 
 ### Fixed
 - Issue with parsing payload on download/upload of article note
+- Multiline textarea label and lines overlapping (happening on Comments, Quotes, and Description)
+
+### Removed
+- None error console logs in browser
 
 ## [1.11.0]  2020-09-27
 ### Changed
