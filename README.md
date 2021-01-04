@@ -1,6 +1,6 @@
-# Logs App #
+# Article Notes App #
 
-Create and track logs for various personal activities. Added a basic input section for creating article reviews in JSON format, and downloading that article locally.
+Create and track notes from various articles. Basic input section for creating article reviews in JSON format, stored using S3 bucket as source with single index.json tracking each individual note JSON file.
 
 ## TODO List ##
 - [x] Add page routing
