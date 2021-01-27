@@ -9,6 +9,7 @@ Create and track notes from various articles. Basic input section for creating a
 - [ ] Finish README
 - [x] Update naming convention to be included in NSSD
 - [ ] Add JSS
+- [ ] fix sort options on mobile/tablet view
 - [x] Arrow indicators on sort
 - [x] Material UI on Form
 
