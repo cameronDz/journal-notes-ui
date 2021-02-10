@@ -7,18 +7,22 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import TextField from '@material-ui/core/TextField';
 import Card from '../../card';
 
-import { uploadArticle, updateIndex } from './state/actions';
+import { getIndex, postArticle, putIndex } from './state/actions';
 import { downloadJson } from '../../../libs/download';
 import { generateDateString } from '../../../libs/date';
 
 const propTypes = {
-  index: PropType.arrayOf(PropType.number | PropType.string),
-  isProcessing: PropType.bool,
+  getIndex: PropType.func,
+  isLoadingIndex: PropType.bool,
+  isProcessingArticle: PropType.bool,
+  isProcessingIndex: PropType.bool,
+  latestIndex: PropType.arrayOf(PropType.string),
   latestUploadKey: PropType.string,
-  uploadArticle: PropType.func
+  postArticle: PropType.func,
+  putIndex: PropType.func
 };
 
-const input = ({ index, isProcessing, latestUploadKey, uploadArticle, updateIndex }) => {
+const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingIndex, latestIndex, latestUploadKey, postArticle, putIndex }) => {
   const [author, setAuthor] = useState('');
   const [description, setDescription] = useState('');
   const [publishDate, setPublishDate] = useState('');
@@ -33,17 +37,27 @@ const input = ({ index, isProcessing, latestUploadKey, uploadArticle, updateInde
   const [tag, setTag] = useState('');
   const [tags, setTags] = useState([]);
 
-  useEffect(() => {
-    if (!isProcessing && !!latestUploadKey) {
-      addUploadToIndex();
-    }
-  }, [isProcessing]);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const addUploadToIndex = () => {
-    if (!!index && !!index.length && !index.includes(latestUploadKey)) {
-      const newIndex = [...index, latestUploadKey];
-      updateIndex(newIndex);
+  useEffect(() => {
+    setIsProcessing((isLoadingIndex) || (isProcessingArticle) || (isProcessingIndex));
+  }, [isLoadingIndex, isProcessingArticle, isProcessingIndex]);
+
+  useEffect(() => {
+    if ((!isRequestingData()) && (!!latestUploadKey)) {
+      getIndex();
     }
+  }, [isProcessingArticle]);
+
+  useEffect(() => {
+    if ((!isRequestingData()) && (Array.isArray(latestIndex)) && (!!latestUploadKey)) {
+      const newIndex = [...latestIndex, latestUploadKey];
+      putIndex(newIndex);
+    }
+  }, [isLoadingIndex]);
+
+  const isRequestingData = () => {
+    return ((isLoadingIndex) || (isProcessingArticle) || (isProcessingIndex));
   };
 
   const handleClearClick = () => {
@@ -63,7 +77,7 @@ const input = ({ index, isProcessing, latestUploadKey, uploadArticle, updateInde
 
   const handleUploadClick = () => {
     const payload = generatePayload();
-    uploadArticle(payload);
+    postArticle(payload);
   };
 
   const handleDownloadClick = () => {
@@ -197,5 +211,12 @@ const input = ({ index, isProcessing, latestUploadKey, uploadArticle, updateInde
 };
 
 input.propTypes = propTypes;
-const mapStateToProps = state => ({ index: state.articles.index, isProcessing: state.input.processingUpload, latestUploadKey: state.input.latestUploadKey });
-export default connect(mapStateToProps, { uploadArticle, updateIndex })(input);
+const mapStateToProps = state => ({
+  isLoadingIndex: state.input.isLoadingIndex,
+  isProcessingArticle: state.input.isProcessingArticle,
+  isProcessingIndex: state.input.isProcessingIndex,
+  latestIndex: state.input.latestIndex,
+  latestUploadKey: state.input.latestUploadKey
+});
+const mapDispatchToProps = { getIndex, postArticle, putIndex };
+export default connect(mapStateToProps, mapDispatchToProps)(input);
