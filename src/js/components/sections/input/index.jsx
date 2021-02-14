@@ -149,7 +149,7 @@ const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingInde
       <Grid item xs={12}>
         <h2>Article Review</h2>
       </Grid>
-      <Grid item xs={12} sm={4}>
+      <Grid item xs={12} sm={12} md={4}>
         <Grid item xs={12}>
           <TextField fullWidth label="Title" onChange={event => setTitle(event.target.value)} value={title}></TextField>
         </Grid>
@@ -178,9 +178,9 @@ const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingInde
           <Button onClick={handleRemoveTag} disabled={!tags.length}>Remove Tag</Button>
         </Grid>
       </Grid>
-      <Grid item xs={12} sm={1}>
+      <Grid item xs={12} sm={12} md={1}>
       </Grid>
-      <Grid item xs={12} sm={7}>
+      <Grid item xs={12} sm={12} md={7}>
         <Grid item xs={12}>
           <TextField fullWidth multiline rows={3} label="Description" onChange={event => setDescription(event.target.value)} value={description}></TextField>
         </Grid>

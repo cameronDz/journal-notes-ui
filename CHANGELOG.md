@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.12.2]  2021-02-14
+### Changed
+- Responsiveness on input puts inputs all full screen with at md
+
 ## [1.12.1]  2021-02-10
 ### Added
 - Base element in index.html file
