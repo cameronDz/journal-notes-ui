@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Input section buttons to all be single, word with title, same size, and centered
+- Show 'No Content' message only when both Quotes and Comments for an article is empty
 
 ## [1.12.2]  2021-02-14
 ### Changed

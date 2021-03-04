@@ -45,26 +45,33 @@ const article = props => {
   }, [props]);
 
   const renderTags = () => {
-    const includeComma = index => { return (index !== tags.length - 1) ? ', ' : ''; };
-    return tags.length
+    const includeComma = index => { return ((Array.isArray(tags)) && (index !== tags.length - 1)) ? ', ' : ''; };
+    return tags.length > 0
       ? tags.map((key, index) => { return <i key={index}>{key}{includeComma(index)}</i>; })
       : <i>No associated tags.</i>;
   };
 
-  const renderArrayConent = (array = [], identifier = '') => {
+  const renderArrayContent = (array = [], identifier = '') => {
     const bullet = <span>&#8226;</span>;
-    return !!identifier && !!array.length
-      ? array.map((key = {}, index) => { return <div key={index}>{bullet} {key[identifier]}</div>; })
-      : 'No content.';
+    return !!identifier && !!array.length && array.map((key = {}, index) => { return <div key={index}>{bullet} {key[identifier]}</div>; });
+  };
+
+  const renderHeader = (title) => {
+    return (
+      <Fragment>
+        <br/>
+        <div>
+          <strong style={{ fontSize: '16px' }}>{title}</strong>
+        </div>
+      </Fragment>);
   };
 
   const renderArray = (array = [], identifier = '', title = '') => {
-    const header = <strong style={{ fontSize: '16px' }}>{title}</strong>;
-    return (
-      <Fragment>
-        <div>{header}</div>
-        {renderArrayConent(array, identifier)}
-      </Fragment>);
+    return ((Array.isArray(array)) && (array.length > 0)) && (
+      <div>
+        {renderHeader(title)}
+        {renderArrayContent(array, identifier)}
+      </div>);
   };
 
   const renderTopSection = () => {
@@ -85,12 +92,18 @@ const article = props => {
   };
 
   const renderBottomSection = () => {
+    const commentsDisplay = renderArray(comments, 'comment', 'Comments');
+    const quotesDisplay = renderArray(quotes, 'quote', 'Quotes');
+    const noContentDisplay = ((!commentsDisplay) && (!quotesDisplay)) && (
+      <Fragment>
+        {renderHeader('Comments/Quotes')}
+        <div>No Comment or Quote content to display.</div>
+      </Fragment>);
     return !!showFull && (
       <Fragment>
-        <br/>
-        <div>{renderArray(quotes, 'quote', 'Quotes')}</div>
-        <br/>
-        <div>{renderArray(comments, 'comment', 'Comments')}</div>
+        {commentsDisplay}
+        {quotesDisplay}
+        {noContentDisplay}
         <p><strong>Tags</strong>: {renderTags()}</p>
       </Fragment>);
   };
