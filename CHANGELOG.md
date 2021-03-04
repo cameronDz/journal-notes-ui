@@ -5,9 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Clear button for Comments, Quotes, and Tags when inputs have value
+
 ### Changed
 - Input section buttons to all be single, word with title, same size, and centered
 - Show 'No Content' message only when both Quotes and Comments for an article is empty
+- Clicking Remove for Comments, Quotes, and Tags will load the removed item value into the empty input field
+
+### Removed
+- 'Remove' button for Comments, Quotes, and Tags when inputs have value
 
 ## [1.12.2]  2021-02-14
 ### Changed

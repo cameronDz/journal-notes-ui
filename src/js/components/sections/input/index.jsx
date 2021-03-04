@@ -124,9 +124,37 @@ const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingInde
     }
   };
 
-  const handleRemoveComment = () => { setComments([...comments.splice(0, comments.length - 1)]); };
-  const handleRemoveQuote = () => { setQuotes([...quotes.splice(0, quotes.length - 1)]); };
-  const handleRemoveTag = () => { setTags([...tags.splice(0, tags.length - 1)]); };
+  const handleRemoveComment = () => {
+    if (comment) {
+      setComment('');
+    } else {
+      const index = Array.isArray(comments) && comments.length > 0 ? comments.length - 1 : 0;
+      const oldComment = comments[index] ? comments[index].comment : '';
+      setComment(oldComment);
+      setComments([...comments.splice(0, index)]);
+    }
+  };
+
+  const handleRemoveQuote = () => {
+    if (quote) {
+      setQuote('');
+    } else {
+      const index = Array.isArray(quotes) && quotes.length > 0 ? quotes.length - 1 : 0;
+      const oldQuote = quotes[index] ? quotes[index].quote : '';
+      setQuote(oldQuote);
+      setQuotes([...quotes.splice(0, index)]);
+    }
+  };
+
+  const handleRemoveTag = () => {
+    if (tag) {
+      setTag('');
+    } else {
+      const index = Array.isArray(tags) && tags.length > 0 ? tags.length - 1 : 0;
+      setTag(tags[index]);
+      setTags([...tags.splice(0, index)]);
+    }
+  };
 
   const handleKeyDown = (event, field) => {
     if (event && event.key === 'Enter') {
@@ -182,7 +210,7 @@ const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingInde
         <Grid item xs={12}>
           <TextField fullWidth label="Tag" onChange={event => setTag(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Tag')} value={tag}></TextField>
           <Button style={{ marginRight: '16px' }} onClick={handleAddTag} disabled={!tag}>Add Tag</Button>
-          <Button onClick={handleRemoveTag} disabled={!tags.length}>Remove Tag</Button>
+          <Button onClick={handleRemoveTag} disabled={!tag && !(tags.length > 0)}>{tag ? 'Clear Tag' : 'Remove Tag'}</Button>
         </Grid>
       </Grid>
       <Grid item xs={12} sm={12} md={1}>
@@ -194,12 +222,12 @@ const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingInde
         <Grid item xs={12}>
           <TextField fullWidth multiline rows={3} label="Comments" onChange={event => setComment(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Comments')} value={comment}></TextField>
           <Button style={{ marginRight: '16px' }} onClick={handleAddComment} disabled={!comment}>Add Comment</Button>
-          <Button onClick={handleRemoveComment} disabled={!comments.length}>Remove Comment</Button>
+          <Button onClick={handleRemoveComment} disabled={!comment && !(comments.length > 0)}>{comment ? 'Clear Comment' : 'Remove Comment'}</Button>
         </Grid>
         <Grid item xs={12}>
           <TextField fullWidth multiline rows={3} label="Quotes" onChange={event => setQuote(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Quotes')} value={quote}></TextField>
           <Button style={{ marginRight: '16px' }} onClick={handleAddQuote} disabled={!quote}>Add Quote</Button>
-          <Button onClick={handleRemoveQuote} disabled={!quotes.length}>Remove Quote</Button>
+          <Button onClick={handleRemoveQuote} disabled={!quote && !(quotes.length > 0)}>{quote ? 'Clear Quote' : 'Remove Quote'}</Button>
         </Grid>
       </Grid>
       <Grid item xs={12}>
