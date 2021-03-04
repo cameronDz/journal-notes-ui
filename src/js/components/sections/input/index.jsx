@@ -22,6 +22,13 @@ const propTypes = {
   putIndex: PropType.func
 };
 
+const buttonContainerStyle = { marginTop: '12px', padding: '4px', textAlign: 'center' };
+const buttonStyle = { marginBottom: '8px', marginRight: '16px', width: '200px' };
+const buttonTitleDownload = 'Download article notes in JSON format';
+const buttonTitleReset = 'Clear input of article notes';
+const buttonTitleUpload = 'Upload article notes to S3';
+const buttonVariant = 'outlined';
+
 const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingIndex, latestIndex, latestUploadKey, postArticle, putIndex }) => {
   const [author, setAuthor] = useState('');
   const [description, setDescription] = useState('');
@@ -202,10 +209,16 @@ const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingInde
         <div style={{ fontSize: '20px', marginBottom: '12px' }}>Card Preview</div>
         {getPreview()}
       </Grid>
-      <Grid style={{ marginTop: '12px', padding: '4px' }} item xs={12}>
-        <Button variant="outlined" disabled={isProcessing} style={{ marginRight: '16px', marginBottom: '8px' }} onClick={handleDownloadClick}>Download form Data</Button>
-        <Button variant="outlined" disabled={isProcessing} style={{ marginRight: '16px', marginBottom: '8px' }} onClick={handleUploadClick}>Upload form Data to S3</Button>
-        <Button variant="outlined" disabled={isProcessing} style={{ marginRight: '16px', marginBottom: '8px' }} onClick={handleClearClick}>Clear Form</Button>
+      <Grid style={buttonContainerStyle} item xs={12}>
+        <Button disabled={isProcessing} style={buttonStyle} title={buttonTitleDownload} variant={buttonVariant} onClick={handleDownloadClick}>
+          Download
+        </Button>
+        <Button disabled={isProcessing} style={buttonStyle} title={buttonTitleUpload} variant={buttonVariant} onClick={handleUploadClick}>
+          Upload
+        </Button>
+        <Button disabled={isProcessing} style={buttonStyle} title={buttonTitleReset} variant={buttonVariant} onClick={handleClearClick}>
+          Reset
+        </Button>
       </Grid>
     </Grid>);
 };
