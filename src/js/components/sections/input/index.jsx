@@ -199,15 +199,16 @@ const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingInde
       </Grid>
       <Grid item xs={12} sm={12} md={4}>
         <Grid item xs={12}>
-          <TextField fullWidth label="Title" onChange={event => setTitle(event.target.value)} value={title}></TextField>
+          <TextField fullWidth disabled={isProcessing} label="Title" onChange={event => setTitle(event.target.value)} value={title}></TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth label="Author" onChange={event => setAuthor(event.target.value)} value={author}></TextField>
+          <TextField fullWidth disabled={isProcessing} label="Author" onChange={event => setAuthor(event.target.value)} value={author}></TextField>
         </Grid>
         <Grid item xs={12}>
           <TextField
             fullWidth
             label="Publish Date"
+            disabled={isProcessing}
             onChange={event => setPublishDate(event.target.value)}
             type="date"
             value={publishDate}
@@ -215,32 +216,32 @@ const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingInde
           </TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth label="Publisher" onChange={event => setPublisher(event.target.value)} value={publisher}></TextField>
+          <TextField fullWidth disabled={isProcessing} label="Publisher" onChange={event => setPublisher(event.target.value)} value={publisher}></TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth label="URL" onChange={event => setUrl(event.target.value)} value={url}></TextField>
+          <TextField fullWidth disabled={isProcessing} label="URL" onChange={event => setUrl(event.target.value)} value={url}></TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth label="Tag" onChange={event => setTag(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Tag')} value={tag}></TextField>
-          <Button style={{ marginRight: '16px' }} onClick={handleAddTag} disabled={!tag}>Add Tag</Button>
-          <Button onClick={handleRemoveTag} disabled={!tag && !(tags.length > 0)}>{tag ? 'Clear Tag' : 'Remove Tag'}</Button>
+          <TextField fullWidth disabled={isProcessing} label="Tag" onChange={event => setTag(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Tag')} value={tag}></TextField>
+          <Button style={{ marginRight: '16px' }} disabled={((isProcessing) || (!tag))} onClick={handleAddTag}>Add Tag</Button>
+          <Button disabled={((isProcessing) || ((!tag) && (!(tags.length > 0))))} onClick={handleRemoveTag}>{tag ? 'Clear Tag' : 'Remove Tag'}</Button>
         </Grid>
       </Grid>
       <Grid item xs={12} sm={12} md={1}>
       </Grid>
       <Grid item xs={12} sm={12} md={7}>
         <Grid item xs={12}>
-          <TextField fullWidth multiline rows={3} label="Description" onChange={event => setDescription(event.target.value)} value={description}></TextField>
+          <TextField fullWidth multiline disabled={isProcessing} rows={3} label="Description" onChange={event => setDescription(event.target.value)} value={description}></TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth multiline rows={3} label="Comments" onChange={event => setComment(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Comments')} value={comment}></TextField>
-          <Button style={{ marginRight: '16px' }} onClick={handleAddComment} disabled={!comment}>Add Comment</Button>
-          <Button onClick={handleRemoveComment} disabled={!comment && !(comments.length > 0)}>{comment ? 'Clear Comment' : 'Remove Comment'}</Button>
+          <TextField fullWidth multiline disabled={isProcessing} rows={3} label="Comments" onChange={event => setComment(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Comments')} value={comment}></TextField>
+          <Button style={{ marginRight: '16px' }} disabled={((isProcessing) || (!comment))} onClick={handleAddComment}>Add Comment</Button>
+          <Button disabled={((isProcessing) || ((!comment) && (!(comments.length > 0))))} onClick={handleRemoveComment}>{comment ? 'Clear Comment' : 'Remove Comment'}</Button>
         </Grid>
         <Grid item xs={12}>
-          <TextField fullWidth multiline rows={3} label="Quotes" onChange={event => setQuote(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Quotes')} value={quote}></TextField>
-          <Button style={{ marginRight: '16px' }} onClick={handleAddQuote} disabled={!quote}>Add Quote</Button>
-          <Button onClick={handleRemoveQuote} disabled={!quote && !(quotes.length > 0)}>{quote ? 'Clear Quote' : 'Remove Quote'}</Button>
+          <TextField fullWidth multiline disabled={isProcessing} rows={3} label="Quotes" onChange={event => setQuote(event.target.value)} onKeyDown={event => handleKeyDown(event, 'Quotes')} value={quote}></TextField>
+          <Button style={{ marginRight: '16px' }} disabled={((isProcessing) || (!quote))} onClick={handleAddQuote}>Add Quote</Button>
+          <Button disabled={((isProcessing) || ((!quote) && (!(quotes.length > 0))))} onClick={handleRemoveQuote}>{quote ? 'Clear Quote' : 'Remove Quote'}</Button>
         </Grid>
       </Grid>
       <Grid item xs={12}>
