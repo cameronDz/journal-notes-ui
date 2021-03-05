@@ -45,6 +45,7 @@ const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingInde
   const [tags, setTags] = useState([]);
 
   const [isProcessing, setIsProcessing] = useState(false);
+  const [hasStartedIndexPut, setHasStartedIndexPut] = useState(false);
 
   useEffect(() => {
     setIsProcessing((isLoadingIndex) || (isProcessingArticle) || (isProcessingIndex));
@@ -57,9 +58,17 @@ const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingInde
   }, [isProcessingArticle]);
 
   useEffect(() => {
+    if ((hasStartedIndexPut) && (!isProcessingIndex)) {
+      clearForm();
+      setHasStartedIndexPut(false);
+    }
+  }, [isProcessingIndex]);
+
+  useEffect(() => {
     if ((!isRequestingData()) && (Array.isArray(latestIndex)) && (!!latestUploadKey)) {
       const newIndex = [...latestIndex, latestUploadKey];
       putIndex(newIndex);
+      setHasStartedIndexPut(true);
     }
   }, [isLoadingIndex]);
 
@@ -68,6 +77,10 @@ const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingInde
   };
 
   const handleClearClick = () => {
+    clearForm();
+  };
+
+  const clearForm = () => {
     setAuthor('');
     setDescription('');
     setPublishDate('');
@@ -238,11 +251,11 @@ const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingInde
         {getPreview()}
       </Grid>
       <Grid style={buttonContainerStyle} item xs={12}>
-        <Button disabled={isProcessing} style={buttonStyle} title={buttonTitleDownload} variant={buttonVariant} onClick={handleDownloadClick}>
-          Download
-        </Button>
         <Button disabled={isProcessing} style={buttonStyle} title={buttonTitleUpload} variant={buttonVariant} onClick={handleUploadClick}>
           Upload
+        </Button>
+        <Button disabled={isProcessing} style={buttonStyle} title={buttonTitleDownload} variant={buttonVariant} onClick={handleDownloadClick}>
+          Download
         </Button>
         <Button disabled={isProcessing} style={buttonStyle} title={buttonTitleReset} variant={buttonVariant} onClick={handleClearClick}>
           Reset
