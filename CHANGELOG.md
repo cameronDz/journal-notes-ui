@@ -9,11 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Clear button for Comments, Quotes, and Tags when inputs have value
 
 ### Changed
+- Sort buttons on List tab changed to Radio button and Switch inputs from Material UI
 - Input section buttons to all be single, word with title, same size, centered, with 'Upload' as first option
 - Clicking Remove for Comments, Quotes, and Tags will load the removed item value into the empty input field
 - Article note form is cleared after successful upload
 - Show 'No Content' message only when both Quotes and Comments for an article is empty
 - Disable article note form inputs when processing form requests
+
+### Fixed
+- Expected alpha order sort for title sort now sorts
 
 ### Removed
 - 'Remove' button for Comments, Quotes, and Tags when inputs have value

@@ -41,7 +41,7 @@ const sortByReversePublishDate = (a, b) => {
   return sortByPublishDate(b, a);
 };
 
-const sortByTitle = (a, b) => {
+const sortByReverseTitle = (a, b) => {
   const aValue = get(a, 'title', '');
   const bValue = get(b, 'title', '');
   let sortValue = NEUTRAL;
@@ -53,8 +53,8 @@ const sortByTitle = (a, b) => {
   return sortValue;
 };
 
-const sortByReverseTitle = (a, b) => {
-  return sortByTitle(b, a);
+const sortByTitle = (a, b) => {
+  return sortByReverseTitle(b, a);
 };
 
 const sortByBooleanValues = (a, b) => {
