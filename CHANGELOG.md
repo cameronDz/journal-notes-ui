@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Filter function to filter article List by tags
 - Clear button for Comments, Quotes, and Tags when inputs have value
 
 ### Changed
