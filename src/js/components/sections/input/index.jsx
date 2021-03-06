@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropType from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import TextField from '@material-ui/core/TextField';
 import Card from '../../card';
 
@@ -188,10 +187,6 @@ const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingInde
       </Grid>);
   };
 
-  const getProcessIndicator = () => {
-    return !!isProcessing && (<LinearProgress />);
-  };
-
   return (
     <Grid container spacing={0}>
       <Grid item xs={12}>
@@ -245,7 +240,6 @@ const input = ({ getIndex, isLoadingIndex, isProcessingArticle, isProcessingInde
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        {getProcessIndicator()}
       </Grid>
       <Grid item xs={12}>
         <div style={{ fontSize: '20px', marginBottom: '12px' }}>Card Preview</div>

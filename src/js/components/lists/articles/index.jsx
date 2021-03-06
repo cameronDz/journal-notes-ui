@@ -8,7 +8,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Select from '@material-ui/core/Select';
@@ -174,18 +173,13 @@ const articles = ({ articles, articlesLoading, fetchArticles, loadingIndex }) =>
     });
   };
 
-  const displayProgressBar = () => {
-    return !!isLoading && (<LinearProgress />);
-  };
-
   return (
     <Fragment>
-      {displayProgressBar()}
       <Grid container spacing={0}>
         <div style={{ fontSize: '24px', fontWeight: '700', textAlign: 'center', width: '100%' }}>Articles List</div>
         <Grid item style={{ border: '3px solid ' + (isLoading ? '#767676' : '#3f51b5'), borderRadius: '8px', margin: '8px 24px', padding: '12px' }} sm={12}>
           <Grid container spacing={0}>
-            <Grid item xs={12} sm={12} md={12} lg={5}>
+            <Grid item xs={12} sm={12} md={5}>
               <div style={{ fontSize: '20px', fontWeight: '700' }}>Sort Order</div>
               <FormControl>
                 <RadioGroup
@@ -221,7 +215,7 @@ const articles = ({ articles, articlesLoading, fetchArticles, loadingIndex }) =>
                 />
               </FormControl>
             </Grid>
-            <Grid item xs={12} sm={12} md={12} lg={5}>
+            <Grid item xs={12} sm={12} md={7}>
               <div style={{ fontSize: '20px', fontWeight: '700' }}>Tag Filters</div>
               <FormControl style={{ minWidth: '224px', marginRight: '12px' }}>
                 <InputLabel shrink htmlFor='available-tag-filters'>

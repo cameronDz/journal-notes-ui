@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Clicking Remove for Comments, Quotes, and Tags will load the removed item value into the empty input field
 - Article note form is cleared after successful upload
 - Show 'No Content' message only when both Quotes and Comments for an article is empty
+- Header and load indicator bar now stretch full screen width
 - Disable article note form inputs when processing form requests
 
 ### Fixed

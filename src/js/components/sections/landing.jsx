@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropType from 'prop-types';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import Card from '../card';
 
 const propTypes = {
@@ -46,13 +45,8 @@ const landing = ({ articles, articlesLoading, loadingIndex }) => {
         : <span style={{ fontSize: '14px', fontWeight: 600 }}>No articles found to display.</span>;
   };
 
-  const displayProgressBar = () => {
-    return !!isLoading && (<LinearProgress />);
-  };
-
   return (
     <Fragment>
-      {displayProgressBar()}
       <h2 style={{ alignItems: 'center', justifyContent: 'center' }}>
         Article Overview Application
       </h2>

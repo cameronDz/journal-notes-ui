@@ -1,11 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import PropType from 'prop-types';
+
 import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
 import InputSection from './input';
 import LandingSeciton from './landing';
@@ -15,10 +19,10 @@ import ArticleSection from '../lists/articles';
 function TabPanel ({ children, value, index, ...other }) {
   return (
     <Typography aria-labelledby={`nav-tab-${index}`}
-      component="div"
+      component='div'
       hidden={value !== index}
       id={`nav-tabpanel-${index}`}
-      role="tabpanel"
+      role='tabpanel'
       {...other}
     >
       <Box p={3}>{children}</Box>
@@ -26,21 +30,13 @@ function TabPanel ({ children, value, index, ...other }) {
 }
 
 TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
+  children: PropType.node,
+  index: PropType.any.isRequired,
+  value: PropType.any.isRequired
 };
 
 function LinkTab (props) {
-  return (
-    <Tab
-      component="a"
-      onClick={event => {
-        event.preventDefault();
-      }}
-      {...props}
-    />
-  );
+  return (<Tab component='a' onClick={(event) => event.preventDefault()} {...props} />);
 }
 
 const useStyles = makeStyles(theme => ({
@@ -50,36 +46,74 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function NavTabs () {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+const propTypes = {
+  articlesLoadingCount: PropType.number,
+  isArticleIndexLoading: PropType.bool,
+  isInputIndexLoading: PropType.bool,
+  isProcessingArticle: PropType.bool,
+  isProcessingIndex: PropType.bool
+};
 
-  function handleChange (event, newValue) {
+const navTabs = ({ articlesLoadingCount, isArticleIndexLoading, isInputIndexLoading, isProcessingArticle, isProcessingIndex }) => {
+  const classes = useStyles();
+
+  const [value, setValue] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(((isArticleIndexLoading) || (isInputIndexLoading) || (isProcessingArticle) || (isProcessingIndex) || (articlesLoadingCount > 0)));
+  }, [articlesLoadingCount, isArticleIndexLoading, isInputIndexLoading, isProcessingArticle, isProcessingIndex]);
+
+  const handleChange = (event, newValue) => {
     setValue(newValue);
-  }
+  };
+
+  const displayProgressBar = () => {
+    return isLoading ? <LinearProgress style={{ minHeight: '8px', paddingTop: '1px' }} /> : <div style={{ minHeight: '8px' }}></div>;
+  };
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs aria-label="nav tabs example"
-          onChange={handleChange}
-          value={value}
-          variant="fullWidth"
-        >
-          <LinkTab label="Overview" />
-          <LinkTab label="Articles" />
-          <LinkTab label="Input" />
-        </Tabs>
+      <AppBar position='static'>
+        <Grid container spacing={0} style={{ maxWidth: '1440px', margin: 'auto', textAlign: 'center' }}>
+          <Grid item xs={12} sm={1}></Grid>
+          <Grid item xs={12} sm={10}>
+            <Tabs aria-label='nav tabs example'
+              onChange={handleChange}
+              value={value}
+              variant='fullWidth'
+            >
+              <LinkTab label='Overview' />
+              <LinkTab label='Articles' />
+              <LinkTab label='Input' />
+            </Tabs>
+          </Grid>
+          <Grid item xs={12} sm={1}></Grid>
+        </Grid>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        <LandingSeciton />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <ArticleSection />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <InputSection />
-      </TabPanel>
-    </div>
-  );
-}
+      {displayProgressBar()}
+      <Grid container spacing={0} style={{ maxWidth: '1440px', margin: 'auto' }}>
+        <Grid item xs={12} sm={12}>
+          <TabPanel value={value} index={0}>
+            <LandingSeciton />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <ArticleSection />
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            <InputSection />
+          </TabPanel>
+        </Grid>
+      </Grid>
+    </div>);
+};
+
+navTabs.propTypes = propTypes;
+const mapStateToProps = state => ({
+  articlesLoadingCount: state.articles.articlesLoading,
+  isArticleIndexLoading: state.articles.isLoadingIndex,
+  isInputIndexLoading: state.input.isLoadingIndex,
+  isProcessingArticle: state.input.isProcessingArticle,
+  isProcessingIndex: state.input.isProcessingIndex
+});
+export default connect(mapStateToProps)(navTabs);
