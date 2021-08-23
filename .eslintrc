@@ -2,8 +2,7 @@
   "extends": [
     "plugin:prettier/recommended",
     "plugin:react/recommended",
-    "react-important-stuff",
-    "standard"
+    "react-important-stuff"
   ],
   "parser": "babel-eslint",
   "rules": {
