@@ -1,12 +1,15 @@
 const generateDateString = () => {
   const currDate = new Date();
-  return getYear(currDate) + '-' + getMonth(currDate) + '-' + getDay(currDate);
+  return getYear(currDate) + "-" + getMonth(currDate) + "-" + getDay(currDate);
 };
 
 const getFullTimeStampString = () => {
   const currDate = new Date();
   const yyyyMMdd = getYear(currDate) + getMonth(currDate) + getDay(currDate);
-  const hhmmss = padNumber(currDate.getHours()) + padNumber(currDate.getMinutes()) + padNumber(currDate.getSeconds());
+  const hhmmss =
+    padNumber(currDate.getHours()) +
+    padNumber(currDate.getMinutes()) +
+    padNumber(currDate.getSeconds());
   return yyyyMMdd + hhmmss + currDate.getMilliseconds();
 };
 
@@ -23,7 +26,7 @@ const getDay = (date) => {
 };
 
 const padNumber = (value) => {
-  return ('' + value).padStart(2, '0');
+  return ("" + value).padStart(2, "0");
 };
 
 export { generateDateString, getFullTimeStampString };

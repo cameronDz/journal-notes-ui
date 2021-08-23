@@ -1,49 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import PropType from 'prop-types';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import PropType from "prop-types";
 
-import AppBar from '@material-ui/core/AppBar';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import AppBar from "@material-ui/core/AppBar";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 
-import InputSection from './input';
-import LandingSeciton from './landing';
-import ArticleSection from '../lists/articles';
+import InputSection from "./input";
+import LandingSeciton from "./landing";
+import ArticleSection from "../lists/articles";
 
 // example added from https://material-ui.com/components/tabs/
-function TabPanel ({ children, value, index, ...other }) {
+function TabPanel({ children, value, index, ...other }) {
   return (
-    <Typography aria-labelledby={`nav-tab-${index}`}
-      component='div'
+    <Typography
+      aria-labelledby={`nav-tab-${index}`}
+      component="div"
       hidden={value !== index}
       id={`nav-tabpanel-${index}`}
-      role='tabpanel'
+      role="tabpanel"
       {...other}
     >
       <Box p={3}>{children}</Box>
-    </Typography>);
+    </Typography>
+  );
 }
 
 TabPanel.propTypes = {
   children: PropType.node,
   index: PropType.any.isRequired,
-  value: PropType.any.isRequired
+  value: PropType.any.isRequired,
 };
 
-function LinkTab (props) {
-  return (<Tab component='a' onClick={(event) => event.preventDefault()} {...props} />);
+function LinkTab(props) {
+  return (
+    <Tab component="a" onClick={(event) => event.preventDefault()} {...props} />
+  );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper
-  }
+    backgroundColor: theme.palette.background.paper,
+  },
 }));
 
 const propTypes = {
@@ -51,48 +55,79 @@ const propTypes = {
   isArticleIndexLoading: PropType.bool,
   isInputIndexLoading: PropType.bool,
   isProcessingArticle: PropType.bool,
-  isProcessingIndex: PropType.bool
+  isProcessingIndex: PropType.bool,
 };
 
-const navTabs = ({ articlesLoadingCount, isArticleIndexLoading, isInputIndexLoading, isProcessingArticle, isProcessingIndex }) => {
+const navTabs = ({
+  articlesLoadingCount,
+  isArticleIndexLoading,
+  isInputIndexLoading,
+  isProcessingArticle,
+  isProcessingIndex,
+}) => {
   const classes = useStyles();
 
   const [value, setValue] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(((isArticleIndexLoading) || (isInputIndexLoading) || (isProcessingArticle) || (isProcessingIndex) || (articlesLoadingCount > 0)));
-  }, [articlesLoadingCount, isArticleIndexLoading, isInputIndexLoading, isProcessingArticle, isProcessingIndex]);
+    setIsLoading(
+      isArticleIndexLoading ||
+        isInputIndexLoading ||
+        isProcessingArticle ||
+        isProcessingIndex ||
+        articlesLoadingCount > 0
+    );
+  }, [
+    articlesLoadingCount,
+    isArticleIndexLoading,
+    isInputIndexLoading,
+    isProcessingArticle,
+    isProcessingIndex,
+  ]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const displayProgressBar = () => {
-    return isLoading ? <LinearProgress style={{ minHeight: '8px', paddingTop: '1px' }} /> : <div style={{ minHeight: '8px' }}></div>;
+    return isLoading ? (
+      <LinearProgress style={{ minHeight: "8px", paddingTop: "1px" }} />
+    ) : (
+      <div style={{ minHeight: "8px" }}></div>
+    );
   };
 
   return (
     <div className={classes.root}>
-      <AppBar position='static'>
-        <Grid container spacing={0} style={{ maxWidth: '1440px', margin: 'auto', textAlign: 'center' }}>
+      <AppBar position="static">
+        <Grid
+          container
+          spacing={0}
+          style={{ maxWidth: "1440px", margin: "auto", textAlign: "center" }}
+        >
           <Grid item xs={12} sm={1}></Grid>
           <Grid item xs={12} sm={10}>
-            <Tabs aria-label='nav tabs example'
+            <Tabs
+              aria-label="nav tabs example"
               onChange={handleChange}
               value={value}
-              variant='fullWidth'
+              variant="fullWidth"
             >
-              <LinkTab label='Overview' />
-              <LinkTab label='Articles' />
-              <LinkTab label='Input' />
+              <LinkTab label="Overview" />
+              <LinkTab label="Articles" />
+              <LinkTab label="Input" />
             </Tabs>
           </Grid>
           <Grid item xs={12} sm={1}></Grid>
         </Grid>
       </AppBar>
       {displayProgressBar()}
-      <Grid container spacing={0} style={{ maxWidth: '1440px', margin: 'auto' }}>
+      <Grid
+        container
+        spacing={0}
+        style={{ maxWidth: "1440px", margin: "auto" }}
+      >
         <Grid item xs={12} sm={12}>
           <TabPanel value={value} index={0}>
             <LandingSeciton />
@@ -105,15 +140,16 @@ const navTabs = ({ articlesLoadingCount, isArticleIndexLoading, isInputIndexLoad
           </TabPanel>
         </Grid>
       </Grid>
-    </div>);
+    </div>
+  );
 };
 
 navTabs.propTypes = propTypes;
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   articlesLoadingCount: state.articles.articlesLoading,
   isArticleIndexLoading: state.articles.isLoadingIndex,
   isInputIndexLoading: state.input.isLoadingIndex,
   isProcessingArticle: state.input.isProcessingArticle,
-  isProcessingIndex: state.input.isProcessingIndex
+  isProcessingIndex: state.input.isProcessingIndex,
 });
 export default connect(mapStateToProps)(navTabs);

@@ -1,12 +1,12 @@
-import React, { useEffect, useState, Fragment } from 'react';
-import { connect } from 'react-redux';
-import PropType from 'prop-types';
-import Card from '../card';
+import React, { useEffect, useState, Fragment } from "react";
+import { connect } from "react-redux";
+import PropType from "prop-types";
+import Card from "../card";
 
 const propTypes = {
   articles: PropType.array,
   articlesLoading: PropType.number,
-  loadingIndex: PropType.bool
+  loadingIndex: PropType.bool,
 };
 
 const landing = ({ articles, articlesLoading, loadingIndex }) => {
@@ -19,17 +19,18 @@ const landing = ({ articles, articlesLoading, loadingIndex }) => {
   const displayLatestArticle = () => {
     const latestArticle = articles.reduce((prev, curr) => {
       let isPrevGreater = false;
-      if ((!!prev) && (!curr)) {
+      if (!!prev && !curr) {
         isPrevGreater = true;
-      } else if ((!prev) && (!!curr)) {
+      } else if (!prev && !!curr) {
         isPrevGreater = false;
       } else {
-        if ((!!prev.createdDate) && (!curr.createdDate)) {
+        if (!!prev.createdDate && !curr.createdDate) {
           isPrevGreater = true;
-        } else if ((!prev.createdDate) && (!!curr.createdDate)) {
+        } else if (!prev.createdDate && !!curr.createdDate) {
           isPrevGreater = false;
         } else {
-          isPrevGreater = new Date(prev.createdDate) > new Date(curr.createdDate);
+          isPrevGreater =
+            new Date(prev.createdDate) > new Date(curr.createdDate);
         }
       }
       return isPrevGreater ? prev : curr;
@@ -38,27 +39,37 @@ const landing = ({ articles, articlesLoading, loadingIndex }) => {
   };
 
   const displayLatestCardSection = () => {
-    return isLoading
-      ? <span style={{ fontSize: '14px', fontWeight: 600 }}>Loading latest articles for preview.</span>
-      : ((!!articles) && (articles.length > 0))
-        ? displayLatestArticle()
-        : <span style={{ fontSize: '14px', fontWeight: 600 }}>No articles found to display.</span>;
+    return isLoading ? (
+      <span style={{ fontSize: "14px", fontWeight: 600 }}>
+        Loading latest articles for preview.
+      </span>
+    ) : !!articles && articles.length > 0 ? (
+      displayLatestArticle()
+    ) : (
+      <span style={{ fontSize: "14px", fontWeight: 600 }}>
+        No articles found to display.
+      </span>
+    );
   };
 
   return (
     <Fragment>
-      <h2 style={{ alignItems: 'center', justifyContent: 'center' }}>
+      <h2 style={{ alignItems: "center", justifyContent: "center" }}>
         Article Overview Application
       </h2>
       <div>
-        Purpose of this application is to find articles that have been read, and create snippets/overviews of articles as well.
+        Purpose of this application is to find articles that have been read, and
+        create snippets/overviews of articles as well.
       </div>
-      <div>
-        {displayLatestCardSection()}
-      </div>
-    </Fragment>);
+      <div>{displayLatestCardSection()}</div>
+    </Fragment>
+  );
 };
 
 landing.propTypes = propTypes;
-const mapStateToProps = state => ({ articles: state.articles.list, articlesLoading: state.articles.articlesLoading, loadingIndex: state.articles.isLoadingIndex });
+const mapStateToProps = (state) => ({
+  articles: state.articles.list,
+  articlesLoading: state.articles.articlesLoading,
+  loadingIndex: state.articles.isLoadingIndex,
+});
 export default connect(mapStateToProps, {})(landing);

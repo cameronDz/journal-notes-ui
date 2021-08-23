@@ -1,4 +1,4 @@
-import * as types from './types';
+import * as types from "./types";
 
 const initialState = {
   isLoadingIndex: false,
@@ -8,7 +8,7 @@ const initialState = {
   latestUploadKey: null,
   loadingIndexError: null,
   processingArticleError: null,
-  processingIndexError: null
+  processingIndexError: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,10 +20,18 @@ const reducer = (state = initialState, action) => {
         newState = { ...state, isLoadingIndex: true };
         break;
       case types.GET_INDEX_SUCCESSFUL:
-        newState = { ...state, latestIndex: action.index, loadingIndexError: null };
+        newState = {
+          ...state,
+          latestIndex: action.index,
+          loadingIndexError: null,
+        };
         break;
       case types.GET_INDEX_ERROR:
-        newState = { ...state, latestIndex: null, loadingIndexError: action.error };
+        newState = {
+          ...state,
+          latestIndex: null,
+          loadingIndexError: action.error,
+        };
         break;
       case types.GET_INDEX_COMPLETED:
         newState = { ...state, isLoadingIndex: false };
@@ -34,10 +42,18 @@ const reducer = (state = initialState, action) => {
         newState = { ...state, isProcessingArticle: true };
         break;
       case types.POST_ARTICLE_SUCCESSFUL:
-        newState = { ...state, latestUploadKey: action.key, processingArticleError: null };
+        newState = {
+          ...state,
+          latestUploadKey: action.key,
+          processingArticleError: null,
+        };
         break;
       case types.POST_ARTICLE_ERROR:
-        newState = { ...state, latestUploadKey: null, processingArticleError: action.error };
+        newState = {
+          ...state,
+          latestUploadKey: null,
+          processingArticleError: action.error,
+        };
         break;
       case types.POST_ARTICLE_COMPLETED:
         newState = { ...state, isProcessingArticle: false };
@@ -54,7 +70,12 @@ const reducer = (state = initialState, action) => {
         newState = { ...state, processingIndexError: action.error };
         break;
       case types.PUT_INDEX_COMPLETED:
-        newState = { ...state, isProcessingIndex: false, latestIndex: null, latestUploadKey: null };
+        newState = {
+          ...state,
+          isProcessingIndex: false,
+          latestIndex: null,
+          latestUploadKey: null,
+        };
         break;
 
       default:
