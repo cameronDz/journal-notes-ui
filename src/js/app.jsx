@@ -12,19 +12,12 @@ const footerStyling = {
   textAlign: "center",
 };
 const App = () => {
-  const [authorName, setAuthorName] = useState("");
   const [displayVersion, setDisplayVersion] = useState("");
 
   useEffect(() => {
-    if (_packageDetails) {
-      const { author, version } = _packageDetails;
-      if (author && author.name) {
-        setAuthorName(author.name);
-      }
-      if (version) {
-        setDisplayVersion("v" + version);
-      }
-    }
+    const version = _packageDetails?.version;
+    const display = version ? "v" + version : "";
+    setDisplayVersion(display);
   }, []);
 
   return (
@@ -35,7 +28,7 @@ const App = () => {
         </div>
       </div>
       <div style={footerStyling}>
-        {authorName} &copy; 2021 {displayVersion}
+        {_packageDetails?.author?.name || ""} &copy; 2021 {displayVersion}
       </div>
     </Fragment>
   );
