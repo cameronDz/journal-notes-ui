@@ -1,7 +1,7 @@
 import React from "react";
 import * as indexData from "../../../../assets/index.json";
 
-const goals = ({ listPath }) => {
+const Goals = ({ listPath }) => {
 
   const getList = () => {
     const list = indexData?.[listPath] || [];
@@ -20,4 +20,4 @@ const goals = ({ listPath }) => {
   return getList();
 };
 
-export default goals;
+export default Goals;

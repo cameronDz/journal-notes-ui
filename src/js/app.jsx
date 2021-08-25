@@ -11,7 +11,7 @@ const footerStyling = {
   maxWidth: "1440px",
   textAlign: "center",
 };
-const app = () => {
+const App = () => {
   const [authorName, setAuthorName] = useState("");
   const [displayVersion, setDisplayVersion] = useState("");
 
@@ -41,4 +41,4 @@ const app = () => {
   );
 };
 
-export default app;
+export default App;

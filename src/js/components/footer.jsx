@@ -15,7 +15,7 @@ const displayDate = new Date().getFullYear();
 const displayName = "Cam Dziurgot";
 const displayVersion = "v" + version;
 
-const footer = () => {
+const Footer = () => {
   return (
     <div style={topStyles}>
       <div style={centeredStyles}>
@@ -25,4 +25,4 @@ const footer = () => {
   );
 };
 
-export default footer;
+export default Footer;

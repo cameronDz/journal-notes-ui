@@ -9,7 +9,7 @@ const propTypes = {
   loadingIndex: PropType.bool,
 };
 
-const landing = ({ articles, articlesLoading, loadingIndex }) => {
+const Landing = ({ articles, articlesLoading, loadingIndex }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -66,10 +66,10 @@ const landing = ({ articles, articlesLoading, loadingIndex }) => {
   );
 };
 
-landing.propTypes = propTypes;
+Landing.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   articles: state.articles.list,
   articlesLoading: state.articles.articlesLoading,
   loadingIndex: state.articles.isLoadingIndex,
 });
-export default connect(mapStateToProps, {})(landing);
+export default connect(mapStateToProps, {})(Landing);

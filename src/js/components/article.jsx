@@ -15,7 +15,7 @@ const propTypes = {
   url: PropType.string,
 };
 
-const article = (props) => {
+const Article = (props) => {
   // this may be a candidate for use redux
   const [author, setAuthor] = useState("");
   const [comments, setComments] = useState([]);
@@ -183,5 +183,5 @@ const article = (props) => {
   );
 };
 
-article.propTypes = propTypes;
-export default article;
+Article.propTypes = propTypes;
+export default Article;

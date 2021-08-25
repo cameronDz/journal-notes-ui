@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
+import { Button, Grid, TextField } from "@material-ui/core";
 import Card from "../../card";
 
 import { getIndex, postArticle, putIndex } from "./state/actions";
@@ -36,7 +34,7 @@ const buttonTitleReset = "Clear input of article notes";
 const buttonTitleUpload = "Upload article notes to S3";
 const buttonVariant = "outlined";
 
-const input = ({
+const Input = ({
   getIndex,
   isLoadingIndex,
   isProcessingArticle,
@@ -409,7 +407,7 @@ const input = ({
   );
 };
 
-input.propTypes = propTypes;
+Input.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   isLoadingIndex: state.input.isLoadingIndex,
   isProcessingArticle: state.input.isProcessingArticle,
@@ -418,4 +416,4 @@ const mapStateToProps = (state) => ({
   latestUploadKey: state.input.latestUploadKey,
 });
 const mapDispatchToProps = { getIndex, postArticle, putIndex };
-export default connect(mapStateToProps, mapDispatchToProps)(input);
+export default connect(mapStateToProps, mapDispatchToProps)(Input);

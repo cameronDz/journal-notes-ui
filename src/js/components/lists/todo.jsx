@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import * as indexData from "../../../../assets/index.json";
 
-const todo = () => {
+const Todo = () => {
   const renderTodo = (name, status) => {
     return <p>{`${name}, ${status}`}</p>;
   };
@@ -26,4 +26,4 @@ const todo = () => {
   return renderList(indexData?.todo?.list || []);
 };
 
-export default todo;
+export default Todo;

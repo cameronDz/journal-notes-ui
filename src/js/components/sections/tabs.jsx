@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
-
-import AppBar from "@material-ui/core/AppBar";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import Typography from "@material-ui/core/Typography";
+import {
+  AppBar,
+  Box,
+  Grid,
+  LinearProgress,
+  Tab,
+  Tabs,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import InputSection from "./input";
@@ -58,7 +59,7 @@ const propTypes = {
   isProcessingIndex: PropType.bool,
 };
 
-const navTabs = ({
+const NavTabs = ({
   articlesLoadingCount,
   isArticleIndexLoading,
   isInputIndexLoading,
@@ -144,7 +145,7 @@ const navTabs = ({
   );
 };
 
-navTabs.propTypes = propTypes;
+NavTabs.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   articlesLoadingCount: state.articles.articlesLoading,
   isArticleIndexLoading: state.articles.isLoadingIndex,
@@ -152,4 +153,4 @@ const mapStateToProps = (state) => ({
   isProcessingArticle: state.input.isProcessingArticle,
   isProcessingIndex: state.input.isProcessingIndex,
 });
-export default connect(mapStateToProps)(navTabs);
+export default connect(mapStateToProps)(NavTabs);

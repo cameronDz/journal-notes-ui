@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import PropType from "prop-types";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
+import {
+  Button,
+  Card as MuiCard,
+  CardActions,
+  CardContent,
+} from "@material-ui/core/Card";
 import Article from "./article";
 
 const propTypes = { articleData: PropType.object, show: PropType.bool };
-const card = ({ articleData, show }) => {
+const Card = ({ articleData, show }) => {
   const EXPAND = "Expand to see More";
   const RETRACT = "Show less";
 
@@ -27,7 +29,7 @@ const card = ({ articleData, show }) => {
   };
 
   return (
-    <Card style={{ margin: "6px" }}>
+    <MuiCard style={{ margin: "6px" }}>
       <CardContent
         style={{ margin: "6px", minHeight: "180px", paddingBottom: "6px" }}
       >
@@ -38,9 +40,9 @@ const card = ({ articleData, show }) => {
           {cardActionText}
         </Button>
       </CardActions>
-    </Card>
+    </MuiCard>
   );
 };
 
-card.propTypes = propTypes;
-export default card;
+Card.propTypes = propTypes;
+export default Card;
