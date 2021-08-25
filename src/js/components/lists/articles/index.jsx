@@ -1,16 +1,17 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
-
-import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Grid from "@material-ui/core/Grid";
-import InputLabel from "@material-ui/core/InputLabel";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Select from "@material-ui/core/Select";
-import Switch from "@material-ui/core/Switch";
+import {
+  Button,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  InputLabel,
+  Radio,
+  RadioGroup,
+  Select,
+  Switch,
+} from "@material-ui/core";
 
 import Card from "../../card";
 import { fetchArticles } from "./state/actions";
@@ -23,7 +24,7 @@ const propTypes = {
   loadingIndex: PropType.bool,
 };
 
-const articles = ({
+const Articles = ({
   articles,
   articlesLoading,
   fetchArticles,
@@ -397,10 +398,10 @@ const articles = ({
   );
 };
 
-articles.propTypes = propTypes;
+Articles.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   articles: state.articles.list,
   articlesLoading: state.articles.articlesLoading,
   loadingIndex: state.articles.isLoadingIndex,
 });
-export default connect(mapStateToProps, { fetchArticles })(articles);
+export default connect(mapStateToProps, { fetchArticles })(Articles);

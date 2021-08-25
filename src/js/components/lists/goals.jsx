@@ -2,7 +2,6 @@ import React from "react";
 import * as indexData from "../../../../assets/index.json";
 
 const Goals = ({ listPath }) => {
-
   const getList = () => {
     const list = indexData?.[listPath] || [];
     return list?.map((key, index) => {
