@@ -5,7 +5,7 @@ import {
   Card as MuiCard,
   CardActions,
   CardContent,
-} from "@material-ui/core/Card";
+} from "@material-ui/core";
 import Article from "./article";
 
 const propTypes = { articleData: PropType.object, show: PropType.bool };

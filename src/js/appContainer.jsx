@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment } from "react";
-import classNames from "classname";
+import classNames from "classnames";
 import { makeStyles } from "@material-ui/core";
 import NavTabs from "./components/sections/tabs";
 import { appContainerStyles } from "./styles";
