@@ -1,5 +1,4 @@
 import axios from "axios";
-import get from "lodash.get";
 import { getFullTimeStampString } from "../../../../libs/date";
 import * as _types from "./types";
 
@@ -13,7 +12,7 @@ export const getIndex = () => {
     return axios
       .get(url, config)
       .then((data) => {
-        const extractedData = get(data, "data.payload", []);
+        const extractedData = data?.data?.payload || [];
         const index = Array.isArray(extractedData) ? extractedData : [];
         return dispatch({ index, type: _types.GET_INDEX_SUCCESSFUL });
       })
@@ -33,7 +32,7 @@ export const postArticle = (content) => {
     return axios
       .post(url, content, config)
       .then((payload) => {
-        const key = get(payload, "data.newObjectKeyName", "");
+        const key = payload?.data?.newObjectKeyName || "";
         return dispatch({ key, type: _types.POST_ARTICLE_SUCCESSFUL });
       })
       .catch((error) => {

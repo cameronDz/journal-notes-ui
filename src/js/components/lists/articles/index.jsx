@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
-import get from "lodash.get";
 
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
@@ -130,7 +129,7 @@ const articles = ({
   };
 
   const handleChangeOrderType = (event = {}) => {
-    const newType = get(event, "target.value", "title");
+    const newType = event?.target?.value || "title";
     setOrderType(newType);
   };
 
@@ -145,12 +144,12 @@ const articles = ({
   };
 
   const handleChangeAvailableFilter = (event) => {
-    const tag = get(event, "target.value", "");
+    const tag = event?.target?.value || "";
     setCurrentAvailableFilterTag([tag]);
   };
 
   const handleChangeSelectFilter = (event) => {
-    const tag = get(event, "target.value", "");
+    const tag = event?.target?.value || "";
     setCurrentSelectedFilterTag([tag]);
   };
 

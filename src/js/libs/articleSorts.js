@@ -1,5 +1,3 @@
-import get from "lodash.get";
-
 const NEUTRAL = 0;
 const FIRST_VALUE_GREATER = -1;
 const SECOND_VALUE_GREATER = 1;
@@ -22,8 +20,8 @@ const sortByDate = (a = "", b = "") => {
 };
 
 const sortByCreatedDate = (a = "", b = "") => {
-  const aValue = get(a, "createdDate", "");
-  const bValue = get(b, "createdDate", "");
+  const aValue = a?.createdDate || "";
+  const bValue = b?.createdDate || "";
   return sortByDate(aValue, bValue);
 };
 
@@ -32,8 +30,8 @@ const sortByReverseCreatedDate = (a, b) => {
 };
 
 const sortByPublishDate = (a, b) => {
-  const aValue = get(a, "publishDate", "");
-  const bValue = get(b, "publishDate", "");
+  const aValue = a?.publishDate || "";
+  const bValue = b?.publishDate || "";
   return sortByDate(aValue, bValue);
 };
 
@@ -42,8 +40,8 @@ const sortByReversePublishDate = (a, b) => {
 };
 
 const sortByReverseTitle = (a, b) => {
-  const aValue = get(a, "title", "");
-  const bValue = get(b, "title", "");
+  const aValue = a?.title || "";
+  const bValue = b?.title || "";
   let sortValue = NEUTRAL;
   if (aValue < bValue) {
     sortValue = SECOND_VALUE_GREATER;

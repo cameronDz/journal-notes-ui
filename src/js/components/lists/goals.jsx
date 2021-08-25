@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from "react";
-import get from "lodash.get";
+import React from "react";
 import * as indexData from "../../../../assets/index.json";
 
-const goals = (props) => {
-  const [listPath, setListPath] = useState("");
-
-  useEffect(() => {
-    setListPath(props.listPath);
-  }, []);
+const goals = ({ listPath }) => {
 
   const getList = () => {
-    const list = get(indexData, listPath, []);
-    return list.map((key, index) => {
-      const { description, name } = key;
+    const list = indexData?.[listPath] || [];
+    return list?.map((key, index) => {
+      const { description, id, name } = key;
       const includedDescription = !!description && ": " + description;
       return (
-        <p key={index}>
+        <p key={id || index}>
           <strong>{name}</strong>
           {includedDescription}
         </p>

@@ -1,6 +1,5 @@
 import * as _types from "./types";
 import axios from "axios";
-import get from "lodash.get";
 
 // get index from heroku, get jsons from s3 directly
 const baseS3Url = "https://log-notes-assets.s3.amazonaws.com/";
@@ -19,7 +18,7 @@ const fetchArticle = (articleId) => {
         });
       })
       .catch((error) => {
-        console.log("article fetch error:", error);
+        console.error("article fetch error:", error);
         return dispatch({
           error: error,
           type: _types.FAILED_SINGLE_ARTICLE_GET_REQUEST,
@@ -53,7 +52,7 @@ export const fetchArticles = () => {
     return axios
       .get(url, config)
       .then((payload) => {
-        const list = get(payload, "data.payload", []);
+        const list = payload?.data?.payload || [];
         processArticleListPayload(dispatch, list);
         return dispatch({
           index: list,
@@ -61,7 +60,7 @@ export const fetchArticles = () => {
         });
       })
       .catch((error) => {
-        console.log("index fetch error:", error);
+        console.error("index fetch error:", error);
         return dispatch({
           error: error,
           type: _types.FAILED_ARTICLE_LIST_GET_REQUEST,
