@@ -20,10 +20,11 @@ const AppContainer = () => {
   return (
     <Fragment>
       <div className={classNames(classes?.appWrapper)}>
-        <div className={classNames(classes?.appNavBarWarpper)}>
+        <div className={classNames(classes?.appNavBarWrapper)}>
           <LeftNavBar />
         </div>
         <div className={classNames(classes?.appContentWrapper)}>
+          <div className={classNames(classes?.appHeaderBarWrapper)}></div>
           <NavTabs />
         </div>
       </div>

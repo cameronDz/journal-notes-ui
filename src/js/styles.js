@@ -1,11 +1,18 @@
+import { sophisticatedColorPalette } from "./libs/colors";
+
 const appContainerStyles = {
   appWrapper: {
     height: "100%",
   },
-  appNavBarWarpper: {
+  appNavBarWrapper: {
+    backgroundColor: sophisticatedColorPalette?.coolBlue,
     display: "inline-block",
     height: "100%",
     width: "84px",
+  },
+  appHeaderBarWrapper: {
+    backgroundColor: sophisticatedColorPalette?.darkBlue,
+    height: "84px",
   },
   appContentWrapper: {
     display: "inline-block",
@@ -13,6 +20,7 @@ const appContainerStyles = {
     minWidth: "800px",
     paddingBottom: "36px",
     position: "absolute",
+    width: "100%",
   },
   appFooterWrapper: {
     bottom: "0",
