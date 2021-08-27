@@ -6,8 +6,9 @@ const appContainerStyles = {
   },
   appNavBarWrapper: {
     backgroundColor: sophisticatedColorPalette?.coolBlue,
-    display: "inline-block",
+    display: "block",
     height: "100%",
+    position: "fixed",
     width: "84px",
   },
   appHeaderBarWrapper: {
@@ -15,12 +16,10 @@ const appContainerStyles = {
     height: "84px",
   },
   appContentWrapper: {
-    display: "inline-block",
-    left: "84px",
+    display: "-block",
+    marginLeft: "84px",
     minWidth: "800px",
     paddingBottom: "36px",
-    position: "absolute",
-    width: "100%",
   },
   appFooterWrapper: {
     bottom: "0",
