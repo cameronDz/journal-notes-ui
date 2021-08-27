@@ -1,4 +1,6 @@
 import { sophisticatedColorPalette } from "./libs/colors";
+import { globalDimensions } from "./libs/dimensions";
+const navBarSizePx = globalDimensions?.appNavBarSize?.px;
 
 const appContainerStyles = {
   appWrapper: {
@@ -9,15 +11,15 @@ const appContainerStyles = {
     display: "block",
     height: "100%",
     position: "fixed",
-    width: "84px",
+    width: navBarSizePx,
   },
   appHeaderBarWrapper: {
     backgroundColor: sophisticatedColorPalette?.darkBlue,
-    height: "84px",
+    height: navBarSizePx,
   },
   appContentWrapper: {
     display: "-block",
-    marginLeft: "84px",
+    marginLeft: navBarSizePx,
     minWidth: "800px",
     paddingBottom: "36px",
   },
