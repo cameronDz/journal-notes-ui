@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 import PropType from "prop-types";
+import ArticleBulletPoints from "./articleBulletPoints";
+import ArticleSectionHeader from "./articleSectionHeader";
 
 const propTypes = {
   author: PropType.string,
@@ -46,73 +48,29 @@ const Article = ({
     );
   };
 
-  const renderArrayContent = (array = [], identifier = "") => {
-    const bullet = <span>&#8226;</span>;
-    return (
-      !!identifier &&
-      !!array.length &&
-      array.map((key = {}, index) => {
-        return (
-          <div key={index}>
-            {bullet} {key[identifier]}
-          </div>
-        );
-      })
-    );
-  };
-
-  const renderHeader = (title) => {
-    return (
-      <Fragment>
-        <br />
-        <div>
-          <strong style={{ fontSize: "16px" }}>{title}</strong>
-        </div>
-      </Fragment>
-    );
-  };
-
-  const renderArray = (array = [], identifier = "", title = "") => {
-    return (
-      Array.isArray(array) &&
-      array.length > 0 && (
-        <div>
-          {renderHeader(title)}
-          {renderArrayContent(array, identifier)}
-        </div>
-      )
-    );
-  };
-
   const renderTopSection = () => {
-    const publishLink = url ? (
+    const display = publisher || url || "";
+    const link = display && url ? <a href={url}>{display}</a> : display;
+    const sourceDisplay = link && (
       <Fragment>
-        <a href={url}>{publisher || url}</a>.
-      </Fragment>
-    ) : (
-      !!publisher && <Fragment>{publisher}.</Fragment>
-    );
-    const publishLinkDisplay = !!publishLink && (
-      <Fragment>
-        <i>Source</i>: {publishLink}
+        <i>Source</i>
+        {`: ${link}.`}
       </Fragment>
     );
-    const publishDateDisplay = !!publishDate && (
-      <Fragment>({publishDate})</Fragment>
-    );
-    const authorComma =
-      !!author && (!!publishLinkDisplay || !!publishDateDisplay) && ",";
+
+    const publishDateDisplay = publishDate || "";
+    const comma = !!author && (!!sourceDisplay || !!publishDateDisplay) && ",";
     const authorDisplay = !!author && (
       <Fragment>
         {author}
-        {authorComma}
+        {comma}
       </Fragment>
     );
     return (
       <Fragment>
         <div style={{ fontSize: "24px", lineHeight: "28px" }}>{title}</div>
         <div style={{ fontSize: "12px" }}>
-          {authorDisplay} {publishLinkDisplay} {publishDateDisplay}
+          {authorDisplay} {sourceDisplay} {publishDateDisplay}
         </div>
         <div style={{ fontSize: "12px" }}>
           <strong>Resource added</strong>: <i>{createdDate}</i>
@@ -125,20 +83,22 @@ const Article = ({
   };
 
   const renderBottomSection = () => {
-    const commentsDisplay = renderArray(comments, "comment", "Comments");
-    const quotesDisplay = renderArray(quotes, "quote", "Quotes");
-    const noContentDisplay = !commentsDisplay && !quotesDisplay && (
-      <Fragment>
-        {renderHeader("Comments/Quotes")}
-        <div>No Comment or Quote content to display.</div>
-      </Fragment>
-    );
     return (
       !!showFull && (
         <Fragment>
-          {commentsDisplay}
-          {quotesDisplay}
-          {noContentDisplay}
+          <ArticleBulletPoints
+            keyName="comments"
+            points={comments}
+            title="Comments"
+          />
+          <ArticleBulletPoints keyName="quote" points={quotes} title="Quotes" />
+          {(!Array.isArray(comments) || comments?.length < 1) &&
+            (!Array.isArray(quotes) || quotes?.length < 1) && (
+              <Fragment>
+                <ArticleSectionHeader title={"Comments/Quotes"} />
+                <div>No Comment or Quote content to display.</div>
+              </Fragment>
+            )}
           <p>
             <strong>Tags</strong>: {renderTags()}
           </p>
