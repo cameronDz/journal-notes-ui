@@ -1,6 +1,6 @@
 const globalDimensions = {
   appNavBarSize: {
-    px: "84px",
+    px: "64px",
   },
 };
 
