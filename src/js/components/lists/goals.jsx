@@ -1,22 +1,23 @@
 import React from "react";
+import PropType from "prop-types";
 import * as indexData from "../../../../assets/index.json";
 
+const propTypes = { listPath: PropType.string };
 const Goals = ({ listPath }) => {
-  const getList = () => {
-    const list = indexData?.[listPath] || [];
-    return list?.map((key, index) => {
-      const { description, id, name } = key;
-      const includedDescription = !!description && ": " + description;
+  return (
+    Array.isArray(indexData?.[listPath]) &&
+    indexData[listPath].map((key, index) => {
       return (
-        <p key={id || index}>
-          <strong>{name}</strong>
-          {includedDescription}
-        </p>
+        key && (
+          <p key={key.id || index}>
+            <strong>{key.name || ""}</strong>
+            {(!!key.description && `: ${key.description}`) || ""}
+          </p>
+        )
       );
-    });
-  };
-
-  return getList();
+    })
+  );
 };
 
+Goals.propTypes = propTypes;
 export default Goals;
