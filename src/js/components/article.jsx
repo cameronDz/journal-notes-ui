@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import PropType from "prop-types";
 import ArticleBulletPoints from "./articleBulletPoints";
 import ArticleSectionHeader from "./articleSectionHeader";
+import ArticleTags from "./ArticleTags";
 
 const propTypes = {
   author: PropType.string,
@@ -30,24 +31,6 @@ const Article = ({
   title,
   url,
 }) => {
-  const renderTags = () => {
-    const includeComma = (index) => {
-      return Array.isArray(tags) && index !== tags.length - 1 ? ", " : "";
-    };
-    return tags.length > 0 ? (
-      tags.map((key, index) => {
-        return (
-          <i key={index}>
-            {key}
-            {includeComma(index)}
-          </i>
-        );
-      })
-    ) : (
-      <i>No associated tags.</i>
-    );
-  };
-
   const renderTopSection = () => {
     const display = publisher || url || "";
     const link = display && url ? <a href={url}>{display}</a> : display;
@@ -99,9 +82,7 @@ const Article = ({
                 <div>No Comment or Quote content to display.</div>
               </Fragment>
             )}
-          <p>
-            <strong>Tags</strong>: {renderTags()}
-          </p>
+          <ArticleTags tags={tags} />
         </Fragment>
       )
     );

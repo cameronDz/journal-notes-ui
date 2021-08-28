@@ -9,18 +9,24 @@ const noContent = <i>No associated tags.</i>;
 const propTypes = { tags: PropType.array };
 const ArticleTags = ({ tags = [] }) => {
   const length = Array.isArray(tags) ? tags.length : -1;
-  return length > 0
-    ? tags.map((key, index) => {
-        return (
-          !!key && (
-            <i key={index}>
-              {key}
-              {includeComma(index, length)}
-            </i>
-          )
-        );
-      })
-    : noContent;
+  return (
+    <p>
+      <strong>Tags</strong>
+      {`: `}
+      {length > 0
+        ? tags.map((key, index) => {
+            return (
+              !!key && (
+                <i key={index}>
+                  {key}
+                  {includeComma(index, length)}
+                </i>
+              )
+            );
+          })
+        : noContent}
+    </p>
+  );
 };
 
 ArticleTags.propTypes = propTypes;
