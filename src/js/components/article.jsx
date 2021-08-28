@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import PropType from "prop-types";
 
 const propTypes = {
@@ -15,47 +15,19 @@ const propTypes = {
   url: PropType.string,
 };
 
-const Article = (props) => {
-  // this may be a candidate for use redux
-  const [author, setAuthor] = useState("");
-  const [comments, setComments] = useState([]);
-  const [createdDate, setCreatedDate] = useState("");
-  const [description, setDescription] = useState("");
-  const [publishDate, setPublishDate] = useState("");
-  const [publisher, setPublisher] = useState("");
-  const [quotes, setQuotes] = useState([]);
-  const [showFull, setShowFull] = useState(false);
-  const [tags, setTags] = useState([]);
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-
-  useEffect(() => {
-    const {
-      author,
-      comments,
-      createdDate,
-      description,
-      publishDate,
-      publisher,
-      quotes,
-      showFull,
-      tags,
-      title,
-      url,
-    } = props;
-    setAuthor(author);
-    setComments(comments);
-    setCreatedDate(createdDate);
-    setDescription(description);
-    setPublishDate(publishDate);
-    setPublisher(publisher);
-    setQuotes(quotes);
-    setShowFull(showFull);
-    setTags(tags);
-    setTitle(title);
-    setUrl(url);
-  }, [props]);
-
+const Article = ({
+  author,
+  comments,
+  createdDate,
+  description,
+  publishDate,
+  publisher,
+  quotes,
+  showFull,
+  tags,
+  title,
+  url,
+}) => {
   const renderTags = () => {
     const includeComma = (index) => {
       return Array.isArray(tags) && index !== tags.length - 1 ? ", " : "";
