@@ -1,17 +1,21 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
+import classNames from "classnames";
 import PropType from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
 import Card from "../card";
 import { latestArticle } from "../../libs/latestArticle";
 import { landingText } from "../../libs/text";
+import { landingStyles } from "./styles";
 
 const propTypes = {
   articles: PropType.array,
   articlesLoading: PropType.number,
   loadingIndex: PropType.bool,
 };
-
+const useStyles = makeStyles(() => landingStyles);
 const Landing = ({ articles, articlesLoading, loadingIndex }) => {
+  const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -23,7 +27,9 @@ const Landing = ({ articles, articlesLoading, loadingIndex }) => {
   };
 
   const displayText = (text) => {
-    return <span style={{ fontSize: "14px", fontWeight: 600 }}>{text}</span>;
+    return (
+      <span className={classNames(classes?.simpleLandingText)}>{text}</span>
+    );
   };
 
   const displayLatestCardSection = () => {
@@ -36,7 +42,7 @@ const Landing = ({ articles, articlesLoading, loadingIndex }) => {
 
   return (
     <Fragment>
-      <h2 style={{ alignItems: "center", justifyContent: "center" }}>
+      <h2 className={classNames(classes?.headerLandingText)}>
         {landingText.header}
       </h2>
       <div>{landingText.overview}</div>
