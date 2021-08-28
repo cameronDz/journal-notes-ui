@@ -1,13 +1,13 @@
 const basicColorPalette = {
-  white: "#ffffff",
+  white: { hex: "#ffffff" },
 };
 
 const sophisticatedColorPalette = {
-  darkBrown: "#5D5C61",
-  coolGreen: "#379683",
-  coolBlue: "#7395AE",
-  darkBlue: "#557A95",
-  lightBrown: "#B1A296",
+  darkBrown: { hex: "#5D5C61" },
+  coolGreen: { hex: "#379683" },
+  coolBlue: { hex: "#7395AE" },
+  darkBlue: { hex: "#557A95" },
+  lightBrown: { hex: "#B1A296" },
 };
 
 export { basicColorPalette, sophisticatedColorPalette };

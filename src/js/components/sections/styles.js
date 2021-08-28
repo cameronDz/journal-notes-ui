@@ -2,7 +2,7 @@ import { basicColorPalette } from "../../libs/colors";
 
 const contentStyles = {
   contentRoot: {
-    backgroundColor: basicColorPalette?.white,
+    backgroundColor: basicColorPalette?.white?.hex,
     flexGrow: 1,
     "& .nssd-grid-wrapper": { maxWidth: "1440px", margin: "auto" },
   },

@@ -7,14 +7,14 @@ const appContainerStyles = {
     height: "100%",
   },
   appNavBarWrapper: {
-    backgroundColor: sophisticatedColorPalette?.coolBlue,
+    backgroundColor: sophisticatedColorPalette?.coolBlue?.hex,
     display: "block",
     height: "100%",
     position: "fixed",
     width: navBarSizePx,
   },
   appHeaderBarWrapper: {
-    backgroundColor: sophisticatedColorPalette?.darkBlue,
+    backgroundColor: sophisticatedColorPalette?.darkBlue?.hex,
     height: navBarSizePx,
   },
   appContentWrapper: {
