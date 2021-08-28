@@ -4,6 +4,7 @@ const contentStyles = {
   contentRoot: {
     backgroundColor: basicColorPalette?.white?.hex,
     flexGrow: 1,
+    minHeight: "100%",
     "& .nssd-grid-wrapper": { maxWidth: "1440px", margin: "auto" },
   },
   contentTop: {
