@@ -1,20 +1,58 @@
 import React, { Fragment } from "react";
 import classNames from "classnames";
-import { SvgIcon } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import {
+  DescriptionTwoTone,
+  Edit,
+  HomeTwoTone,
+  SearchTwoTone,
+} from "@material-ui/icons";
+import NavIcon from "./navIcon";
 import { navBarStyles } from "./styles";
+
+const icons = [
+  {
+    icon: <HomeTwoTone />,
+    name: "home",
+  },
+  {
+    icon: <DescriptionTwoTone />,
+    name: "view",
+  },
+  {
+    icon: <SearchTwoTone />,
+    name: "search",
+  },
+  {
+    icon: <Edit />,
+    name: "create",
+  },
+];
 
 const useStyles = makeStyles(() => navBarStyles);
 const LeftNavBar = () => {
+  const handleClick = (event) => {
+    console.info("EVENT:", event);
+  };
+
   const classes = useStyles();
   return (
     <Fragment>
       <div className={classNames(classes?.navBarRoot)}>
-        <div className={classNames(classes?.iconWrapper)}>
-          <SvgIcon fontSize="large">
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-          </SvgIcon>
-        </div>
+        {Array.isArray(icons) &&
+          icons.map((icon) => {
+            return (
+              icon && (
+                <Fragment key={icon?.name}>
+                  <NavIcon
+                    icon={icon?.icon}
+                    name={icon?.name}
+                    onClick={handleClick}
+                  />
+                </Fragment>
+              )
+            );
+          })}
       </div>
     </Fragment>
   );
