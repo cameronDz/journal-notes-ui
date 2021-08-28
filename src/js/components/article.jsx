@@ -70,7 +70,7 @@ const Article = ({
       !!showFull && (
         <Fragment>
           <ArticleBulletPoints
-            keyName="comments"
+            keyName="comment"
             points={comments}
             title="Comments"
           />
