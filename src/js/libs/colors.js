@@ -1,3 +1,7 @@
+const basicColorPalette = {
+  white: "#ffffff",
+};
+
 const sophisticatedColorPalette = {
   darkBrown: "#5D5C61",
   coolGreen: "#379683",
@@ -6,4 +10,4 @@ const sophisticatedColorPalette = {
   lightBrown: "#B1A296",
 };
 
-export { sophisticatedColorPalette };
+export { basicColorPalette, sophisticatedColorPalette };

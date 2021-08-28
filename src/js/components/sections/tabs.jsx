@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import classNames from "classnames";
 import PropType from "prop-types";
-import { Box, Grid, LinearProgress, Typography } from "@material-ui/core";
+import { Grid, LinearProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Panel from "./panel";
 import InputSection from "./input";
 import LandingSeciton from "./landing";
 import ArticleSection from "../lists/articles";
+import { contentStyles } from "./styles";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
+const useStyles = makeStyles((theme) => contentStyles);
 
 const propTypes = {
   articlesLoadingCount: PropType.number,
@@ -64,20 +61,18 @@ const NavTabs = ({
 
   const displayProgressBar = () => {
     return isLoading ? (
-      <LinearProgress style={{ minHeight: "8px", paddingTop: "1px" }} />
+      <LinearProgress
+        className={classNames(classes?.contentTop, classes?.contentLoader)}
+      />
     ) : (
-      <div style={{ minHeight: "8px" }}></div>
+      <div className={classNames(classes?.contentTop)}></div>
     );
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classNames(classes?.contentRoot)}>
       {displayProgressBar()}
-      <Grid
-        container
-        spacing={0}
-        style={{ maxWidth: "1440px", margin: "auto" }}
-      >
+      <Grid className="nssd-grid-wrapper" container spacing={0}>
         <Grid item xs={12} sm={12}>
           <Panel value={value} index={0}>
             <LandingSeciton />
