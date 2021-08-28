@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import classNames from "classnames";
+import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   DescriptionTwoTone,
@@ -29,10 +30,13 @@ const icons = [
   },
 ];
 
+const propTypes = { onClick: PropType.func };
 const useStyles = makeStyles(() => navBarStyles);
-const LeftNavBar = () => {
+const LeftNavBar = ({ onClick }) => {
   const handleClick = (event) => {
-    console.info("EVENT:", event);
+    if (typeof onClick === "function") {
+      onClick(event);
+    }
   };
 
   const classes = useStyles();
@@ -58,4 +62,5 @@ const LeftNavBar = () => {
   );
 };
 
+LeftNavBar.propTypes = propTypes;
 export default LeftNavBar;
