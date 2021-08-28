@@ -9,6 +9,10 @@ const appFooterStyles = {
   },
 };
 
+const bulletPointStyles = {
+  bulletsTitle: { fontSize: "16px" },
+};
+
 const navBarStyles = {
   navBarRoot: {
     marginTop: globalDimensions?.appNavBarSize?.px,
@@ -28,4 +32,4 @@ const navBarIconStyles = {
   },
 };
 
-export { appFooterStyles, navBarIconStyles, navBarStyles };
+export { appFooterStyles, bulletPointStyles, navBarIconStyles, navBarStyles };
