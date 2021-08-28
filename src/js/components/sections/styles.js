@@ -5,7 +5,13 @@ const contentStyles = {
     backgroundColor: basicColorPalette?.white?.hex,
     flexGrow: 1,
     minHeight: "100%",
-    "& .nssd-grid-wrapper": { maxWidth: "1440px", margin: "auto" },
+    "& .nssd-grid-wrapper": {
+      maxWidth: "1440px",
+      margin: "auto",
+      "& .MuiBox-root": {
+        paddingTop: "6px",
+      },
+    },
   },
   contentTop: {
     minHeight: "8px",
