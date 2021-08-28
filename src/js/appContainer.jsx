@@ -1,22 +1,13 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core";
 import LeftNavBar from "./components/leftNavBar";
 import NavTabs from "./components/sections/tabs";
 import { appContainerStyles } from "./styles";
-import * as _packageDetails from "../../package.json";
 
 const useStyles = makeStyles(() => appContainerStyles);
 const AppContainer = () => {
-  const [displayVersion, setDisplayVersion] = useState("");
   const [page, setPage] = useState("home");
-
-  useEffect(() => {
-    const version = _packageDetails?.version;
-    const display = version ? "v" + version : "";
-    setDisplayVersion(display);
-  }, []);
-
   const handleNavBarIconClick = (event) => {
     setPage(event || "home");
   };
@@ -32,9 +23,6 @@ const AppContainer = () => {
           <div className={classNames(classes?.appHeaderBarWrapper)}></div>
           <NavTabs page={page} />
         </div>
-      </div>
-      <div className={classNames(classes?.appFooterWrapper)}>
-        {_packageDetails?.author?.name || ""} &copy; 2021 {displayVersion}
       </div>
     </Fragment>
   );
