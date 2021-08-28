@@ -57,6 +57,8 @@ const propTypes = {
   isInputIndexLoading: PropType.bool,
   isProcessingArticle: PropType.bool,
   isProcessingIndex: PropType.bool,
+  onPageChange: PropType.func,
+  page: PropType.string,
 };
 
 const NavTabs = ({
@@ -65,11 +67,22 @@ const NavTabs = ({
   isInputIndexLoading,
   isProcessingArticle,
   isProcessingIndex,
+  onPageChange,
+  page,
 }) => {
   const classes = useStyles();
-
   const [value, setValue] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    let newValue = 0;
+    if (page === "search" || page === "view") {
+      newValue = 1;
+    } else if (page === "create") {
+      newValue = 2;
+    }
+    setValue(newValue);
+  }, [page]);
 
   useEffect(() => {
     setIsLoading(
@@ -87,8 +100,17 @@ const NavTabs = ({
     isProcessingIndex,
   ]);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (_event, newValue) => {
     setValue(newValue);
+    if (typeof onPageChange === "function") {
+      let newPage = "home";
+      if (newValue === 1) {
+        newPage = "search";
+      } else if (newValue === 2) {
+        newPage = "create";
+      }
+      onPageChange(newPage);
+    }
   };
 
   const displayProgressBar = () => {

@@ -9,6 +9,7 @@ import * as _packageDetails from "../../package.json";
 const useStyles = makeStyles(() => appContainerStyles);
 const AppContainer = () => {
   const [displayVersion, setDisplayVersion] = useState("");
+  const [page, setPage] = useState("home");
 
   useEffect(() => {
     const version = _packageDetails?.version;
@@ -16,16 +17,20 @@ const AppContainer = () => {
     setDisplayVersion(display);
   }, []);
 
+  const handleNavBarIconClick = (event) => {
+    setPage(event || "home");
+  };
+
   const classes = useStyles();
   return (
     <Fragment>
       <div className={classNames(classes?.appWrapper)}>
         <div className={classNames(classes?.appNavBarWrapper)}>
-          <LeftNavBar />
+          <LeftNavBar onClick={handleNavBarIconClick} />
         </div>
         <div className={classNames(classes?.appContentWrapper)}>
           <div className={classNames(classes?.appHeaderBarWrapper)}></div>
-          <NavTabs />
+          <NavTabs page={page} />
         </div>
       </div>
       <div className={classNames(classes?.appFooterWrapper)}>
