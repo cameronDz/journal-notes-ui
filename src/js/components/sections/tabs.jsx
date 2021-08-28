@@ -3,31 +3,10 @@ import { connect } from "react-redux";
 import PropType from "prop-types";
 import { Box, Grid, LinearProgress, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Panel from "./panel";
 import InputSection from "./input";
 import LandingSeciton from "./landing";
 import ArticleSection from "../lists/articles";
-
-// example added from https://material-ui.com/components/tabs/
-function Panel({ children, value, index, ...other }) {
-  return (
-    <Typography
-      aria-labelledby={`nav-tab-${index}`}
-      component="div"
-      hidden={value !== index}
-      id={`nav-tabpanel-${index}`}
-      role="tabpanel"
-      {...other}
-    >
-      <Box p={3}>{children}</Box>
-    </Typography>
-  );
-}
-
-Panel.propTypes = {
-  children: PropType.node,
-  index: PropType.any.isRequired,
-  value: PropType.any.isRequired,
-};
 
 const useStyles = makeStyles((theme) => ({
   root: {
