@@ -10,7 +10,7 @@ import LandingSeciton from "./landing";
 import ArticleSection from "../lists/articles";
 import { contentStyles } from "./styles";
 
-const useStyles = makeStyles((theme) => contentStyles);
+const useStyles = makeStyles(() => contentStyles);
 
 const propTypes = {
   articlesLoadingCount: PropType.number,

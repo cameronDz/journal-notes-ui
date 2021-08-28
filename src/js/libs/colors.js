@@ -3,10 +3,10 @@ const basicColorPalette = {
 };
 
 const sophisticatedColorPalette = {
-  darkBrown: { hex: "#5D5C61" },
-  coolGreen: { hex: "#379683" },
   coolBlue: { hex: "#7395AE" },
+  coolGreen: { hex: "#379683" },
   darkBlue: { hex: "#557A95" },
+  darkBrown: { hex: "#5D5C61" },
   lightBrown: { hex: "#B1A296" },
 };
 
