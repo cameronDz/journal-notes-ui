@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
-import {
-  AppBar,
-  Box,
-  Grid,
-  LinearProgress,
-  Tab,
-  Tabs,
-  Typography,
-} from "@material-ui/core";
+import { Box, Grid, LinearProgress, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
 import InputSection from "./input";
 import LandingSeciton from "./landing";
 import ArticleSection from "../lists/articles";
 
 // example added from https://material-ui.com/components/tabs/
-function TabPanel({ children, value, index, ...other }) {
+function Panel({ children, value, index, ...other }) {
   return (
     <Typography
       aria-labelledby={`nav-tab-${index}`}
@@ -32,17 +23,11 @@ function TabPanel({ children, value, index, ...other }) {
   );
 }
 
-TabPanel.propTypes = {
+Panel.propTypes = {
   children: PropType.node,
   index: PropType.any.isRequired,
   value: PropType.any.isRequired,
 };
-
-function LinkTab(props) {
-  return (
-    <Tab component="a" onClick={(event) => event.preventDefault()} {...props} />
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,7 +42,6 @@ const propTypes = {
   isInputIndexLoading: PropType.bool,
   isProcessingArticle: PropType.bool,
   isProcessingIndex: PropType.bool,
-  onPageChange: PropType.func,
   page: PropType.string,
 };
 
@@ -67,7 +51,6 @@ const NavTabs = ({
   isInputIndexLoading,
   isProcessingArticle,
   isProcessingIndex,
-  onPageChange,
   page,
 }) => {
   const classes = useStyles();
@@ -100,19 +83,6 @@ const NavTabs = ({
     isProcessingIndex,
   ]);
 
-  const handleChange = (_event, newValue) => {
-    setValue(newValue);
-    if (typeof onPageChange === "function") {
-      let newPage = "home";
-      if (newValue === 1) {
-        newPage = "search";
-      } else if (newValue === 2) {
-        newPage = "create";
-      }
-      onPageChange(newPage);
-    }
-  };
-
   const displayProgressBar = () => {
     return isLoading ? (
       <LinearProgress style={{ minHeight: "8px", paddingTop: "1px" }} />
@@ -123,28 +93,6 @@ const NavTabs = ({
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Grid
-          container
-          spacing={0}
-          style={{ maxWidth: "1440px", margin: "auto", textAlign: "center" }}
-        >
-          <Grid item xs={12} sm={1}></Grid>
-          <Grid item xs={12} sm={10}>
-            <Tabs
-              aria-label="nav tabs example"
-              onChange={handleChange}
-              value={value}
-              variant="fullWidth"
-            >
-              <LinkTab label="Overview" />
-              <LinkTab label="Articles" />
-              <LinkTab label="Input" />
-            </Tabs>
-          </Grid>
-          <Grid item xs={12} sm={1}></Grid>
-        </Grid>
-      </AppBar>
       {displayProgressBar()}
       <Grid
         container
@@ -152,15 +100,15 @@ const NavTabs = ({
         style={{ maxWidth: "1440px", margin: "auto" }}
       >
         <Grid item xs={12} sm={12}>
-          <TabPanel value={value} index={0}>
+          <Panel value={value} index={0}>
             <LandingSeciton />
-          </TabPanel>
-          <TabPanel value={value} index={1}>
+          </Panel>
+          <Panel value={value} index={1}>
             <ArticleSection />
-          </TabPanel>
-          <TabPanel value={value} index={2}>
+          </Panel>
+          <Panel value={value} index={2}>
             <InputSection />
-          </TabPanel>
+          </Panel>
         </Grid>
       </Grid>
     </div>
