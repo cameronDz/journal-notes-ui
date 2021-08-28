@@ -19,7 +19,7 @@ const ArticleBulletPoints = ({ keyName = "", points = [], title = "" }) => {
           points.map((point, index) => {
             return (
               point &&
-              point?.[keyName](
+              point?.[keyName] && (
                 <div key={point?.id || index}>
                   {bullet} {point[keyName]}
                 </div>
