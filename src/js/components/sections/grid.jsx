@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropType from "prop-types";
 import { Grid as MuiGrid } from "@material-ui/core";
 
 const propTypes = { section: PropType.object, title: PropType.string };
-const Grid = (props) => {
-  const [section, setSection] = useState("");
-  const [title, setTitle] = useState("");
-
-  useEffect(() => {
-    const { section, title } = props;
-    setSection(section);
-    setTitle(title);
-  }, []);
-
+const Grid = ({ section, title }) => {
   return (
     !!section &&
     !!title && (
