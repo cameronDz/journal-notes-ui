@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from "react";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core";
+import AppFooter from "./components/appFooter";
 import LeftNavBar from "./components/leftNavBar";
 import NavTabs from "./components/sections/tabs";
 import { appContainerStyles } from "./styles";
@@ -19,9 +20,14 @@ const AppContainer = () => {
         <div className={classNames(classes?.appNavBarWrapper)}>
           <LeftNavBar onClick={handleNavBarIconClick} />
         </div>
-        <div className={classNames(classes?.appContentWrapper)}>
-          <div className={classNames(classes?.appHeaderBarWrapper)}></div>
-          <NavTabs page={page} />
+        <div className={classNames(classes?.appContentOuterWrapper)}>
+          <div className={classNames(classes?.appContentInnerWrapper)}>
+            <div className={classNames(classes?.appHeaderBarWrapper)}></div>
+            <NavTabs page={page} />
+          </div>
+        </div>
+        <div className={classNames(classes?.appFooter)}>
+          <AppFooter />
         </div>
       </div>
     </Fragment>
