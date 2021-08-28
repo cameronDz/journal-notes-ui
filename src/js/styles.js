@@ -3,8 +3,11 @@ import { globalDimensions } from "./libs/dimensions";
 const navBarSizePx = globalDimensions?.appNavBarSize?.px;
 
 const appContainerStyles = {
-  appWrapper: {
+  appOutWrapper: {
     height: "100%",
+  },
+  appInnerWrapper: {
+    paddingBottom: "36px",
   },
   appNavBarWrapper: {
     backgroundColor: sophisticatedColorPalette?.coolBlue?.hex,
@@ -18,10 +21,14 @@ const appContainerStyles = {
     height: navBarSizePx,
   },
   appContentWrapper: {
-    display: "-block",
     marginLeft: navBarSizePx,
+    minHeight: "100%",
     minWidth: "800px",
     paddingBottom: "36px",
+  },
+  appFooter: {
+    height: "36px",
+    marginTop: "-36px",
   },
 };
 
