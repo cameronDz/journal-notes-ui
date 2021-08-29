@@ -19,7 +19,7 @@ const propTypes = {
   loadingIndex: PropType.bool,
 };
 const useStyles = makeStyles(() => articleGridStyles);
-const Articles = ({
+const ArticleSection = ({
   articles,
   articlesLoading,
   fetchArticles,
@@ -245,10 +245,10 @@ const Articles = ({
   );
 };
 
-Articles.propTypes = propTypes;
+ArticleSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   articles: state.articles.list,
   articlesLoading: state.articles.articlesLoading,
   loadingIndex: state.articles.isLoadingIndex,
 });
-export default connect(mapStateToProps, { fetchArticles })(Articles);
+export default connect(mapStateToProps, { fetchArticles })(ArticleSection);
