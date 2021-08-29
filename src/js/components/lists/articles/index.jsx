@@ -228,7 +228,6 @@ const Articles = ({
           style={{
             fontSize: "24px",
             fontWeight: "700",
-            textAlign: "center",
             width: "100%",
           }}
         >
