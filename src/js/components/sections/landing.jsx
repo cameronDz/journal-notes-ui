@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "../card";
+import ArticleCard from "../articleCard";
 import { latestArticle } from "../../libs/latestArticle";
 import { landingText } from "../../libs/text";
 import { landingStyles } from "./styles";
@@ -23,7 +23,7 @@ const Landing = ({ articles, articlesLoading, loadingIndex }) => {
   }, [articlesLoading, loadingIndex]);
 
   const displayArticle = (article) => {
-    return !!article && <Card articleData={article} />;
+    return !!article && <ArticleCard articleData={article} />;
   };
 
   const displayText = (text) => {

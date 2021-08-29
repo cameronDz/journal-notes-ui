@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
 import { Button, Grid, TextField } from "@material-ui/core";
-import Card from "../../card";
+import ArticleCard from "../../articleCard";
 
 import { getIndex, postArticle, putIndex } from "./state/actions";
 import { downloadJson } from "../../../libs/download";
@@ -221,7 +221,7 @@ const Input = ({
   const getPreview = () => {
     return (
       <Grid item sm={12}>
-        <Card articleData={generateCardPayload()} show={true} />
+        <ArticleCard articleData={generateCardPayload()} show={true} />
       </Grid>
     );
   };

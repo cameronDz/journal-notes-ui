@@ -13,7 +13,7 @@ import {
   Switch,
 } from "@material-ui/core";
 
-import Card from "../../card";
+import ArticleCard from "../../articleCard";
 import { fetchArticles } from "./state/actions";
 import * as _sorts from "../../../libs/articleSorts";
 
@@ -180,9 +180,10 @@ const Articles = ({
         .sort(sortFunction)
         .map((key, index) => {
           return (
+            index < 5 &&
             !!isArticleDisplayable(key) && (
-              <Grid key={index} item sm={12} md={6}>
-                <Card articleData={key} />
+              <Grid key={key.id || index} item sm={12} md={6}>
+                <ArticleCard articleData={key} />
               </Grid>
             )
           );
