@@ -13,7 +13,11 @@ const propTypes = {
   title: PropType.string,
   url: PropType.string,
 };
+const textComma = `,`;
+const textColon = `: `;
+const textPeriod = `.`;
 const textResources = "Resource added";
+const textSource = "Source";
 const useStyles = makeStyles(() => articleOverviewStyles);
 const ArticleOverview = ({
   author,
@@ -29,15 +33,16 @@ const ArticleOverview = ({
   const link = display && url ? <a href={url}>{display}</a> : display;
   const sourceDisplay = link && (
     <Fragment>
-      <i>Source</i>
-      {`: `}
+      <i>{textSource}</i>
+      {textColon}
       {link}
-      {`.`}
+      {textPeriod}
     </Fragment>
   );
 
   const publishDateDisplay = publishDate || "";
-  const comma = !!author && (!!sourceDisplay || !!publishDateDisplay) && ",";
+  const comma =
+    (!!author && (!!sourceDisplay || !!publishDateDisplay) && textComma) || "";
   const authorDisplay = !!author && (
     <Fragment>
       {author}
@@ -52,7 +57,7 @@ const ArticleOverview = ({
       </div>
       <div className={classNames(classes?.overviewSimple)}>
         <strong>{textResources}</strong>
-        {`: `}
+        {textColon}
         <i>{createdDate}</i>
       </div>
       <div className={classNames(classes?.overviewDescription)}>
