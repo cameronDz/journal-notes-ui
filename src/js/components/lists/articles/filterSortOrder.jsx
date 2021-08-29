@@ -10,7 +10,6 @@ import {
 import FilterTitle from "./filterTitle";
 
 const propTypes = {
-  ascendingOrder: PropType.bool,
   checkedCreatedDate: PropType.bool,
   checkedPublishDate: PropType.bool,
   checkedTitle: PropType.bool,
@@ -23,7 +22,6 @@ const textAscend = `Ascending`;
 const textDescend = `Desending`;
 const textTitle = `Sort Order`;
 const FilterSortOrder = ({
-  ascendingOrder = true,
   checkedCreatedDate = false,
   checkedPublishDate = false,
   checkedTitle = false,
@@ -44,8 +42,8 @@ const FilterSortOrder = ({
     }
   };
 
-  const getDisplayLabel = (type) => {
-    const title = ascendingOrder ? textAscend : textDescend;
+  const getDisplayLabel = (type, checked) => {
+    const title = checked ? textAscend : textDescend;
     return orderType === type ? title : ``;
   };
 
@@ -99,7 +97,7 @@ const FilterSortOrder = ({
         <FormControlLabel
           control={getSwitch("title", "checkedTitle", checkedTitle)}
           disabled={isLoading || orderType !== "title"}
-          label={getDisplayLabel("title")}
+          label={getDisplayLabel("title", checkedTitle)}
           style={{ padding: "2px" }}
         />
         <FormControlLabel
@@ -109,7 +107,7 @@ const FilterSortOrder = ({
             checkedCreatedDate
           )}
           disabled={isLoading || orderType !== "createdDate"}
-          label={getDisplayLabel("createdDate")}
+          label={getDisplayLabel("createdDate", checkedCreatedDate)}
           style={{ padding: "2px" }}
         />
         <FormControlLabel
@@ -119,7 +117,7 @@ const FilterSortOrder = ({
             checkedPublishDate
           )}
           disabled={isLoading || orderType !== "publishDate"}
-          label={getDisplayLabel("publishDate")}
+          label={getDisplayLabel("publishDate", checkedPublishDate)}
           style={{ padding: "2px" }}
         />
       </FormControl>
