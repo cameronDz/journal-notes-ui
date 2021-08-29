@@ -30,7 +30,9 @@ const ArticleOverview = ({
   const sourceDisplay = link && (
     <Fragment>
       <i>Source</i>
-      {`: ${link}.`}
+      {`: `}
+      {link}
+      {`.`}
     </Fragment>
   );
 
