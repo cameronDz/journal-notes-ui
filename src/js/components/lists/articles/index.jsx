@@ -1,17 +1,15 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
+import classNames from "classnames";
 import PropType from "prop-types";
-import {
-  Button,
-  FormControl,
-  Grid,
-  InputLabel,
-  Select,
-} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
-import FilterSortOrder from "./filterSortOrder";
 import ArticleCard from "../../articleCard";
+import FilterSortOrder from "./filterSortOrder";
+import FilterTagSelector from "./filterTagSelector";
 import { fetchArticles } from "./state/actions";
+import { articleGridStyles } from "./styles";
 import * as _sorts from "../../../libs/articleSorts";
 
 const propTypes = {
@@ -20,13 +18,14 @@ const propTypes = {
   fetchArticles: PropType.func,
   loadingIndex: PropType.bool,
 };
-
+const useStyles = makeStyles(() => articleGridStyles);
 const Articles = ({
   articles,
   articlesLoading,
   fetchArticles,
   loadingIndex,
 }) => {
+  const classes = useStyles();
   const [sortFunction, setSortFunction] = useState(() => _sorts.sortByTitle);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -141,14 +140,12 @@ const Articles = ({
     }
   };
 
-  const handleChangeAvailableFilter = (event) => {
-    const tag = event?.target?.value || "";
-    setCurrentAvailableFilterTag([tag]);
+  const handleChangeAvailableFilter = (value) => {
+    setCurrentAvailableFilterTag([value || ""]);
   };
 
-  const handleChangeSelectFilter = (event) => {
-    const tag = event?.target?.value || "";
-    setCurrentSelectedFilterTag([tag]);
+  const handleChangeSelectFilter = (value) => {
+    setCurrentSelectedFilterTag([value || ""]);
   };
 
   const handleClickAddCurrentAvailableFilter = () => {
@@ -188,41 +185,34 @@ const Articles = ({
     );
   };
 
-  const displayTagOptions = () => {
-    return (
-      Array.isArray(availableTags) &&
-      availableTags.map((tag) => {
-        return (
-          filterTags.indexOf(tag) === -1 && (
-            <option key={tag} value={tag}>
-              {tag}
-            </option>
-          )
-        );
-      })
-    );
+  const handleTagButtonClick = (name) => {
+    if (name === "add") {
+      handleClickAddCurrentAvailableFilter();
+    } else if (name === "remove") {
+      handleClickRemoveCurrentSelectedFilter();
+    }
   };
 
+  const handleTagSelectChange = (value, name) => {
+    if (name === "add") {
+      handleChangeAvailableFilter(value);
+    } else if (name === "remove") {
+      handleChangeSelectFilter(value);
+    }
+  };
+
+  const loadingClass = isLoading
+    ? classes?.filterLoadingWrapper
+    : classes?.filterLoadedWrapper;
   return (
     <Fragment>
       <Grid container spacing={0}>
-        <div
-          style={{
-            fontSize: "24px",
-            fontWeight: "700",
-            width: "100%",
-          }}
-        >
+        <div className={classNames(classes?.filterTitleWrapper)}>
           Articles List
         </div>
         <Grid
+          className={classNames(classes?.filterGridWrapper, loadingClass)}
           item
-          style={{
-            border: "3px solid " + (isLoading ? "#767676" : "#3f51b5"),
-            borderRadius: "8px",
-            margin: "8px 24px",
-            padding: "12px",
-          }}
           sm={12}
         >
           <Grid container spacing={0}>
@@ -238,71 +228,14 @@ const Articles = ({
               />
             </Grid>
             <Grid item xs={12} sm={12} md={7}>
-              <div style={{ fontSize: "20px", fontWeight: "700" }}>
-                Tag Filters
-              </div>
-              <FormControl style={{ minWidth: "224px", marginRight: "12px" }}>
-                <InputLabel shrink htmlFor="available-tag-filters">
-                  Available Tags
-                </InputLabel>
-                <Select
-                  inputProps={{ id: "available-tag-filters" }}
-                  multiple
-                  native
-                  onChange={handleChangeAvailableFilter}
-                  style={{ maxHeight: "120px", minHeight: "120px" }}
-                  value={currentAvailableFilterTag}
-                >
-                  {displayTagOptions()}
-                </Select>
-                <Button
-                  color="primary"
-                  disabled={
-                    !currentAvailableFilterTag ||
-                    currentAvailableFilterTag.length === 0
-                  }
-                  onClick={handleClickAddCurrentAvailableFilter}
-                  style={{ marginTop: "8px", minWidth: "120px" }}
-                  variant="outlined"
-                >
-                  Add Filter
-                </Button>
-              </FormControl>
-
-              <FormControl style={{ minWidth: "224px" }}>
-                <InputLabel shrink htmlFor="current-tag-filters">
-                  Current Filters
-                </InputLabel>
-                <Select
-                  inputProps={{ id: "current-tag-filters" }}
-                  multiple
-                  native
-                  onChange={handleChangeSelectFilter}
-                  style={{ maxHeight: "120px", minHeight: "120px" }}
-                  value={currentSelectedFilterTag}
-                >
-                  {Array.isArray(filterTags) &&
-                    filterTags.map((tag) => {
-                      return (
-                        <option key={tag} value={tag}>
-                          {tag}
-                        </option>
-                      );
-                    })}
-                </Select>
-                <Button
-                  color="primary"
-                  disabled={
-                    !currentSelectedFilterTag ||
-                    currentSelectedFilterTag.length === 0
-                  }
-                  onClick={handleClickRemoveCurrentSelectedFilter}
-                  style={{ marginTop: "8px", minWidth: "120px" }}
-                  variant="outlined"
-                >
-                  Remove Filter
-                </Button>
-              </FormControl>
+              <FilterTagSelector
+                availableTags={availableTags}
+                currentAvailableFilterTag={currentAvailableFilterTag}
+                currentSelectedFilterTag={currentSelectedFilterTag}
+                filterTags={filterTags}
+                onButtonClick={handleTagButtonClick}
+                onSelectChange={handleTagSelectChange}
+              />
             </Grid>
           </Grid>
         </Grid>
