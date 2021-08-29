@@ -3,17 +3,13 @@ import PropType from "prop-types";
 import { Switch } from "@material-ui/core";
 
 const propTypes = {
-  currentOrder: PropType.string,
   disabled: PropType.bool,
   onChange: PropType.func,
-  orderName: PropType.string,
   value: PropType.bool,
 };
 
 const FilterSortOrderSwitch = ({
-  currentOrder = "",
   disabled = true,
-  orderName = "",
   onChange = null,
   value = false,
 }) => {
@@ -24,9 +20,9 @@ const FilterSortOrderSwitch = ({
   };
   return (
     <Switch
-      checked={currentOrder === orderName && value}
+      checked={value}
       color={"primary"}
-      disabled={disabled || currentOrder !== orderName}
+      disabled={disabled}
       onChange={handleChange}
       value={value}
     />
