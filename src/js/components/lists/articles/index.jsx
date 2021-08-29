@@ -15,16 +15,10 @@ import * as _sorts from "../../../libs/articleSorts";
 const propTypes = {
   articles: PropType.array,
   articlesLoading: PropType.number,
-  fetchArticles: PropType.func,
   loadingIndex: PropType.bool,
 };
 const useStyles = makeStyles(() => articleGridStyles);
-const ArticleSection = ({
-  articles,
-  articlesLoading,
-  fetchArticles,
-  loadingIndex,
-}) => {
+const ArticleSection = ({ articles, articlesLoading, loadingIndex }) => {
   const classes = useStyles();
   const [sortFunction, setSortFunction] = useState(() => _sorts.sortByTitle);
   const [isLoading, setIsLoading] = useState(false);
