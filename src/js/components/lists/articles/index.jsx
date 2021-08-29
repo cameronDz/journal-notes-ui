@@ -15,14 +15,14 @@ import * as _sorts from "../../../libs/articleSorts";
 const propTypes = {
   articles: PropType.array,
   articlesLoading: PropType.number,
-  fetchArticles: PropType.func,
+  callFetchArticles: PropType.func,
   loadingIndex: PropType.bool,
 };
 const useStyles = makeStyles(() => articleGridStyles);
 const ArticleSection = ({
   articles,
   articlesLoading,
-  fetchArticles,
+  callFetchArticles,
   loadingIndex,
 }) => {
   const classes = useStyles();
@@ -42,7 +42,7 @@ const ArticleSection = ({
   const [checkedCreatedDate, setCheckedCreatedDate] = useState(true);
 
   useEffect(() => {
-    fetchArticles();
+    callFetchArticles();
   }, []);
 
   useEffect(() => {
@@ -250,4 +250,6 @@ const mapStateToProps = (state) => ({
   articlesLoading: state.articles.articlesLoading,
   loadingIndex: state.articles.isLoadingIndex,
 });
-export default connect(mapStateToProps, { fetchArticles })(ArticleSection);
+export default connect(mapStateToProps, { callFetchArticles: fetchArticles })(
+  ArticleSection
+);
