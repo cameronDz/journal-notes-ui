@@ -37,11 +37,8 @@ const ArticleOverview = ({
   );
 
   const publishDateDisplay = publishDate || "";
-  const comma =
-    (!!author &&
-      (!!sourceDisplay || !!publishDateDisplay) &&
-      genericText?.comma) ||
-    "";
+  const hasDisplay = !!sourceDisplay || !!publishDateDisplay;
+  const comma = (!!author && hasDisplay && genericText?.comma) || "";
   const authorDisplay = !!author && (
     <Fragment>
       {author}
