@@ -9,7 +9,7 @@ import {
 import Article from "./article";
 
 const propTypes = { articleData: PropType.object, show: PropType.bool };
-const Card = ({ articleData, show }) => {
+const ArticleCard = ({ articleData, show }) => {
   const EXPAND = "Expand to see More";
   const RETRACT = "Show less";
 
@@ -44,5 +44,5 @@ const Card = ({ articleData, show }) => {
   );
 };
 
-Card.propTypes = propTypes;
-export default Card;
+ArticleCard.propTypes = propTypes;
+export default ArticleCard;
