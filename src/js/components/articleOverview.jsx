@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
+import { genericText, overviewText } from "../libs/text";
 import { articleOverviewStyles } from "./styles";
 
 const propTypes = {
@@ -13,11 +14,6 @@ const propTypes = {
   title: PropType.string,
   url: PropType.string,
 };
-const textComma = `,`;
-const textColon = `: `;
-const textPeriod = `.`;
-const textResources = "Resource added";
-const textSource = "Source";
 const useStyles = makeStyles(() => articleOverviewStyles);
 const ArticleOverview = ({
   author,
@@ -33,16 +29,19 @@ const ArticleOverview = ({
   const link = display && url ? <a href={url}>{display}</a> : display;
   const sourceDisplay = link && (
     <Fragment>
-      <i>{textSource}</i>
-      {textColon}
+      <i>{overviewText?.source}</i>
+      {genericText?.colonSpace}
       {link}
-      {textPeriod}
+      {genericText?.period}
     </Fragment>
   );
 
   const publishDateDisplay = publishDate || "";
   const comma =
-    (!!author && (!!sourceDisplay || !!publishDateDisplay) && textComma) || "";
+    (!!author &&
+      (!!sourceDisplay || !!publishDateDisplay) &&
+      genericText?.comma) ||
+    "";
   const authorDisplay = !!author && (
     <Fragment>
       {author}
@@ -56,8 +55,8 @@ const ArticleOverview = ({
         {authorDisplay} {sourceDisplay} {publishDateDisplay}
       </div>
       <div className={classNames(classes?.overviewSimple)}>
-        <strong>{textResources}</strong>
-        {textColon}
+        <strong>{overviewText?.resources}</strong>
+        {genericText?.colonSpace}
         <i>{createdDate}</i>
       </div>
       <div className={classNames(classes?.overviewDescription)}>
