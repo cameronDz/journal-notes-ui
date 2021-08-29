@@ -4,13 +4,9 @@ import PropType from "prop-types";
 import {
   Button,
   FormControl,
-  FormControlLabel,
   Grid,
   InputLabel,
-  Radio,
-  RadioGroup,
   Select,
-  Switch,
 } from "@material-ui/core";
 
 import FilterSortOrder from "./filterSortOrder";
@@ -189,21 +185,6 @@ const Articles = ({
             )
           );
         })
-    );
-  };
-
-  const getSwitch = (keyName = "", checkName = "", checkValue = false) => {
-    return (
-      !!keyName &&
-      !!checkName && (
-        <Switch
-          checked={orderType === keyName && checkValue}
-          color={"primary"}
-          disabled={orderType !== keyName}
-          onChange={() => handleChangeChecked(checkName)}
-          value={checkName}
-        />
-      )
     );
   };
 
