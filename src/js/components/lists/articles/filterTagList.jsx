@@ -3,20 +3,19 @@ import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, FormControl, InputLabel, Select } from "@material-ui/core";
-import { filterTagSelectorStyles } from "./styles";
+import { filterTagListStyles } from "./styles";
 
 const propTypes = {
   disabled: PropType.bool,
-  filterTags: PropType.array,
   id: PropType.string,
   labelButton: PropType.string,
   labelList: PropType.string,
   onButtonClick: PropType.func,
   onSelectChange: PropType.func,
-  tagsAvailable: PropType.array,
   tagsCurrent: PropType.array,
+  tagsSelectable: PropType.array,
 };
-const useStyles = makeStyles(() => filterTagSelectorStyles);
+const useStyles = makeStyles(() => filterTagListStyles);
 const FilterTagList = ({
   disabled = true,
   id = "",
@@ -24,8 +23,8 @@ const FilterTagList = ({
   labelList = "",
   onButtonClick = null,
   onSelectChange = null,
-  tagsAvailable = [],
   tagsCurrent = [],
+  tagsSelectable = [],
 }) => {
   const handleButtonClick = (event) => {
     if (typeof onButtonClick === "function") {
@@ -54,8 +53,8 @@ const FilterTagList = ({
           onChange={handleSelectChange}
           value={tagsCurrent}
         >
-          {Array.isArray(tagsAvailable) &&
-            tagsAvailable.map((tag) => {
+          {Array.isArray(tagsSelectable) &&
+            tagsSelectable.map((tag) => {
               return (
                 !!tag && (
                   <option key={tag} value={tag}>
