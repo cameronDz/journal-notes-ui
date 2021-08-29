@@ -13,6 +13,7 @@ import {
   Switch,
 } from "@material-ui/core";
 
+import FilterSortOrder from "./filterSortOrder";
 import ArticleCard from "../../articleCard";
 import { fetchArticles } from "./state/actions";
 import * as _sorts from "../../../libs/articleSorts";
@@ -245,83 +246,15 @@ const Articles = ({
         >
           <Grid container spacing={0}>
             <Grid item xs={12} sm={12} md={5}>
-              <div style={{ fontSize: "20px", fontWeight: "700" }}>
-                Sort Order
-              </div>
-              <FormControl>
-                <RadioGroup
-                  name={"orderType"}
-                  style={{ marginRight: "16px" }}
-                  title={"Order Type"}
-                  value={orderType}
-                  onChange={handleChangeOrderType}
-                >
-                  <FormControlLabel
-                    control={<Radio color={"primary"} />}
-                    disabled={isLoading}
-                    label={"Title"}
-                    value={"title"}
-                  />
-                  <FormControlLabel
-                    control={<Radio color={"primary"} />}
-                    disabled={isLoading}
-                    label={"Created Date"}
-                    value={"createdDate"}
-                  />
-                  <FormControlLabel
-                    control={<Radio color={"primary"} />}
-                    disabled={isLoading}
-                    label={"Publish Date"}
-                    value={"publishDate"}
-                  />
-                </RadioGroup>
-              </FormControl>
-              <FormControl>
-                <FormControlLabel
-                  control={getSwitch("title", "checkedTitle", checkedTitle)}
-                  disabled={isLoading || orderType !== "title"}
-                  label={
-                    orderType !== "title"
-                      ? ""
-                      : checkedTitle
-                      ? "Ascending"
-                      : "Desending"
-                  }
-                  style={{ padding: "2px" }}
-                />
-                <FormControlLabel
-                  control={getSwitch(
-                    "createdDate",
-                    "checkedCreatedDate",
-                    checkedCreatedDate
-                  )}
-                  disabled={isLoading || orderType !== "createdDate"}
-                  label={
-                    orderType !== "createdDate"
-                      ? ""
-                      : checkedCreatedDate
-                      ? "Ascending"
-                      : "Desending"
-                  }
-                  style={{ padding: "2px" }}
-                />
-                <FormControlLabel
-                  control={getSwitch(
-                    "publishDate",
-                    "checkedPublishDate",
-                    checkedPublishDate
-                  )}
-                  disabled={isLoading || orderType !== "publishDate"}
-                  label={
-                    orderType !== "publishDate"
-                      ? ""
-                      : checkedPublishDate
-                      ? "Ascending"
-                      : "Desending"
-                  }
-                  style={{ padding: "2px" }}
-                />
-              </FormControl>
+              <FilterSortOrder
+                checkedCreatedDate={checkedCreatedDate}
+                checkedPublishDate={checkedPublishDate}
+                checkedTitle={checkedTitle}
+                isLoading={isLoading}
+                onOrderChange={handleChangeChecked}
+                onTypeChange={handleChangeOrderType}
+                orderType={orderType}
+              />
             </Grid>
             <Grid item xs={12} sm={12} md={7}>
               <div style={{ fontSize: "20px", fontWeight: "700" }}>
