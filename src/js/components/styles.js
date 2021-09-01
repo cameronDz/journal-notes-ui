@@ -1,4 +1,6 @@
 import { globalDimensions } from "../libs/dimensions";
+import { sophisticatedColorPalette } from "../libs/colors";
+
 const appFooterStyles = {
   appFooterWrapper: {
     bottom: "0",
@@ -24,6 +26,12 @@ const navBarStyles = {
 const navBarIconStyles = {
   iconWrapper: {
     marginBottom: "12px",
+    "& .MuiButtonBase-root": {
+      width: "100%",
+      "&:hover": {
+        backgroundColor: sophisticatedColorPalette?.darkBlue?.hex,
+      },
+    },
     "& svg": {
       margin: "0 auto",
       width: "100%",

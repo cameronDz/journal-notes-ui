@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import PropType from "prop-types";
-import { SvgIcon } from "@material-ui/core";
+import { IconButton, SvgIcon } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { navBarIconStyles } from "./styles";
 
@@ -22,9 +22,11 @@ const NavIcon = ({ icon, name, onClick, size = "large" }) => {
   const classes = useStyles();
   return (
     <div className={classNames(classes?.iconWrapper)} title={name}>
-      <SvgIcon fontSize={size} onClick={() => handleClick()}>
-        {icon}
-      </SvgIcon>
+      <IconButton>
+        <SvgIcon fontSize={size} onClick={() => handleClick()}>
+          {icon}
+        </SvgIcon>
+      </IconButton>
     </div>
   );
 };
