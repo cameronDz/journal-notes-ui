@@ -17,6 +17,7 @@ const propTypes = {
   articlesLoading: PropType.number,
   callFetchArticles: PropType.func,
   loadingIndex: PropType.bool,
+  pageName: PropType.string,
 };
 const useStyles = makeStyles(() => articleGridStyles);
 const ArticleSection = ({
@@ -24,6 +25,7 @@ const ArticleSection = ({
   articlesLoading,
   callFetchArticles,
   loadingIndex,
+  pageName,
 }) => {
   const classes = useStyles();
   const [sortFunction, setSortFunction] = useState(() => _sorts.sortByTitle);
@@ -209,35 +211,37 @@ const ArticleSection = ({
         <div className={classNames(classes?.filterTitleWrapper)}>
           Articles List
         </div>
-        <Grid
-          className={classNames(classes?.filterGridWrapper, loadingClass)}
-          item
-          sm={12}
-        >
-          <Grid container spacing={0}>
-            <Grid item xs={12} sm={12} md={5}>
-              <FilterSortOrder
-                checkedCreatedDate={checkedCreatedDate}
-                checkedPublishDate={checkedPublishDate}
-                checkedTitle={checkedTitle}
-                isLoading={isLoading}
-                onOrderChange={handleChangeChecked}
-                onTypeChange={handleChangeOrderType}
-                orderType={orderType}
-              />
-            </Grid>
-            <Grid item xs={12} sm={12} md={7}>
-              <FilterTagSelector
-                availableTags={availableTags}
-                currentAvailableFilterTag={currentAvailableFilterTag}
-                currentSelectedFilterTag={currentSelectedFilterTag}
-                filterTags={filterTags}
-                onButtonClick={handleTagButtonClick}
-                onSelectChange={handleTagSelectChange}
-              />
+        {pageName !== "view" && (
+          <Grid
+            className={classNames(classes?.filterGridWrapper, loadingClass)}
+            item
+            sm={12}
+          >
+            <Grid container spacing={0}>
+              <Grid item xs={12} sm={12} md={5}>
+                <FilterSortOrder
+                  checkedCreatedDate={checkedCreatedDate}
+                  checkedPublishDate={checkedPublishDate}
+                  checkedTitle={checkedTitle}
+                  isLoading={isLoading}
+                  onOrderChange={handleChangeChecked}
+                  onTypeChange={handleChangeOrderType}
+                  orderType={orderType}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={7}>
+                <FilterTagSelector
+                  availableTags={availableTags}
+                  currentAvailableFilterTag={currentAvailableFilterTag}
+                  currentSelectedFilterTag={currentSelectedFilterTag}
+                  filterTags={filterTags}
+                  onButtonClick={handleTagButtonClick}
+                  onSelectChange={handleTagSelectChange}
+                />
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        )}
         {renderData()}
       </Grid>
     </Fragment>

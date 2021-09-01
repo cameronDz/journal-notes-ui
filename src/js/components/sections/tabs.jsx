@@ -78,7 +78,7 @@ const NavTabs = ({
             <LandingSeciton />
           </Panel>
           <Panel value={value} index={1}>
-            <ArticleSection />
+            <ArticleSection pageName={page} />
           </Panel>
           <Panel value={value} index={2}>
             <InputSection />
