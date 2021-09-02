@@ -66,5 +66,5 @@
     "lint-fix": "eslint --fix ./src/js/**/* ./webpack",
     "start": "webpack-dev-server --open --config webpack/dev.babel.js"
   },
-  "version": "1.13.0"
+  "version": "1.14.0"
 }

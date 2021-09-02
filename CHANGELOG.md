@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.13.0] 2021-09-01
+
+### Added
+
+- Left Navigation side bar
+- View of all articles without filter
+
+### Changed
+
+- Replaced top navbar with tabs with left side nav bar with icon buttons
+
+### Removed
+
+- Top Tab Navbar removed
+
 ## [1.13.0] 2021-03-06
 
 ### Added
