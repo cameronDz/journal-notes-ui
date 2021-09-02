@@ -1,3 +1,5 @@
+import { basicColorPalette } from "../../../libs/colors";
+
 const articleGridStyles = {
   filterGridWrapper: {
     borderRadius: "8px",
@@ -5,10 +7,10 @@ const articleGridStyles = {
     padding: "12px",
   },
   filterLoadingWrapper: {
-    border: "3px solid #767676",
+    border: `3px solid ${basicColorPalette?.grey?.hex}`,
   },
   filterLoadedWrapper: {
-    border: "3px solid #3f51b5",
+    border: `3px solid ${basicColorPalette?.blue?.hex}`,
   },
 };
 

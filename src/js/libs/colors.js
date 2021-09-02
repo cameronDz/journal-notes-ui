@@ -1,4 +1,6 @@
 const basicColorPalette = {
+  blue: { hex: "#3f51b5" },
+  grey: { hex: "#767676" },
   white: { hex: "#ffffff" },
 };
 
