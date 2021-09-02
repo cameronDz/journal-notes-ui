@@ -1,36 +1,27 @@
-import React, { Fragment } from 'react';
-import get from 'lodash.get';
-import * as indexData from '../../../../assets/index.json';
+import React, { Fragment } from "react";
+import * as indexData from "../../../../assets/index.json";
 
-const todo = () => {
-  const renderTodo = (todo = {}) => {
-    const { name, status } = todo;
-    return (<p>{name}, {status}</p>);
-  };
-
+const Todo = () => {
   const renderList = (baseList = []) => {
     return baseList.map((key, index) => {
-      const { list, name, status, type } = key;
-      return (type === 2)
+      const { id, list, name, status, type } = key;
+      return type === 2 ? (
         // render a list when type is 2
-        ? <Fragment key={index}>
+        <Fragment key={id || index}>
           <h3>{name}</h3>
-          <p>Status: {status}</p>
+          <p>{`Status: ${status}`}</p>
           {renderList(list)}
         </Fragment>
+      ) : (
         // render all other types as todo
-        : <Fragment key={index}>
-          {renderTodo(key)}
-        </Fragment>;
+        <Fragment key={id || index}>
+          <p>{`${name}, ${status}`}</p>
+        </Fragment>
+      );
     });
   };
 
-  const renderTodoList = () => {
-    const list = get(indexData, 'todo.list', []);
-    return renderList(list);
-  };
-
-  return renderTodoList();
+  return renderList(indexData?.todo?.list || []);
 };
 
-export default todo;
+export default Todo;

@@ -1,14 +1,12 @@
 {
   "extends": [
+    "plugin:prettier/recommended",
     "plugin:react/recommended",
-    "standard"
+    "react-important-stuff"
   ],
   "parser": "babel-eslint",
   "rules": {
-    "semi": [
-      2,
-      "always"
-    ],
+    "semi": [2, "always"],
     "semi-spacing": [
       "error",
       {

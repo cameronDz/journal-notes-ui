@@ -1,6 +1,6 @@
-import merge from 'webpack-merge';
-import common from './common.babel';
+import merge from "webpack-merge";
+import common from "./common.babel";
 
-const prod = { mode: 'production' };
+const prod = { mode: "production" };
 
 module.exports = merge(common, prod);

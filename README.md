@@ -1,11 +1,12 @@
-# Article Notes App #
+# Article Notes App
 
 Create and track notes from various articles. Basic input section for creating article reviews in JSON format, stored using S3 bucket as source with single index.json tracking each individual note JSON file.
 
-## TODO List ##
+## TODO List
+
 - [x] Add page routing
   - [x] Set "src="/bundle.js" to not include "/"
-  - [x] Include a ```<base>``` tag element for configuring ```href``` attribute
+  - [x] Include a `<base>` tag element for configuring `href` attribute
 - [ ] Finish README
 - [x] Update naming convention to be included in NSSD
 - [ ] Add JSS
@@ -13,7 +14,8 @@ Create and track notes from various articles. Basic input section for creating a
 - [x] Arrow indicators on sort
 - [x] Material UI on Form
 
-### Sample Article JSON ###
+### Sample Article JSON
+
 ```javascript
 {
     "title": String,
@@ -50,7 +52,8 @@ Create and track notes from various articles. Basic input section for creating a
 }
 ```
 
-## S3 Bucket Sample Configuration ##
+## S3 Bucket Sample Configuration
+
 ```
 <CORSConfiguration>
   <CORSRule>

@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import get from 'lodash.get';
-import * as indexData from '../../../../assets/index.json';
+import React from "react";
+import PropType from "prop-types";
+import * as indexData from "../../../../assets/index.json";
 
-const goals = props => {
-  const [listPath, setListPath] = useState('');
-
-  useEffect(() => {
-    setListPath(props.listPath);
-  }, []);
-
-  const getList = () => {
-    const list = get(indexData, listPath, []);
-    return list.map((key, index) => {
-      const { description, name } = key;
-      const includedDescription = (!!description) && ': ' + description;
+const propTypes = { listPath: PropType.string };
+const Goals = ({ listPath }) => {
+  return (
+    Array.isArray(indexData?.[listPath]) &&
+    indexData[listPath].map((key, index) => {
       return (
-        <p key={index}>
-          <strong>{name}</strong>{includedDescription}
-        </p>);
-    });
-  };
-
-  return getList();
+        key && (
+          <p key={key.id || index}>
+            <strong>{key.name || ""}</strong>
+            {(!!key.description && `: ${key.description}`) || ""}
+          </p>
+        )
+      );
+    })
+  );
 };
 
-export default goals;
+Goals.propTypes = propTypes;
+export default Goals;
