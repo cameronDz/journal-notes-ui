@@ -6,7 +6,6 @@ import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import ArticleCard from "../../articleCard";
-import ArticleDisplay from "../../articleDisplay";
 import FilterSortOrder from "./filterSortOrder";
 import FilterTagSelector from "./filterTagSelector";
 import { fetchArticles } from "./state/actions";
@@ -169,7 +168,9 @@ const ArticleSection = ({
   };
 
   const renderData = () => {
-    const md = pageName !== "view" ? 6 : 12;
+    const isView = pageName === "view";
+    const md = isView ? 12 : 6;
+    const minHeight = isView ? "120px" : null;
     return (
       !isLoading &&
       Array.isArray(articles) &&
@@ -182,11 +183,7 @@ const ArticleSection = ({
               <Fragment key={key.id || index}>
                 {
                   <Grid item sm={12} md={md}>
-                    {pageName !== "view" ? (
-                      <ArticleCard articleData={key} />
-                    ) : (
-                      <ArticleDisplay articleData={key} />
-                    )}
+                    <ArticleCard articleData={key} minHeight={minHeight} />
                   </Grid>
                 }
               </Fragment>

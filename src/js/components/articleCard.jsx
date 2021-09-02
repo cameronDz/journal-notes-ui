@@ -8,8 +8,12 @@ import {
 } from "@material-ui/core";
 import Article from "./article";
 
-const propTypes = { articleData: PropType.object, show: PropType.bool };
-const ArticleCard = ({ articleData, show }) => {
+const propTypes = {
+  articleData: PropType.object,
+  minHeight: PropType.string,
+  show: PropType.bool,
+};
+const ArticleCard = ({ articleData, minHeight, show }) => {
   const EXPAND = "Expand to see More";
   const RETRACT = "Show less";
 
@@ -28,10 +32,15 @@ const ArticleCard = ({ articleData, show }) => {
     setShowFull(!showFull);
   };
 
+  console.info("minHeight", minHeight);
   return (
     <MuiCard style={{ margin: "6px" }}>
       <CardContent
-        style={{ margin: "6px", minHeight: "180px", paddingBottom: "6px" }}
+        style={{
+          margin: "6px",
+          minHeight: minHeight || "180px",
+          paddingBottom: "6px",
+        }}
       >
         <Article {...articleData} showFull={showFull} />
       </CardContent>
