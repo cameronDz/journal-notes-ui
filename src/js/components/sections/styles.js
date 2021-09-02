@@ -23,6 +23,7 @@ const contentStyles = {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     fontSize: "24px",
     fontWeight: "700",
+    marginLeft: "24px",
     width: "100%",
   },
 };
