@@ -10,7 +10,28 @@ import LandingSeciton from "./landing";
 import ArticleSection from "../lists/articles";
 import { contentStyles } from "./styles";
 
-const useStyles = makeStyles(() => contentStyles);
+const pages = [
+  {
+    name: "home",
+    title: "Article Overview Application",
+    index: 0,
+  },
+  {
+    name: "view",
+    title: "Articles List",
+    index: 1,
+  },
+  {
+    name: "search",
+    title: "Articles Card List with Filters",
+    index: 2,
+  },
+  {
+    name: "create",
+    title: "Article Review Creator",
+    index: 3,
+  },
+];
 
 const propTypes = {
   articlesLoadingCount: PropType.number,
@@ -20,7 +41,7 @@ const propTypes = {
   isProcessingIndex: PropType.bool,
   page: PropType.string,
 };
-
+const useStyles = makeStyles(() => contentStyles);
 const NavTabs = ({
   articlesLoadingCount,
   isArticleIndexLoading,
@@ -31,15 +52,20 @@ const NavTabs = ({
 }) => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
+  const [title, setTitle] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    let newTitleKey = 0;
     let newValue = 0;
     if (page === "search" || page === "view") {
       newValue = 1;
+      newTitleKey = page === "view" ? 1 : 2;
     } else if (page === "create") {
       newValue = 2;
+      newTitleKey = 3;
     }
+    setTitle(pages?.[newTitleKey]?.title);
     setValue(newValue);
   }, [page]);
 
@@ -74,6 +100,9 @@ const NavTabs = ({
       {displayProgressBar()}
       <Grid className="nssd-grid-wrapper" container spacing={0}>
         <Grid item xs={12} sm={12}>
+          <div className={classNames(classes?.panelHeader)}>
+            <h2>{title}</h2>
+          </div>
           <Panel value={value} index={0}>
             <LandingSeciton />
           </Panel>

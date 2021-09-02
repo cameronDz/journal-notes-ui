@@ -228,9 +228,6 @@ const Input = ({
 
   return (
     <Grid container spacing={0}>
-      <Grid item xs={12}>
-        <h2>Article Review</h2>
-      </Grid>
       <Grid item xs={12} sm={12} md={4}>
         <Grid item xs={12}>
           <TextField

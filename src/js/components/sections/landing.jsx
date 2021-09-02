@@ -42,9 +42,6 @@ const Landing = ({ articles, articlesLoading, loadingIndex }) => {
 
   return (
     <Fragment>
-      <h2 className={classNames(classes?.headerLandingText)}>
-        {landingText.header}
-      </h2>
       <div>{landingText.overview}</div>
       <div>{displayLatestCardSection()}</div>
     </Fragment>

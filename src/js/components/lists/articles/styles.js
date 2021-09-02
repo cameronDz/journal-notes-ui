@@ -10,11 +10,6 @@ const articleGridStyles = {
   filterLoadedWrapper: {
     border: "3px solid #3f51b5",
   },
-  filterTitleWrapper: {
-    fontSize: "24px",
-    fontWeight: "700",
-    width: "100%",
-  },
 };
 
 const filterTagListStyles = {

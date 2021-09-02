@@ -19,10 +19,15 @@ const contentStyles = {
   contentLoader: {
     paddingTop: "1px",
   },
+  panelHeader: {
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontSize: "24px",
+    fontWeight: "700",
+    width: "100%",
+  },
 };
 
 const landingStyles = {
-  headerLandingText: { alignItems: "center", justifyContent: "center" },
   simpleLandingText: { fontSize: "14px", fontWeight: 600 },
 };
 

@@ -218,9 +218,6 @@ const ArticleSection = ({
   return (
     <Fragment>
       <Grid container spacing={0}>
-        <div className={classNames(classes?.filterTitleWrapper)}>
-          Articles List
-        </div>
         {pageName !== "view" && (
           <Grid
             className={classNames(classes?.filterGridWrapper, loadingClass)}
