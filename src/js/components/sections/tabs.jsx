@@ -23,7 +23,7 @@ const pages = [
   },
   {
     name: "search",
-    title: "Articles Card List with Filters",
+    title: "Articles Card with Filters",
     index: 2,
   },
   {
