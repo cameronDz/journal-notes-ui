@@ -24,7 +24,6 @@ const contentStyles = {
     fontSize: "24px",
     fontWeight: "700",
     marginLeft: "48px",
-    width: "100%",
   },
 };
 
