@@ -22,10 +22,8 @@ const NavIcon = ({ icon, name, onClick, size = "large" }) => {
   const classes = useStyles();
   return (
     <div className={classNames(classes?.iconWrapper)} title={name}>
-      <IconButton>
-        <SvgIcon fontSize={size} onClick={() => handleClick()}>
-          {icon}
-        </SvgIcon>
+      <IconButton onClick={() => handleClick()}>
+        <SvgIcon fontSize={size}>{icon}</SvgIcon>
       </IconButton>
     </div>
   );
