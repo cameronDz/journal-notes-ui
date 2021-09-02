@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.13.0] 2021-09-01
+## [1.14.0] 2021-09-01
 
 ### Added
 
@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Replaced top navbar with tabs with left side nav bar with icon buttons
+
+### Fixed
+
+- Update versions for dependencies with security issues
 
 ### Removed
 
