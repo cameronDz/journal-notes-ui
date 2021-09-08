@@ -32,7 +32,6 @@ const ArticleCard = ({ articleData, minHeight, show }) => {
     setShowFull(!showFull);
   };
 
-  console.info("minHeight", minHeight);
   return (
     <MuiCard style={{ margin: "6px" }}>
       <CardContent

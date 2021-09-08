@@ -13,10 +13,8 @@ const propTypes = { callFetchArticles: PropType.func };
 const useStyles = makeStyles(() => appContainerStyles);
 const AppContainer = ({ callFetchArticles }) => {
   useEffect(() => {
-    console.info("useEffect: ", typeof callFetchArticles);
     if (typeof callFetchArticles === "function") {
       callFetchArticles();
-      console.info("hit");
     }
   }, [callFetchArticles]);
 
