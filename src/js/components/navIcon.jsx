@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import classNames from "classnames";
 import PropType from "prop-types";
 import { IconButton, SvgIcon } from "@material-ui/core";
@@ -20,14 +19,13 @@ const NavIcon = ({ icon, name, onClick, size = "large" }) => {
       onClick(name);
     }
   };
+
   const classes = useStyles();
   return (
     <div className={classNames(classes?.iconWrapper)} title={name}>
-      <Link to={`/${name}`}>
-        <IconButton onClick={() => handleClick()}>
-          <SvgIcon fontSize={size}>{icon}</SvgIcon>
-        </IconButton>
-      </Link>
+      <IconButton onClick={() => handleClick()}>
+        <SvgIcon fontSize={size}>{icon}</SvgIcon>
+      </IconButton>
     </div>
   );
 };

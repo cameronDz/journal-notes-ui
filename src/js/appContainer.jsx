@@ -1,5 +1,6 @@
 import React, { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core";
@@ -12,18 +13,23 @@ import { appContainerStyles } from "./styles";
 const propTypes = { callFetchArticles: PropType.func };
 const useStyles = makeStyles(() => appContainerStyles);
 const AppContainer = ({ callFetchArticles }) => {
+  const classes = useStyles();
+  const history = useHistory();
   useEffect(() => {
     if (typeof callFetchArticles === "function") {
       callFetchArticles();
     }
   }, [callFetchArticles]);
 
-  const classes = useStyles();
+  const handleNavigation = (name) => {
+    history.push(`/${name}`);
+  };
+
   return (
     <Fragment>
       <div className={classNames(classes?.appWrapper)}>
         <div className={classNames(classes?.appNavBarWrapper)}>
-          <LeftNavBar />
+          <LeftNavBar onClick={handleNavigation} />
         </div>
         <div className={classNames(classes?.appContentOuterWrapper)}>
           <div className={classNames(classes?.appContentInnerWrapper)}>
