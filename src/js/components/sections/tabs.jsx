@@ -86,17 +86,17 @@ const NavTabs = ({
             <Route path="/">
               <LandingSeciton title={pages[0].title} />
             </Route>
-            <Route path="/home">
-              <LandingSeciton />
+            <Route path={`/${pages[0].name}`}>
+              <LandingSeciton title={pages[0].title} />
             </Route>
-            <Route path="/view">
-              <ArticleSection pageName={"view"} />
+            <Route path={`/${pages[1].name}`}>
+              <ArticleSection pageName={pages[1].name} title={pages[1].title} />
             </Route>
-            <Route path="/search">
-              <ArticleSection pageName={"search"} />
+            <Route path={`/${pages[2].name}`}>
+              <ArticleSection pageName={pages[2].name} title={pages[2].title} />
             </Route>
-            <Route path="/create">
-              <InputSection />
+            <Route path={`/${pages[3].name}`}>
+              <InputSection title={pages[3].title} />
             </Route>
           </RouterSwitch>
         </Grid>
