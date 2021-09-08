@@ -16,9 +16,9 @@ const propTypes = {
   isProcessingIndex: PropType.bool,
   latestIndex: PropType.arrayOf(PropType.string),
   latestUploadKey: PropType.string,
+  pageTitle: PropType.string,
   postArticle: PropType.func,
   putIndex: PropType.func,
-  title: PropType.string,
 };
 
 const buttonContainerStyle = {
@@ -43,6 +43,7 @@ const Input = ({
   isProcessingIndex,
   latestIndex,
   latestUploadKey,
+  pageTitle,
   postArticle,
   putIndex,
 }) => {
@@ -230,7 +231,7 @@ const Input = ({
 
   return (
     <Fragment>
-      <RouteTitle title={title} />
+      <RouteTitle title={pageTitle} />
       <Grid container spacing={0}>
         <Grid item xs={12} sm={12} md={4}>
           <Grid item xs={12}>

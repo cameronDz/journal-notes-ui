@@ -85,26 +85,26 @@ const NavTabs = ({
         <Grid item xs={12} sm={12}>
           <Panel index={"empty"} value={"empty"}>
             <RouterSwitch>
-              <Route path="/">
+              <Route exact path="/">
                 <LandingSeciton title={pages[0].title} />
               </Route>
-              <Route path={`/${pages[0].name}`}>
+              <Route exact path={`/${pages[0].name}`}>
                 <LandingSeciton title={pages[0].title} />
               </Route>
-              <Route path={`/${pages[1].name}`}>
+              <Route exact path={`/${pages[1].name}`}>
                 <ArticleSection
                   pageName={pages[1].name}
                   title={pages[1].title}
                 />
               </Route>
-              <Route path={`/${pages[2].name}`}>
+              <Route exact path={`/${pages[2].name}`}>
                 <ArticleSection
                   pageName={pages[2].name}
                   title={pages[2].title}
                 />
               </Route>
-              <Route path={`/${pages[3].name}`}>
-                <InputSection title={pages[3].title} />
+              <Route exact path={`/${pages[3].name}`}>
+                <InputSection pageTitle={pages[3].title} />
               </Route>
             </RouterSwitch>
           </Panel>
