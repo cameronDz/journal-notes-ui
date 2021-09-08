@@ -77,14 +77,6 @@ const NavTabs = ({
     );
   };
 
-  const showTitle = (title) => {
-    return (
-      <div className={classNames(classes?.panelHeader)}>
-        <h2>{title}</h2>
-      </div>
-    );
-  };
-
   return (
     <div className={classNames(classes?.contentRoot)}>
       {displayProgressBar()}
@@ -92,23 +84,18 @@ const NavTabs = ({
         <Grid item xs={12} sm={12}>
           <RouterSwitch>
             <Route path="/">
-              {showTitle(pages[0].title)}
-              <LandingSeciton />
+              <LandingSeciton title={pages[0].title} />
             </Route>
             <Route path="/home">
-              {showTitle(pages[0].title)}
               <LandingSeciton />
             </Route>
             <Route path="/view">
-              {showTitle(pages[1].title)}
-              <ArticleSection pageName={page} />
+              <ArticleSection pageName={"view"} />
             </Route>
             <Route path="/search">
-              {showTitle(pages[1].title)}
-              <ArticleSection pageName={page} />
+              <ArticleSection pageName={"search"} />
             </Route>
             <Route path="/create">
-              {showTitle(pages[2].title)}
               <InputSection />
             </Route>
           </RouterSwitch>
