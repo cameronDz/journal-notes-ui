@@ -4,6 +4,7 @@ import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import ArticleCard from "../articleCard";
+import RouteTitle from "./routeTitle";
 import { latestArticle } from "../../libs/latestArticle";
 import { landingText } from "../../libs/text";
 import { landingStyles } from "./styles";
@@ -12,9 +13,10 @@ const propTypes = {
   articles: PropType.array,
   articlesLoading: PropType.number,
   loadingIndex: PropType.bool,
+  title: PropType.string,
 };
 const useStyles = makeStyles(() => landingStyles);
-const Landing = ({ articles, articlesLoading, loadingIndex }) => {
+const Landing = ({ articles, articlesLoading, loadingIndex, title }) => {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -42,6 +44,7 @@ const Landing = ({ articles, articlesLoading, loadingIndex }) => {
 
   return (
     <Fragment>
+      <RouteTitle title={title} />
       <div>{landingText.overview}</div>
       <div>{displayLatestCardSection()}</div>
     </Fragment>
