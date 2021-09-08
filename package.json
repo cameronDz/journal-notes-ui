@@ -61,11 +61,11 @@
     "url": "https://github.com/cameronDz/article-notes-ui.git"
   },
   "scripts": {
-    "build-dev": "webpack --config webpack/dev.babel.js",
-    "build-prod": "webpack --config webpack/prod.babel.js",
+    "build:dev": "webpack --config webpack/dev.babel.js",
+    "build:prod": "webpack --config webpack/prod.babel.js",
     "format": "prettier --write .",
     "lint": "eslint ./src/js/**/* ./webpack",
-    "lint-fix": "eslint --fix ./src/js/**/* ./webpack",
+    "lint:fix": "eslint --fix ./src/js/**/* ./webpack",
     "start": "webpack-dev-server --open --config webpack/dev.babel.js"
   },
   "version": "1.15.0"
