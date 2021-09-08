@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ArticleCard from "../../articleCard";
 import FilterSortOrder from "./filterSortOrder";
 import FilterTagSelector from "./filterTagSelector";
+import RouteTitle from "../../sections/routeTitle";
 import { fetchArticles } from "./state/actions";
 import { articleGridStyles } from "./styles";
 import * as _sorts from "../../../libs/articleSorts";
@@ -18,6 +19,7 @@ const propTypes = {
   callFetchArticles: PropType.func,
   loadingIndex: PropType.bool,
   pageName: PropType.string,
+  title: PropType.string,
 };
 const useStyles = makeStyles(() => articleGridStyles);
 const ArticleSection = ({
@@ -26,6 +28,7 @@ const ArticleSection = ({
   callFetchArticles,
   loadingIndex,
   pageName,
+  title,
 }) => {
   const classes = useStyles();
   const [sortFunction, setSortFunction] = useState(() => _sorts.sortByTitle);
@@ -214,6 +217,7 @@ const ArticleSection = ({
     : classes?.filterLoadedWrapper;
   return (
     <Fragment>
+      <RouteTitle title={title} />
       <Grid container spacing={0}>
         {pageName !== "view" && (
           <Grid

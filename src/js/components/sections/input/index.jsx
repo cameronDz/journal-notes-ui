@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
 import { Button, Grid, TextField } from "@material-ui/core";
 import ArticleCard from "../../articleCard";
+import RouteTitle from "../../sections/routeTitle";
 
 import { getIndex, postArticle, putIndex } from "./state/actions";
 import { downloadJson } from "../../../libs/download";
@@ -17,6 +18,7 @@ const propTypes = {
   latestUploadKey: PropType.string,
   postArticle: PropType.func,
   putIndex: PropType.func,
+  title: PropType.string,
 };
 
 const buttonContainerStyle = {
@@ -227,180 +229,183 @@ const Input = ({
   };
 
   return (
-    <Grid container spacing={0}>
-      <Grid item xs={12} sm={12} md={4}>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            disabled={isProcessing}
-            label="Title"
-            onChange={(event) => setTitle(event.target.value)}
-            value={title}
-          ></TextField>
+    <Fragment>
+      <RouteTitle title={title} />
+      <Grid container spacing={0}>
+        <Grid item xs={12} sm={12} md={4}>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              disabled={isProcessing}
+              label="Title"
+              onChange={(event) => setTitle(event.target.value)}
+              value={title}
+            ></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              disabled={isProcessing}
+              label="Author"
+              onChange={(event) => setAuthor(event.target.value)}
+              value={author}
+            ></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Publish Date"
+              disabled={isProcessing}
+              onChange={(event) => setPublishDate(event.target.value)}
+              type="date"
+              value={publishDate}
+              InputLabelProps={{ shrink: true }}
+            ></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              disabled={isProcessing}
+              label="Publisher"
+              onChange={(event) => setPublisher(event.target.value)}
+              value={publisher}
+            ></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              disabled={isProcessing}
+              label="URL"
+              onChange={(event) => setUrl(event.target.value)}
+              value={url}
+            ></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              disabled={isProcessing}
+              label="Tag"
+              onChange={(event) => setTag(event.target.value)}
+              onKeyDown={(event) => handleKeyDown(event, "Tag")}
+              value={tag}
+            ></TextField>
+            <Button
+              style={{ marginRight: "16px" }}
+              disabled={isProcessing || !tag}
+              onClick={handleAddTag}
+            >
+              Add Tag
+            </Button>
+            <Button
+              disabled={isProcessing || (!tag && !(tags.length > 0))}
+              onClick={handleRemoveTag}
+            >
+              {tag ? "Clear Tag" : "Remove Tag"}
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            disabled={isProcessing}
-            label="Author"
-            onChange={(event) => setAuthor(event.target.value)}
-            value={author}
-          ></TextField>
+        <Grid item xs={12} sm={12} md={1}></Grid>
+        <Grid item xs={12} sm={12} md={7}>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              multiline
+              disabled={isProcessing}
+              rows={3}
+              label="Description"
+              onChange={(event) => setDescription(event.target.value)}
+              value={description}
+            ></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              multiline
+              disabled={isProcessing}
+              rows={3}
+              label="Comments"
+              onChange={(event) => setComment(event.target.value)}
+              onKeyDown={(event) => handleKeyDown(event, "Comments")}
+              value={comment}
+            ></TextField>
+            <Button
+              style={{ marginRight: "16px" }}
+              disabled={isProcessing || !comment}
+              onClick={handleAddComment}
+            >
+              Add Comment
+            </Button>
+            <Button
+              disabled={isProcessing || (!comment && !(comments.length > 0))}
+              onClick={handleRemoveComment}
+            >
+              {comment ? "Clear Comment" : "Remove Comment"}
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              multiline
+              disabled={isProcessing}
+              rows={3}
+              label="Quotes"
+              onChange={(event) => setQuote(event.target.value)}
+              onKeyDown={(event) => handleKeyDown(event, "Quotes")}
+              value={quote}
+            ></TextField>
+            <Button
+              style={{ marginRight: "16px" }}
+              disabled={isProcessing || !quote}
+              onClick={handleAddQuote}
+            >
+              Add Quote
+            </Button>
+            <Button
+              disabled={isProcessing || (!quote && !(quotes.length > 0))}
+              onClick={handleRemoveQuote}
+            >
+              {quote ? "Clear Quote" : "Remove Quote"}
+            </Button>
+          </Grid>
         </Grid>
+        <Grid item xs={12}></Grid>
         <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Publish Date"
-            disabled={isProcessing}
-            onChange={(event) => setPublishDate(event.target.value)}
-            type="date"
-            value={publishDate}
-            InputLabelProps={{ shrink: true }}
-          ></TextField>
+          <div style={{ fontSize: "20px", marginBottom: "12px" }}>
+            Card Preview
+          </div>
+          {getPreview()}
         </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            disabled={isProcessing}
-            label="Publisher"
-            onChange={(event) => setPublisher(event.target.value)}
-            value={publisher}
-          ></TextField>
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            disabled={isProcessing}
-            label="URL"
-            onChange={(event) => setUrl(event.target.value)}
-            value={url}
-          ></TextField>
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            disabled={isProcessing}
-            label="Tag"
-            onChange={(event) => setTag(event.target.value)}
-            onKeyDown={(event) => handleKeyDown(event, "Tag")}
-            value={tag}
-          ></TextField>
+        <Grid style={buttonContainerStyle} item xs={12}>
           <Button
-            style={{ marginRight: "16px" }}
-            disabled={isProcessing || !tag}
-            onClick={handleAddTag}
+            disabled={isProcessing}
+            style={buttonStyle}
+            title={buttonTitleUpload}
+            variant={buttonVariant}
+            onClick={handleUploadClick}
           >
-            Add Tag
+            Upload
           </Button>
           <Button
-            disabled={isProcessing || (!tag && !(tags.length > 0))}
-            onClick={handleRemoveTag}
+            disabled={isProcessing}
+            style={buttonStyle}
+            title={buttonTitleDownload}
+            variant={buttonVariant}
+            onClick={handleDownloadClick}
           >
-            {tag ? "Clear Tag" : "Remove Tag"}
+            Download
+          </Button>
+          <Button
+            disabled={isProcessing}
+            style={buttonStyle}
+            title={buttonTitleReset}
+            variant={buttonVariant}
+            onClick={handleClearClick}
+          >
+            Reset
           </Button>
         </Grid>
       </Grid>
-      <Grid item xs={12} sm={12} md={1}></Grid>
-      <Grid item xs={12} sm={12} md={7}>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            multiline
-            disabled={isProcessing}
-            rows={3}
-            label="Description"
-            onChange={(event) => setDescription(event.target.value)}
-            value={description}
-          ></TextField>
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            multiline
-            disabled={isProcessing}
-            rows={3}
-            label="Comments"
-            onChange={(event) => setComment(event.target.value)}
-            onKeyDown={(event) => handleKeyDown(event, "Comments")}
-            value={comment}
-          ></TextField>
-          <Button
-            style={{ marginRight: "16px" }}
-            disabled={isProcessing || !comment}
-            onClick={handleAddComment}
-          >
-            Add Comment
-          </Button>
-          <Button
-            disabled={isProcessing || (!comment && !(comments.length > 0))}
-            onClick={handleRemoveComment}
-          >
-            {comment ? "Clear Comment" : "Remove Comment"}
-          </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            multiline
-            disabled={isProcessing}
-            rows={3}
-            label="Quotes"
-            onChange={(event) => setQuote(event.target.value)}
-            onKeyDown={(event) => handleKeyDown(event, "Quotes")}
-            value={quote}
-          ></TextField>
-          <Button
-            style={{ marginRight: "16px" }}
-            disabled={isProcessing || !quote}
-            onClick={handleAddQuote}
-          >
-            Add Quote
-          </Button>
-          <Button
-            disabled={isProcessing || (!quote && !(quotes.length > 0))}
-            onClick={handleRemoveQuote}
-          >
-            {quote ? "Clear Quote" : "Remove Quote"}
-          </Button>
-        </Grid>
-      </Grid>
-      <Grid item xs={12}></Grid>
-      <Grid item xs={12}>
-        <div style={{ fontSize: "20px", marginBottom: "12px" }}>
-          Card Preview
-        </div>
-        {getPreview()}
-      </Grid>
-      <Grid style={buttonContainerStyle} item xs={12}>
-        <Button
-          disabled={isProcessing}
-          style={buttonStyle}
-          title={buttonTitleUpload}
-          variant={buttonVariant}
-          onClick={handleUploadClick}
-        >
-          Upload
-        </Button>
-        <Button
-          disabled={isProcessing}
-          style={buttonStyle}
-          title={buttonTitleDownload}
-          variant={buttonVariant}
-          onClick={handleDownloadClick}
-        >
-          Download
-        </Button>
-        <Button
-          disabled={isProcessing}
-          style={buttonStyle}
-          title={buttonTitleReset}
-          variant={buttonVariant}
-          onClick={handleClearClick}
-        >
-          Reset
-        </Button>
-      </Grid>
-    </Grid>
+    </Fragment>
   );
 };
 
