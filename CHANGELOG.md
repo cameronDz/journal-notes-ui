@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Hashing in routing paths
 
+### Changed
+
+- Major version bump to React framework
+
 ## [1.14.0] 2021-09-01
 
 ### Added

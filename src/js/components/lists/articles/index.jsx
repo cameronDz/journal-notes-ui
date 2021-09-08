@@ -9,14 +9,12 @@ import ArticleCard from "../../articleCard";
 import FilterSortOrder from "./filterSortOrder";
 import FilterTagSelector from "./filterTagSelector";
 import RouteTitle from "../../sections/routeTitle";
-import { fetchArticles } from "./state/actions";
 import { articleGridStyles } from "./styles";
 import * as _sorts from "../../../libs/articleSorts";
 
 const propTypes = {
   articles: PropType.array,
   articlesLoading: PropType.number,
-  callFetchArticles: PropType.func,
   loadingIndex: PropType.bool,
   pageName: PropType.string,
   title: PropType.string,
@@ -25,7 +23,6 @@ const useStyles = makeStyles(() => articleGridStyles);
 const ArticleSection = ({
   articles,
   articlesLoading,
-  callFetchArticles,
   loadingIndex,
   pageName,
   title,
@@ -45,10 +42,6 @@ const ArticleSection = ({
   const [checkedTitle, setCheckedTitle] = useState(true);
   const [checkedPublishDate, setCheckedPublishDate] = useState(true);
   const [checkedCreatedDate, setCheckedCreatedDate] = useState(true);
-
-  useEffect(() => {
-    callFetchArticles();
-  }, []);
 
   useEffect(() => {
     if (!articlesLoading) {
@@ -262,6 +255,4 @@ const mapStateToProps = (state) => ({
   articlesLoading: state.articles.articlesLoading,
   loadingIndex: state.articles.isLoadingIndex,
 });
-export default connect(mapStateToProps, { callFetchArticles: fetchArticles })(
-  ArticleSection
-);
+export default connect(mapStateToProps, null)(ArticleSection);
