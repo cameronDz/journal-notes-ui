@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { Switch as RouterSwitch, Route } from "react-router-dom";
 import classNames from "classnames";
 import PropType from "prop-types";
 import { Grid, LinearProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Panel from "./panel";
 import InputSection from "./input";
 import LandingSeciton from "./landing";
 import ArticleSection from "../lists/articles";
@@ -39,7 +39,6 @@ const propTypes = {
   isInputIndexLoading: PropType.bool,
   isProcessingArticle: PropType.bool,
   isProcessingIndex: PropType.bool,
-  page: PropType.string,
 };
 const useStyles = makeStyles(() => contentStyles);
 const NavTabs = ({
@@ -48,26 +47,9 @@ const NavTabs = ({
   isInputIndexLoading,
   isProcessingArticle,
   isProcessingIndex,
-  page,
 }) => {
   const classes = useStyles();
-  const [value, setValue] = useState(0);
-  const [title, setTitle] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    let newTitleKey = 0;
-    let newValue = 0;
-    if (page === "search" || page === "view") {
-      newValue = 1;
-      newTitleKey = page === "view" ? 1 : 2;
-    } else if (page === "create") {
-      newValue = 2;
-      newTitleKey = 3;
-    }
-    setTitle(pages?.[newTitleKey]?.title);
-    setValue(newValue);
-  }, [page]);
 
   useEffect(() => {
     setIsLoading(
@@ -95,23 +77,41 @@ const NavTabs = ({
     );
   };
 
+  const showTitle = (title) => {
+    return (
+      <div className={classNames(classes?.panelHeader)}>
+        <h2>{title}</h2>
+      </div>
+    );
+  };
+
   return (
     <div className={classNames(classes?.contentRoot)}>
       {displayProgressBar()}
       <Grid className="nssd-grid-wrapper" container spacing={0}>
         <Grid item xs={12} sm={12}>
-          <div className={classNames(classes?.panelHeader)}>
-            <h2>{title}</h2>
-          </div>
-          <Panel value={value} index={0}>
-            <LandingSeciton />
-          </Panel>
-          <Panel value={value} index={1}>
-            <ArticleSection pageName={page} />
-          </Panel>
-          <Panel value={value} index={2}>
-            <InputSection />
-          </Panel>
+          <RouterSwitch>
+            <Route path="/">
+              {showTitle(pages[0].title)}
+              <LandingSeciton />
+            </Route>
+            <Route path="/home">
+              {showTitle(pages[0].title)}
+              <LandingSeciton />
+            </Route>
+            <Route path="/view">
+              {showTitle(pages[1].title)}
+              <ArticleSection pageName={page} />
+            </Route>
+            <Route path="/search">
+              {showTitle(pages[1].title)}
+              <ArticleSection pageName={page} />
+            </Route>
+            <Route path="/create">
+              {showTitle(pages[2].title)}
+              <InputSection />
+            </Route>
+          </RouterSwitch>
         </Grid>
       </Grid>
     </div>

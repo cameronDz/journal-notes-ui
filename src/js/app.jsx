@@ -1,4 +1,5 @@
 import React from "react";
+import { HashRouter } from "react-router-dom";
 import {
   StylesProvider,
   createGenerateClassName,
@@ -11,9 +12,11 @@ const generateClassName = createGenerateClassName({
 
 const App = () => {
   return (
-    <StylesProvider generateClassName={generateClassName}>
-      <AppContainer />
-    </StylesProvider>
+    <HashRouter>
+      <StylesProvider generateClassName={generateClassName}>
+        <AppContainer />
+      </StylesProvider>
+    </HashRouter>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { Fragment } from "react";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core";
 import AppFooter from "./components/appFooter";
@@ -8,22 +8,17 @@ import { appContainerStyles } from "./styles";
 
 const useStyles = makeStyles(() => appContainerStyles);
 const AppContainer = () => {
-  const [page, setPage] = useState("home");
-  const handleNavBarIconClick = (event) => {
-    setPage(event || "home");
-  };
-
   const classes = useStyles();
   return (
     <Fragment>
       <div className={classNames(classes?.appWrapper)}>
         <div className={classNames(classes?.appNavBarWrapper)}>
-          <LeftNavBar onClick={handleNavBarIconClick} />
+          <LeftNavBar />
         </div>
         <div className={classNames(classes?.appContentOuterWrapper)}>
           <div className={classNames(classes?.appContentInnerWrapper)}>
             <div className={classNames(classes?.appHeaderBarWrapper)}></div>
-            <NavTabs page={page} />
+            <NavTabs />
           </div>
         </div>
         <div className={classNames(classes?.appFooter)}>
