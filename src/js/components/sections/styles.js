@@ -19,6 +19,13 @@ const contentStyles = {
   contentLoader: {
     paddingTop: "1px",
   },
+};
+
+const landingStyles = {
+  simpleLandingText: { fontSize: "14px", fontWeight: 600 },
+};
+
+const routeTitleStyles = {
   panelHeader: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     fontSize: "24px",
@@ -27,8 +34,4 @@ const contentStyles = {
   },
 };
 
-const landingStyles = {
-  simpleLandingText: { fontSize: "14px", fontWeight: 600 },
-};
-
-export { contentStyles, landingStyles };
+export { contentStyles, landingStyles, routeTitleStyles };
