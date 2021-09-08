@@ -5,9 +5,10 @@ import classNames from "classnames";
 import PropType from "prop-types";
 import { Grid, LinearProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import ArticleSection from "../lists/articles";
 import InputSection from "./input";
 import LandingSeciton from "./landing";
-import ArticleSection from "../lists/articles";
+import Panel from "./panel";
 import { contentStyles } from "./styles";
 
 const pages = [
@@ -82,23 +83,31 @@ const NavTabs = ({
       {displayProgressBar()}
       <Grid className="nssd-grid-wrapper" container spacing={0}>
         <Grid item xs={12} sm={12}>
-          <RouterSwitch>
-            <Route path="/">
-              <LandingSeciton title={pages[0].title} />
-            </Route>
-            <Route path={`/${pages[0].name}`}>
-              <LandingSeciton title={pages[0].title} />
-            </Route>
-            <Route path={`/${pages[1].name}`}>
-              <ArticleSection pageName={pages[1].name} title={pages[1].title} />
-            </Route>
-            <Route path={`/${pages[2].name}`}>
-              <ArticleSection pageName={pages[2].name} title={pages[2].title} />
-            </Route>
-            <Route path={`/${pages[3].name}`}>
-              <InputSection title={pages[3].title} />
-            </Route>
-          </RouterSwitch>
+          <Panel index={"empty"} value={"empty"}>
+            <RouterSwitch>
+              <Route path="/">
+                <LandingSeciton title={pages[0].title} />
+              </Route>
+              <Route path={`/${pages[0].name}`}>
+                <LandingSeciton title={pages[0].title} />
+              </Route>
+              <Route path={`/${pages[1].name}`}>
+                <ArticleSection
+                  pageName={pages[1].name}
+                  title={pages[1].title}
+                />
+              </Route>
+              <Route path={`/${pages[2].name}`}>
+                <ArticleSection
+                  pageName={pages[2].name}
+                  title={pages[2].title}
+                />
+              </Route>
+              <Route path={`/${pages[3].name}`}>
+                <InputSection title={pages[3].title} />
+              </Route>
+            </RouterSwitch>
+          </Panel>
         </Grid>
       </Grid>
     </div>
