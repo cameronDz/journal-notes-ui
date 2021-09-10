@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Use uuid instead of timestamp for ID
+
 ## [1.15.0] 2021-09-08
 
 ### Added
