@@ -2,13 +2,13 @@ import * as _types from "./types";
 import axios from "axios";
 
 // get index from heroku, get jsons from s3 directly
-const baseS3Url = "https://log-notes-assets.s3.amazonaws.com/";
-const baseHerokuUrl = "https://log-notes-assets-api.herokuapp.com/json/";
+const herokuStorageApiUrl =
+  "https://article-notes-storage-api.herokuapp.com/json/";
 const config = { header: { "Content-Type": "application/json" } };
 
 const fetchArticle = (articleId) => {
   return (dispatch) => {
-    const endpoint = baseS3Url + articleId + ".json";
+    const endpoint = herokuStorageApiUrl + "/object/" + articleId + ".json";
     return axios
       .get(endpoint, config)
       .then((payload) => {
@@ -45,15 +45,40 @@ const startListGetRequest = () => {
   return { type: _types.START_ARTICLE_LIST_GET_REQUEST };
 };
 
+const fetchEntireListPayload = (dispatch, list) => {
+  const url = herokuStorageApiUrl + "objects";
+  dispatch(startListGetRequest());
+  return axios
+    .post(url, list, config)
+    .then((payload) => {
+      const articlesList = payload?.data?.payload?.list || [];
+      return dispatch({
+        list: articlesList,
+        type: _types.SUCCESSFUL_ARTICLES_GET_REQUEST,
+      });
+    })
+    .catch((error) => {
+      console.error("catch error", error);
+      return dispatch({
+        error: error,
+        type: _types.FAILED_ARTICLE_LIST_GET_REQUEST,
+      });
+    })
+    .finally(() => {
+      dispatch({ type: _types.END_ARTICLE_LIST_GET_REQUEST });
+    });
+};
+
 export const fetchArticles = () => {
   return (dispatch) => {
-    const url = baseHerokuUrl + "object/index";
+    const url = herokuStorageApiUrl + "object/index";
     dispatch(startListGetRequest());
     return axios
       .get(url, config)
       .then((payload) => {
-        const list = payload?.data?.payload || [];
-        processArticleListPayload(dispatch, list);
+        const list = payload?.data?.payload?.list || [];
+        fetchEntireListPayload(dispatch, list);
+        // processArticleListPayload(dispatch, list);
         return dispatch({
           index: list,
           type: _types.SUCCESSFUL_ARTICLE_LIST_GET_REQUEST,

@@ -45,11 +45,14 @@ const reducer = (state = initialState, action) => {
         ...state,
         index: action.index,
         indexError: null,
-        articlesLoading: action.index.length,
       };
       break;
     case types.END_ARTICLE_LIST_GET_REQUEST:
       newState = { ...state, isLoadingIndex: false };
+      break;
+
+    case types.SUCCESSFUL_ARTICLES_GET_REQUEST:
+      newState = { ...state, list: action?.list || [] };
       break;
 
     default:
