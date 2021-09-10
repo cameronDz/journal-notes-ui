@@ -78,7 +78,6 @@ export const fetchArticles = () => {
       .then((payload) => {
         const list = payload?.data?.payload?.list || [];
         fetchEntireListPayload(dispatch, list);
-        // processArticleListPayload(dispatch, list);
         return dispatch({
           index: list,
           type: _types.SUCCESSFUL_ARTICLE_LIST_GET_REQUEST,

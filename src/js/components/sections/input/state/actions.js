@@ -2,7 +2,7 @@ import axios from "axios";
 import { getFullTimeStampString } from "../../../../libs/date";
 import * as _types from "./types";
 
-const baseHerokuUrl = "https://log-notes-assets-api.herokuapp.com/json/";
+const baseHerokuUrl = "https://article-notes-storage-api.herokuapp.com/json/";
 const config = { header: { "Content-Type": "application/json" } };
 
 export const getIndex = () => {
@@ -12,7 +12,7 @@ export const getIndex = () => {
     return axios
       .get(url, config)
       .then((data) => {
-        const extractedData = data?.data?.payload || [];
+        const extractedData = data?.data?.payload?.list || [];
         const index = Array.isArray(extractedData) ? extractedData : [];
         return dispatch({ index, type: _types.GET_INDEX_SUCCESSFUL });
       })
@@ -46,11 +46,12 @@ export const postArticle = (content) => {
 };
 
 export const putIndex = (updatedIndex) => {
+  const index = { list: updatedIndex };
   return (dispatch) => {
     const url = baseHerokuUrl + "update/index";
     dispatch(startRequestType(_types.PUT_INDEX_START));
     return axios
-      .put(url, updatedIndex, config)
+      .put(url, index, config)
       .then(() => {
         return dispatch({ type: _types.PUT_INDEX_SUCCESSFUL });
       })
