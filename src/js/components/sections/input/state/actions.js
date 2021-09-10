@@ -27,7 +27,8 @@ export const getIndex = () => {
 
 export const postArticle = (content) => {
   return (dispatch) => {
-    const url = baseHerokuUrl + "upload/" + getFullTimeStampString();
+    const name = content?.id || getFullTimeStampString();
+    const url = baseHerokuUrl + "upload/" + name;
     dispatch(startRequestType(_types.POST_ARTICLE_START));
     return axios
       .post(url, content, config)

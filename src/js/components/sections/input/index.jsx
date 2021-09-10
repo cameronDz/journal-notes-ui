@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
+import { v4 as uuidv4 } from "uuid";
 import { Button, Grid, TextField } from "@material-ui/core";
 import ArticleCard from "../../articleCard";
 import RouteTitle from "../../sections/routeTitle";
@@ -49,6 +50,7 @@ const Input = ({
 }) => {
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
+  const [id, setId] = useState("");
   const [publishDate, setPublishDate] = useState("");
   const [publisher, setPublisher] = useState("");
   const [title, setTitle] = useState("");
@@ -63,6 +65,10 @@ const Input = ({
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [hasStartedIndexPut, setHasStartedIndexPut] = useState(false);
+
+  useEffect(() => {
+    setId(uuidv4());
+  }, []);
 
   useEffect(() => {
     setIsProcessing(isLoadingIndex || isProcessingArticle || isProcessingIndex);
@@ -123,7 +129,7 @@ const Input = ({
 
   const handleDownloadClick = () => {
     const payload = generatePayload();
-    downloadJson(JSON.stringify(payload));
+    downloadJson(JSON.stringify(payload), id);
   };
 
   const generatePayload = () => {
@@ -138,6 +144,7 @@ const Input = ({
       author,
       comments,
       description,
+      id,
       publishDate,
       publisher,
       quotes,

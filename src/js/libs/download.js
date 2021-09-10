@@ -1,8 +1,9 @@
-const downloadJson = (object = "") => {
+const downloadJson = (object = "", name = "") => {
   if (!object) {
     return;
   }
-  const filename = new Date().getTime() + ".json";
+  const prefix = !!name ? name : new Date().getTime();
+  const filename = prefix + ".json";
 
   // fake a click to download file
   const element = document.createElement("a");
