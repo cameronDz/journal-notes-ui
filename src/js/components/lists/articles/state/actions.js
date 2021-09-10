@@ -91,7 +91,7 @@ export const fetchArticles = () => {
         });
       })
       .finally(() => {
-        return dispatch({ type: _types.END_ARTICLE_LIST_GET_REQUEST });
+        // return dispatch({ type: _types.END_ARTICLE_LIST_GET_REQUEST });
       });
   };
 };

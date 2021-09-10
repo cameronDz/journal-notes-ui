@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.17.1] 2021-09-10
+
+### Fixed
+
+- Load indicator shows until all articles finish loading on initial launch instead of stopping once list of articles is added
+
 ## [1.17.0] 2021-09-10
 
 ### Changed
