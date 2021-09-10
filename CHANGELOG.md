@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.16.0] 2021-09-10
+
 ### Changed
 
+- Migrated to new storage APIs
 - Use uuid instead of timestamp for ID
 
 ## [1.15.0] 2021-09-08
