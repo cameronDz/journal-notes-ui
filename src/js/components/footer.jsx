@@ -1,5 +1,5 @@
 import React from "react";
-import { version } from "../../../package.json";
+import _packageDetails from "../../../package.json";
 
 const topStyles = {
   width: "100%",
@@ -13,7 +13,9 @@ const centeredStyles = {
 
 const displayDate = new Date().getFullYear();
 const displayName = "Cam Dziurgot";
-const displayVersion = "v" + version;
+const displayVersion = _packageDetails?.version
+  ? "v" + _packageDetails.version
+  : "";
 
 const Footer = () => {
   return (

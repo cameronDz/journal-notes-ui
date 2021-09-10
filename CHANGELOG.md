@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Webpack Major version bump for security vulnerabilities
 
+### Fixed
+
+- Import JSON for entire block
+
 ## [1.16.0] 2021-09-10
 
 ### Changed
