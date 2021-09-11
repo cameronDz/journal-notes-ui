@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useCallback, useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import classNames from "classnames";
 import PropType from "prop-types";
@@ -48,39 +48,13 @@ const ArticleSection = ({
       setFilterTags([]);
       collectTagList();
     }
-  }, [articlesLoading]);
+  }, [articlesLoading, collectTagList]);
 
   useEffect(() => {
     setIsLoading(!!loadingIndex || articlesLoading > 0);
   }, [articlesLoading, loadingIndex]);
 
   useEffect(() => {
-    detemineSortOrder();
-  }, [orderType, checkedCreatedDate, checkedPublishDate, checkedTitle]);
-
-  const isArticleDisplayable = (article = null) => {
-    return (
-      !!article &&
-      !!article.title &&
-      !!(
-        (!!article.comments && !!article.comments.length) ||
-        (!!article.quotes && !!article.quotes.length)
-      )
-    );
-  };
-
-  const collectTagList = () => {
-    const tags = [];
-    const length = Array.isArray(articles) ? articles.length : 0;
-    for (let idx = 0; idx < length; idx++) {
-      if (!!articles[idx] && Array.isArray(articles[idx].tags)) {
-        tags.push(...articles[idx].tags);
-      }
-    }
-    setAvailableTags([...new Set(tags)].sort());
-  };
-
-  const detemineSortOrder = () => {
     if (orderType) {
       let newSort = null;
       if (orderType === "title") {
@@ -96,6 +70,28 @@ const ArticleSection = ({
       }
       setSortFunction(() => newSort);
     }
+  }, [orderType, checkedCreatedDate, checkedPublishDate, checkedTitle]);
+
+  const collectTagList = useCallback(() => {
+    const tags = [];
+    const length = Array.isArray(articles) ? articles.length : 0;
+    for (let idx = 0; idx < length; idx++) {
+      if (!!articles[idx] && Array.isArray(articles[idx].tags)) {
+        tags.push(...articles[idx].tags);
+      }
+    }
+    setAvailableTags([...new Set(tags)].sort());
+  }, [articles]);
+
+  const isArticleDisplayable = (article = null) => {
+    return (
+      !!article &&
+      !!article.title &&
+      !!(
+        (!!article.comments && !!article.comments.length) ||
+        (!!article.quotes && !!article.quotes.length)
+      )
+    );
   };
 
   const filterFunction = (article) => {

@@ -24,7 +24,7 @@ const ArticleCard = ({ articleData, minHeight, show }) => {
     const text = show ? RETRACT : EXPAND;
     setCardActionText(text);
     setShowFull(!!show);
-  }, []);
+  }, [show]);
 
   const switchExpand = () => {
     const newText = showFull ? EXPAND : RETRACT;
