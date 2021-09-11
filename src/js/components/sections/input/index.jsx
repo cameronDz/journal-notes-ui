@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useCallback, useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
 import { v4 as uuidv4 } from "uuid";
@@ -11,15 +11,15 @@ import { downloadJson } from "../../../libs/download";
 import { generateDateString } from "../../../libs/date";
 
 const propTypes = {
-  getIndex: PropType.func,
+  getArticleIndexList: PropType.func,
   isLoadingIndex: PropType.bool,
   isProcessingArticle: PropType.bool,
   isProcessingIndex: PropType.bool,
   latestIndex: PropType.arrayOf(PropType.string),
   latestUploadKey: PropType.string,
   pageTitle: PropType.string,
-  postArticle: PropType.func,
-  putIndex: PropType.func,
+  postNewArticle: PropType.func,
+  updateArticleIndexList: PropType.func,
 };
 
 const buttonContainerStyle = {
@@ -38,15 +38,15 @@ const buttonTitleUpload = "Upload article notes to S3";
 const buttonVariant = "outlined";
 
 const Input = ({
-  getIndex,
+  getArticleIndexList,
   isLoadingIndex,
   isProcessingArticle,
   isProcessingIndex,
   latestIndex,
   latestUploadKey,
   pageTitle,
-  postArticle,
-  putIndex,
+  postNewArticle,
+  updateArticleIndexList,
 }) => {
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
@@ -75,33 +75,46 @@ const Input = ({
   }, [isLoadingIndex, isProcessingArticle, isProcessingIndex]);
 
   useEffect(() => {
-    if (!isRequestingData() && !!latestUploadKey) {
-      getIndex();
+    if (isNotRequestingData()) {
+      getArticleIndexList();
     }
-  }, [isProcessingArticle]);
+  }, [getArticleIndexList, isNotRequestingData]);
 
   useEffect(() => {
     if (hasStartedIndexPut && !isProcessingIndex) {
       clearForm();
       setHasStartedIndexPut(false);
     }
-  }, [isProcessingIndex]);
+  }, [hasStartedIndexPut, isProcessingIndex]);
 
   useEffect(() => {
-    if (
-      !isRequestingData() &&
-      Array.isArray(latestIndex) &&
-      !!latestUploadKey
-    ) {
-      const newIndex = [...latestIndex, latestUploadKey];
-      putIndex(newIndex);
+    if (isNotRequestingData() && isLatestIndexArray()) {
+      const newIndex = getNewIndex();
+      updateArticleIndexList(newIndex);
       setHasStartedIndexPut(true);
     }
-  }, [isLoadingIndex]);
+  }, [
+    getNewIndex,
+    isLoadingIndex,
+    isLatestIndexArray,
+    isNotRequestingData,
+    updateArticleIndexList,
+  ]);
 
-  const isRequestingData = () => {
-    return isLoadingIndex || isProcessingArticle || isProcessingIndex;
-  };
+  const isLatestIndexArray = useCallback(() => {
+    return Array.isArray(latestIndex);
+  }, [latestIndex]);
+
+  const getNewIndex = useCallback(() => {
+    return [...latestIndex, latestUploadKey];
+  }, [latestIndex, latestUploadKey]);
+
+  const isNotRequestingData = useCallback(() => {
+    return (
+      !(isLoadingIndex || isProcessingArticle || isProcessingIndex) &&
+      !!latestUploadKey
+    );
+  }, [isLoadingIndex, isProcessingArticle, isProcessingIndex, latestUploadKey]);
 
   const handleClearClick = () => {
     clearForm();
@@ -124,7 +137,7 @@ const Input = ({
 
   const handleUploadClick = () => {
     const payload = generatePayload();
-    postArticle(payload);
+    postNewArticle(payload);
   };
 
   const handleDownloadClick = () => {
@@ -425,5 +438,9 @@ const mapStateToProps = (state) => ({
   latestIndex: state.input.latestIndex,
   latestUploadKey: state.input.latestUploadKey,
 });
-const mapDispatchToProps = { getIndex, postArticle, putIndex };
+const mapDispatchToProps = {
+  getArticleIndexList: getIndex,
+  postNewArticle: postArticle,
+  updateArticleIndexList: putIndex,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Input);
