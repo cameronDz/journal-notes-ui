@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
 import { v4 as uuidv4 } from "uuid";
@@ -7,17 +7,15 @@ import ArticleCard from "../../articleCard";
 import RouteTitle from "../../sections/routeTitle";
 import StandardButton from "./standardButton";
 
-import { getIndex, postArticle, putIndex } from "./state/actions";
+import { postArticle, putIndex } from "./state/actions";
 import { downloadJson } from "../../../libs/download";
 import { generateDateString } from "../../../libs/date";
 
 const propTypes = {
-  getArticleIndexList: PropType.func,
   isLoadingIndex: PropType.bool,
   isProcessingArticle: PropType.bool,
   isProcessingIndex: PropType.bool,
-  latestIndex: PropType.arrayOf(PropType.string),
-  latestUploadKey: PropType.string,
+  indexList: PropType.arrayOf(PropType.string),
   pageTitle: PropType.string,
   postNewArticle: PropType.func,
   updateArticleIndexList: PropType.func,
@@ -33,12 +31,10 @@ const buttonTitleReset = "Clear input of article notes";
 const buttonTitleUpload = "Upload article notes to S3";
 
 const Input = ({
-  getArticleIndexList,
   isLoadingIndex,
   isProcessingArticle,
   isProcessingIndex,
-  latestIndex,
-  latestUploadKey,
+  indexList,
   pageTitle,
   postNewArticle,
   updateArticleIndexList,
@@ -70,46 +66,19 @@ const Input = ({
   }, [isLoadingIndex, isProcessingArticle, isProcessingIndex]);
 
   useEffect(() => {
-    if (isNotRequestingData()) {
-      getArticleIndexList();
-    }
-  }, [getArticleIndexList, isNotRequestingData]);
-
-  useEffect(() => {
     if (hasStartedIndexPut && !isProcessingIndex) {
       clearForm();
       setHasStartedIndexPut(false);
     }
   }, [hasStartedIndexPut, isProcessingIndex]);
 
-  useEffect(() => {
-    if (isNotRequestingData() && isLatestIndexArray()) {
-      const newIndex = getNewIndex();
+  const fireIndexUpdate = () => {
+    if (!!id && Array.isArray(indexList)) {
+      const newIndex = [...indexList, id];
       updateArticleIndexList(newIndex);
       setHasStartedIndexPut(true);
     }
-  }, [
-    getNewIndex,
-    isLoadingIndex,
-    isLatestIndexArray,
-    isNotRequestingData,
-    updateArticleIndexList,
-  ]);
-
-  const isLatestIndexArray = useCallback(() => {
-    return Array.isArray(latestIndex);
-  }, [latestIndex]);
-
-  const getNewIndex = useCallback(() => {
-    return [...latestIndex, latestUploadKey];
-  }, [latestIndex, latestUploadKey]);
-
-  const isNotRequestingData = useCallback(() => {
-    return (
-      !(isLoadingIndex || isProcessingArticle || isProcessingIndex) &&
-      !!latestUploadKey
-    );
-  }, [isLoadingIndex, isProcessingArticle, isProcessingIndex, latestUploadKey]);
+  };
 
   const handleClearClick = () => {
     clearForm();
@@ -132,6 +101,7 @@ const Input = ({
 
   const handleUploadClick = () => {
     const payload = generatePayload();
+    fireIndexUpdate();
     postNewArticle(payload);
   };
 
@@ -302,13 +272,13 @@ const Input = ({
               disabled={isProcessing || !tag}
               label="Add Tag"
               onClick={handleAddTag}
-              variant=""
+              variant="text"
             />
             <StandardButton
               disabled={isProcessing || (!tag && !tags?.length)}
               label={tag ? "Clear Tag" : "Remove Tag"}
               onClick={handleRemoveTag}
-              variant=""
+              variant="text"
             />
           </Grid>
         </Grid>
@@ -340,13 +310,13 @@ const Input = ({
               disabled={isProcessing || !comment}
               label="Add Comment"
               onClick={handleAddComment}
-              variant=""
+              variant="text"
             />
             <StandardButton
               disabled={isProcessing || (!comment && !comments?.length)}
               label={comments ? "Clear Comment" : "Remove Comment"}
               onClick={handleRemoveComment}
-              variant=""
+              variant="text"
             />
           </Grid>
           <Grid item xs={12}>
@@ -364,13 +334,13 @@ const Input = ({
               disabled={isProcessing || !quote}
               label="Add Quote"
               onClick={handleAddQuote}
-              variant=""
+              variant="text"
             />
             <StandardButton
               disabled={isProcessing || !quotes?.length}
               label={quote ? "Clear Quote" : "Remove Quote"}
               onClick={handleRemoveQuote}
-              variant=""
+              variant="text"
             />
           </Grid>
         </Grid>
@@ -414,11 +384,9 @@ const mapStateToProps = (state) => ({
   isLoadingIndex: state.input.isLoadingIndex,
   isProcessingArticle: state.input.isProcessingArticle,
   isProcessingIndex: state.input.isProcessingIndex,
-  latestIndex: state.input.latestIndex,
-  latestUploadKey: state.input.latestUploadKey,
+  indexList: state.articles.index,
 });
 const mapDispatchToProps = {
-  getArticleIndexList: getIndex,
   postNewArticle: postArticle,
   updateArticleIndexList: putIndex,
 };
