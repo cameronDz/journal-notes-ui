@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Button, Grid, TextField } from "@material-ui/core";
 import ArticleCard from "../../articleCard";
 import RouteTitle from "../../sections/routeTitle";
+import StandardButton from "./standardButton";
 
 import { getIndex, postArticle, putIndex } from "./state/actions";
 import { downloadJson } from "../../../libs/download";
@@ -397,33 +398,24 @@ const Input = ({
           {getPreview()}
         </Grid>
         <Grid style={buttonContainerStyle} item xs={12}>
-          <Button
+          <StandardButton
             disabled={isProcessing}
-            style={buttonStyle}
-            title={buttonTitleUpload}
-            variant={buttonVariant}
+            label="Upload"
             onClick={handleUploadClick}
-          >
-            Upload
-          </Button>
-          <Button
+            title={buttonTitleUpload}
+          />
+          <StandardButton
             disabled={isProcessing}
-            style={buttonStyle}
-            title={buttonTitleDownload}
-            variant={buttonVariant}
+            label="Download"
             onClick={handleDownloadClick}
-          >
-            Download
-          </Button>
-          <Button
+            title={buttonTitleDownload}
+          />
+          <StandardButton
             disabled={isProcessing}
-            style={buttonStyle}
-            title={buttonTitleReset}
-            variant={buttonVariant}
+            label="Reset"
             onClick={handleClearClick}
-          >
-            Reset
-          </Button>
+            title={buttonTitleReset}
+          />
         </Grid>
       </Grid>
     </Fragment>

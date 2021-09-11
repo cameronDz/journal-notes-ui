@@ -27,15 +27,16 @@ const StandardButton = ({
     }
   };
   return (
-    <MuiButton
-      classes={classes?.standardButtonRoot}
-      disabled={disabled}
-      onClick={handleClick}
-      title={title}
-      variant={variant}
-    >
-      {label}
-    </MuiButton>
+    <div className={classes?.standardButtonRoot}>
+      <MuiButton
+        disabled={disabled}
+        onClick={handleClick}
+        title={title}
+        variant={variant}
+      >
+        {label}
+      </MuiButton>
+    </div>
   );
 };
 

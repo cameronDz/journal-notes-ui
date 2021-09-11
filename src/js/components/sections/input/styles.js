@@ -1,8 +1,11 @@
 const standardButtonStyles = {
   standardButtonRoot: {
-    marginBottom: "8px",
-    marginRight: "16px",
-    width: "200px",
+    display: "inline-flex",
+    "& .MuiButton-root": {
+      marginBottom: "8px",
+      marginRight: "16px",
+      width: "200px",
+    },
   },
 };
 
