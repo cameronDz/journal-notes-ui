@@ -188,40 +188,33 @@ const Input = ({
   };
 
   const handleRemoveComment = () => {
-    if (comment) {
-      setComment("");
-    } else {
-      const index =
-        Array.isArray(comments) && comments.length > 0
-          ? comments.length - 1
-          : 0;
-      const oldComment = comments[index] ? comments[index].comment : "";
-      setComment(oldComment);
+    let value = "";
+    if (!comment) {
+      const index = comments?.length > 0 ? comments.length - 1 : 0;
+      value = comments?.[index]?.comment || "";
       setComments([...comments.splice(0, index)]);
     }
+    setComment(value);
   };
 
   const handleRemoveQuote = () => {
-    if (quote) {
-      setQuote("");
-    } else {
-      const index =
-        Array.isArray(quotes) && quotes.length > 0 ? quotes.length - 1 : 0;
-      const oldQuote = quotes[index] ? quotes[index].quote : "";
-      setQuote(oldQuote);
+    let value = "";
+    if (!quote) {
+      const index = quotes?.length > 0 ? quotes.length - 1 : 0;
+      value = quotes?.[index]?.quote || "";
       setQuotes([...quotes.splice(0, index)]);
     }
+    setQuote(value);
   };
 
   const handleRemoveTag = () => {
-    if (tag) {
-      setTag("");
-    } else {
-      const index =
-        Array.isArray(tags) && tags.length > 0 ? tags.length - 1 : 0;
-      setTag(tags[index]);
+    let value = "";
+    if (!tag) {
+      const index = tags?.length > 0 ? tags.length - 1 : 0;
+      value = tags[index] || "";
       setTags([...tags.splice(0, index)]);
     }
+    setTag(value);
   };
 
   const handleKeyDown = (event, field) => {
