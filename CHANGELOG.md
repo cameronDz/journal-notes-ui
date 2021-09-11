@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.17.2] 2021-09-11
+
 ### Fixed
 
+- Update index list when article uploaded
 - Linter issues for exhaustive dependencies
 
 ## [1.17.1] 2021-09-10
