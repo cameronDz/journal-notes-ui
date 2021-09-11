@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
 import { v4 as uuidv4 } from "uuid";
-import { Button, Grid, TextField } from "@material-ui/core";
+import { Grid, TextField } from "@material-ui/core";
 import ArticleCard from "../../articleCard";
 import RouteTitle from "../../sections/routeTitle";
 import StandardButton from "./standardButton";
@@ -28,15 +28,9 @@ const buttonContainerStyle = {
   padding: "4px",
   textAlign: "center",
 };
-const buttonStyle = {
-  marginBottom: "8px",
-  marginRight: "16px",
-  width: "200px",
-};
 const buttonTitleDownload = "Download article notes in JSON format";
 const buttonTitleReset = "Clear input of article notes";
 const buttonTitleUpload = "Upload article notes to S3";
-const buttonVariant = "outlined";
 
 const Input = ({
   getArticleIndexList,
@@ -311,19 +305,18 @@ const Input = ({
               onKeyDown={(event) => handleKeyDown(event, "Tag")}
               value={tag}
             ></TextField>
-            <Button
-              style={{ marginRight: "16px" }}
+            <StandardButton
               disabled={isProcessing || !tag}
+              label="Add Tag"
               onClick={handleAddTag}
-            >
-              Add Tag
-            </Button>
-            <Button
-              disabled={isProcessing || (!tag && !(tags.length > 0))}
+              variant=""
+            />
+            <StandardButton
+              disabled={isProcessing || (!tag && !tags?.length)}
+              label={tag ? "Clear Tag" : "Remove Tag"}
               onClick={handleRemoveTag}
-            >
-              {tag ? "Clear Tag" : "Remove Tag"}
-            </Button>
+              variant=""
+            />
           </Grid>
         </Grid>
         <Grid item xs={12} sm={12} md={1}></Grid>
@@ -350,19 +343,18 @@ const Input = ({
               onKeyDown={(event) => handleKeyDown(event, "Comments")}
               value={comment}
             ></TextField>
-            <Button
-              style={{ marginRight: "16px" }}
+            <StandardButton
               disabled={isProcessing || !comment}
+              label="Add Comment"
               onClick={handleAddComment}
-            >
-              Add Comment
-            </Button>
-            <Button
-              disabled={isProcessing || (!comment && !(comments.length > 0))}
+              variant=""
+            />
+            <StandardButton
+              disabled={isProcessing || (!comment && !comments?.length)}
+              label={comments ? "Clear Comment" : "Remove Comment"}
               onClick={handleRemoveComment}
-            >
-              {comment ? "Clear Comment" : "Remove Comment"}
-            </Button>
+              variant=""
+            />
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -375,19 +367,18 @@ const Input = ({
               onKeyDown={(event) => handleKeyDown(event, "Quotes")}
               value={quote}
             ></TextField>
-            <Button
-              style={{ marginRight: "16px" }}
+            <StandardButton
               disabled={isProcessing || !quote}
+              label="Add Quote"
               onClick={handleAddQuote}
-            >
-              Add Quote
-            </Button>
-            <Button
-              disabled={isProcessing || (!quote && !(quotes.length > 0))}
+              variant=""
+            />
+            <StandardButton
+              disabled={isProcessing || !quotes?.length}
+              label={quote ? "Clear Quote" : "Remove Quote"}
               onClick={handleRemoveQuote}
-            >
-              {quote ? "Clear Quote" : "Remove Quote"}
-            </Button>
+              variant=""
+            />
           </Grid>
         </Grid>
         <Grid item xs={12}></Grid>
@@ -400,18 +391,21 @@ const Input = ({
         <Grid style={buttonContainerStyle} item xs={12}>
           <StandardButton
             disabled={isProcessing}
+            isFat={true}
             label="Upload"
             onClick={handleUploadClick}
             title={buttonTitleUpload}
           />
           <StandardButton
             disabled={isProcessing}
+            isFat={true}
             label="Download"
             onClick={handleDownloadClick}
             title={buttonTitleDownload}
           />
           <StandardButton
             disabled={isProcessing}
+            isFat={true}
             label="Reset"
             onClick={handleClearClick}
             title={buttonTitleReset}
