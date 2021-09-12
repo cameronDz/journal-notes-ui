@@ -14,7 +14,7 @@ import { contentStyles } from "./styles";
 const pages = [
   {
     name: "home",
-    title: "Article Overview Application",
+    title: "Article Overview",
     index: 0,
   },
   {

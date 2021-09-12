@@ -45,7 +45,7 @@ const startListGetRequest = () => {
 };
 
 const fetchEntireListPayload = (dispatch, list) => {
-  const url = baseApiUrl + "objects";
+  const url = `${baseApiUrl}/objects`;
   dispatch(startListGetRequest());
   return axios
     .post(url, list, config)
@@ -70,7 +70,7 @@ const fetchEntireListPayload = (dispatch, list) => {
 
 export const fetchArticles = () => {
   return (dispatch) => {
-    const url = baseApiUrl + "object/index";
+    const url = `${baseApiUrl}/object/index`;
     dispatch(startListGetRequest());
     return axios
       .get(url, config)
