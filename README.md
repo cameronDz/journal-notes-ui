@@ -1,6 +1,6 @@
-# Article Notes App
+# Journal Notes UI
 
-Create and track notes from various articles. Basic input section for creating article reviews in JSON format, stored using S3 bucket as source with single index.json tracking each individual note JSON file.
+Create and track notes from various articles/journal entires. Basic input section for creating article reviews in JSON format, stored using S3 bucket as source with single index.json tracking each individual note JSON file.
 
 ## TODO List
 

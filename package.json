@@ -4,7 +4,7 @@
     "name": "Cam Dziurgot",
     "url": "https://www.camdziurgot.io"
   },
-  "description": "Keep logs and notes on personal trackers.",
+  "description": "Keep logs and notes on personal journals.",
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
@@ -55,13 +55,13 @@
     "webpack-dev-server": "^4.2.0",
     "webpack-merge": "^5.8.0"
   },
-  "homepage": "https://www.camdziurgot.io/article-notes",
+  "homepage": "https://www.camdziurgot.io/journal-notes",
   "license": "MIT",
   "main": "index.js",
-  "name": "@nssd/article-notes-ui",
+  "name": "@nssd/journal-notes-ui",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cameronDz/article-notes-ui.git"
+    "url": "https://github.com/cameronDz/journal-notes-ui.git"
   },
   "scripts": {
     "build:dev": "webpack --config webpack/dev.babel.js",
@@ -71,5 +71,5 @@
     "lint:fix": "eslint --fix ./src/js/**/* ./webpack",
     "start": "webpack-dev-server --open --config webpack/dev.babel.js"
   },
-  "version": "1.17.2"
+  "version": "2.0.0"
 }
