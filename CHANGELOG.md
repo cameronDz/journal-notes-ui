@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] 2021-09-11
+
+### Changed
+
+- Use new storage endpoint that matches naming convention
+- Update browser tab title to match name
+
 ## [2.0.0] 2021-09-11
 
 ### Changed
