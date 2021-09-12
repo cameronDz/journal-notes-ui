@@ -1,4 +1,4 @@
-import { basicColorPalette } from "../../libs/colors";
+import { basicColorPalette, sophisticatedColorPalette } from "../../libs/colors";
 
 const contentStyles = {
   contentRoot: {
@@ -11,6 +11,12 @@ const contentStyles = {
       "& .MuiBox-root": {
         paddingTop: "6px",
       },
+    },
+    "& .MuiLinearProgress-barColorPrimary": {
+      backgroundColor: sophisticatedColorPalette?.darkBrown?.hex,
+    },
+    "& .MuiLinearProgress-colorPrimary": {
+      backgroundColor: sophisticatedColorPalette?.lightBrown?.hex,
     },
   },
   contentTop: {
