@@ -1,13 +1,14 @@
 import axios from "axios";
-import { getFullTimeStampString } from "../../../../libs/date";
 import * as _types from "./types";
+import { getFullTimeStampString } from "../../../../libs/date";
+import _apiConfig from "../../../../../assets/apiConfig.json";
 
-const baseHerokuUrl = "https://article-notes-storage-api.herokuapp.com/json/";
-const config = { header: { "Content-Type": "application/json" } };
+const baseApiUrl = _apiConfig.baseApiUrl;
+const config = _apiConfig.baseApiConfig;
 
 export const getIndex = () => {
   return (dispatch) => {
-    const url = baseHerokuUrl + "object/index";
+    const url = `${baseApiUrl}/object/index`;
     dispatch(startRequestType(_types.GET_INDEX_START));
     return axios
       .get(url, config)
@@ -28,7 +29,7 @@ export const getIndex = () => {
 export const postArticle = (content) => {
   return (dispatch) => {
     const name = content?.id || getFullTimeStampString();
-    const url = baseHerokuUrl + "upload/" + name;
+    const url = `${baseApiUrl}/upload/${name}`;
     dispatch(startRequestType(_types.POST_ARTICLE_START));
     return axios
       .post(url, content, config)
@@ -48,7 +49,7 @@ export const postArticle = (content) => {
 export const putIndex = (updatedIndex) => {
   const index = { list: updatedIndex };
   return (dispatch) => {
-    const url = baseHerokuUrl + "update/index";
+    const url = `${baseApiUrl}/update/index`;
     dispatch(startRequestType(_types.PUT_INDEX_START));
     return axios
       .put(url, index, config)

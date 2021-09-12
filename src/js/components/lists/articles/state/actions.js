@@ -1,14 +1,13 @@
-import * as _types from "./types";
 import axios from "axios";
+import * as _types from "./types";
+import _apiConfig from "../../../../../assets/apiConfig.json";
 
-// get index from heroku, get jsons from s3 directly
-const herokuStorageApiUrl =
-  "https://article-notes-storage-api.herokuapp.com/json/";
-const config = { header: { "Content-Type": "application/json" } };
+const baseApiUrl = _apiConfig.baseApiUrl;
+const config = _apiConfig.baseApiConfig;
 
 const fetchArticle = (articleId) => {
   return (dispatch) => {
-    const endpoint = herokuStorageApiUrl + "/object/" + articleId + ".json";
+    const endpoint = `${baseApiUrl}/object/${articleId}.json`;
     return axios
       .get(endpoint, config)
       .then((payload) => {
@@ -46,7 +45,7 @@ const startListGetRequest = () => {
 };
 
 const fetchEntireListPayload = (dispatch, list) => {
-  const url = herokuStorageApiUrl + "objects";
+  const url = baseApiUrl + "objects";
   dispatch(startListGetRequest());
   return axios
     .post(url, list, config)
@@ -71,7 +70,7 @@ const fetchEntireListPayload = (dispatch, list) => {
 
 export const fetchArticles = () => {
   return (dispatch) => {
-    const url = herokuStorageApiUrl + "object/index";
+    const url = baseApiUrl + "object/index";
     dispatch(startListGetRequest());
     return axios
       .get(url, config)

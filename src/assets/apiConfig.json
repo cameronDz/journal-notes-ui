@@ -1,0 +1,4 @@
+{
+  "baseApiUrl": "https://journal-notes-storage-api.herokuapp.com/json",
+  "baseApiConfig": { "header": { "Content-Type": "application/json" } }
+}
