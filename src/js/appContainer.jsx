@@ -1,9 +1,10 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core";
+import RequestTokenDialog from "./auth/components/requestTokenDialog";
 import AppFooter from "./components/appFooter";
 import LeftNavBar from "./components/leftNavBar";
 import NavTabs from "./components/sections/tabs";
@@ -15,6 +16,8 @@ const useStyles = makeStyles(() => appContainerStyles);
 const AppContainer = ({ callFetchArticles }) => {
   const classes = useStyles();
   const history = useHistory();
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     if (typeof callFetchArticles === "function") {
       callFetchArticles();
@@ -25,7 +28,7 @@ const AppContainer = ({ callFetchArticles }) => {
     if (name !== "signin") {
       history.push(`/${name}`);
     } else {
-      // TODO open Dialog
+      setIsOpen(true);
     }
   }
 
@@ -45,6 +48,7 @@ const AppContainer = ({ callFetchArticles }) => {
           <AppFooter />
         </div>
       </div>
+      <RequestTokenDialog isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </Fragment>
   );
 };
