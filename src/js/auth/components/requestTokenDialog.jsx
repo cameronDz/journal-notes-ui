@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
 import {
@@ -15,6 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { fetchToken, livenessCheck } from "../state/actions";
 import { requestTokenDialogStyles } from "./styles";
 
+const title = "Sign in with credentials";
 const propTypes = {
   fetchUserToken: PropType.func,
   isOpen: PropType.bool,
@@ -22,8 +23,6 @@ const propTypes = {
   livenessTokenCheck: PropType.func,
   onClose: PropType.func,
 };
-
-const title = "Sign in with credentials";
 const useStyles = makeStyles(() => requestTokenDialogStyles);
 const RequestTokenDialog = ({
   fetchUserToken,
@@ -33,12 +32,15 @@ const RequestTokenDialog = ({
   onClose,
 }) => {
   const classes = useStyles();
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     if (typeof livenessTokenCheck === "function") {
       fetchUserToken();
     }
   }, []);
+
   const handleClose = () => {
     if (!isProcessingRequest && typeof onClose === "function") {
       onClose();
@@ -73,7 +75,9 @@ const RequestTokenDialog = ({
             id="username"
             label="Username"
             margin="dense"
+            onChange={(event) => setUsername(event?.target?.value)}
             type="text"
+            value={username}
             variant="standard"
           />
           <TextField
@@ -82,7 +86,9 @@ const RequestTokenDialog = ({
             id="password"
             label="Password"
             margin="dense"
+            onChange={(event) => setPassword(event?.target?.value)}
             type="password"
+            value={password}
             variant="standard"
           />
         </DialogContent>
