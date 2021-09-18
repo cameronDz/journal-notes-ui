@@ -12,7 +12,12 @@ import {
   TextField,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { clearError, clearToken, fetchToken, livenessCheck } from "../state/actions";
+import {
+  clearError,
+  clearToken,
+  fetchToken,
+  livenessCheck,
+} from "../state/actions";
 import { requestTokenDialogStyles } from "./styles";
 
 const handleEvent = (onEvent, args) => {
@@ -70,7 +75,7 @@ const RequestTokenDialog = ({
       const credentials = { username, password };
       handleEvent(fetchUserToken, credentials);
     }
-  }
+  };
 
   const handleClose = () => {
     if (!isProcessingRequest) {
@@ -86,7 +91,7 @@ const RequestTokenDialog = ({
       text = `Unable to verify credentials. Please, try again.`;
     }
     return text;
-  }
+  };
 
   return (
     <Dialog onClose={handleClose} open={isOpen}>
@@ -127,16 +132,18 @@ const RequestTokenDialog = ({
           <Button disabled={isProcessingRequest} onClick={handleClose}>
             {!!token ? `Close` : `Cancel`}
           </Button>
-          {!!token
-            ?
-              <Button disabled={isProcessingRequest} onClick={handleActionClick}>
-                Clear Credentials
-              </Button>
-            :
-              <Button disabled={isProcessingRequest || !username || !password} onClick={handleActionClick}>
-                Signin
-              </Button>
-          }
+          {!!token ? (
+            <Button disabled={isProcessingRequest} onClick={handleActionClick}>
+              Clear Credentials
+            </Button>
+          ) : (
+            <Button
+              disabled={isProcessingRequest || !username || !password}
+              onClick={handleActionClick}
+            >
+              Signin
+            </Button>
+          )}
         </DialogActions>
       </div>
     </Dialog>
