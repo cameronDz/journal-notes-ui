@@ -30,7 +30,7 @@ const AppContainer = ({ callFetchArticles }) => {
     } else {
       setIsOpen(true);
     }
-  }
+  };
 
   return (
     <Fragment>
