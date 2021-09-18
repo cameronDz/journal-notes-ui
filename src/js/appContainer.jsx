@@ -21,15 +21,19 @@ const AppContainer = ({ callFetchArticles }) => {
     }
   }, [callFetchArticles]);
 
-  const handleNavigation = (name) => {
-    history.push(`/${name}`);
-  };
+  const handleIconClick = (name) => {
+    if (name !== "signin") {
+      history.push(`/${name}`);
+    } else {
+      // TODO open Dialog
+    }
+  }
 
   return (
     <Fragment>
       <div className={classNames(classes?.appWrapper)}>
         <div className={classNames(classes?.appNavBarWrapper)}>
-          <LeftNavBar onClick={handleNavigation} />
+          <LeftNavBar onClick={handleIconClick} />
         </div>
         <div className={classNames(classes?.appContentOuterWrapper)}>
           <div className={classNames(classes?.appContentInnerWrapper)}>

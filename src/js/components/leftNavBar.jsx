@@ -7,6 +7,7 @@ import {
   Edit,
   HomeTwoTone,
   SearchTwoTone,
+  VpnKey,
 } from "@material-ui/icons";
 import NavIcon from "./navIcon";
 import { navBarStyles } from "./styles";
@@ -27,6 +28,10 @@ const icons = [
   {
     icon: <Edit />,
     name: "create",
+  },
+  {
+    icon: <VpnKey />,
+    name: "signin",
   },
 ];
 
