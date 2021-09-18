@@ -25,7 +25,13 @@ const propTypes = {
 
 const title = "Sign in with credentials";
 const useStyles = makeStyles(() => requestTokenDialogStyles);
-const RequestTokenDialog = ({ fetchUserToken, isOpen, isProcessingRequest, livenessTokenCheck, onClose }) => {
+const RequestTokenDialog = ({
+  fetchUserToken,
+  isOpen,
+  isProcessingRequest,
+  livenessTokenCheck,
+  onClose,
+}) => {
   const classes = useStyles();
 
   useEffect(() => {
@@ -84,7 +90,9 @@ const RequestTokenDialog = ({ fetchUserToken, isOpen, isProcessingRequest, liven
           <Button disabled={isProcessingRequest} onClick={handleClose}>
             Cancel
           </Button>
-          <Button disabled={isProcessingRequest} onClick={handleSignInClick}>Signin</Button>
+          <Button disabled={isProcessingRequest} onClick={handleSignInClick}>
+            Signin
+          </Button>
         </DialogActions>
       </div>
     </Dialog>
@@ -92,7 +100,9 @@ const RequestTokenDialog = ({ fetchUserToken, isOpen, isProcessingRequest, liven
 };
 
 RequestTokenDialog.propTypes = propTypes;
-const mapStateToProps = (state) => ({ isProcessingRequest: state.auth.isFetching });
+const mapStateToProps = (state) => ({
+  isProcessingRequest: state.auth.isFetching,
+});
 const mapDispatchToProps = {
   fetchUserToken: fetchToken,
   livenessTokenCheck: livenessCheck,
