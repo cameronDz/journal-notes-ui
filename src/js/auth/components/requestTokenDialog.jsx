@@ -12,20 +12,22 @@ import {
   TextField,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { clearToken, fetchToken, livenessCheck } from "../state/actions";
+import { clearError, clearToken, fetchToken, livenessCheck } from "../state/actions";
 import { requestTokenDialogStyles } from "./styles";
 
-const handleEvent = (onEvent) => {
+const handleEvent = (onEvent, args) => {
   if (typeof onEvent === "function") {
-    onEvent();
+    onEvent(args);
   }
 };
 
 const title = "Sign in with credentials";
 const propTypes = {
-  clearUserToken: PropType.func,
+  clearTokenError: PropType.func,
+  clearTokenUser: PropType.func,
   error: PropType.any,
   fetchUserToken: PropType.func,
+  isAuthLive: PropType.bool,
   isOpen: PropType.bool,
   isProcessingRequest: PropType.bool,
   livenessTokenCheck: PropType.func,
@@ -34,9 +36,11 @@ const propTypes = {
 };
 const useStyles = makeStyles(() => requestTokenDialogStyles);
 const RequestTokenDialog = ({
-  clearUserToken,
+  clearTokenError,
+  clearTokenUser,
   error,
   fetchUserToken,
+  isAuthLive,
   isOpen,
   isProcessingRequest,
   livenessTokenCheck,
@@ -49,15 +53,22 @@ const RequestTokenDialog = ({
 
   useEffect(() => {
     if (isOpen) {
-      handleEvent(livenessTokenCheck);
+      if (!isAuthLive) {
+        handleEvent(livenessTokenCheck);
+      }
+    } else {
+      handleEvent(clearTokenError);
+      setPassword("");
+      setUsername("");
     }
   }, [isOpen]);
 
   const handleActionClick = () => {
     if (!!token) {
-      handleEvent(clearUserToken);
+      handleEvent(clearTokenUser);
     } else {
-      handleEvent(fetchUserToken);
+      const credentials = { username, password };
+      handleEvent(fetchUserToken, credentials);
     }
   }
 
@@ -114,12 +125,18 @@ const RequestTokenDialog = ({
         </DialogContent>
         <DialogActions>
           <Button disabled={isProcessingRequest} onClick={handleClose}>
-            Cancel
+            {!!token ? `Close` : `Cancel`}
           </Button>
-
-          <Button disabled={isProcessingRequest} onClick={handleActionClick}>
-            {!!token ? `Clear Credentials` : `Signin`}
-          </Button>
+          {!!token
+            ?
+              <Button disabled={isProcessingRequest} onClick={handleActionClick}>
+                Clear Credentials
+              </Button>
+            :
+              <Button disabled={isProcessingRequest || !username || !password} onClick={handleActionClick}>
+                Signin
+              </Button>
+          }
         </DialogActions>
       </div>
     </Dialog>
@@ -129,11 +146,13 @@ const RequestTokenDialog = ({
 RequestTokenDialog.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   error: state.auth.error,
+  isAuthLive: state.auth.isLive,
   isProcessingRequest: state.auth.isFetching,
   token: state.auth.token,
 });
 const mapDispatchToProps = {
-  clearUserToken: clearToken,
+  clearTokenError: clearError,
+  clearTokenUser: clearToken,
   fetchUserToken: fetchToken,
   livenessTokenCheck: livenessCheck,
 };
