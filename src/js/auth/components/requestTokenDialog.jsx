@@ -66,7 +66,7 @@ const RequestTokenDialog = ({
       setPassword("");
       setUsername("");
     }
-  }, [isOpen]);
+  }, [clearTokenError, isAuthLive, isOpen, livenessTokenCheck]);
 
   const handleActionClick = () => {
     if (!!token) {
@@ -80,6 +80,12 @@ const RequestTokenDialog = ({
   const handleClose = () => {
     if (!isProcessingRequest) {
       handleEvent(onClose);
+    }
+  };
+
+  const handleTextKeyPress = (event) => {
+    if (event?.key === "Enter" && !!username && !!password) {
+      handleActionClick();
     }
   };
 
@@ -99,30 +105,34 @@ const RequestTokenDialog = ({
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
           <div className={classes?.dialogContentContainer}>
-            <DialogContentText>
-              {isProcessingRequest ? <CircularProgress /> : getText()}
-            </DialogContentText>
+            {isProcessingRequest ? (
+              <CircularProgress />
+            ) : (
+              <DialogContentText>{getText()}</DialogContentText>
+            )}
           </div>
 
           <TextField
             autoFocus
-            disabled={isProcessingRequest}
+            disabled={isProcessingRequest || !!token}
             fullWidth={true}
             id="username"
             label="Username"
             margin="dense"
             onChange={(event) => setUsername(event?.target?.value)}
+            onKeyPress={(event) => handleTextKeyPress(event)}
             type="text"
             value={username}
             variant="standard"
           />
           <TextField
-            disabled={isProcessingRequest}
+            disabled={isProcessingRequest || !!token}
             fullWidth={true}
             id="password"
             label="Password"
             margin="dense"
             onChange={(event) => setPassword(event?.target?.value)}
+            onKeyPress={(event) => handleTextKeyPress(event)}
             type="password"
             value={password}
             variant="standard"
