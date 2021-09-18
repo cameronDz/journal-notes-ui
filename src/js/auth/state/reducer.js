@@ -13,10 +13,20 @@ const reducer = (state = initialState, action = null) => {
       newState = { ...state, isFetching: false };
       break;
     case _types.GET_TOKEN_ERROR:
-      newState = { ...state, error: action.error, isFetching: false, token: null };
+      newState = {
+        ...state,
+        error: action.error,
+        isFetching: false,
+        token: null,
+      };
       break;
     case _types.GET_TOKEN_SUCCESS:
-      newState = { ...state, error: null, isFetching: false, token: action.data };
+      newState = {
+        ...state,
+        error: null,
+        isFetching: false,
+        token: action.data,
+      };
       break;
     case _types.GET_TOKEN_START:
       newState = { ...state, error: null, isFetching: true, token: null };
