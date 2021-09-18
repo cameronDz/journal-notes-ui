@@ -9,6 +9,12 @@ const startRequest = () => {
   return { type: _types.GET_TOKEN_START };
 };
 
+const clearToken = () => {
+  return (dispatch) => {
+    console.warn("TODO fire event to clear out token")
+  };
+};
+
 const fetchToken = (credentials) => {
   return (dispatch) => {
     console.info("start");
@@ -33,7 +39,9 @@ const fetchToken = (credentials) => {
 };
 
 const livenessCheck = () => {
-  // TODO fire liveness check
+  return (dispatch) => {
+    console.warn("TODO fire liveness check")
+  };
 };
 
-export { fetchToken, livenessCheck };
+export { clearToken, fetchToken, livenessCheck };
