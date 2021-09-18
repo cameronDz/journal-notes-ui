@@ -15,6 +15,7 @@ const propTypes = {
   isLoadingIndex: PropType.bool,
   isProcessingArticle: PropType.bool,
   isProcessingIndex: PropType.bool,
+  isUserSecured: PropType.bool,
   indexList: PropType.arrayOf(PropType.string),
   pageTitle: PropType.string,
   postNewArticle: PropType.func,
@@ -34,6 +35,7 @@ const Input = ({
   isLoadingIndex,
   isProcessingArticle,
   isProcessingIndex,
+  isUserSecured,
   indexList,
   pageTitle,
   postNewArticle,
@@ -55,6 +57,7 @@ const Input = ({
   const [tags, setTags] = useState([]);
 
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
   const [hasStartedIndexPut, setHasStartedIndexPut] = useState(false);
 
   useEffect(() => {
@@ -64,6 +67,10 @@ const Input = ({
   useEffect(() => {
     setIsProcessing(isLoadingIndex || isProcessingArticle || isProcessingIndex);
   }, [isLoadingIndex, isProcessingArticle, isProcessingIndex]);
+
+  useEffect(() => {
+    setIsDisabled(isProcessing || !isUserSecured);
+  }, [isProcessing, isUserSecured]);
 
   useEffect(() => {
     if (hasStartedIndexPut && !isProcessingIndex) {
@@ -210,12 +217,17 @@ const Input = ({
   return (
     <Fragment>
       <RouteTitle title={pageTitle} />
+      {!isUserSecured && (
+        <span style={{ color: "red" }}>
+          * Must log in with user credentials in order to create journal notes.
+        </span>
+      )}
       <Grid container spacing={0}>
         <Grid item xs={12} sm={12} md={4}>
           <Grid item xs={12}>
             <TextField
               fullWidth
-              disabled={isProcessing}
+              disabled={isDisabled}
               label="Title"
               onChange={(event) => setTitle(event.target.value)}
               value={title}
@@ -224,7 +236,7 @@ const Input = ({
           <Grid item xs={12}>
             <TextField
               fullWidth
-              disabled={isProcessing}
+              disabled={isDisabled}
               label="Author"
               onChange={(event) => setAuthor(event.target.value)}
               value={author}
@@ -234,7 +246,7 @@ const Input = ({
             <TextField
               fullWidth
               label="Publish Date"
-              disabled={isProcessing}
+              disabled={isDisabled}
               onChange={(event) => setPublishDate(event.target.value)}
               type="date"
               value={publishDate}
@@ -244,7 +256,7 @@ const Input = ({
           <Grid item xs={12}>
             <TextField
               fullWidth
-              disabled={isProcessing}
+              disabled={isDisabled}
               label="Publisher"
               onChange={(event) => setPublisher(event.target.value)}
               value={publisher}
@@ -253,7 +265,7 @@ const Input = ({
           <Grid item xs={12}>
             <TextField
               fullWidth
-              disabled={isProcessing}
+              disabled={isDisabled}
               label="URL"
               onChange={(event) => setUrl(event.target.value)}
               value={url}
@@ -262,20 +274,20 @@ const Input = ({
           <Grid item xs={12}>
             <TextField
               fullWidth
-              disabled={isProcessing}
+              disabled={isDisabled}
               label="Tag"
               onChange={(event) => setTag(event.target.value)}
               onKeyDown={(event) => handleKeyDown(event, "Tag")}
               value={tag}
             ></TextField>
             <StandardButton
-              disabled={isProcessing || !tag}
+              disabled={isDisabled || !tag}
               label="Add Tag"
               onClick={handleAddTag}
               variant="text"
             />
             <StandardButton
-              disabled={isProcessing || (!tag && !tags?.length)}
+              disabled={isDisabled || (!tag && !tags?.length)}
               label={tag ? "Clear Tag" : "Remove Tag"}
               onClick={handleRemoveTag}
               variant="text"
@@ -288,7 +300,7 @@ const Input = ({
             <TextField
               fullWidth
               multiline
-              disabled={isProcessing}
+              disabled={isDisabled}
               rows={3}
               label="Description"
               onChange={(event) => setDescription(event.target.value)}
@@ -299,7 +311,7 @@ const Input = ({
             <TextField
               fullWidth
               multiline
-              disabled={isProcessing}
+              disabled={isDisabled}
               rows={3}
               label="Comments"
               onChange={(event) => setComment(event.target.value)}
@@ -307,13 +319,13 @@ const Input = ({
               value={comment}
             ></TextField>
             <StandardButton
-              disabled={isProcessing || !comment}
+              disabled={isDisabled || !comment}
               label="Add Comment"
               onClick={handleAddComment}
               variant="text"
             />
             <StandardButton
-              disabled={isProcessing || (!comment && !comments?.length)}
+              disabled={isDisabled || (!comment && !comments?.length)}
               label={comments ? "Clear Comment" : "Remove Comment"}
               onClick={handleRemoveComment}
               variant="text"
@@ -323,7 +335,7 @@ const Input = ({
             <TextField
               fullWidth
               multiline
-              disabled={isProcessing}
+              disabled={isDisabled}
               rows={3}
               label="Quotes"
               onChange={(event) => setQuote(event.target.value)}
@@ -331,13 +343,13 @@ const Input = ({
               value={quote}
             ></TextField>
             <StandardButton
-              disabled={isProcessing || !quote}
+              disabled={isDisabled || !quote}
               label="Add Quote"
               onClick={handleAddQuote}
               variant="text"
             />
             <StandardButton
-              disabled={isProcessing || !quotes?.length}
+              disabled={isDisabled || !quotes?.length}
               label={quote ? "Clear Quote" : "Remove Quote"}
               onClick={handleRemoveQuote}
               variant="text"
@@ -353,21 +365,21 @@ const Input = ({
         </Grid>
         <Grid style={buttonContainerStyle} item xs={12}>
           <StandardButton
-            disabled={isProcessing}
+            disabled={isDisabled}
             isFat={true}
             label="Upload"
             onClick={handleUploadClick}
             title={buttonTitleUpload}
           />
           <StandardButton
-            disabled={isProcessing}
+            disabled={isDisabled}
             isFat={true}
             label="Download"
             onClick={handleDownloadClick}
             title={buttonTitleDownload}
           />
           <StandardButton
-            disabled={isProcessing}
+            disabled={isDisabled}
             isFat={true}
             label="Reset"
             onClick={handleClearClick}
@@ -381,10 +393,11 @@ const Input = ({
 
 Input.propTypes = propTypes;
 const mapStateToProps = (state) => ({
+  indexList: state.articles.index,
   isLoadingIndex: state.input.isLoadingIndex,
   isProcessingArticle: state.input.isProcessingArticle,
   isProcessingIndex: state.input.isProcessingIndex,
-  indexList: state.articles.index,
+  isUserSecured: !!state.auth.token,
 });
 const mapDispatchToProps = {
   postNewArticle: postArticle,
