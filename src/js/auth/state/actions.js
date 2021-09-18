@@ -32,4 +32,8 @@ const fetchToken = (credentials) => {
   };
 };
 
-export { fetchToken };
+const livenessCheck = () => {
+  // TODO fire liveness check
+};
+
+export { fetchToken, livenessCheck };

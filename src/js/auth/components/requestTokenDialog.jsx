@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import PropType from "prop-types";
 import {
   Button,
   CircularProgress,
@@ -10,22 +12,37 @@ import {
   TextField,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { fetchToken, livenessCheck } from "../state/actions";
 import { requestTokenDialogStyles } from "./styles";
+
+const propTypes = {
+  fetchUserToken: PropType.func,
+  isOpen: PropType.bool,
+  isProcessingRequest: PropType.bool,
+  livenessTokenCheck: PropType.func,
+  onClose: PropType.func,
+};
 
 const title = "Sign in with credentials";
 const useStyles = makeStyles(() => requestTokenDialogStyles);
-const RequestTokenDialog = ({ isOpen, onClose }) => {
+const RequestTokenDialog = ({ fetchUserToken, isOpen, isProcessingRequest, livenessTokenCheck, onClose }) => {
   const classes = useStyles();
-  const [isProcessing, setIsProcessing] = useState(false);
 
+  useEffect(() => {
+    if (typeof livenessTokenCheck === "function") {
+      fetchUserToken();
+    }
+  }, []);
   const handleClose = () => {
-    if (!isProcessing && typeof onClose === "function") {
+    if (!isProcessingRequest && typeof onClose === "function") {
       onClose();
     }
   };
 
   const handleSignInClick = () => {
-    setIsProcessing(!isProcessing);
+    if (typeof fetchUserToken === "function") {
+      fetchUserToken();
+    }
   };
 
   return (
@@ -35,7 +52,7 @@ const RequestTokenDialog = ({ isOpen, onClose }) => {
         <DialogContent>
           <div className={classes?.dialogContentContainer}>
             <DialogContentText>
-              {isProcessing ? (
+              {isProcessingRequest ? (
                 <CircularProgress />
               ) : (
                 `To create new journal notes, please log in with valid credentials.`
@@ -45,7 +62,7 @@ const RequestTokenDialog = ({ isOpen, onClose }) => {
 
           <TextField
             autoFocus
-            disabled={isProcessing}
+            disabled={isProcessingRequest}
             fullWidth={true}
             id="username"
             label="Username"
@@ -54,7 +71,7 @@ const RequestTokenDialog = ({ isOpen, onClose }) => {
             variant="standard"
           />
           <TextField
-            disabled={isProcessing}
+            disabled={isProcessingRequest}
             fullWidth={true}
             id="password"
             label="Password"
@@ -64,14 +81,20 @@ const RequestTokenDialog = ({ isOpen, onClose }) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button disabled={isProcessing} onClick={handleClose}>
+          <Button disabled={isProcessingRequest} onClick={handleClose}>
             Cancel
           </Button>
-          <Button onClick={handleSignInClick}>Signin</Button>
+          <Button disabled={isProcessingRequest} onClick={handleSignInClick}>Signin</Button>
         </DialogActions>
       </div>
     </Dialog>
   );
 };
 
-export default RequestTokenDialog;
+RequestTokenDialog.propTypes = propTypes;
+const mapStateToProps = (state) => ({ isProcessingRequest: state.auth.isFetching });
+const mapDispatchToProps = {
+  fetchUserToken: fetchToken,
+  livenessTokenCheck: livenessCheck,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(RequestTokenDialog);
