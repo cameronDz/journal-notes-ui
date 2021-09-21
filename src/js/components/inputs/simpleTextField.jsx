@@ -30,7 +30,12 @@ const SimpleTextField = ({
   }, [value]);
 
   useEffect(() => {
-    let newType = inputType === inputTypes.DATE_FIELD ? "date" : "text";
+    let newType = "text";
+    if (inputType === inputTypes.DATE_FIELD) {
+      newType = "date";
+    } else if (inputType === inputTypes.PASSWORD_FIELD) {
+      newType = "password";
+    }
     setType(newType);
   }, [inputType]);
 
