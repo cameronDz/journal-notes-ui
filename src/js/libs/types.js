@@ -1,4 +1,4 @@
-const inputType = {
+const inputTypes = {
   NONE: "",
   HIDDEN: "HIDDEN",
   TEXT_FIELD: "TEXT_FIELD",
@@ -9,7 +9,7 @@ const inputType = {
   TEXT_AREA_LIST: "TEXT_AREA_LIST",
 };
 
-const journalType = {
+const journalTypes = {
   NONE: "",
   ARTICLE: "ARTICLE",
   AUDIO_BOOK: "AUDIO_BOOK",
@@ -19,49 +19,49 @@ const journalType = {
   YOUTUBE_VIDEO: "YOUTUBE_VIDEO",
 };
 
-const journalForm = {
+const journalForms = {
   NONE: {},
   ARTICLE: {
     inputs: [
       {
         name: "title",
         title: "Title",
-        type: inputType.TEXT_FIELD,
+        type: inputTypes.TEXT_FIELD,
       },
       {
         name: "author",
         title: "Author",
-        type: inputType.TEXT_FIELD,
+        type: inputTypes.TEXT_FIELD,
       },
       {
         name: "publishDate",
         title: "Publish Date",
-        type: inputType.DATE_FIELD,
+        type: inputTypes.DATE_FIELD,
       },
       {
         name: "url",
         title: "URL",
-        type: inputType.TEXT_FIELD,
+        type: inputTypes.TEXT_FIELD,
       },
       {
         name: "tags",
         title: "Tag",
-        type: inputType.TEXT_FIELD_LIST,
+        type: inputTypes.TEXT_FIELD_LIST,
       },
       {
         name: "description",
         title: "Description",
-        type: inputType.TEXT_AREA,
+        type: inputTypes.TEXT_AREA,
       },
       {
         name: "comments",
         title: "Comment",
-        type: inputType.TEXT_AREA_LIST,
+        type: inputTypes.TEXT_AREA_LIST,
       },
       {
         name: "quotes",
         title: "Quotes",
-        type: inputType.TEXT_AREA_LIST,
+        type: inputTypes.TEXT_AREA_LIST,
       },
     ],
     name: "Article Note",
@@ -73,4 +73,4 @@ const journalForm = {
   YOUTUBE_VIDEO: {},
 };
 
-export { inputType, journalForm, journalType };
+export { inputTypes, journalForms, journalTypes };
