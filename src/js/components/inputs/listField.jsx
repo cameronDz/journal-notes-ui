@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from "react";
 import PropType from "prop-types";
 import StandardButton from "../sections/input/standardButton";
+import SimpleTextArea from "./simpleTextArea";
 import SimpleTextField from "./simpleTextField";
 import { handleFunction } from "../../libs/eventUtil";
 import { inputTypes } from "../../libs/types";
@@ -46,14 +47,21 @@ const ListField = ({
       {inputType === inputTypes.TEXT_FIELD_LIST && (
         <SimpleTextField
           disabled={isDisabled}
+          inputType={inputTypes.TEXT_FIELD}
           label={label}
           name={name}
           onUpdate={(event) => setDisplay(event)}
           value={display}
-        ></SimpleTextField>
+        />
       )}
       {inputType === inputTypes.TEXT_AREA_LIST && (
-        <div>{`${name}: ${items}`}</div>
+        <SimpleTextArea
+          disabled={isDisabled}
+          label={label}
+          name={name}
+          onUpdate={(event) => setDisplay(event)}
+          value={display}
+        />
       )}
 
       <StandardButton
