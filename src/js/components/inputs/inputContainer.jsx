@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import PropType from "prop-types";
+import SimpleTextArea from "./simpleTextArea";
 import SimpleTextField from "./simpleTextField";
 import { inputTypes } from "../../libs/types";
 
@@ -27,10 +28,18 @@ const InputContainer = ({ isDisabled, onUpdate, name, title, type, value }) => {
           name={name}
           onUpdate={onUpdate}
           value={value}
-        ></SimpleTextField>
+        />
+      )}
+      {type === inputTypes.TEXT_AREA && (
+        <SimpleTextArea
+          isDisabled={isDisabled}
+          label={title}
+          name={name}
+          onUpdate={onUpdate}
+          value={value}
+        />
       )}
       {type === inputTypes.TEXT_FIELD_LIST && <div>{`${name}: ${value}`}</div>}
-      {type === inputTypes.TEXT_AREA && <div>{`${name}: ${value}`}</div>}
       {type === inputTypes.TEXT_AREA_LIST && <div>{`${name}: ${value}`}</div>}
     </Fragment>
   );
