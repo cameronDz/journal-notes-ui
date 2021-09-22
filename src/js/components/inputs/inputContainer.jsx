@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import PropType from "prop-types";
+import ListField from "./listField";
 import SimpleTextArea from "./simpleTextArea";
 import SimpleTextField from "./simpleTextField";
 import { inputTypes } from "../../libs/types";
@@ -17,6 +18,7 @@ const simpleFields = [
   inputTypes.PASSWORD_FIELD,
   inputTypes.TEXT_FIELD,
 ];
+const listFields = [inputTypes.TEXT_AREA_LIST, inputTypes.TEXT_FIELD_LIST];
 const InputContainer = ({ isDisabled, onUpdate, name, title, type, value }) => {
   return (
     <Fragment>
@@ -39,8 +41,16 @@ const InputContainer = ({ isDisabled, onUpdate, name, title, type, value }) => {
           value={value}
         />
       )}
-      {type === inputTypes.TEXT_FIELD_LIST && <div>{`${name}: ${value}`}</div>}
-      {type === inputTypes.TEXT_AREA_LIST && <div>{`${name}: ${value}`}</div>}
+      {listFields.indexOf(type) > -1 && (
+        <ListField
+          inputType={type}
+          isDisabled={isDisabled}
+          label={title}
+          name={name}
+          onUpdate={onUpdate}
+          value={value}
+        />
+      )}
     </Fragment>
   );
 };
