@@ -5,7 +5,6 @@ import { handleFunction } from "../../libs/eventUtil";
 import { inputTypes } from "../../libs/types";
 
 const propTypes = {
-  fullWidth: PropType.bool,
   isDisabled: PropType.bool,
   label: PropType.string,
   name: PropType.string,
@@ -14,7 +13,6 @@ const propTypes = {
   value: PropType.any,
 };
 const SimpleTextField = ({
-  fullWidth = true,
   isDisabled = false,
   label = "",
   name = "",
@@ -57,7 +55,7 @@ const SimpleTextField = ({
   return (
     <TextField
       disabled={isDisabled}
-      fullWidth={fullWidth}
+      fullWidth={true}
       InputLabelProps={type === inputType.DATE_FIELD ? { shrink: true } : {}}
       label={label}
       name={name}
