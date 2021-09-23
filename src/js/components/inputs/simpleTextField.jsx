@@ -58,6 +58,9 @@ const SimpleTextField = ({
       fullWidth={true}
       InputLabelProps={inputType === inputTypes.DATE_FIELD && { shrink: true }}
       label={label}
+      maxRows={inputType === inputTypes.TEXT_AREA ? 5 : 1}
+      minRows={inputType === inputTypes.TEXT_AREA ? 2 : 1}
+      multiline={inputType === inputTypes.TEXT_AREA}
       name={name}
       onBlur={handleBlur}
       onChange={handleChange}

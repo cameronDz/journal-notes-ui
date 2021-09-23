@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import PropType from "prop-types";
 import ListField from "./listField";
-import SimpleTextArea from "./simpleTextArea";
 import SimpleTextField from "./simpleTextField";
 import { inputTypes } from "../../libs/types";
 import { handleFunction } from "../../libs/eventUtil";
@@ -17,6 +16,7 @@ const propTypes = {
 const simpleFields = [
   inputTypes.DATE_FIELD,
   inputTypes.PASSWORD_FIELD,
+  inputTypes.TEXT_AREA,
   inputTypes.TEXT_FIELD,
 ];
 const listFields = [inputTypes.TEXT_AREA_LIST, inputTypes.TEXT_FIELD_LIST];
@@ -30,15 +30,6 @@ const InputContainer = ({ isDisabled, onUpdate, name, title, type, value }) => {
           label={title}
           name={name}
           onUpdate={(update) => handleFunction(onUpdate, update)}
-          value={value}
-        />
-      )}
-      {type === inputTypes.TEXT_AREA && (
-        <SimpleTextArea
-          isDisabled={isDisabled}
-          label={title}
-          name={name}
-          onUpdate={onUpdate}
           value={value}
         />
       )}
