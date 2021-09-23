@@ -46,12 +46,12 @@ const ListField = ({
     <Fragment>
       {textFields.indexOf(inputType) > -1 && (
         <SimpleTextField
-          disabled={isDisabled}
           inputType={
             inputType === inputTypes.TEXT_AREA_LIST
               ? inputTypes.TEXT_AREA
               : inputTypes.TEXT_FIELD
           }
+          isDisabled={isDisabled}
           label={label}
           name={name}
           onUpdate={(event) => setDisplay(event)}
@@ -65,7 +65,7 @@ const ListField = ({
         variant="text"
       />
       <StandardButton
-        disabled={isDisabled || (!items && !items?.length)}
+        disabled={isDisabled || (!display && !items?.length)}
         label={`${!!display ? "Clear" : "Remove"} ${label}`}
         onClick={handleRemove}
         variant="text"
