@@ -56,7 +56,7 @@ const SimpleTextField = ({
     <TextField
       disabled={isDisabled}
       fullWidth={true}
-      InputLabelProps={type === inputType.DATE_FIELD ? { shrink: true } : {}}
+      InputLabelProps={type === inputTypes.DATE_FIELD ? { shrink: true } : {}}
       label={label}
       name={name}
       onBlur={handleBlur}
