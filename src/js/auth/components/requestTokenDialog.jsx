@@ -18,13 +18,8 @@ import {
   fetchToken,
   livenessCheck,
 } from "../state/actions";
+import { handleFunction } from "../../libs/eventUtil";
 import { requestTokenDialogStyles } from "./styles";
-
-const handleEvent = (onEvent, args) => {
-  if (typeof onEvent === "function") {
-    onEvent(args);
-  }
-};
 
 const title = "Sign in with credentials";
 const propTypes = {
@@ -59,10 +54,10 @@ const RequestTokenDialog = ({
   useEffect(() => {
     if (isOpen) {
       if (!isAuthLive) {
-        handleEvent(livenessTokenCheck);
+        handleFunction(livenessTokenCheck);
       }
     } else {
-      handleEvent(clearTokenError);
+      handleFunction(clearTokenError);
       setPassword("");
       setUsername("");
     }
@@ -70,16 +65,16 @@ const RequestTokenDialog = ({
 
   const handleActionClick = () => {
     if (!!token) {
-      handleEvent(clearTokenUser);
+      handleFunction(clearTokenUser);
     } else {
       const credentials = { username, password };
-      handleEvent(fetchUserToken, credentials);
+      handleFunction(fetchUserToken, credentials);
     }
   };
 
   const handleClose = () => {
     if (!isProcessingRequest) {
-      handleEvent(onClose);
+      handleFunction(onClose);
     }
   };
 
