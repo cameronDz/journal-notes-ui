@@ -4,6 +4,7 @@ import ListField from "./listField";
 import SimpleTextArea from "./simpleTextArea";
 import SimpleTextField from "./simpleTextField";
 import { inputTypes } from "../../libs/types";
+import { handleFunction } from "../../libs/eventUtil";
 
 const propTypes = {
   isDisabled: PropType.bool,
@@ -28,7 +29,7 @@ const InputContainer = ({ isDisabled, onUpdate, name, title, type, value }) => {
           isDisabled={isDisabled}
           label={title}
           name={name}
-          onUpdate={onUpdate}
+          onUpdate={(update) => handleFunction(onUpdate, update)}
           value={value}
         />
       )}
