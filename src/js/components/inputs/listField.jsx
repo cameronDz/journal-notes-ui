@@ -43,7 +43,8 @@ const ListField = ({
     let newDisplay = "";
     if (!display) {
       const clone = Array.isArray(items) ? [...items] : [];
-      newDisplay = clone.pop();
+      const removedElement = clone.pop();
+      newDisplay = !!elementName ? removedElement[elementName] : removedElement;
       handleFunction(onUpdate, clone);
     }
     setDisplay(newDisplay);
