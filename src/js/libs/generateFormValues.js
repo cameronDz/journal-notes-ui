@@ -1,3 +1,5 @@
+import { inputTypes } from "./types";
+
 const generateFormValues = (form, defaultValues = {}) => {
   const values = {};
   const length = Array.isArray(form?.inputs) ? form.inputs.length : 0;
@@ -5,10 +7,49 @@ const generateFormValues = (form, defaultValues = {}) => {
     const name = form.inputs[idx]?.name;
     const value = defaultValues?.[name];
     if (!!name) {
-      values[name] = value !== undefined ? value : null;
+      values[name] = isUndefined(value)
+        ? defaultType(form.inputs[idx].type)
+        : value;
     }
   }
   return values;
+};
+
+const isUndefined = (value) => {
+  return value === undefined;
+};
+
+const defaultType = (type) => {
+  let value;
+  switch (type) {
+    case inputTypes.DATE_FIELD:
+      value = null;
+      break;
+    case inputTypes.HIDDEN:
+      value = null;
+      break;
+    case inputTypes.NONE:
+      value = null;
+      break;
+    case inputTypes.PASSWORD_FIELD:
+      value = "";
+      break;
+    case inputTypes.TEXT_AREA:
+      value = "";
+      break;
+    case inputTypes.TEXT_AREA_LIST:
+      value = [];
+      break;
+    case inputTypes.TEXT_FIELD_LIST:
+      value = [];
+      break;
+    case inputTypes.TEXT_FIELD:
+      value = "";
+      break;
+    default:
+      value = "";
+  }
+  return value;
 };
 
 export { generateFormValues };
