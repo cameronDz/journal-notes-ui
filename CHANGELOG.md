@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] 2021-09-25
+
+### Added
+
+- Set of types for inputs, journals, and forms
+
+### Changed
+
+- Replaced hard coded input fields with dynamic input field container for handling multiple forms
+
+### Fixed
+
+- Security vulnerability npm package
+
 ## [2.1.0] 2021-09-18
 
 ### Added
