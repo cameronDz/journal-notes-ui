@@ -6,6 +6,8 @@ import { Grid, TextField } from "@material-ui/core";
 import ArticleCard from "../../articleCard";
 import RouteTitle from "../../sections/routeTitle";
 import StandardButton from "./standardButton";
+import JournalForm from "../journalForm";
+import { journalForms } from "../../../libs/types";
 
 import { postArticle, putIndex } from "./state/actions";
 import { downloadJson } from "../../../libs/download";
@@ -164,54 +166,16 @@ const Input = ({
     }
   };
 
-  const handleRemoveComment = () => {
-    let value = "";
-    if (!comment) {
-      const index = comments?.length > 0 ? comments.length - 1 : 0;
-      value = comments?.[index]?.comment || "";
-      setComments([...comments.splice(0, index)]);
-    }
-    setComment(value);
-  };
-
-  const handleRemoveQuote = () => {
-    let value = "";
-    if (!quote) {
-      const index = quotes?.length > 0 ? quotes.length - 1 : 0;
-      value = quotes?.[index]?.quote || "";
-      setQuotes([...quotes.splice(0, index)]);
-    }
-    setQuote(value);
-  };
-
-  const handleRemoveTag = () => {
-    let value = "";
-    if (!tag) {
-      const index = tags?.length > 0 ? tags.length - 1 : 0;
-      value = tags[index] || "";
-      setTags([...tags.splice(0, index)]);
-    }
-    setTag(value);
-  };
-
-  const handleKeyDown = (event, field) => {
-    if (event && event.key === "Enter") {
-      if (field === "Tag") {
-        handleAddTag();
-      } else if (field === "Comments") {
-        handleAddComment();
-      } else if (field === "Quotes") {
-        handleAddQuote();
-      }
-    }
-  };
-
   const getPreview = () => {
     return (
       <Grid item sm={12}>
         <ArticleCard articleData={generateCardPayload()} show={true} />
       </Grid>
     );
+  };
+
+  const updateValues = (updatedValues) => {
+    console.info("up", updatedValues);
   };
 
   return (
@@ -222,141 +186,12 @@ const Input = ({
           * Must log in with user credentials in order to create journal notes.
         </span>
       )}
+      <JournalForm
+        inputs={journalForms.ARTICLE.inputs}
+        isDisabled={isDisabled}
+        updateValues={updateValues}
+      />
       <Grid container spacing={0}>
-        <Grid item xs={12} sm={12} md={4}>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              disabled={isDisabled}
-              label="Title"
-              onChange={(event) => setTitle(event.target.value)}
-              value={title}
-            ></TextField>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              disabled={isDisabled}
-              label="Author"
-              onChange={(event) => setAuthor(event.target.value)}
-              value={author}
-            ></TextField>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Publish Date"
-              disabled={isDisabled}
-              onChange={(event) => setPublishDate(event.target.value)}
-              type="date"
-              value={publishDate}
-              InputLabelProps={{ shrink: true }}
-            ></TextField>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              disabled={isDisabled}
-              label="Publisher"
-              onChange={(event) => setPublisher(event.target.value)}
-              value={publisher}
-            ></TextField>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              disabled={isDisabled}
-              label="URL"
-              onChange={(event) => setUrl(event.target.value)}
-              value={url}
-            ></TextField>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              disabled={isDisabled}
-              label="Tag"
-              onChange={(event) => setTag(event.target.value)}
-              onKeyDown={(event) => handleKeyDown(event, "Tag")}
-              value={tag}
-            ></TextField>
-            <StandardButton
-              disabled={isDisabled || !tag}
-              label="Add Tag"
-              onClick={handleAddTag}
-              variant="text"
-            />
-            <StandardButton
-              disabled={isDisabled || (!tag && !tags?.length)}
-              label={tag ? "Clear Tag" : "Remove Tag"}
-              onClick={handleRemoveTag}
-              variant="text"
-            />
-          </Grid>
-        </Grid>
-        <Grid item xs={12} sm={12} md={1}></Grid>
-        <Grid item xs={12} sm={12} md={7}>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              multiline
-              disabled={isDisabled}
-              rows={3}
-              label="Description"
-              onChange={(event) => setDescription(event.target.value)}
-              value={description}
-            ></TextField>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              multiline
-              disabled={isDisabled}
-              rows={3}
-              label="Comments"
-              onChange={(event) => setComment(event.target.value)}
-              onKeyDown={(event) => handleKeyDown(event, "Comments")}
-              value={comment}
-            ></TextField>
-            <StandardButton
-              disabled={isDisabled || !comment}
-              label="Add Comment"
-              onClick={handleAddComment}
-              variant="text"
-            />
-            <StandardButton
-              disabled={isDisabled || (!comment && !comments?.length)}
-              label={comments ? "Clear Comment" : "Remove Comment"}
-              onClick={handleRemoveComment}
-              variant="text"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              multiline
-              disabled={isDisabled}
-              rows={3}
-              label="Quotes"
-              onChange={(event) => setQuote(event.target.value)}
-              onKeyDown={(event) => handleKeyDown(event, "Quotes")}
-              value={quote}
-            ></TextField>
-            <StandardButton
-              disabled={isDisabled || !quote}
-              label="Add Quote"
-              onClick={handleAddQuote}
-              variant="text"
-            />
-            <StandardButton
-              disabled={isDisabled || !quotes?.length}
-              label={quote ? "Clear Quote" : "Remove Quote"}
-              onClick={handleRemoveQuote}
-              variant="text"
-            />
-          </Grid>
-        </Grid>
-        <Grid item xs={12}></Grid>
         <Grid item xs={12}>
           <div style={{ fontSize: "20px", marginBottom: "12px" }}>
             Card Preview
