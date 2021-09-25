@@ -6,6 +6,7 @@ import { handleFunction } from "../../libs/eventUtil";
 import { inputTypes } from "../../libs/types";
 
 const propTypes = {
+  elementName: PropType.string,
   inputType: PropType.oneOf(Object.values(inputTypes)),
   isDisabled: PropType.bool,
   items: PropType.arrayOf(PropType.any),
@@ -15,6 +16,7 @@ const propTypes = {
 };
 
 const ListField = ({
+  elementName = "",
   inputType = null,
   isDisabled = false,
   items = [],
@@ -26,7 +28,13 @@ const ListField = ({
 
   const handleAdd = () => {
     const clone = Array.isArray(items) ? [...items] : [];
-    clone.push(display);
+    if (!!elementName) {
+      const data = { createDate: new Date() };
+      data[elementName] = display;
+      clone.push(data);
+    } else {
+      clone.push(display);
+    }
     handleFunction(onUpdate, clone);
     setDisplay("");
   };

@@ -6,6 +6,7 @@ import { inputTypes } from "../../libs/types";
 import { handleFunction } from "../../libs/eventUtil";
 
 const propTypes = {
+  elementName: PropType.string,
   isDisabled: PropType.bool,
   onUpdate: PropType.func,
   name: PropType.string,
@@ -20,7 +21,15 @@ const simpleFields = [
   inputTypes.TEXT_FIELD,
 ];
 const listFields = [inputTypes.TEXT_AREA_LIST, inputTypes.TEXT_FIELD_LIST];
-const InputContainer = ({ isDisabled, onUpdate, name, title, type, value }) => {
+const InputContainer = ({
+  elementName,
+  isDisabled,
+  onUpdate,
+  name,
+  title,
+  type,
+  value,
+}) => {
   return (
     <Fragment>
       {simpleFields.indexOf(type) > -1 && (
@@ -35,6 +44,7 @@ const InputContainer = ({ isDisabled, onUpdate, name, title, type, value }) => {
       )}
       {listFields.indexOf(type) > -1 && (
         <ListField
+          elementName={elementName}
           inputType={type}
           isDisabled={isDisabled}
           label={title}
