@@ -1,15 +1,13 @@
 import { inputTypes } from "./types";
 
-const generateFormValues = (form, defaultValues = {}) => {
+const generateFormValues = (inputs, defaultValues = {}) => {
   const values = {};
-  const length = Array.isArray(form?.inputs) ? form.inputs.length : 0;
+  const length = Array.isArray(inputs) ? inputs.length : 0;
   for (let idx = 0; idx < length; idx++) {
-    const name = form.inputs[idx]?.name;
+    const name = inputs[idx]?.name;
     const value = defaultValues?.[name];
     if (!!name) {
-      values[name] = isUndefined(value)
-        ? defaultType(form.inputs[idx].type)
-        : value;
+      values[name] = isUndefined(value) ? defaultType(inputs[idx].type) : value;
     }
   }
   return values;
