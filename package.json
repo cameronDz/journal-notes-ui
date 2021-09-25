@@ -38,6 +38,7 @@
     "http-proxy": "^1.18.1",
     "minimist": "^1.2.2",
     "node-forge": "^0.10.0",
+    "nth-check": ">=2.0.1",
     "path": "^0.12.7",
     "prettier": "^2.3.2",
     "prop-types": "^15.7.2",
@@ -71,5 +72,5 @@
     "lint:fix": "eslint --fix ./src/js/**/* ./webpack",
     "start": "webpack-dev-server --open --config webpack/dev.babel.js"
   },
-  "version": "2.1.0"
+  "version": "2.2.0"
 }
