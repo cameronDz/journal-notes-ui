@@ -6,21 +6,21 @@ import { handleFunction } from "../../libs/eventUtil";
 import { inputTypes } from "../../libs/types";
 
 const propTypes = {
+  inputType: PropType.oneOfType(inputTypes),
   isDisabled: PropType.bool,
+  items: PropType.arrayOf(PropType.any),
   label: PropType.string,
   name: PropType.string,
   onUpdate: PropType.func,
-  inputType: PropType.oneOfType(inputTypes),
-  items: PropType.arrayOf(PropType.any),
 };
 
 const ListField = ({
+  inputType = null,
   isDisabled = false,
+  items = [],
   label = "",
   name = "",
   onUpdate = null,
-  inputType = null,
-  items = [],
 }) => {
   const [display, setDisplay] = useState("");
 
