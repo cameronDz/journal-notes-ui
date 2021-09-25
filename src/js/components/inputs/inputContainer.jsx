@@ -47,10 +47,10 @@ const InputContainer = ({
           elementName={elementName}
           inputType={type}
           isDisabled={isDisabled}
+          items={value}
           label={title}
           name={name}
           onUpdate={onUpdate}
-          value={value}
         />
       )}
     </Fragment>

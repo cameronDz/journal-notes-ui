@@ -20,6 +20,13 @@ const JournalForm = ({
   const [values, setValues] = useState(null);
 
   useEffect(() => {
+    if (!hasSetValues && !!inputs) {
+      const generatedValues = generateFormValues(inputs, {});
+      setValues(generatedValues);
+    }
+  }, [hasSetValues, inputs]);
+
+  useEffect(() => {
     if (!hasSetValues && !!defaultValues && !!inputs) {
       const generatedValues = generateFormValues(inputs, defaultValues);
       setValues(generatedValues);
@@ -30,7 +37,7 @@ const JournalForm = ({
   const handleUpdate = (updateValue, updateName) => {
     if (values?.[updateName] !== undefined) {
       setValues((prev) => {
-        return { ...prev, [updateName]: updateValue };
+        return { ...(!!prev ? prev : {}), [updateName]: updateValue };
       });
     }
   };
@@ -47,7 +54,7 @@ const JournalForm = ({
                     elementName={input.elementName}
                     isDisabled={isDisabled}
                     name={input.name}
-                    onUpdate={(update) => handleUpdate(update, name)}
+                    onUpdate={(update) => handleUpdate(update, input.name)}
                     title={input.title}
                     type={input.type}
                     value={values?.[input.name]}

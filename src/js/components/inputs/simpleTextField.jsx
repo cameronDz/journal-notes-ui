@@ -47,7 +47,7 @@ const SimpleTextField = ({
   };
 
   const updateDisplay = (event) => {
-    const newDisplay = event?.target?.value || null;
+    const newDisplay = event?.target?.value || "";
     setDisplay(newDisplay);
     return newDisplay;
   };
