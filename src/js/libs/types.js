@@ -57,11 +57,13 @@ const journalForms = {
         name: "comments",
         title: "Comment",
         type: inputTypes.TEXT_AREA_LIST,
+        elementName: "comment",
       },
       {
         name: "quotes",
         title: "Quotes",
         type: inputTypes.TEXT_AREA_LIST,
+        elementName: "quote",
       },
     ],
     name: "Article Note",
