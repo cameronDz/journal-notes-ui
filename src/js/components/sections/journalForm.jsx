@@ -44,6 +44,7 @@ const JournalForm = ({
               <Fragment key={input.id || index}>
                 <Grid item xs={12} sm={12} md={12}>
                   <InputContainer
+                    elementName={input.elementName}
                     isDisabled={isDisabled}
                     name={input.name}
                     onUpdate={(update) => handleUpdate(update, name)}
