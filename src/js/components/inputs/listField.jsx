@@ -6,7 +6,7 @@ import { handleFunction } from "../../libs/eventUtil";
 import { inputTypes } from "../../libs/types";
 
 const propTypes = {
-  inputType: PropType.oneOfType(inputTypes),
+  inputType: PropType.oneOf(Object.values(inputTypes)),
   isDisabled: PropType.bool,
   items: PropType.arrayOf(PropType.any),
   label: PropType.string,

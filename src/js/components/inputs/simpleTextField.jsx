@@ -9,7 +9,7 @@ const propTypes = {
   label: PropType.string,
   name: PropType.string,
   onUpdate: PropType.func,
-  inputType: PropType.oneOfType(inputTypes),
+  inputType: PropType.oneOf(Object.values(inputTypes)),
   value: PropType.any,
 };
 const SimpleTextField = ({
@@ -56,7 +56,9 @@ const SimpleTextField = ({
     <TextField
       disabled={isDisabled}
       fullWidth={true}
-      InputLabelProps={inputType === inputTypes.DATE_FIELD && { shrink: true }}
+      InputLabelProps={
+        inputType === inputTypes.DATE_FIELD ? { shrink: true } : {}
+      }
       label={label}
       maxRows={inputType === inputTypes.TEXT_AREA ? 5 : 1}
       minRows={inputType === inputTypes.TEXT_AREA ? 2 : 1}

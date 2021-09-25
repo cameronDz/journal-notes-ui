@@ -10,7 +10,7 @@ const propTypes = {
   onUpdate: PropType.func,
   name: PropType.string,
   title: PropType.string,
-  type: PropType.oneOfType(inputTypes),
+  type: PropType.oneOf(Object.values(inputTypes)),
   value: PropType.any,
 };
 const simpleFields = [
