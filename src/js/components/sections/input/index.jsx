@@ -2,7 +2,7 @@ import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
 import { v4 as uuidv4 } from "uuid";
-import { Grid, TextField } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import ArticleCard from "../../articleCard";
 import RouteTitle from "../../sections/routeTitle";
 import StandardButton from "./standardButton";
@@ -43,20 +43,8 @@ const Input = ({
   postNewArticle,
   updateArticleIndexList,
 }) => {
-  const [author, setAuthor] = useState("");
-  const [description, setDescription] = useState("");
   const [id, setId] = useState("");
-  const [publishDate, setPublishDate] = useState("");
-  const [publisher, setPublisher] = useState("");
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-
-  const [comment, setComment] = useState("");
-  const [comments, setComments] = useState([]);
-  const [quote, setQuote] = useState("");
-  const [quotes, setQuotes] = useState([]);
-  const [tag, setTag] = useState("");
-  const [tags, setTags] = useState([]);
+  const [values, setValues] = useState({});
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -81,6 +69,10 @@ const Input = ({
     }
   }, [hasStartedIndexPut, isProcessingIndex]);
 
+  const clearForm = () => {
+    setValues(null);
+  };
+
   const fireIndexUpdate = () => {
     if (!!id && Array.isArray(indexList)) {
       const newIndex = [...indexList, id];
@@ -93,77 +85,24 @@ const Input = ({
     clearForm();
   };
 
-  const clearForm = () => {
-    setAuthor("");
-    setDescription("");
-    setPublishDate("");
-    setPublisher("");
-    setTitle("");
-    setUrl("");
-    setComment("");
-    setComments([]);
-    setQuote("");
-    setQuotes([]);
-    setTag("");
-    setTags([]);
-  };
-
   const handleUploadClick = () => {
-    const payload = generatePayload();
+    const payload = generateCardPayload();
     fireIndexUpdate();
     postNewArticle(payload);
   };
 
   const handleDownloadClick = () => {
-    const payload = generatePayload();
+    const payload = generateCardPayload();
     downloadJson(JSON.stringify(payload), id);
   };
 
-  const generatePayload = () => {
-    handleAddComment();
-    handleAddQuote();
-    handleAddTag();
-    return generateCardPayload();
-  };
-
   const generateCardPayload = () => {
-    return {
-      author,
-      comments,
-      description,
-      id,
-      publishDate,
-      publisher,
-      quotes,
-      tags,
-      title,
-      url,
-      createdDate: generateDateString(),
-    };
+    const createdDate = generateDateString();
+    return { ...(values || {}), createdDate, id };
   };
 
-  const handleAddComment = () => {
-    if (comment) {
-      setComments([
-        ...comments,
-        { comment, createdDate: generateDateString() },
-      ]);
-      setComment("");
-    }
-  };
-
-  const handleAddQuote = () => {
-    if (quote) {
-      setQuotes([...quotes, { quote, createdDate: generateDateString() }]);
-      setQuote("");
-    }
-  };
-
-  const handleAddTag = () => {
-    if (tag) {
-      setTags([...tags, tag]);
-      setTag("");
-    }
+  const updateValues = (updatedValues) => {
+    setValues(updatedValues);
   };
 
   const getPreview = () => {
@@ -172,10 +111,6 @@ const Input = ({
         <ArticleCard articleData={generateCardPayload()} show={true} />
       </Grid>
     );
-  };
-
-  const updateValues = (updatedValues) => {
-    console.info("up", updatedValues);
   };
 
   return (
@@ -187,6 +122,7 @@ const Input = ({
         </span>
       )}
       <JournalForm
+        formValues={values}
         inputs={journalForms.ARTICLE.inputs}
         isDisabled={isDisabled}
         updateValues={updateValues}

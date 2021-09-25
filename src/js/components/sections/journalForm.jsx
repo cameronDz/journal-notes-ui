@@ -6,14 +6,14 @@ import { handleFunction } from "../../libs/eventUtil";
 import InputContainer from "../inputs/inputContainer";
 
 const propTypes = {
-  defaultValues: PropType.object,
+  formValues: PropType.object,
   inputs: PropType.array,
   isDisabled: PropType.bool,
   name: PropType.string,
   updateValues: PropType.func,
 };
 const JournalForm = ({
-  defaultValues = null,
+  formValues = null,
   inputs = null,
   isDisabled = true,
   name = "",
@@ -27,13 +27,13 @@ const JournalForm = ({
   }, [updateValues, values]);
 
   useEffect(() => {
-    if (!hasSetValues || defaultValues === null) {
-      const newValues = defaultValues || {};
+    if (!hasSetValues || formValues === null) {
+      const newValues = formValues || {};
       const generatedValues = generateFormValues(inputs, newValues);
-      setHasSetValues(defaultValues === null);
+      setHasSetValues(formValues === null);
       setValues(generatedValues);
     }
-  }, [defaultValues, hasSetValues, inputs]);
+  }, [formValues, hasSetValues, inputs]);
 
   const handleUpdate = (updateValue, updateName) => {
     if (values?.[updateName] !== undefined) {
