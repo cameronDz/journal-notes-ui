@@ -7,11 +7,11 @@ import ArticleCard from "../../articleCard";
 import RouteTitle from "../../sections/routeTitle";
 import StandardButton from "./standardButton";
 import JournalForm from "../journalForm";
-import { journalForms } from "../../../libs/types";
 
 import { postArticle, putIndex } from "./state/actions";
 import { downloadJson } from "../../../libs/download";
 import { generateDateString } from "../../../libs/date";
+import { journalForms } from "../../../libs/types";
 
 const propTypes = {
   isLoadingIndex: PropType.bool,
@@ -105,14 +105,6 @@ const Input = ({
     setValues(updatedValues);
   };
 
-  const getPreview = () => {
-    return (
-      <Grid item sm={12}>
-        <ArticleCard articleData={generateCardPayload()} show={true} />
-      </Grid>
-    );
-  };
-
   return (
     <Fragment>
       <RouteTitle title={pageTitle} />
@@ -132,7 +124,9 @@ const Input = ({
           <div style={{ fontSize: "20px", marginBottom: "12px" }}>
             Card Preview
           </div>
-          {getPreview()}
+          <Grid item sm={12}>
+            <ArticleCard articleData={generateCardPayload()} show={true} />
+          </Grid>
         </Grid>
         <Grid style={buttonContainerStyle} item xs={12}>
           <StandardButton
