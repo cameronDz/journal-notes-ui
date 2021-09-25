@@ -1,9 +1,9 @@
 import React, { useEffect, useState, Fragment } from "react";
 import PropType from "prop-types";
 import { Grid } from "@material-ui/core";
-import InputContainer from "../inputs/inputContainer";
 import { generateFormValues } from "../../libs/generateFormValues";
 import { handleFunction } from "../../libs/eventUtil";
+import InputContainer from "../inputs/inputContainer";
 
 const propTypes = {
   defaultValues: PropType.object,
@@ -27,17 +27,11 @@ const JournalForm = ({
   }, [updateValues, values]);
 
   useEffect(() => {
-    if (!hasSetValues && !!inputs) {
-      const generatedValues = generateFormValues(inputs, {});
+    if (!hasSetValues || defaultValues === null) {
+      const newValues = defaultValues || {};
+      const generatedValues = generateFormValues(inputs, newValues);
+      setHasSetValues(defaultValues === null);
       setValues(generatedValues);
-    }
-  }, [hasSetValues, inputs]);
-
-  useEffect(() => {
-    if (!hasSetValues && !!defaultValues && !!inputs) {
-      const generatedValues = generateFormValues(inputs, defaultValues);
-      setValues(generatedValues);
-      setHasSetValues(true);
     }
   }, [defaultValues, hasSetValues, inputs]);
 
