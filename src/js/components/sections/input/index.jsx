@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
-import { v4 as uuidv4 } from "uuid";
 import { Grid } from "@material-ui/core";
 import ArticleCard from "../../articleCard";
 import RouteTitle from "../../sections/routeTitle";
@@ -43,16 +42,10 @@ const Input = ({
   postNewArticle,
   updateArticleIndexList,
 }) => {
-  const [id, setId] = useState("");
   const [values, setValues] = useState({});
-
   const [isProcessing, setIsProcessing] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [hasStartedIndexPut, setHasStartedIndexPut] = useState(false);
-
-  useEffect(() => {
-    setId(uuidv4());
-  }, []);
 
   useEffect(() => {
     setIsProcessing(isLoadingIndex || isProcessingArticle || isProcessingIndex);
@@ -74,8 +67,8 @@ const Input = ({
   };
 
   const fireIndexUpdate = () => {
-    if (!!id && Array.isArray(indexList)) {
-      const newIndex = [...indexList, id];
+    if (!!values?.id && Array.isArray(indexList)) {
+      const newIndex = [...indexList, values?.id];
       updateArticleIndexList(newIndex);
       setHasStartedIndexPut(true);
     }
@@ -93,12 +86,12 @@ const Input = ({
 
   const handleDownloadClick = () => {
     const payload = generateCardPayload();
-    downloadJson(JSON.stringify(payload), id);
+    downloadJson(JSON.stringify(payload), values?.id || "data");
   };
 
   const generateCardPayload = () => {
     const createdDate = generateDateString();
-    return { ...(values || {}), createdDate, id };
+    return { ...(values || {}), createdDate };
   };
 
   const updateValues = (updatedValues) => {
