@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import { inputTypes } from "./types";
 
 const generateFormValues = (inputs, defaultValues = {}) => {
@@ -7,7 +8,10 @@ const generateFormValues = (inputs, defaultValues = {}) => {
     const name = inputs[idx]?.name;
     const value = defaultValues?.[name];
     if (!!name) {
-      values[name] = isUndefined(value) ? defaultType(inputs[idx].type) : value;
+      values[name] = value;
+      if (isUndefined(values[name])) {
+        values[name] = name === "id" ? uuidv4() : defaultType(inputs[idx].type);
+      }
     }
   }
   return values;
@@ -24,7 +28,7 @@ const defaultType = (type) => {
       value = null;
       break;
     case inputTypes.HIDDEN:
-      value = null;
+      value = "";
       break;
     case inputTypes.NONE:
       value = null;

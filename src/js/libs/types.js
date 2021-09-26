@@ -24,6 +24,11 @@ const journalForms = {
   ARTICLE: {
     inputs: [
       {
+        name: "id",
+        title: "ID",
+        type: inputTypes.HIDDEN,
+      },
+      {
         name: "title",
         title: "Title",
         type: inputTypes.TEXT_FIELD,
