@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core";
 import { appFooterStyles } from "./styles";
-import _packageDetails from "../../../package.json";
+import _packageDetails from "../../../../package.json";
 
 const useStyles = makeStyles(() => appFooterStyles);
 const AppFooter = () => {

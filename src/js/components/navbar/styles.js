@@ -1,15 +1,5 @@
-import { globalDimensions } from "../libs/dimensions";
-import { sophisticatedColorPalette } from "../libs/colors";
-
-const appFooterStyles = {
-  appFooterWrapper: {
-    bottom: "0",
-    margin: "-36px auto 0 auto",
-    maxHeight: "24px",
-    maxWidth: "1440px",
-    textAlign: "center",
-  },
-};
+import { globalDimensions } from "../../libs/dimensions";
+import { sophisticatedColorPalette } from "../../libs/colors";
 
 const navBarStyles = {
   navBarRoot: {
@@ -36,4 +26,4 @@ const navBarIconStyles = {
   },
 };
 
-export { appFooterStyles, navBarIconStyles, navBarStyles };
+export { navBarIconStyles, navBarStyles };
