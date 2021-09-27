@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import ArticleCard from "../articleCard";
+import ArticleCard from "../displays/articleCard";
 import RouteTitle from "./routeTitle";
 import { latestArticle } from "../../libs/latestArticle";
 import { landingText } from "../../libs/text";

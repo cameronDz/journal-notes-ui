@@ -11,12 +11,6 @@ const appFooterStyles = {
   },
 };
 
-const articleOverviewStyles = {
-  overviewDescription: { fontSize: "18px", lineHeight: "24px" },
-  overviewSimple: { fontSize: "12px" },
-  overviewTitle: { fontSize: "24px", lineHeight: "28px" },
-};
-
 const navBarStyles = {
   navBarRoot: {
     marginTop: globalDimensions?.appNavBarSize?.px,
@@ -42,14 +36,4 @@ const navBarIconStyles = {
   },
 };
 
-const sectionHeaderStyles = {
-  titleText: { fontSize: "16px" },
-};
-
-export {
-  appFooterStyles,
-  articleOverviewStyles,
-  navBarIconStyles,
-  navBarStyles,
-  sectionHeaderStyles,
-};
+export { appFooterStyles, navBarIconStyles, navBarStyles };

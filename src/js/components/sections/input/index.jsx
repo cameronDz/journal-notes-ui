@@ -2,7 +2,7 @@ import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
 import { Grid } from "@material-ui/core";
-import ArticleCard from "../../articleCard";
+import ArticleCard from "../../displays/articleCard";
 import RouteTitle from "../../sections/routeTitle";
 import StandardButton from "./standardButton";
 import JournalForm from "../journalForm";
