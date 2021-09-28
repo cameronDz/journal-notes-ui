@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { Switch as RouterSwitch, Route } from "react-router-dom";
 import classNames from "classnames";
 import PropType from "prop-types";
+import { connect } from "react-redux";
+import { Switch as RouterSwitch, Route } from "react-router-dom";
 import { Grid, LinearProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import ArticleSection from "../lists/articles";
-import InputSection from "./input";
-import LandingSeciton from "./landing";
+import ArticleSection from "../../components/lists/articles";
+import InputSection from "../editor";
+import LandingSeciton from "../landing/landing";
 import Panel from "./panel";
-import { contentStyles } from "./styles";
+import { contentStyles } from "../styles";
 
 const pages = [
   {

@@ -11,10 +11,10 @@ const initialState = {
   processingIndexError: null,
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action = null) => {
   let newState;
   if (action) {
-    switch (action.type) {
+    switch (action?.type) {
       /* fetch latest index from data storage */
       case types.GET_INDEX_START:
         newState = { ...state, isLoadingIndex: true };

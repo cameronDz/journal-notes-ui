@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import ArticleCard from "../displays/articleCard";
-import RouteTitle from "./routeTitle";
+import ArticleCard from "../../components/displays/articleCard";
 import { latestArticle } from "../../libs/latestArticle";
 import { landingText } from "../../libs/text";
-import { landingStyles } from "./styles";
+import { landingStyles } from "../styles";
 
 const propTypes = {
   articles: PropType.array,
@@ -24,27 +23,18 @@ const Landing = ({ articles, articlesLoading, loadingIndex, title }) => {
     setIsLoading(!!loadingIndex || articlesLoading > 0);
   }, [articlesLoading, loadingIndex]);
 
-  const displayArticle = (article) => {
-    return !!article && <ArticleCard articleData={article} />;
-  };
-
-  const displayText = (text) => {
-    return (
+  const displayLatestCardSection = () => {
+    const text = isLoading ? landingText.loading : landingText.noArticles;
+    const article = latestArticle(articles);
+    return !isLoading && !!article ? (
+      <ArticleCard articleData={article} />
+    ) : (
       <span className={classNames(classes?.simpleLandingText)}>{text}</span>
     );
   };
 
-  const displayLatestCardSection = () => {
-    const text = isLoading ? landingText.loading : landingText.noArticles;
-    const article = latestArticle(articles);
-    return !isLoading && !!article
-      ? displayArticle(article)
-      : displayText(text);
-  };
-
   return (
     <Fragment>
-      <RouteTitle title={title} />
       <div>{landingText.overview}</div>
       <div>{displayLatestCardSection()}</div>
     </Fragment>

@@ -2,15 +2,15 @@ import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import PropType from "prop-types";
 import { Grid } from "@material-ui/core";
-import ArticleCard from "../../displays/articleCard";
-import RouteTitle from "../../sections/routeTitle";
+import ArticleCard from "../../components/displays/articleCard";
+import RouteTitle from "../../components/routeTitle";
 import StandardButton from "./standardButton";
-import JournalForm from "../journalForm";
+import JournalForm from "./journalForm";
 
 import { postArticle, putIndex } from "./state/actions";
-import { downloadJson } from "../../../libs/download";
-import { generateDateString } from "../../../libs/date";
-import { journalForms } from "../../../libs/types";
+import { downloadJson } from "../../libs/download";
+import { generateDateString } from "../../libs/date";
+import { journalForms } from "../../libs/types";
 
 const propTypes = {
   isLoadingIndex: PropType.bool,

@@ -1,7 +1,4 @@
-import {
-  basicColorPalette,
-  sophisticatedColorPalette,
-} from "../../libs/colors";
+import { basicColorPalette, sophisticatedColorPalette } from "../libs/colors";
 
 const contentStyles = {
   contentRoot: {
