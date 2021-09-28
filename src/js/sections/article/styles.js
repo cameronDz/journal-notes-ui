@@ -1,4 +1,4 @@
-import { basicColorPalette } from "../../../libs/colors";
+import { basicColorPalette } from "../../libs/colors";
 
 const articleGridStyles = {
   filterGridWrapper: {
