@@ -151,7 +151,7 @@ const Input = ({
 
 Input.propTypes = propTypes;
 const mapStateToProps = (state) => ({
-  indexList: state.articles.index,
+  indexList: state.notes.index,
   isLoadingIndex: state.editor.isLoadingIndex,
   isProcessingArticle: state.editor.isProcessingArticle,
   isProcessingIndex: state.editor.isProcessingIndex,

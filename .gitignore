@@ -10,5 +10,4 @@ dist/
 node_modules/
 
 # notes for projects not needed for source control
-notes/
 assets/markdown/

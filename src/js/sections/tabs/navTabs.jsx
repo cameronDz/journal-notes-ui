@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Switch as RouterSwitch, Route } from "react-router-dom";
 import { Grid, LinearProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import ArticleSection from "../articles";
+import ArticleSection from "../notes";
 import InputSection from "../editor";
 import { LandingSection } from "../landing";
 import Panel from "./panel";
@@ -116,8 +116,8 @@ const NavTabs = ({
 
 NavTabs.propTypes = propTypes;
 const mapStateToProps = (state) => ({
-  articlesLoadingCount: state.articles.articlesLoading,
-  isArticleIndexLoading: state.articles.isLoadingIndex,
+  articlesLoadingCount: state.notes.articlesLoading,
+  isArticleIndexLoading: state.notes.isLoadingIndex,
   isInputIndexLoading: state.editor.isLoadingIndex,
   isProcessingArticle: state.editor.isProcessingArticle,
   isProcessingIndex: state.editor.isProcessingIndex,

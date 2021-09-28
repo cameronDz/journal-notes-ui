@@ -45,8 +45,8 @@ const LandingSection = ({ articles, articlesLoading, loadingIndex, title }) => {
 
 LandingSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
-  articles: state.articles.list,
-  articlesLoading: state.articles.articlesLoading,
-  loadingIndex: state.articles.isLoadingIndex,
+  articles: state.notes.list,
+  articlesLoading: state.notes.articlesLoading,
+  loadingIndex: state.notes.isLoadingIndex,
 });
 export default connect(mapStateToProps, {})(LandingSection);
