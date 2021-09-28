@@ -4,10 +4,11 @@ import { useHistory } from "react-router-dom";
 import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core";
+
 import RequestTokenDialog from "./auth/components/requestTokenDialog";
 import { AppFooter } from "./components/footer";
 import { LeftNavBar } from "./components/navbar";
-import NavTabs from "./components/sections/tabs";
+import { NavTabs } from "./sections/tabs";
 import { fetchArticles } from "./components/lists/articles/state/actions";
 import { appContainerStyles } from "./styles";
 

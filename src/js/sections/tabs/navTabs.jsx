@@ -118,8 +118,8 @@ NavTabs.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   articlesLoadingCount: state.articles.articlesLoading,
   isArticleIndexLoading: state.articles.isLoadingIndex,
-  isInputIndexLoading: state.input.isLoadingIndex,
-  isProcessingArticle: state.input.isProcessingArticle,
-  isProcessingIndex: state.input.isProcessingIndex,
+  isInputIndexLoading: state.editor.isLoadingIndex,
+  isProcessingArticle: state.editor.isProcessingArticle,
+  isProcessingIndex: state.editor.isProcessingIndex,
 });
 export default connect(mapStateToProps)(NavTabs);

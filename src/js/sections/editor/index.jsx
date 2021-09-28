@@ -152,9 +152,9 @@ const Input = ({
 Input.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   indexList: state.articles.index,
-  isLoadingIndex: state.input.isLoadingIndex,
-  isProcessingArticle: state.input.isProcessingArticle,
-  isProcessingIndex: state.input.isProcessingIndex,
+  isLoadingIndex: state.editor.isLoadingIndex,
+  isProcessingArticle: state.editor.isProcessingArticle,
+  isProcessingIndex: state.editor.isProcessingIndex,
   isUserSecured: !!state.auth.token,
 });
 const mapDispatchToProps = {

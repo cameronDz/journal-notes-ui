@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import articlesReducer from "../components/lists/articles/state/reducer";
 import authReducer from "../auth/state/reducer";
-import inputReducer from "../components/sections/input/state/reducer";
+import editorReducer from "../sections/editor/state/reducer";
 
 export default combineReducers({
   articles: articlesReducer,
   auth: authReducer,
-  input: inputReducer,
+  editor: editorReducer,
 });
