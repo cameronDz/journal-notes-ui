@@ -17,8 +17,8 @@ import {
   clearToken,
   fetchToken,
   livenessCheck,
-} from "../state/actions";
-import { handleFunction } from "../../libs/eventUtil";
+} from "./state/actions";
+import { handleFunction } from "../libs/eventUtil";
 import { requestTokenDialogStyles } from "./styles";
 
 const title = "Sign in with credentials";
