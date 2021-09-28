@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import PropType from "prop-types";
-import StandardButton from "../sections/input/standardButton";
+import StandardButton from "../standardButton";
 import SimpleTextField from "./simpleTextField";
 import { handleFunction } from "../../libs/eventUtil";
 import { inputTypes } from "../../libs/types";
