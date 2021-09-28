@@ -4,7 +4,7 @@ import PropType from "prop-types";
 import { Grid } from "@material-ui/core";
 import ArticleCard from "../../components/displays/articleCard";
 import RouteTitle from "../../components/routeTitle";
-import StandardButton from "./standardButton";
+import StandardButton from "../../components/standardButton";
 import JournalForm from "./journalForm";
 
 import { postArticle, putIndex } from "./state/actions";

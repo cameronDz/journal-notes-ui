@@ -3,7 +3,7 @@ import PropType from "prop-types";
 import { Grid } from "@material-ui/core";
 import { generateFormValues } from "../../libs/generateFormValues";
 import { handleFunction } from "../../libs/eventUtil";
-import InputContainer from "../inputs/inputContainer";
+import InputContainer from "../../components/inputs/inputContainer";
 
 const propTypes = {
   formValues: PropType.object,
