@@ -31,13 +31,4 @@ const landingStyles = {
   simpleLandingText: { fontSize: "14px", fontWeight: 600 },
 };
 
-const routeTitleStyles = {
-  panelHeader: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    fontSize: "24px",
-    fontWeight: "700",
-    marginLeft: "48px",
-  },
-};
-
-export { contentStyles, landingStyles, routeTitleStyles };
+export { contentStyles, landingStyles };
