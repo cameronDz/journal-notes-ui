@@ -1,3 +1,3 @@
-import Landing from "./landingSection";
+import LandingSection from "./landingSection";
 
-export { Landing as LandingSection };
+export { LandingSection };

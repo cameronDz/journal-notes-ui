@@ -12,10 +12,9 @@ const propTypes = {
   articles: PropType.array,
   articlesLoading: PropType.number,
   loadingIndex: PropType.bool,
-  title: PropType.string,
 };
 const useStyles = makeStyles(() => landingStyles);
-const Landing = ({ articles, articlesLoading, loadingIndex, title }) => {
+const LandingSection = ({ articles, articlesLoading, loadingIndex }) => {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -41,10 +40,10 @@ const Landing = ({ articles, articlesLoading, loadingIndex, title }) => {
   );
 };
 
-Landing.propTypes = propTypes;
+LandingSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   articles: state.articles.list,
   articlesLoading: state.articles.articlesLoading,
   loadingIndex: state.articles.isLoadingIndex,
 });
-export default connect(mapStateToProps, {})(Landing);
+export default connect(mapStateToProps, {})(LandingSection);

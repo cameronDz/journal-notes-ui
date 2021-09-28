@@ -5,9 +5,9 @@ import PropType from "prop-types";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { FilterSortOrder, FilterTagSelector } from "../../filters";
-import ArticleCard from "../../displays/articleCard";
-import RouteTitle from "../../routeTitle";
+import { FilterSortOrder, FilterTagSelector } from "../../components/filters";
+import ArticleCard from "../../components/displays/articleCard";
+import RouteTitle from "../../components/routeTitle";
 import { articleGridStyles } from "./styles";
 import * as _sorts from "../../../libs/articleSorts";
 
