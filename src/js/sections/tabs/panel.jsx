@@ -2,21 +2,10 @@ import React from "react";
 import PropType from "prop-types";
 import { Box, Typography } from "@material-ui/core";
 
-const propTypes = {
-  children: PropType.node,
-  index: PropType.any.isRequired,
-  value: PropType.any.isRequired,
-};
-const Panel = ({ children, value, index, ...other }) => {
+const propTypes = { children: PropType.node };
+const Panel = ({ children, ...other }) => {
   return (
-    <Typography
-      aria-labelledby={`nav-tab-${index}`}
-      component="div"
-      hidden={value !== index}
-      id={`nav-tabpanel-${index}`}
-      role="tabpanel"
-      {...other}
-    >
+    <Typography component="div" {...other}>
       <Box p={3}>{children}</Box>
     </Typography>
   );

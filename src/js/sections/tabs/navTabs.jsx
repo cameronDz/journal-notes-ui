@@ -83,7 +83,7 @@ const NavTabs = ({
       {displayProgressBar()}
       <Grid className="nssd-grid-wrapper" container spacing={0}>
         <Grid item xs={12} sm={12}>
-          <Panel index={"empty"} value={"empty"}>
+          <Panel>
             <RouterSwitch>
               <Route exact path="/">
                 <LandingSection title={pages[0].title} />
