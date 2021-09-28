@@ -6,9 +6,9 @@ const initialState = {
   list: [],
   articleErrors: [],
 };
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action = null) => {
   let newState;
-  switch (action.type) {
+  switch (action?.type) {
     // single article requests
     case types.FAILED_SINGLE_ARTICLE_GET_REQUEST:
       newState = {

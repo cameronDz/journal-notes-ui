@@ -9,7 +9,7 @@ import { FilterSortOrder, FilterTagSelector } from "../../components/filters";
 import ArticleCard from "../../components/displays/articleCard";
 import RouteTitle from "../../components/routeTitle";
 import { articleGridStyles } from "./styles";
-import * as _sorts from "../../../libs/articleSorts";
+import * as _sorts from "../../libs/articleSorts";
 
 const propTypes = {
   articles: PropType.array,
