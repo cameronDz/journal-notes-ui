@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ArticleCard from "../../components/displays/articleCard";
 import { latestArticle } from "../../libs/latestArticle";
 import { landingText } from "../../libs/text";
-import { landingStyles } from "../styles";
+import { landingStyles } from "./styles";
 
 const propTypes = {
   articles: PropType.array,

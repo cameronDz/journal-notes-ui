@@ -7,9 +7,9 @@ import { Grid, LinearProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ArticleSection from "../articles";
 import InputSection from "../editor";
-import LandingSeciton from "../landing/landing";
+import { LandingSeciton } from "../landing";
 import Panel from "./panel";
-import { contentStyles } from "../styles";
+import { contentStyles } from "./styles";
 
 const pages = [
   {

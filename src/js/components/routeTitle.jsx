@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import { routeTitleStyles } from "../sections/styles";
+import { routeTitleStyles } from "./styles";
 
 const propTypes = { title: PropType.string };
 const useStyles = makeStyles(() => routeTitleStyles);

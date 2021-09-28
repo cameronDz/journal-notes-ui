@@ -27,8 +27,4 @@ const contentStyles = {
   },
 };
 
-const landingStyles = {
-  simpleLandingText: { fontSize: "14px", fontWeight: 600 },
-};
-
-export { contentStyles, landingStyles };
+export { contentStyles };
