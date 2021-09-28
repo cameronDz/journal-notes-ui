@@ -9,7 +9,7 @@ import RequestTokenDialog from "./auth/components/requestTokenDialog";
 import { AppFooter } from "./components/footer";
 import { LeftNavBar } from "./components/navbar";
 import { NavTabs } from "./sections/tabs";
-import { fetchArticles } from "./components/lists/articles/state/actions";
+import { fetchArticles } from "./sections/articles/state/actions";
 import { appContainerStyles } from "./styles";
 
 const propTypes = { callFetchArticles: PropType.func };
