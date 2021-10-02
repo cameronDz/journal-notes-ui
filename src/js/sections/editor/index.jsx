@@ -23,6 +23,7 @@ const propTypes = {
   updateArticleIndexList: PropType.func,
 };
 
+const availableTypes = Object.values(journalTypes);
 const buttonTitleDownload = "Download article notes in JSON format";
 const buttonTitleReset = "Clear input of article notes";
 const buttonTitleUpload = "Upload article notes to S3";
@@ -121,7 +122,7 @@ const Input = ({
       <RouteTitle title={pageTitle} />
       <div className={classes.radioContainer}>
         <JournalFormRadioSelect
-          availableTypes={[journalTypes.ARTICLE, journalTypes.PODCAST]}
+          availableTypes={availableTypes}
           currentType={type}
           isDisabled={isDirty}
           onTypeChange={(event) => setType(event?.target?.value)}

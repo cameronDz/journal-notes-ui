@@ -19,22 +19,24 @@ const JournalFormRadioSelect = ({
   const buttons = [];
   const length = availableTypes?.length || 0;
   for (let idx = 0; idx < length; idx++) {
-    buttons.push(
-      <FormControlLabel
-        control={
-          <Radio
-            checked={currentType === availableTypes[idx]}
-            color="primary"
-            disabled={isDisabled}
-            onChange={(event) => handleFunction(onTypeChange, event)}
-            value={availableTypes[idx]}
-          />
-        }
-        key={availableTypes[idx]}
-        label={availableTypes[idx]}
-        labelPlacement="top"
-      />
-    );
+    if (!!availableTypes[idx]) {
+      buttons.push(
+        <FormControlLabel
+          control={
+            <Radio
+              checked={currentType === availableTypes[idx]}
+              color="primary"
+              disabled={isDisabled}
+              onChange={(event) => handleFunction(onTypeChange, event)}
+              value={availableTypes[idx]}
+            />
+          }
+          key={availableTypes[idx]}
+          label={availableTypes[idx].replace(/_/g, ` `)}
+          labelPlacement="top"
+        />
+      );
+    }
   }
   return <Fragment>{buttons}</Fragment>;
 };
