@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import { Switch as RouterSwitch, Route } from "react-router-dom";
 import { Grid, LinearProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import ArticleSection from "../notes";
 import InputSection from "../editor";
 import { LandingSection } from "../landing";
+import { ArticleSection } from "../notes";
 import Panel from "./panel";
 import { contentStyles } from "./styles";
 
