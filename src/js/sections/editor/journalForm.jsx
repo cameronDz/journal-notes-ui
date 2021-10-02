@@ -10,6 +10,7 @@ const propTypes = {
   inputs: PropType.array,
   isDisabled: PropType.bool,
   name: PropType.string,
+  onDirtiedForm: PropType.func,
   updateValues: PropType.func,
 };
 const JournalForm = ({
@@ -17,6 +18,7 @@ const JournalForm = ({
   inputs = null,
   isDisabled = true,
   name = "",
+  onDirtiedForm = null,
   updateValues = null,
 }) => {
   const [hasSetValues, setHasSetValues] = useState(false);
@@ -40,6 +42,7 @@ const JournalForm = ({
       setValues((prev) => {
         return { ...(!!prev ? prev : {}), [updateName]: updateValue };
       });
+      handleFunction(onDirtiedForm, true);
     }
   };
 

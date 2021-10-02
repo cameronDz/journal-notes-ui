@@ -51,9 +51,14 @@ const Input = ({
 }) => {
   const [hasStartedIndexPut, setHasStartedIndexPut] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [isDirty, setIsDirty] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [type, setType] = useState(journalTypes.ARTICLE);
   const [values, setValues] = useState({});
+
+  useEffect(() => {
+    clearForm();
+  }, [type]);
 
   useEffect(() => {
     setIsProcessing(isLoadingIndex || isProcessingArticle || isProcessingIndex);
@@ -72,6 +77,7 @@ const Input = ({
 
   const clearForm = () => {
     setValues(null);
+    setIsDirty(false);
   };
 
   const fireIndexUpdate = () => {
@@ -105,6 +111,10 @@ const Input = ({
     setValues(updatedValues);
   };
 
+  const handleDirtiedForm = (val) => {
+    setIsDirty(val);
+  };
+
   const classes = useStyles();
   return (
     <Fragment>
@@ -113,7 +123,7 @@ const Input = ({
         <JournalFormRadioSelect
           availableTypes={[journalTypes.ARTICLE, journalTypes.PODCAST]}
           currentType={type}
-          isDisabled={false}
+          isDisabled={isDirty}
           onTypeChange={(event) => setType(event?.target?.value)}
         />
       </div>
@@ -126,6 +136,7 @@ const Input = ({
         formValues={values}
         inputs={journalForms?.[type]?.inputs}
         isDisabled={isDisabled}
+        onDirtiedForm={handleDirtiedForm}
         updateValues={updateValues}
       />
       <Grid container spacing={0}>
