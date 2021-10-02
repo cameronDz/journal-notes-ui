@@ -9,7 +9,7 @@ import JournalForm from "./journalForm";
 
 import { postArticle, putIndex } from "./state/actions";
 import { downloadJson } from "../../libs/download";
-import { journalForms } from "../../libs/types";
+import { journalForms, journalTypes } from "../../libs/types";
 
 const propTypes = {
   isLoadingIndex: PropType.bool,
@@ -41,10 +41,11 @@ const Input = ({
   postNewArticle,
   updateArticleIndexList,
 }) => {
-  const [values, setValues] = useState({});
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(true);
   const [hasStartedIndexPut, setHasStartedIndexPut] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [type, setType] = useState(journalTypes.ARTICLE);
+  const [values, setValues] = useState({});
 
   useEffect(() => {
     setIsProcessing(isLoadingIndex || isProcessingArticle || isProcessingIndex);
@@ -112,12 +113,16 @@ const Input = ({
       />
       <Grid container spacing={0}>
         <Grid item xs={12}>
-          <div style={{ fontSize: "20px", marginBottom: "12px" }}>
-            Card Preview
-          </div>
-          <Grid item sm={12}>
-            <ArticleCard articleData={generateCardPayload()} show={true} />
-          </Grid>
+          {type === journalTypes.ARTICLE && (
+            <Fragment>
+              <div style={{ fontSize: "20px", marginBottom: "12px" }}>
+                Card Preview
+              </div>
+              <Grid item sm={12}>
+                <ArticleCard articleData={generateCardPayload()} show={true} />
+              </Grid>
+            </Fragment>
+          )}
         </Grid>
         <Grid style={buttonContainerStyle} item xs={12}>
           <StandardButton
