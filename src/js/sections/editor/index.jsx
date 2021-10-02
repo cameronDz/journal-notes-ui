@@ -33,6 +33,10 @@ const useStyles = makeStyles({
     textAlign: "center",
   },
   titleContainer: {},
+  unauthWarning: {
+    color: "red",
+    display: "block",
+  },
 });
 const Input = ({
   isLoadingIndex,
@@ -103,17 +107,16 @@ const Input = ({
   const classes = useStyles();
   return (
     <Fragment>
-      <div className={classes.titleContainer}>
-        <RouteTitle title={pageTitle} />
-      </div>
+      <RouteTitle title={pageTitle} />
+      <div className={classes.titleContainer}></div>
       {!isUserSecured && (
-        <span style={{ color: "red" }}>
+        <span className={classes.unauthWarning}>
           * Must log in with user credentials in order to create journal notes.
         </span>
       )}
       <JournalForm
         formValues={values}
-        inputs={type}
+        inputs={journalForms?.[type]?.inputs}
         isDisabled={isDisabled}
         updateValues={updateValues}
       />
