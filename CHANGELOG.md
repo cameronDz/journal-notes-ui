@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Podcast input form values
+- Keys to journal type article for create, update, and jounral type
+- Keys for how to generate specific input types
+
 ### Changed
 
 - Code organizational structure

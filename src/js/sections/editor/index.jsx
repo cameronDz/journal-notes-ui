@@ -9,7 +9,6 @@ import JournalForm from "./journalForm";
 
 import { postArticle, putIndex } from "./state/actions";
 import { downloadJson } from "../../libs/download";
-import { generateDateString } from "../../libs/date";
 import { journalForms } from "../../libs/types";
 
 const propTypes = {
