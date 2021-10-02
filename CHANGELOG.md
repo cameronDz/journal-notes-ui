@@ -7,14 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] 2021-10-02
+
 ### Added
 
-- Podcast input form values
+- Podcast input form option and input
+- Radio button for selecting form type on editor page
 - Keys to journal type article for create, update, and jounral type
 - Keys for how to generate specific input types
 
 ### Changed
 
+- Editor form cleared when auth token cleared
 - Code organizational structure
 
 ## [2.2.1] 2021-09-25
