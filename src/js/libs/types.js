@@ -35,17 +35,36 @@ const journalTypes = {
   YOUTUBE_VIDEO: "YOUTUBE_VIDEO",
 };
 
+const defaultInputs = [
+  {
+    generateOn: generateOnTypes.CREATE,
+    generationType: generationTypes.UUID,
+    inputType: inputTypes.HIDDEN,
+    name: "id",
+    title: "ID",
+  },
+  {
+    generateOn: generateOnTypes.CREATE,
+    generationType: generationTypes.CURRENT_DATE,
+    inputType: inputTypes.DATE_FIELD,
+    isHidden: true,
+    name: "createdDate",
+    title: "Created Date",
+  },
+  {
+    generateOn: generateOnTypes.UPDATE,
+    generationType: generationTypes.CURRENT_DATE,
+    inputType: inputTypes.DATE_FIELD,
+    isHidden: true,
+    name: "updatedDate",
+    title: "Updated Date",
+  },
+];
+
 const journalForms = {
   NONE: {},
   ARTICLE: {
     inputs: [
-      {
-        generateOn: generateOnTypes.CREATE,
-        generationType: generationTypes.UUID,
-        inputType: inputTypes.HIDDEN,
-        name: "id",
-        title: "ID",
-      },
       {
         defaultValue: journalTypes.ARTICLE,
         generationType: generationTypes.NONE,
@@ -78,16 +97,16 @@ const journalForms = {
         title: "URL",
       },
       {
-        generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_FIELD_LIST,
-        name: "tags",
-        title: "Tag",
-      },
-      {
         generationType: generationTypes.EMPTY_STRING,
         inputType: inputTypes.TEXT_AREA,
         name: "description",
         title: "Description",
+      },
+      {
+        generationType: generationTypes.EMPTY_ARRAY,
+        inputType: inputTypes.TEXT_FIELD_LIST,
+        name: "tags",
+        title: "Tag",
       },
       {
         elementName: "comment",
@@ -103,22 +122,7 @@ const journalForms = {
         name: "quotes",
         title: "Quotes",
       },
-      {
-        generateOn: generateOnTypes.CREATE,
-        generationType: generationTypes.CURRENT_DATE,
-        inputType: inputTypes.DATE_FIELD,
-        isHidden: true,
-        name: "createdDate",
-        title: "Created Date",
-      },
-      {
-        generateOn: generateOnTypes.UPDATE,
-        generationType: generationTypes.CURRENT_DATE,
-        inputType: inputTypes.DATE_FIELD,
-        isHidden: true,
-        name: "updatedDate",
-        title: "Updated Date",
-      },
+      ...defaultInputs,
     ],
     name: "Article Note",
   },
@@ -126,13 +130,6 @@ const journalForms = {
   BOOK: {},
   PODCAST: {
     inputs: [
-      {
-        generateOn: generateOnTypes.CREATE,
-        generationType: generationTypes.UUID,
-        inputType: inputTypes.HIDDEN,
-        name: "id",
-        title: "ID",
-      },
       {
         defaultValue: journalTypes.PODCAST,
         generationType: generationTypes.NONE,
@@ -159,11 +156,11 @@ const journalForms = {
         title: "Host",
       },
       {
-        elementName: "comment",
+        elementName: "guest",
         generationType: generationTypes.EMPTY_ARRAY,
         inputType: inputTypes.TEXT_AREA_LIST,
         name: "guests",
-        title: "Guests",
+        title: "Guest",
       },
       {
         generationType: generationTypes.EMPTY_STRING,
@@ -183,7 +180,7 @@ const journalForms = {
         generationType: generationTypes.EMPTY_ARRAY,
         inputType: inputTypes.TEXT_AREA_LIST,
         name: "timestamps",
-        title: "Timestamps",
+        title: "Timestamp",
       },
       {
         generationType: generationTypes.EMPTY_STRING,
@@ -209,22 +206,7 @@ const journalForms = {
         name: "tags",
         title: "Tag",
       },
-      {
-        generateOn: generateOnTypes.CREATE,
-        generationType: generationTypes.CURRENT_DATE,
-        inputType: inputTypes.DATE_FIELD,
-        isHidden: true,
-        name: "createdDate",
-        title: "Created Date",
-      },
-      {
-        generateOn: generateOnTypes.UPDATE,
-        generationType: generationTypes.CURRENT_DATE,
-        inputType: inputTypes.DATE_FIELD,
-        isHidden: true,
-        name: "updatedDate",
-        title: "Updated Date",
-      },
+      ...defaultInputs,
     ],
     name: "Podcast Notes",
   },
