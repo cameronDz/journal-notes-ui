@@ -6,6 +6,7 @@ import ArticleCard from "../../components/displays/articleCard";
 import RouteTitle from "../../components/routeTitle";
 import StandardButton from "../../components/standardButton";
 import JournalForm from "./journalForm";
+import JournalFormRadioSelect from "./journalFormRadioSelect";
 
 import { postArticle, putIndex } from "./state/actions";
 import { downloadJson } from "../../libs/download";
@@ -108,7 +109,14 @@ const Input = ({
   return (
     <Fragment>
       <RouteTitle title={pageTitle} />
-      <div className={classes.titleContainer}></div>
+      <div className={classes.radioContainer}>
+        <JournalFormRadioSelect
+          availableTypes={[journalTypes.ARTICLE, journalTypes.PODCAST]}
+          currentType={type}
+          isDisabled={false}
+          onTypeChange={(event) => setType(event?.target?.value)}
+        />
+      </div>
       {!isUserSecured && (
         <span className={classes.unauthWarning}>
           * Must log in with user credentials in order to create journal notes.

@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import PropType from "prop-types";
-import { Radio } from "@material-ui/core";
+import { FormControlLabel, Radio } from "@material-ui/core";
 import { handleFunction } from "../../libs/eventUtil";
 
 const propTypes = {
@@ -20,11 +20,19 @@ const JournalFormRadioSelect = ({
   const length = availableTypes?.length || 0;
   for (let idx = 0; idx < length; idx++) {
     buttons.push(
-      <Radio
-        checked={currentType === availableTypes[idx]}
-        disabled={isDisabled}
-        onChange={(event) => handleFunction(onTypeChange, event)}
-        value={availableTypes[idx]}
+      <FormControlLabel
+        control={
+          <Radio
+            checked={currentType === availableTypes[idx]}
+            color="primary"
+            disabled={isDisabled}
+            onChange={(event) => handleFunction(onTypeChange, event)}
+            value={availableTypes[idx]}
+          />
+        }
+        key={availableTypes[idx]}
+        label={availableTypes[idx]}
+        labelPlacement="top"
       />
     );
   }
