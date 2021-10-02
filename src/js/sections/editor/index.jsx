@@ -90,8 +90,7 @@ const Input = ({
   };
 
   const generateCardPayload = () => {
-    const createdDate = generateDateString();
-    return { ...(values || {}), createdDate };
+    return { ...(values || {}) };
   };
 
   const updateValues = (updatedValues) => {

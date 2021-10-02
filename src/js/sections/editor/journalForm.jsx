@@ -49,7 +49,8 @@ const JournalForm = ({
       {Array.isArray(inputs) &&
         inputs.map((input, index) => {
           return (
-            !!input && (
+            !!input &&
+            !input.isHidden && (
               <Fragment key={input.id || index}>
                 <Grid item xs={12} sm={12} md={12}>
                   <InputContainer

@@ -100,13 +100,15 @@ const journalForms = {
         generateOn: generateOnTypes.CREATE,
         generationType: generationTypes.CURRENT_DATE,
         inputType: inputTypes.DATE_FIELD,
-        name: "createDate",
-        title: "Create Date",
+        isHidden: true,
+        name: "createdDate",
+        title: "Created Date",
       },
       {
         generateOn: generateOnTypes.UPDATE,
         generationType: generationTypes.CURRENT_DATE,
         inputType: inputTypes.DATE_FIELD,
+        isHidden: true,
         name: "updatedDate",
         title: "Updated Date",
       },
@@ -120,4 +122,4 @@ const journalForms = {
   YOUTUBE_VIDEO: {},
 };
 
-export { inputTypes, journalForms, journalTypes };
+export { generationTypes, inputTypes, journalForms, journalTypes };
