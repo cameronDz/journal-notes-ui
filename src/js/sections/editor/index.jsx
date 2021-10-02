@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
-import { connect } from "react-redux";
 import PropType from "prop-types";
-import { Grid } from "@material-ui/core";
+import { connect } from "react-redux";
+import { Grid, makeStyles } from "@material-ui/core";
 import ArticleCard from "../../components/displays/articleCard";
 import RouteTitle from "../../components/routeTitle";
 import StandardButton from "../../components/standardButton";
@@ -22,15 +22,18 @@ const propTypes = {
   updateArticleIndexList: PropType.func,
 };
 
-const buttonContainerStyle = {
-  marginTop: "12px",
-  padding: "4px",
-  textAlign: "center",
-};
 const buttonTitleDownload = "Download article notes in JSON format";
 const buttonTitleReset = "Clear input of article notes";
 const buttonTitleUpload = "Upload article notes to S3";
 
+const useStyles = makeStyles({
+  buttonContainer: {
+    marginTop: "12px",
+    padding: "4px",
+    textAlign: "center",
+  },
+  titleContainer: {},
+});
 const Input = ({
   isLoadingIndex,
   isProcessingArticle,
@@ -97,9 +100,12 @@ const Input = ({
     setValues(updatedValues);
   };
 
+  const classes = useStyles();
   return (
     <Fragment>
-      <RouteTitle title={pageTitle} />
+      <div className={classes.titleContainer}>
+        <RouteTitle title={pageTitle} />
+      </div>
       {!isUserSecured && (
         <span style={{ color: "red" }}>
           * Must log in with user credentials in order to create journal notes.
@@ -107,24 +113,22 @@ const Input = ({
       )}
       <JournalForm
         formValues={values}
-        inputs={journalForms.ARTICLE.inputs}
+        inputs={type}
         isDisabled={isDisabled}
         updateValues={updateValues}
       />
       <Grid container spacing={0}>
-        <Grid item xs={12}>
-          {type === journalTypes.ARTICLE && (
-            <Fragment>
-              <div style={{ fontSize: "20px", marginBottom: "12px" }}>
-                Card Preview
-              </div>
-              <Grid item sm={12}>
-                <ArticleCard articleData={generateCardPayload()} show={true} />
-              </Grid>
-            </Fragment>
-          )}
-        </Grid>
-        <Grid style={buttonContainerStyle} item xs={12}>
+        {type === journalTypes.ARTICLE && (
+          <Grid item xs={12}>
+            <div style={{ fontSize: "20px", marginBottom: "12px" }}>
+              Card Preview
+            </div>
+            <Grid item sm={12}>
+              <ArticleCard articleData={generateCardPayload()} show={true} />
+            </Grid>
+          </Grid>
+        )}
+        <Grid className={classes.buttonContainer} item xs={12}>
           <StandardButton
             disabled={isDisabled}
             isFat={true}
