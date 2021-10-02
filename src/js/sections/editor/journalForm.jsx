@@ -58,7 +58,7 @@ const JournalForm = ({
                     name={input.name}
                     onUpdate={(update) => handleUpdate(update, input.name)}
                     title={input.title}
-                    type={input.type}
+                    type={input.inputType}
                     value={values?.[input.name]}
                   />
                 </Grid>

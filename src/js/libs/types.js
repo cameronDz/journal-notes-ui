@@ -1,3 +1,19 @@
+const generationTypes = {
+  NONE: "",
+  CURRENT_DATE: "CURRENT_DATE",
+  EMPTY_ARRAY: "EMPTY_ARRAY",
+  EMPTY_DATE: "EMPTY_DATE",
+  EMPTY_STRING: "EMPTY_STRING",
+  NULL: "NULL",
+  UUID: "UUID",
+};
+
+const generateOnTypes = {
+  NONE: "",
+  CREATE: "CREATE",
+  UPDATE: "UPDATE",
+};
+
 const inputTypes = {
   NONE: "",
   HIDDEN: "HIDDEN",
@@ -24,51 +40,75 @@ const journalForms = {
   ARTICLE: {
     inputs: [
       {
+        generateOn: generateOnTypes.CREATE,
+        generationType: generationTypes.UUID,
+        inputType: inputTypes.HIDDEN,
         name: "id",
         title: "ID",
-        type: inputTypes.HIDDEN,
       },
       {
+        generationType: generationTypes.EMPTY_STRING,
+        inputType: inputTypes.TEXT_FIELD,
         name: "title",
         title: "Title",
-        type: inputTypes.TEXT_FIELD,
       },
       {
+        generationType: generationTypes.EMPTY_STRING,
+        inputType: inputTypes.TEXT_FIELD,
         name: "author",
         title: "Author",
-        type: inputTypes.TEXT_FIELD,
       },
       {
+        generationType: generationTypes.EMPTY_DATE,
+        inputType: inputTypes.DATE_FIELD,
         name: "publishDate",
         title: "Publish Date",
-        type: inputTypes.DATE_FIELD,
       },
       {
+        generationType: generationTypes.EMPTY_STRING,
+        inputType: inputTypes.TEXT_FIELD,
         name: "url",
         title: "URL",
-        type: inputTypes.TEXT_FIELD,
       },
       {
+        generationType: generationTypes.EMPTY_ARRAY,
+        inputType: inputTypes.TEXT_FIELD_LIST,
         name: "tags",
         title: "Tag",
-        type: inputTypes.TEXT_FIELD_LIST,
       },
       {
+        generationType: generationTypes.EMPTY_STRING,
+        inputType: inputTypes.TEXT_AREA,
         name: "description",
         title: "Description",
-        type: inputTypes.TEXT_AREA,
       },
       {
+        elementName: "comment",
+        generationType: generationTypes.EMPTY_ARRAY,
+        inputType: inputTypes.TEXT_AREA_LIST,
         name: "comments",
         title: "Comment",
-        type: inputTypes.TEXT_AREA_LIST,
-        elementName: "comment",
       },
       {
+        elementName: "quote",
+        generationType: generationTypes.EMPTY_ARRAY,
+        inputType: inputTypes.TEXT_AREA_LIST,
         name: "quotes",
         title: "Quotes",
-        type: inputTypes.TEXT_AREA_LIST,
-        elementName: "quote",
+      },
+      {
+        generateOn: generateOnTypes.CREATE,
+        generationType: generationTypes.CURRENT_DATE,
+        inputType: inputTypes.DATE_FIELD,
+        name: "createDate",
+        title: "Create Date",
+      },
+      {
+        generateOn: generateOnTypes.UPDATE,
+        generationType: generationTypes.CURRENT_DATE,
+        inputType: inputTypes.DATE_FIELD,
+        name: "updatedDate",
+        title: "Updated Date",
       },
     ],
     name: "Article Note",

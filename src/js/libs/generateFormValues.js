@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { inputTypes } from "./types";
+import { generationTypes } from "./types";
 
 const generateFormValues = (inputs, defaultValues = {}) => {
   const values = {};
@@ -10,7 +10,7 @@ const generateFormValues = (inputs, defaultValues = {}) => {
     if (!!name) {
       values[name] = value;
       if (isUndefined(values[name])) {
-        values[name] = name === "id" ? uuidv4() : defaultType(inputs[idx].type);
+        values[name] = defaultType(inputs[idx].generationType);
       }
     }
   }
@@ -24,29 +24,23 @@ const isUndefined = (value) => {
 const defaultType = (type) => {
   let value;
   switch (type) {
-    case inputTypes.DATE_FIELD:
-      value = null;
+    case generationTypes.CURRENT_DATE:
+      value = new Date();
       break;
-    case inputTypes.HIDDEN:
-      value = "";
-      break;
-    case inputTypes.NONE:
-      value = null;
-      break;
-    case inputTypes.PASSWORD_FIELD:
-      value = "";
-      break;
-    case inputTypes.TEXT_AREA:
-      value = "";
-      break;
-    case inputTypes.TEXT_AREA_LIST:
+    case generationTypes.EMPTY_ARRAY:
       value = [];
       break;
-    case inputTypes.TEXT_FIELD_LIST:
-      value = [];
-      break;
-    case inputTypes.TEXT_FIELD:
+    case generationTypes.EMPTY_DATE:
       value = "";
+      break;
+    case generationTypes.EMPTY_STRING:
+      value = "";
+      break;
+    case generationTypes.NULL:
+      value = null;
+      break;
+    case generationTypes.UUID:
+      value = uuidv4();
       break;
     default:
       value = "";
