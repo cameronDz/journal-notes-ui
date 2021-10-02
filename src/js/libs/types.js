@@ -47,6 +47,13 @@ const journalForms = {
         title: "ID",
       },
       {
+        defaultValue: journalTypes.ARTICLE,
+        generationType: generationTypes.NONE,
+        inputType: inputTypes.HIDDEN,
+        name: "journalType",
+        title: "Journal Type",
+      },
+      {
         generationType: generationTypes.EMPTY_STRING,
         inputType: inputTypes.TEXT_FIELD,
         name: "title",
