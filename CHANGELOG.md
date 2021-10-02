@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.0] 2021-10-02
+
+### Added
+
+- Form types for Audiobook, Books, Online videos, and Video games
+- Set new form types to be selectable in options
+
 ## [2.3.0] 2021-10-02
 
 ### Added
