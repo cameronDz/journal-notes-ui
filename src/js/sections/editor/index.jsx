@@ -58,7 +58,7 @@ const Input = ({
 
   useEffect(() => {
     clearForm();
-  }, [type]);
+  }, [type, isUserSecured]);
 
   useEffect(() => {
     setIsProcessing(isLoadingIndex || isProcessingArticle || isProcessingIndex);
