@@ -246,8 +246,8 @@ const ArticleSection = ({
 
 ArticleSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
-  articles: state.articles.list,
-  articlesLoading: state.articles.articlesLoading,
-  loadingIndex: state.articles.isLoadingIndex,
+  articles: state.notes.list,
+  articlesLoading: state.notes.articlesLoading,
+  loadingIndex: state.notes.isLoadingIndex,
 });
 export default connect(mapStateToProps, null)(ArticleSection);
