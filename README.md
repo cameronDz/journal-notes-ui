@@ -15,6 +15,7 @@ Create and track notes from various articles/journal entires. Basic input sectio
 - [ ] Finish README
 - [ ] Upgrade cards to support multiple types
 - [ ] Move types to API/storage
+- [ ] Move large dependencies (react-dom, material-ui) to assets S3 bucket
 - [ ] Create notes-access-api for enforcing auth at API level
 - [ ] Fix sort options on mobile/tablet view
 
