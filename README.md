@@ -7,12 +7,16 @@ Create and track notes from various articles/journal entires. Basic input sectio
 - [x] Add page routing
   - [x] Set "src="/bundle.js" to not include "/"
   - [x] Include a `<base>` tag element for configuring `href` attribute
-- [ ] Finish README
 - [x] Update naming convention to be included in NSSD
-- [ ] Add JSS
-- [ ] fix sort options on mobile/tablet view
 - [x] Arrow indicators on sort
 - [x] Material UI on Form
+- [x] Add JSS
+- [ ] Upgrade to MUI v5
+- [ ] Finish README
+- [ ] Upgrade cards to support multiple types
+- [ ] Move types to API/storage
+- [ ] Create notes-access-api for enforcing auth at API level
+- [ ] Fix sort options on mobile/tablet view
 
 ### Sample Article JSON
 
