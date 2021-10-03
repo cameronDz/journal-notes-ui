@@ -8,9 +8,10 @@ import StandardButton from "../../components/standardButton";
 import JournalForm from "./journalForm";
 import JournalFormRadioSelect from "./journalFormRadioSelect";
 
-import { postArticle, putIndex } from "./state/actions";
 import { downloadJson } from "../../libs/download";
 import { journalForms, journalTypes } from "../../libs/types";
+import { postArticle, putIndex } from "./state/actions";
+import { editorSectionStyles as styles } from "./styles";
 
 const propTypes = {
   isLoadingIndex: PropType.bool,
@@ -28,19 +29,8 @@ const buttonTitleDownload = "Download article notes in JSON format";
 const buttonTitleReset = "Clear input of article notes";
 const buttonTitleUpload = "Upload article notes to S3";
 
-const useStyles = makeStyles({
-  buttonContainer: {
-    marginTop: "12px",
-    padding: "4px",
-    textAlign: "center",
-  },
-  titleContainer: {},
-  unauthWarning: {
-    color: "red",
-    display: "block",
-  },
-});
-const Input = ({
+const useStyles = makeStyles(() => styles);
+const EditorSection = ({
   isLoadingIndex,
   isProcessingArticle,
   isProcessingIndex,
@@ -179,7 +169,7 @@ const Input = ({
   );
 };
 
-Input.propTypes = propTypes;
+EditorSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   indexList: state.notes.index,
   isLoadingIndex: state.editor.isLoadingIndex,
@@ -191,4 +181,4 @@ const mapDispatchToProps = {
   postNewArticle: postArticle,
   updateArticleIndexList: putIndex,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Input);
+export default connect(mapStateToProps, mapDispatchToProps)(EditorSection);
