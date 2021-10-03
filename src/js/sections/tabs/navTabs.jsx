@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Switch as RouterSwitch, Route } from "react-router-dom";
 import { Grid, LinearProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import InputSection from "../editor";
+import { EditorSection } from "../editor";
 import { LandingSection } from "../landing";
 import { ArticleSection } from "../notes";
 import Panel from "./panel";
@@ -14,22 +14,22 @@ import { contentStyles } from "./styles";
 const pages = [
   {
     name: "home",
-    title: "Article Overview",
+    title: "Notes Overview",
     index: 0,
   },
   {
     name: "view",
-    title: "Articles List",
+    title: "Notes List",
     index: 1,
   },
   {
     name: "search",
-    title: "Articles Card with Filters",
+    title: "Notes Card with Filters",
     index: 2,
   },
   {
     name: "create",
-    title: "Article Review Creator",
+    title: "Note Review Creator",
     index: 3,
   },
 ];
@@ -104,7 +104,7 @@ const NavTabs = ({
                 />
               </Route>
               <Route exact path={`/${pages[3].name}`}>
-                <InputSection pageTitle={pages[3].title} />
+                <EditorSection pageTitle={pages[3].title} />
               </Route>
             </RouterSwitch>
           </Panel>
