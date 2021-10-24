@@ -4,6 +4,7 @@ import { sophisticatedColorPalette } from "../../libs/colors";
 const navBarStyles = {
   navBarRoot: {
     marginTop: globalDimensions?.appNavBarSize?.px,
+    zIndex: 1200,
   },
 };
 

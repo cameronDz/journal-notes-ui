@@ -10,7 +10,7 @@ import {
   VpnKey,
 } from "@material-ui/icons";
 import NavIcon from "./navIcon";
-import { navBarStyles } from "./styles";
+import { navBarStyles as styles } from "./styles";
 
 const icons = [
   {
@@ -36,7 +36,7 @@ const icons = [
 ];
 
 const propTypes = { onClick: PropType.func };
-const useStyles = makeStyles(() => navBarStyles);
+const useStyles = makeStyles(() => styles);
 const LeftNavBar = ({ onClick }) => {
   const handleClick = (event) => {
     if (typeof onClick === "function") {

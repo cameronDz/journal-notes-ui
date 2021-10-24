@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.3] 2021-10-23
+
+### Fixed
+
+- Navbar overflow/transparency issue on navbar when on the form page
+
 ## [2.4.1] 2021-10-02
 
 ### Fixed
