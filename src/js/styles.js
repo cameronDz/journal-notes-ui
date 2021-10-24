@@ -12,6 +12,7 @@ const appContainerStyles = {
     height: "100%",
     position: "fixed",
     width: navBarSizePx,
+    zIndex: 1200,
   },
   appHeaderBarWrapper: {
     backgroundColor: sophisticatedColorPalette?.darkBlue?.hex,
