@@ -7,8 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.4.4] 2021-10-24
+## [2.4.5] 2021-11-26
 
+### Fixed
+
+- Article from added "publisher" key back 
+
+## [2.4.4] 2021-10-24
 
 ### Fixed
 
