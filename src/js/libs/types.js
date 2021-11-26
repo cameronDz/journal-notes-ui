@@ -85,6 +85,12 @@ const journalForms = {
         title: "Author",
       },
       {
+        generationType: generationTypes.EMPTY_STRING,
+        inputType: inputTypes.TEXT_FIELD,
+        name: "publisher",
+        title: "Publisher",
+      },
+      {
         generationType: generationTypes.EMPTY_DATE,
         inputType: inputTypes.DATE_FIELD,
         name: "publishDate",
