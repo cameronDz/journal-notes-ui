@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Article from added "publisher" key back 
+- Article from added "publisher" key back
 
 ## [2.4.4] 2021-10-24
 
