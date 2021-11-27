@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.0] 2021-11-27
+
+### Added
+
+- journal form type for personal interviews
+
 ## [2.6.0] 2021-11-26
 
 ### Added
