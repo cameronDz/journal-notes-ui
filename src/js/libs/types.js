@@ -114,6 +114,13 @@ const journalForms = {
         title: "Publish Date",
       },
       {
+        format: dateTypes.MM_DD_YYYY,
+        generationType: generationTypes.EMPTY_DATE,
+        inputType: inputTypes.DATE_FIELD,
+        name: "readDate",
+        title: "Read Date",
+      },
+      {
         generationType: generationTypes.EMPTY_STRING,
         inputType: inputTypes.TEXT_FIELD,
         name: "url",
