@@ -11,7 +11,10 @@ const generateFormValues = (inputs, defaultValues = {}) => {
     if (!!name) {
       values[name] = value || inputs[idx].defaultValue;
       if (isUndefined(values[name])) {
-        values[name] = defaultType(inputs[idx].generationType);
+        values[name] = defaultType(
+          inputs[idx].generationType,
+          inputs[idx].defaultValue
+        );
       }
     }
   }
@@ -22,7 +25,7 @@ const isUndefined = (value) => {
   return value === undefined;
 };
 
-const defaultType = (type) => {
+const defaultType = (type, defValue = "") => {
   let value;
   switch (type) {
     case generationTypes.CURRENT_DATE:
@@ -39,6 +42,9 @@ const defaultType = (type) => {
       break;
     case generationTypes.NULL:
       value = null;
+      break;
+    case generationTypes.PRESET:
+      value = defValue || "";
       break;
     case generationTypes.UUID:
       value = uuidv4();

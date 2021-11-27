@@ -1,3 +1,12 @@
+const dateTypes = {
+  NONE: "",
+  FREE: "FREE",
+  MM_DD_YYYY: "MM_DD_YYYY",
+  MM_YYYY: "MM_YYYY",
+  MMMM_YYYY: "MMMM_YYYY",
+  YYYY: "YYYY",
+};
+
 const generationTypes = {
   NONE: "",
   CURRENT_DATE: "CURRENT_DATE",
@@ -5,6 +14,7 @@ const generationTypes = {
   EMPTY_DATE: "EMPTY_DATE",
   EMPTY_STRING: "EMPTY_STRING",
   NULL: "NULL",
+  PRESET: "PRESET",
   UUID: "UUID",
 };
 
@@ -91,6 +101,13 @@ const journalForms = {
         title: "Publisher",
       },
       {
+        generationType: generationTypes.EMPTY_STRING,
+        inputType: inputTypes.TEXT_FIELD,
+        name: "volumePages",
+        title: "Volume/Pages",
+      },
+      {
+        format: dateTypes.MM_DD_YYYY,
         generationType: generationTypes.EMPTY_DATE,
         inputType: inputTypes.DATE_FIELD,
         name: "publishDate",
@@ -127,6 +144,14 @@ const journalForms = {
         inputType: inputTypes.TEXT_AREA_LIST,
         name: "quotes",
         title: "Quotes",
+      },
+      {
+        defaultValue: "1.0.0",
+        generateOn: generateOnTypes.CREATE,
+        generationType: generationTypes.PRESET,
+        inputType: inputTypes.HIDDEN,
+        name: "_version",
+        title: "VERSION",
       },
       ...defaultInputs,
     ],
@@ -178,12 +203,14 @@ const journalForms = {
         title: "Publisher",
       },
       {
+        format: dateTypes.MM_DD_YYYY,
         generationType: generationTypes.EMPTY_DATE,
         inputType: inputTypes.DATE_FIELD,
         name: "publishDate",
         title: "Publish Date",
       },
       {
+        format: dateTypes.MM_DD_YYYY,
         generationType: generationTypes.EMPTY_DATE,
         inputType: inputTypes.DATE_FIELD,
         name: "readDate",
@@ -245,6 +272,14 @@ const journalForms = {
         name: "tags",
         title: "Tag",
       },
+      {
+        defaultValue: "1.0.0",
+        generateOn: generateOnTypes.CREATE,
+        generationType: generationTypes.PRESET,
+        inputType: inputTypes.HIDDEN,
+        name: "_version",
+        title: "VERSION",
+      },
       ...defaultInputs,
     ],
     name: "Audio Book Notes",
@@ -289,6 +324,7 @@ const journalForms = {
         title: "Publisher",
       },
       {
+        format: dateTypes.MM_DD_YYYY,
         generationType: generationTypes.EMPTY_DATE,
         inputType: inputTypes.DATE_FIELD,
         name: "publishDate",
@@ -301,6 +337,7 @@ const journalForms = {
         title: "Book Source",
       },
       {
+        format: dateTypes.MM_DD_YYYY,
         generationType: generationTypes.EMPTY_DATE,
         inputType: inputTypes.DATE_FIELD,
         name: "readDate",
@@ -350,6 +387,14 @@ const journalForms = {
         name: "tags",
         title: "Tag",
       },
+      {
+        defaultValue: "1.0.0",
+        generateOn: generateOnTypes.CREATE,
+        generationType: generationTypes.PRESET,
+        inputType: inputTypes.HIDDEN,
+        name: "_version",
+        title: "VERSION",
+      },
       ...defaultInputs,
     ],
     name: "Book Notes",
@@ -388,12 +433,14 @@ const journalForms = {
         title: "Personal Source",
       },
       {
+        format: dateTypes.MM_DD_YYYY,
         generationType: generationTypes.EMPTY_DATE,
         inputType: inputTypes.DATE_FIELD,
         name: "broadcastDate",
         title: "Broadcast Date",
       },
       {
+        format: dateTypes.MM_DD_YYYY,
         generationType: generationTypes.EMPTY_DATE,
         inputType: inputTypes.DATE_FIELD,
         name: "watchDate",
@@ -424,6 +471,14 @@ const journalForms = {
         inputType: inputTypes.TEXT_FIELD_LIST,
         name: "tags",
         title: "Tag",
+      },
+      {
+        defaultValue: "1.0.0",
+        generateOn: generateOnTypes.CREATE,
+        generationType: generationTypes.PRESET,
+        inputType: inputTypes.HIDDEN,
+        name: "_version",
+        title: "VERSION",
       },
       ...defaultInputs,
     ],
@@ -496,12 +551,14 @@ const journalForms = {
         title: "Personal Source",
       },
       {
+        format: dateTypes.MM_DD_YYYY,
         generationType: generationTypes.EMPTY_DATE,
         inputType: inputTypes.DATE_FIELD,
         name: "broadcastDate",
         title: "Broadcast Date",
       },
       {
+        format: dateTypes.MM_DD_YYYY,
         generationType: generationTypes.EMPTY_DATE,
         inputType: inputTypes.DATE_FIELD,
         name: "watchDate",
@@ -512,6 +569,14 @@ const journalForms = {
         inputType: inputTypes.TEXT_FIELD_LIST,
         name: "tags",
         title: "Tag",
+      },
+      {
+        defaultValue: "1.0.0",
+        generateOn: generateOnTypes.CREATE,
+        generationType: generationTypes.PRESET,
+        inputType: inputTypes.HIDDEN,
+        name: "_version",
+        title: "VERSION",
       },
       ...defaultInputs,
     ],
@@ -545,6 +610,7 @@ const journalForms = {
         title: "System",
       },
       {
+        format: dateTypes.MM_DD_YYYY,
         generationType: generationTypes.EMPTY_DATE,
         inputType: inputTypes.DATE_FIELD,
         name: "playedDate",
@@ -580,6 +646,14 @@ const journalForms = {
         inputType: inputTypes.TEXT_FIELD_LIST,
         name: "tags",
         title: "Tag",
+      },
+      {
+        defaultValue: "1.0.0",
+        generateOn: generateOnTypes.CREATE,
+        generationType: generationTypes.PRESET,
+        inputType: inputTypes.HIDDEN,
+        name: "_version",
+        title: "VERSION",
       },
       ...defaultInputs,
     ],

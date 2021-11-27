@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.5.0] 2021-11-26
+
+### Added
+
+- article form key for pages/volume
+- form type key for version of type
+
 ## [2.4.5] 2021-11-26
 
 ### Fixed
