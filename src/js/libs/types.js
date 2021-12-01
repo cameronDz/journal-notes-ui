@@ -495,6 +495,13 @@ const journalForms = {
   PERSONAL_INTERVIEW: {
     inputs: [
       {
+        defaultValue: journalTypes.PERSONAL_INTERVIEW,
+        generationType: generationTypes.NONE,
+        inputType: inputTypes.HIDDEN,
+        name: "journalType",
+        title: "Journal Type",
+      },
+      {
         generationType: generationTypes.EMPTY_STRING,
         inputType: inputTypes.TEXT_AREA,
         name: "interviewee",
