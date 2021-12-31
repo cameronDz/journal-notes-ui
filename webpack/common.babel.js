@@ -40,7 +40,7 @@ module.exports = {
           to: "images",
         },
         {
-          from: resolve(__dirname, "..", "./src/favicon.ico"),
+          from: resolve(__dirname, "..", "./src/assets/favicon.ico"),
           to: "favicon.ico",
         },
       ],
