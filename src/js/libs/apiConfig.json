@@ -1,7 +1,0 @@
-{
-  "authApiBaseUrl": "https://jwt-auth-access-api.herokuapp.com",
-  "authApiEndpointLiveness": "liveness",
-  "authApiEndpointToken": "token",
-  "baseApiUrl": "https://journal-notes-storage-api.herokuapp.com/json",
-  "baseApiConfig": { "header": { "Content-Type": "application/json" } }
-}

@@ -1,9 +1,9 @@
 import axios from "axios";
 import * as _types from "./types";
-import _apiConfig from "../../../libs/apiConfig.json";
-
-const baseApiUrl = _apiConfig.baseApiUrl;
-const config = _apiConfig.baseApiConfig;
+import {
+  baseApiUrl as baseApiUrl,
+  baseApiConfig as config,
+} from "../../../libs/apiConfig";
 
 const fetchArticle = (articleId) => {
   return (dispatch) => {
