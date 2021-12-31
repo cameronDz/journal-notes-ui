@@ -6,7 +6,7 @@ import {
   createGenerateClassName,
 } from "@material-ui/core/styles";
 import { configureStore } from "./state/store";
-import AppContainer from "./appContainer";
+import AppContainer from "./sections/appContainer";
 
 const generateClassName = createGenerateClassName({
   productionPrefix: "nssd",

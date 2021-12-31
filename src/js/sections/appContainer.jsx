@@ -5,11 +5,11 @@ import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core";
 
-import { AppFooter } from "./components/footer";
-import { LeftNavBar } from "./components/navbar";
-import { NavTabs } from "./sections/tabs";
-import { RequestTokenDialog } from "./auth";
-import { fetchArticles } from "./sections/notes/state/actions";
+import { AppFooter } from "../components/footer";
+import { LeftNavBar } from "../components/navbar";
+import { NavTabs } from "./tabs";
+import { RequestTokenDialog } from "../auth";
+import { fetchArticles } from "./notes/state/actions";
 import { appContainerStyles } from "./styles";
 
 const propTypes = { callFetchArticles: PropType.func };

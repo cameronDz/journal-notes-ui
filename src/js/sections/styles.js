@@ -1,5 +1,5 @@
-import { sophisticatedColorPalette } from "./libs/colors";
-import { globalDimensions } from "./libs/dimensions";
+import { sophisticatedColorPalette } from "../libs/colors";
+import { globalDimensions } from "../libs/dimensions";
 const navBarSizePx = globalDimensions?.appNavBarSize?.px;
 
 const appContainerStyles = {
