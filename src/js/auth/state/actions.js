@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as _types from "./types";
-import _apiConfig from "../../../assets/apiConfig.json";
+import _apiConfig from "../../libs/apiConfig.json";
 
 const authApiUrl = _apiConfig.authApiBaseUrl;
 const endpointLiveness = _apiConfig.authApiEndpointLiveness;

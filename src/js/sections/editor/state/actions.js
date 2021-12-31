@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as _types from "./types";
 import { getFullTimeStampString } from "../../../libs/date";
-import _apiConfig from "../../../../assets/apiConfig.json";
+import _apiConfig from "../../../libs/apiConfig.json";
 
 const baseApiUrl = _apiConfig.baseApiUrl;
 const config = _apiConfig.baseApiConfig;
