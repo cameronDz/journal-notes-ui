@@ -1,9 +1,11 @@
 import React from "react";
+import { Provider } from "react-redux";
 import { HashRouter } from "react-router-dom";
 import {
   StylesProvider,
   createGenerateClassName,
 } from "@material-ui/core/styles";
+import { configureStore } from "./state/store";
 import AppContainer from "./appContainer";
 
 const generateClassName = createGenerateClassName({
@@ -12,11 +14,13 @@ const generateClassName = createGenerateClassName({
 
 const App = () => {
   return (
-    <HashRouter>
-      <StylesProvider generateClassName={generateClassName}>
-        <AppContainer />
-      </StylesProvider>
-    </HashRouter>
+    <Provider store={configureStore()}>
+      <HashRouter>
+        <StylesProvider generateClassName={generateClassName}>
+          <AppContainer />
+        </StylesProvider>
+      </HashRouter>
+    </Provider>
   );
 };
 
