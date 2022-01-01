@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import PropType from "prop-types";
-import ArticleSectionHeader from "./articleSectionHeader";
+import SectionHeader from "./sectionHeader";
 
 const propTypes = {
   keyName: PropType.string,
@@ -9,12 +9,12 @@ const propTypes = {
 };
 
 const bullet = <span>&#8226;</span>;
-const ArticleBulletPoints = ({ keyName = "", points = [], title = "" }) => {
+const ListBulletpoints = ({ keyName = "", points = [], title = "" }) => {
   return (
     Array.isArray(points) &&
     points.length > 0 && (
       <Fragment>
-        <ArticleSectionHeader title={title} />
+        <SectionHeader title={title} />
         {!!keyName &&
           points.map((point, index) => {
             return (
@@ -31,5 +31,5 @@ const ArticleBulletPoints = ({ keyName = "", points = [], title = "" }) => {
   );
 };
 
-ArticleBulletPoints.propTypes = propTypes;
-export default ArticleBulletPoints;
+ListBulletpoints.propTypes = propTypes;
+export default ListBulletpoints;

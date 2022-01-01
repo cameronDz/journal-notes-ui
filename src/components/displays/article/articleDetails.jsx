@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import PropType from "prop-types";
-import ArticleBulletPoints from "./articleBulletPoints";
-import ArticleSectionHeader from "./articleSectionHeader";
+import ListBulletpoints from "../listBulletpoints";
+import SectionHeader from "../sectionHeader";
 import ArticleTags from "./articleTags";
 
 const propTypes = {
@@ -13,16 +13,12 @@ const textNoContent = "No Comment or Quote content to display.";
 const ArticleDetails = ({ comments, quotes, tags }) => {
   return (
     <Fragment>
-      <ArticleBulletPoints
-        keyName="comment"
-        points={comments}
-        title="Comments"
-      />
-      <ArticleBulletPoints keyName="quote" points={quotes} title="Quotes" />
+      <ListBulletpoints keyName="comment" points={comments} title="Comments" />
+      <ListBulletpoints keyName="quote" points={quotes} title="Quotes" />
       {(!Array.isArray(comments) || comments?.length < 1) &&
         (!Array.isArray(quotes) || quotes?.length < 1) && (
           <Fragment>
-            <ArticleSectionHeader title={"Comments/Quotes"} />
+            <SectionHeader title={"Comments/Quotes"} />
             <div>{textNoContent}</div>
           </Fragment>
         )}

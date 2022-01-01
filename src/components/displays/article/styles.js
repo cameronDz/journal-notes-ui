@@ -4,8 +4,4 @@ const articleOverviewStyles = {
   overviewTitle: { fontSize: "24px", lineHeight: "28px" },
 };
 
-const sectionHeaderStyles = {
-  titleText: { fontSize: "16px" },
-};
-
-export { articleOverviewStyles, sectionHeaderStyles };
+export { articleOverviewStyles };
