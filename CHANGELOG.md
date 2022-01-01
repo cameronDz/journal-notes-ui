@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- state provider moved to App component instead of index
+- configuration changed from JSON to js file with variables
+
+### Removed
+
+- js folder structure removed, all folders and files moved to src
+- unused images
+
 ## [2.7.1] 2021-12-01
 
 ### Fixed
