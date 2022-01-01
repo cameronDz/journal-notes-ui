@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import PropType from "prop-types";
 import ArticleBulletPoints from "./articleBulletPoints";
 import ArticleSectionHeader from "./articleSectionHeader";
-import ArticleTags from "./ArticleTags";
+import ArticleTags from "./articleTags";
 
 const propTypes = {
   comments: PropType.array,

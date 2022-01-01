@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import { genericText, overviewText } from "../../libs/text";
+import { genericText, overviewText } from "../../../libs/text";
 import { articleOverviewStyles } from "./styles";
 
 const propTypes = {
