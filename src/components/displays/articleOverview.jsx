@@ -47,16 +47,16 @@ const ArticleOverview = ({
   );
   return (
     <Fragment>
-      <div className={classNames(classes?.overviewTitle)}>{title}</div>
-      <div className={classNames(classes?.overviewSimple)}>
+      <div className={classNames(classes.overviewTitle)}>{title}</div>
+      <div className={classNames(classes.overviewSimple)}>
         {authorDisplay} {sourceDisplay} {publishDateDisplay}
       </div>
-      <div className={classNames(classes?.overviewSimple)}>
+      <div className={classNames(classes.overviewSimple)}>
         <strong>{overviewText?.resources}</strong>
         {genericText?.colonSpace}
         <i>{createdDate}</i>
       </div>
-      <div className={classNames(classes?.overviewDescription)}>
+      <div className={classNames(classes.overviewDescription)}>
         {description}
       </div>
     </Fragment>

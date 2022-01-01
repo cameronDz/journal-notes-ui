@@ -41,12 +41,12 @@ const FilterTagList = ({
   const classes = useStyles();
   return (
     <Fragment>
-      <FormControl className={classNames(classes?.tagFormControl)}>
+      <FormControl className={classNames(classes.tagFormControl)}>
         <InputLabel shrink htmlFor={id}>
           {labelList}
         </InputLabel>
         <Select
-          className={classNames(classes?.tagSelect)}
+          className={classNames(classes.tagSelect)}
           inputProps={{ id }}
           multiple
           native
@@ -65,7 +65,7 @@ const FilterTagList = ({
             })}
         </Select>
         <Button
-          className={classNames(classes?.tagButton)}
+          className={classNames(classes.tagButton)}
           color="primary"
           disabled={disabled}
           onClick={handleButtonClick}

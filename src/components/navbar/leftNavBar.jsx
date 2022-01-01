@@ -47,7 +47,7 @@ const LeftNavBar = ({ onClick }) => {
   const classes = useStyles();
   return (
     <Fragment>
-      <div className={classNames(classes?.navBarRoot)}>
+      <div className={classNames(classes.navBarRoot)}>
         {Array.isArray(icons) &&
           icons.map((icon) => {
             return (

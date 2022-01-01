@@ -201,15 +201,15 @@ const ArticleSection = ({
   };
 
   const loadingClass = isLoading
-    ? classes?.filterLoadingWrapper
-    : classes?.filterLoadedWrapper;
+    ? classes.filterLoadingWrapper
+    : classes.filterLoadedWrapper;
   return (
     <Fragment>
       <RouteTitle title={title} />
       <Grid container spacing={0}>
         {pageName !== "view" && (
           <Grid
-            className={classNames(classes?.filterGridWrapper, loadingClass)}
+            className={classNames(classes.filterGridWrapper, loadingClass)}
             item
             sm={12}
           >

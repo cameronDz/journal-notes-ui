@@ -11,7 +11,7 @@ const AppFooter = () => {
   const versionDisplay = version ? "v" + version : "";
   const classes = useStyles();
   return (
-    <div className={classNames(classes?.appFooterWrapper)}>
+    <div className={classNames(classes.appFooterWrapper)}>
       {name} &copy; 2021 {versionDisplay}
     </div>
   );

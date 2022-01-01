@@ -96,10 +96,10 @@ const RequestTokenDialog = ({
 
   return (
     <Dialog onClose={handleClose} open={isOpen}>
-      <div className={classes?.dialogContainer}>
+      <div className={classes.dialogContainer}>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
-          <div className={classes?.dialogContentContainer}>
+          <div className={classes.dialogContentContainer}>
             {isProcessingRequest ? (
               <CircularProgress />
             ) : (

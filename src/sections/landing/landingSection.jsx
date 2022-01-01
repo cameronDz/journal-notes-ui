@@ -30,7 +30,7 @@ const LandingSection = ({ articles, articlesLoading, loadingIndex, title }) => {
     return !isLoading && !!article ? (
       <ArticleCard articleData={article} />
     ) : (
-      <span className={classNames(classes?.simpleLandingText)}>{text}</span>
+      <span className={classNames(classes.simpleLandingText)}>{text}</span>
     );
   };
 

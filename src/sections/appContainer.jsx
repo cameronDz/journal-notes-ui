@@ -35,17 +35,17 @@ const AppContainer = ({ callFetchArticles }) => {
 
   return (
     <Fragment>
-      <div className={classNames(classes?.appWrapper)}>
-        <div className={classNames(classes?.appNavBarWrapper)}>
+      <div className={classNames(classes.appWrapper)}>
+        <div className={classNames(classes.appNavBarWrapper)}>
           <LeftNavBar onClick={handleIconClick} />
         </div>
-        <div className={classNames(classes?.appContentOuterWrapper)}>
-          <div className={classNames(classes?.appContentInnerWrapper)}>
-            <div className={classNames(classes?.appHeaderBarWrapper)}></div>
+        <div className={classNames(classes.appContentOuterWrapper)}>
+          <div className={classNames(classes.appContentInnerWrapper)}>
+            <div className={classNames(classes.appHeaderBarWrapper)}></div>
             <NavTabs />
           </div>
         </div>
-        <div className={classNames(classes?.appFooter)}>
+        <div className={classNames(classes.appFooter)}>
           <AppFooter />
         </div>
       </div>

@@ -71,15 +71,15 @@ const NavTabs = ({
   const displayProgressBar = () => {
     return isLoading ? (
       <LinearProgress
-        className={classNames(classes?.contentTop, classes?.contentLoader)}
+        className={classNames(classes.contentTop, classes.contentLoader)}
       />
     ) : (
-      <div className={classNames(classes?.contentTop)}></div>
+      <div className={classNames(classes.contentTop)}></div>
     );
   };
 
   return (
-    <div className={classNames(classes?.contentRoot)}>
+    <div className={classNames(classes.contentRoot)}>
       {displayProgressBar()}
       <Grid className="nssd-grid-wrapper" container spacing={0}>
         <Grid item xs={12} sm={12}>

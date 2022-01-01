@@ -10,7 +10,7 @@ const FilterTitle = ({ title }) => {
   const classes = useStyles();
   return (
     !!title && (
-      <div className={classNames(classes?.filterTitleHeader)}>{title}</div>
+      <div className={classNames(classes.filterTitleHeader)}>{title}</div>
     )
   );
 };

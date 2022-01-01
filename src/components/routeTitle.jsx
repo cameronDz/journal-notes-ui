@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => routeTitleStyles);
 const RouteTitle = ({ title }) => {
   const classes = useStyles();
   return (
-    <div className={classNames(classes?.panelHeader)}>
+    <div className={classNames(classes.panelHeader)}>
       <h2>{title}</h2>
     </div>
   );

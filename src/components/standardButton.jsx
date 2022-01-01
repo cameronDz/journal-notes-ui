@@ -30,7 +30,7 @@ const StandardButton = ({
     }
   };
   return (
-    <div className={classNames(classes?.stdBtnRoot, isFat && classes?.fatBtn)}>
+    <div className={classNames(classes.stdBtnRoot, isFat && classes.fatBtn)}>
       <MuiButton
         disabled={disabled}
         onClick={handleClick}

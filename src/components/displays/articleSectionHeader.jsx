@@ -13,7 +13,7 @@ const ArticleSectionHeader = ({ title }) => {
       <br />
       {!!title && (
         <div>
-          <strong className={classNames(classes?.titleText)}>{title}</strong>
+          <strong className={classNames(classes.titleText)}>{title}</strong>
         </div>
       )}
     </Fragment>
