@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import PropType from "prop-types";
 import ListBulletpoints from "../listBulletpoints";
 import SectionHeader from "../sectionHeader";
-import ArticleTags from "./articleTags";
+import TagsDisplay from "../tagsDisplay";
 
 const propTypes = {
   comments: PropType.array,
@@ -22,7 +22,7 @@ const ArticleDetails = ({ comments, quotes, tags }) => {
             <div>{textNoContent}</div>
           </Fragment>
         )}
-      <ArticleTags tags={tags} />
+      <TagsDisplay tags={tags} />
     </Fragment>
   );
 };

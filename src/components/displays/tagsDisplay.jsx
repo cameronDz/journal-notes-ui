@@ -7,7 +7,7 @@ const includeComma = (index, length) => {
 
 const noContent = <i>No associated tags.</i>;
 const propTypes = { tags: PropType.array };
-const ArticleTags = ({ tags = [] }) => {
+const TagsDisplay = ({ tags = [] }) => {
   const length = Array.isArray(tags) ? tags.length : -1;
   return (
     <p>
@@ -29,5 +29,5 @@ const ArticleTags = ({ tags = [] }) => {
   );
 };
 
-ArticleTags.propTypes = propTypes;
-export default ArticleTags;
+TagsDisplay.propTypes = propTypes;
+export default TagsDisplay;
