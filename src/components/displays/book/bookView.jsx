@@ -20,33 +20,30 @@ const BookView = ({ note = null, showFull = false }) => {
       <Fragment>
         {!!note.title && (
           <div>
-            <span
-              className={classNames(
-                classes.bookHeaderText,
-                classes.bookSemiBoldText
-              )}
-            >
+            <span className={classNames(classes.bookHeaderText)}>
               {note.title}
             </span>
             <span>. {note.author}</span>
           </div>
         )}
         {!!note.bookDescription && (
-          <div className={classNames(classes.bookHeaderText)}>
+          <div className={classNames(classes.bookSubHeaderText)}>
             {note.bookDescription}
           </div>
         )}
         <div className={classNames(classes.bookSubText)}>
-          {!!note.bookSource && <span>{note.bookSource} </span>}
+          {!!note.bookSource && <span>{note.bookSource}</span>}
+          {!!note.bookSource && !!note.pageCount && <span> </span>}
           {!!note.pageCount && <span>({note.pageCount} pgs)</span>}
           {(!!note.bookSource || !!note.pageCount) && <span>.</span>}
-          {!!note.publisher && <span>{note.publisher} </span>}
+          {!!note.publisher && <span>{note.publisher}</span>}
+          {!!note.publisher && !!note.publishDate && <span> </span>}
           {!!note.publishDate && <span>{note.publishDate}</span>}
           {(!!note.publisher || !!note.publishDate) && <span>.</span>}
         </div>
         <div
           className={classNames(
-            classes.bookHeaderText,
+            classes.bookSubHeaderText,
             classes.bookSessionDescription
           )}
         >

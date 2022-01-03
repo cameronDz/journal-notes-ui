@@ -3,11 +3,14 @@ const bookViewStyles = {
     fontSize: "14px",
     lineHeight: "130%",
   },
-  bookSemiBoldText: {
-    fontWeight: "600",
-  },
   bookHeaderText: {
-    fontSize: "18px",
+    fontSize: "20px",
+    fontWeight: "700",
+    lineHeight: "130%",
+  },
+  bookSubHeaderText: {
+    fontSize: "16px",
+    fontWeight: "600",
     lineHeight: "130%",
   },
   bookSessionDescription: {
