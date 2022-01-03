@@ -13,16 +13,19 @@ const getFullTimeStampString = () => {
   return yyyyMMdd + hhmmss + currDate.getMilliseconds();
 };
 
+/**
+ * formatted date
+ * @param {*} dateString string value of UTC date as "YYYY-MM-DD"
+ * @returns UTC display of date as "MMMM DD, YYYY"
+ */
 const getDateDisplay = (dateString = null) => {
   let display = "";
   const date = new Date(dateString);
   if (isValidDate(date)) {
-    const options = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
-    display = date.toLocaleDateString("en-US", options);
+    const year = date.getUTCFullYear();
+    const day = date.getUTCDate();
+    const month = dateFullMonths[date.getUTCMonth()];
+    display = `${month} ${day}, ${year}`;
   }
   return display;
 };
@@ -49,6 +52,21 @@ const isValidDate = (date = null) => {
     typeof date.getTime === "function" &&
     typeof date.getTime() === "number"
   );
+};
+
+const dateFullMonths = {
+  0: "January",
+  1: "February",
+  2: "March",
+  3: "April",
+  4: "May",
+  5: "June",
+  6: "July",
+  7: "August",
+  8: "September",
+  9: "October",
+  10: "November",
+  11: "December",
 };
 
 export { getDateDisplay, generateDateString, getFullTimeStampString };
