@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.8.0] 2022-01-02
+
+### Added
+
+- book note view card specific to book note details
 ### Changed
 
 - state provider moved to App component instead of index
