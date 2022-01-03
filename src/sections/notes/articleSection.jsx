@@ -7,9 +7,11 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { FilterSortOrder, FilterTagSelector } from "../../components/filters";
 import { ArticleCard } from "../../components/displays/article";
+import { BookCard } from "../../components/displays/book";
 import RouteTitle from "../../components/routeTitle";
 import { articleGridStyles } from "./styles";
 import * as _sorts from "../../libs/articleSorts";
+import { journalTypes } from "../../libs/types";
 
 const propTypes = {
   articles: PropType.array,
@@ -168,13 +170,18 @@ const ArticleSection = ({
       articles
         .filter(filterFunction)
         .sort(sortFunction)
-        .map((key, index) => {
+        .map((note, index) => {
           return (
-            !!isArticleDisplayable(key) && (
-              <Fragment key={key.id || index}>
+            !!isArticleDisplayable(note) && (
+              <Fragment key={note.id || index}>
                 {
                   <Grid item sm={12} md={md}>
-                    <ArticleCard articleData={key} minHeight={minHeight} />
+                    {note.journalType === journalTypes.BOOK && (
+                      <BookCard minHeight={minHeight} noteData={note} />
+                    )}
+                    {note.journalType !== journalTypes.BOOK && (
+                      <ArticleCard articleData={note} minHeight={minHeight} />
+                    )}
                   </Grid>
                 }
               </Fragment>

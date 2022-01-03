@@ -3,6 +3,7 @@ import PropType from "prop-types";
 import { connect } from "react-redux";
 import { Grid, makeStyles } from "@material-ui/core";
 import { ArticleCard } from "../../components/displays/article";
+import { BookCard } from "../../components/displays/book";
 import RouteTitle from "../../components/routeTitle";
 import StandardButton from "../../components/standardButton";
 import JournalForm from "./journalForm";
@@ -131,13 +132,18 @@ const EditorSection = ({
         updateValues={updateValues}
       />
       <Grid container spacing={0}>
-        {type === journalTypes.ARTICLE && (
+        {(type === journalTypes.ARTICLE || type === journalTypes.BOOK) && (
           <Grid item xs={12}>
             <div style={{ fontSize: "20px", marginBottom: "12px" }}>
               Card Preview
             </div>
             <Grid item sm={12}>
-              <ArticleCard articleData={generateCardPayload()} show={true} />
+              {type === journalTypes.ARTICLE && (
+                <ArticleCard articleData={generateCardPayload()} show={true} />
+              )}
+              {type === journalTypes.BOOK && (
+                <BookCard noteData={generateCardPayload()} show={true} />
+              )}
             </Grid>
           </Grid>
         )}

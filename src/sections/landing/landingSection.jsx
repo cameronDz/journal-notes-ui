@@ -4,9 +4,11 @@ import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { ArticleCard } from "../../components/displays/article";
+import { BookCard } from "../../components/displays/book";
 import RouteTitle from "../../components/routeTitle";
 import { latestArticle } from "../../libs/latestArticle";
 import { landingText } from "../../libs/text";
+import { journalTypes } from "../../libs/types";
 import { landingStyles } from "./styles";
 
 const propTypes = {
@@ -28,7 +30,14 @@ const LandingSection = ({ articles, articlesLoading, loadingIndex, title }) => {
     const text = isLoading ? landingText.loading : landingText.noArticles;
     const article = latestArticle(articles);
     return !isLoading && !!article ? (
-      <ArticleCard articleData={article} />
+      <Fragment>
+        {article.journalType === journalTypes.BOOK && (
+          <BookCard noteData={article} />
+        )}
+        {article.journalType !== journalTypes.BOOK && (
+          <ArticleCard articleData={article} />
+        )}
+      </Fragment>
     ) : (
       <span className={classNames(classes.simpleLandingText)}>{text}</span>
     );
