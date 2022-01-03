@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
+import { getDateDisplay } from "../../../libs/date";
 import ListBulletpoints from "../listBulletpoints";
 import TagsDisplay from "../tagsDisplay";
 import { bookViewStyles as styles } from "./styles";
@@ -35,10 +36,12 @@ const BookView = ({ note = null, showFull = false }) => {
           {!!note.bookSource && <span>{note.bookSource}</span>}
           {!!note.bookSource && !!note.pageCount && <span> </span>}
           {!!note.pageCount && <span>({note.pageCount} pgs)</span>}
-          {(!!note.bookSource || !!note.pageCount) && <span>.</span>}
+          {(!!note.bookSource || !!note.pageCount) && <span>. </span>}
           {!!note.publisher && <span>{note.publisher}</span>}
-          {!!note.publisher && !!note.publishDate && <span> </span>}
-          {!!note.publishDate && <span>{note.publishDate}</span>}
+          {!!note.publisher && !!note.publishDate && <span>, </span>}
+          {!!note.publishDate && (
+            <span>{getDateDisplay(note.publishDate)}</span>
+          )}
           {(!!note.publisher || !!note.publishDate) && <span>.</span>}
         </div>
         <div
@@ -51,11 +54,16 @@ const BookView = ({ note = null, showFull = false }) => {
         </div>
         <div className={classNames(classes.bookSubText)}>
           <span>
-            {note.readTime}, <span>({note.readDate})</span>.{" "}
+            {!!note.readTime && <span>{note.readTime}</span>}
+            {!!note.readTime && !!note.readDate && <span>, </span>}
+            {!!note.readDate && <span>({getDateDisplay(note.readDate)})</span>}
+            {(!!note.readTime || !!note.readDate) && <span>. </span>}
           </span>
-          <span>
-            pgs: {note.startPage} - {note.endPage}.
-          </span>
+          {!!note.startPage && !!note.endPage && (
+            <span>
+              <i>pages</i> {note.startPage} - {note.endPage}.
+            </span>
+          )}
         </div>
         {showFull && (
           <Fragment>

@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.8.1] 2022-01-02
+
+### Changed
+
+- book note view date formatted
+
+### Fixed
+
+- book note view spacing
+
 ## [2.8.0] 2022-01-02
 
 ### Added

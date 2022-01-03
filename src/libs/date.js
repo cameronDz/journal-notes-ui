@@ -13,6 +13,16 @@ const getFullTimeStampString = () => {
   return yyyyMMdd + hhmmss + currDate.getMilliseconds();
 };
 
+const getDateDisplay = (dateString = null) => {
+  let display = "";
+  const date = new Date(dateString);
+  if (isValidDate(date)) {
+    const options = {};
+    display = date.toLocaleDateString("en-US", options);
+  }
+  return display;
+};
+
 const getYear = (date) => {
   return date.getFullYear();
 };
@@ -29,4 +39,12 @@ const padNumber = (value) => {
   return ("" + value).padStart(2, "0");
 };
 
-export { generateDateString, getFullTimeStampString };
+const isValidDate = (date = null) => {
+  return (
+    typeof date === "object" &&
+    typeof date.getTime === "function" &&
+    typeof date.getTime() === "number"
+  );
+};
+
+export { getDateDisplay, generateDateString, getFullTimeStampString };
