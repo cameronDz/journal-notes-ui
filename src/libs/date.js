@@ -17,7 +17,11 @@ const getDateDisplay = (dateString = null) => {
   let display = "";
   const date = new Date(dateString);
   if (isValidDate(date)) {
-    const options = {};
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
     display = date.toLocaleDateString("en-US", options);
   }
   return display;
