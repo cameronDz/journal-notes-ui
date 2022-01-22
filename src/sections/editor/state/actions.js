@@ -6,6 +6,12 @@ import {
   baseApiConfig as config,
 } from "../../../libs/apiConfig";
 
+export const clearNote = () => {
+  return (dispatch) => {
+    dispatch(startRequestType(_types.CLEAR_EDIT_NOTE));
+  };
+};
+
 export const getIndex = () => {
   return (dispatch) => {
     const url = `${baseApiUrl}/object/index`;
@@ -26,41 +32,61 @@ export const getIndex = () => {
   };
 };
 
-export const postArticle = (content) => {
+export const getNote = (id) => {
   return (dispatch) => {
-    const name = content?.id || getFullTimeStampString();
-    const url = `${baseApiUrl}/upload/${name}`;
-    dispatch(startRequestType(_types.POST_ARTICLE_START));
+    const url = `${baseApiUrl}/object/${id}`;
+    dispatch(startRequestType(_types.GET_EDIT_NOTE_START));
     return axios
-      .post(url, content, config)
-      .then((payload) => {
-        const key = payload?.data?.newObjectKeyName || "";
-        return dispatch({ key, type: _types.POST_ARTICLE_SUCCESSFUL });
+      .get(url, config)
+      .then((data) => {
+        const note = data?.data?.payload || null;
+        return dispatch({ note, type: _types.GET_EDIT_NOTE_SUCCESSFUL });
       })
       .catch((error) => {
-        return dispatch({ error, type: _types.POST_ARTICLE_ERROR });
+        return dispatch({ error, type: _types.GET_EDIT_NOTE_ERROR });
       })
       .finally(() => {
-        return dispatch({ type: _types.POST_ARTICLE_COMPLETED });
+        return dispatch({ type: _types.GET_EDIT_NOTE_COMPLETED });
       });
   };
 };
 
-export const putIndex = (updatedIndex) => {
+export const upsertNote = (content, isNew = true) => {
+  return (dispatch) => {
+    const name = content?.id || getFullTimeStampString();
+    const requestType = isNew ? "post" : "put";
+    const urlMethod = isNew ? "upload" : "updated";
+    const url = `${baseApiUrl}/${urlMethod}/${name}`;
+    dispatch(startRequestType(_types.UPSERT_NOTE_START));
+    return axios[requestType](url, content, config)
+      .then((payload) => {
+        const key = payload?.data?.newObjectKeyName || "";
+        return dispatch({ key, type: _types.UPSERT_NOTE_SUCCESSFUL });
+      })
+      .catch((error) => {
+        return dispatch({ error, type: _types.UPSERT_NOTE_ERROR });
+      })
+      .finally(() => {
+        return dispatch({ type: _types.UPSERT_NOTE_COMPLETED });
+      });
+  };
+};
+
+export const upsertIndex = (updatedIndex) => {
   const index = { list: updatedIndex };
   return (dispatch) => {
     const url = `${baseApiUrl}/update/index`;
-    dispatch(startRequestType(_types.PUT_INDEX_START));
+    dispatch(startRequestType(_types.UPSERT_INDEX_START));
     return axios
       .put(url, index, config)
       .then(() => {
-        return dispatch({ type: _types.PUT_INDEX_SUCCESSFUL });
+        return dispatch({ type: _types.UPSERT_INDEX_SUCCESSFUL });
       })
       .catch((error) => {
-        return dispatch({ error, type: _types.PUT_INDEX_SUCCESSFUL });
+        return dispatch({ error, type: _types.UPSERT_INDEX_SUCCESSFUL });
       })
       .finally(() => {
-        return dispatch({ type: _types.PUT_INDEX_COMPLETED });
+        return dispatch({ type: _types.UPSERT_INDEX_COMPLETED });
       });
   };
 };

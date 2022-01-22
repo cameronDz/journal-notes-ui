@@ -1,6 +1,8 @@
 import * as types from "./types";
 
 const initialState = {
+  editNote: null,
+  isLoadingEditNote: false,
   isLoadingIndex: false,
   isProcessingArticle: false,
   isProcessingIndex: false,
@@ -37,39 +39,64 @@ const reducer = (state = initialState, action = null) => {
         newState = { ...state, isLoadingIndex: false };
         break;
 
+      /* fetch latest index from data storage */
+      case types.GET_EDIT_NOTE_START:
+        newState = { ...state, isLoadingEditNote: true };
+        break;
+      case types.GET_EDIT_NOTE_SUCCESSFUL:
+        newState = {
+          ...state,
+          editNote: action.note || null,
+          loadingEditNoteError: null,
+        };
+        break;
+      case types.GET_EDIT_NOTE_ERROR:
+        newState = {
+          ...state,
+          editNote: null,
+          loadingEditNoteError: action.error || "ERROR",
+        };
+        break;
+      case types.GET_EDIT_NOTE_COMPLETED:
+        newState = { ...state, isLoadingEditNote: false };
+        break;
+      case types.CLEAR_EDIT_NOTE:
+        newState = { ...state, editNote: null };
+        break;
+
       /* upload a new article data storage */
-      case types.POST_ARTICLE_START:
+      case types.UPSERT_NOTE_START:
         newState = { ...state, isProcessingArticle: true };
         break;
-      case types.POST_ARTICLE_SUCCESSFUL:
+      case types.UPSERT_NOTE_SUCCESSFUL:
         newState = {
           ...state,
           latestUploadKey: action.key,
           processingArticleError: null,
         };
         break;
-      case types.POST_ARTICLE_ERROR:
+      case types.UPSERT_NOTE_ERROR:
         newState = {
           ...state,
           latestUploadKey: null,
           processingArticleError: action.error,
         };
         break;
-      case types.POST_ARTICLE_COMPLETED:
+      case types.UPSERT_NOTE_COMPLETED:
         newState = { ...state, isProcessingArticle: false };
         break;
 
       /* update index with new article key */
-      case types.PUT_INDEX_START:
+      case types.UPSERT_INDEX_START:
         newState = { ...state, isProcessingIndex: true };
         break;
-      case types.PUT_INDEX_SUCCESSFUL:
+      case types.UPSERT_INDEX_SUCCESSFUL:
         newState = { ...state, processingIndexError: null };
         break;
-      case types.PUT_INDEX_ERROR:
+      case types.UPSERT_INDEX_ERROR:
         newState = { ...state, processingIndexError: action.error };
         break;
-      case types.PUT_INDEX_COMPLETED:
+      case types.UPSERT_INDEX_COMPLETED:
         newState = {
           ...state,
           isProcessingIndex: false,
