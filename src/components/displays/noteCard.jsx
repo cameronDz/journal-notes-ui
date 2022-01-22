@@ -51,7 +51,11 @@ const NoteCard = ({
           {cardActionText}
         </Button>
         {isEditable && (
-          <Button onClick={() => handleFunction(onClickEdit)} size="small" variant="outlined">
+          <Button
+            onClick={() => handleFunction(onClickEdit)}
+            size="small"
+            variant="outlined"
+          >
             {EDIT}
           </Button>
         )}

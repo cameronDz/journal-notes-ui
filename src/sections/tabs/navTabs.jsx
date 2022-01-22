@@ -97,10 +97,16 @@ const NavTabs = ({
                 <LandingSection title={pages[0].title} />
               </Route>
               <Route exact path={`/${pages[1].name}`}>
-                <ArticleSection pageName={pages[1].name} title={pages[1].title} />
+                <ArticleSection
+                  pageName={pages[1].name}
+                  title={pages[1].title}
+                />
               </Route>
               <Route exact path={`/${pages[2].name}`}>
-                <ArticleSection pageName={pages[2].name} title={pages[2].title} />
+                <ArticleSection
+                  pageName={pages[2].name}
+                  title={pages[2].title}
+                />
               </Route>
               <Route exact path={`/${pages[3].name}`}>
                 <EditorSection isNew={true} pageTitle={pages[3].title} />

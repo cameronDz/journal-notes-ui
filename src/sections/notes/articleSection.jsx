@@ -162,7 +162,7 @@ const ArticleSection = ({
       const search = `id=${id}`;
       history.push({ pathname, search });
     } else {
-      console.error("ERROR - UNABLE TO ENTER EDIT MODE")
+      console.error("ERROR - UNABLE TO ENTER EDIT MODE");
     }
   };
 
@@ -192,7 +192,12 @@ const ArticleSection = ({
                 {
                   <Grid item sm={12} md={md}>
                     {note.journalType === journalTypes.BOOK && (
-                      <BookCard isEditable={isUserSecured} minHeight={minHeight} noteData={note} onClickEdit={() => handleClickEditNote(note)} />
+                      <BookCard
+                        isEditable={isUserSecured}
+                        minHeight={minHeight}
+                        noteData={note}
+                        onClickEdit={() => handleClickEditNote(note)}
+                      />
                     )}
                     {note.journalType !== journalTypes.BOOK && (
                       <ArticleCard articleData={note} minHeight={minHeight} />

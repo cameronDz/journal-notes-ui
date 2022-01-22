@@ -21,7 +21,12 @@ const ArticleCard = ({ articleData, isEditable, minHeight, show }) => {
   };
 
   return (
-    <NoteCard isEditable={isEditable} isFullView={null} minHeight={minHeight} onClickFull={handleClick}>
+    <NoteCard
+      isEditable={isEditable}
+      isFullView={null}
+      minHeight={minHeight}
+      onClickFull={handleClick}
+    >
       <Article {...articleData} showFull={showFull} />
     </NoteCard>
   );

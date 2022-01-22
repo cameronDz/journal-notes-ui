@@ -11,7 +11,13 @@ const propTypes = {
   show: PropType.bool,
 };
 
-const BookCard = ({ isEditable = false, minHeight = null, noteData = null, onClickEdit = null, show = false }) => {
+const BookCard = ({
+  isEditable = false,
+  minHeight = null,
+  noteData = null,
+  onClickEdit = null,
+  show = false,
+}) => {
   const [showFull, setShowFull] = useState(false);
 
   useEffect(() => {
@@ -23,7 +29,13 @@ const BookCard = ({ isEditable = false, minHeight = null, noteData = null, onCli
   };
 
   return (
-    <NoteCard isEditable={isEditable} isFullView={null} minHeight={minHeight} onClickFull={handleClick} onClickEdit={onClickEdit}>
+    <NoteCard
+      isEditable={isEditable}
+      isFullView={null}
+      minHeight={minHeight}
+      onClickFull={handleClick}
+      onClickEdit={onClickEdit}
+    >
       <BookView note={noteData} showFull={showFull} />
     </NoteCard>
   );

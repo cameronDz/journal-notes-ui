@@ -75,12 +75,12 @@ const EditorSection = ({
   useEffect(() => {
     if (!!editNote && typeof editNote === "object") {
       setType(editNote.journalType);
-      setEditValues({...editNote});
+      setEditValues({ ...editNote });
       setReloadValues(true);
       setTimeout(() => {
         setEditValues(null);
         clearEditNote();
-      })
+      });
     }
   }, [editNote]);
 
@@ -91,8 +91,18 @@ const EditorSection = ({
   }, [isNew, isUserSecured, editId]);
 
   useEffect(() => {
-    setIsProcessing(isLoadingEditNote || isLoadingIndex || isProcessingArticle || isProcessingIndex);
-  }, [isLoadingEditNote, isLoadingIndex, isProcessingArticle, isProcessingIndex]);
+    setIsProcessing(
+      isLoadingEditNote ||
+        isLoadingIndex ||
+        isProcessingArticle ||
+        isProcessingIndex
+    );
+  }, [
+    isLoadingEditNote,
+    isLoadingIndex,
+    isProcessingArticle,
+    isProcessingIndex,
+  ]);
 
   useEffect(() => {
     setIsDisabled(isProcessing || !isUserSecured);
@@ -138,7 +148,7 @@ const EditorSection = ({
   };
 
   const generateCardPayload = () => {
-    const payload = { ...(values || {}) }
+    const payload = { ...(values || {}) };
     if (!isNew) {
       payload.updatedDate = generateDateString();
     }
