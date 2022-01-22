@@ -5,12 +5,13 @@ import BookView from "./bookView";
 import { propTypesBookV1 } from "./types";
 
 const propTypes = {
+  isEditable: PropType.bool,
   minHeight: PropType.string,
   noteData: PropType.shape(propTypesBookV1),
   show: PropType.bool,
 };
 
-const BookCard = ({ minHeight = null, noteData = null, show = false }) => {
+const BookCard = ({ isEditable = false, minHeight = null, noteData = null, onClickEdit = null, show = false }) => {
   const [showFull, setShowFull] = useState(false);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const BookCard = ({ minHeight = null, noteData = null, show = false }) => {
   };
 
   return (
-    <NoteCard isFullView={null} minHeight={minHeight} onClickFull={handleClick}>
+    <NoteCard isEditable={isEditable} isFullView={null} minHeight={minHeight} onClickFull={handleClick} onClickEdit={onClickEdit}>
       <BookView note={noteData} showFull={showFull} />
     </NoteCard>
   );

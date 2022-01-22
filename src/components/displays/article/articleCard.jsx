@@ -5,10 +5,11 @@ import Article from "./article";
 
 const propTypes = {
   articleData: PropType.object,
+  isEditable: PropType.bool,
   minHeight: PropType.string,
   show: PropType.bool,
 };
-const ArticleCard = ({ articleData, minHeight, show }) => {
+const ArticleCard = ({ articleData, isEditable, minHeight, show }) => {
   const [showFull, setShowFull] = useState(false);
 
   useEffect(() => {
@@ -20,7 +21,7 @@ const ArticleCard = ({ articleData, minHeight, show }) => {
   };
 
   return (
-    <NoteCard isFullView={null} minHeight={minHeight} onClickFull={handleClick}>
+    <NoteCard isEditable={isEditable} isFullView={null} minHeight={minHeight} onClickFull={handleClick}>
       <Article {...articleData} showFull={showFull} />
     </NoteCard>
   );

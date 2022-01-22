@@ -6,17 +6,28 @@ import {
   CardActions,
   CardContent,
 } from "@material-ui/core";
+import { handleFunction } from "../../libs/eventUtil";
 
+const EDIT = "Edit Note";
 const EXPAND = "Expand to see More";
 const RETRACT = "Show less";
 
 const propTypes = {
   children: PropType.node,
+  isEditable: PropType.bool,
   isFullView: PropType.bool,
   minHeight: PropType.string,
+  onClickEdit: PropType.func,
   onClickFull: PropType.func,
 };
-const NoteCard = ({ children, isFullView, minHeight, onClickFull }) => {
+const NoteCard = ({
+  children = null,
+  isEditable = false,
+  isFullView = false,
+  minHeight = null,
+  onClickEdit = null,
+  onClickFull = null,
+}) => {
   const [cardActionText, setCardActionText] = useState("");
 
   useEffect(() => {
@@ -36,9 +47,14 @@ const NoteCard = ({ children, isFullView, minHeight, onClickFull }) => {
         {children}
       </CardContent>
       <CardActions style={{ alignItems: "center", justifyContent: "center" }}>
-        <Button onClick={() => onClickFull()} size="small">
+        <Button onClick={() => handleFunction(onClickFull)} size="small">
           {cardActionText}
         </Button>
+        {isEditable && (
+          <Button onClick={() => handleFunction(onClickEdit)} size="small" variant="outlined">
+            {EDIT}
+          </Button>
+        )}
       </CardActions>
     </MuiCard>
   );
