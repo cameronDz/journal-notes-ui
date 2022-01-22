@@ -32,6 +32,11 @@ const pages = [
     title: "Note Review Creator",
     index: 3,
   },
+  {
+    name: "edit",
+    title: "Note Review Editor",
+    index: 4,
+  },
 ];
 
 const propTypes = {
@@ -92,19 +97,16 @@ const NavTabs = ({
                 <LandingSection title={pages[0].title} />
               </Route>
               <Route exact path={`/${pages[1].name}`}>
-                <ArticleSection
-                  pageName={pages[1].name}
-                  title={pages[1].title}
-                />
+                <ArticleSection pageName={pages[1].name} title={pages[1].title} />
               </Route>
               <Route exact path={`/${pages[2].name}`}>
-                <ArticleSection
-                  pageName={pages[2].name}
-                  title={pages[2].title}
-                />
+                <ArticleSection pageName={pages[2].name} title={pages[2].title} />
               </Route>
               <Route exact path={`/${pages[3].name}`}>
-                <EditorSection pageTitle={pages[3].title} />
+                <EditorSection isNew={true} pageTitle={pages[3].title} />
+              </Route>
+              <Route exact path={`/${pages[4].name}`}>
+                <EditorSection isNew={false} pageTitle={pages[4].title} />
               </Route>
             </RouterSwitch>
           </Panel>

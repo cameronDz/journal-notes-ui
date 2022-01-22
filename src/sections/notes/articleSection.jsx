@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import classNames from "classnames";
 import PropType from "prop-types";
 import { Grid } from "@material-ui/core";
@@ -16,6 +17,7 @@ import { journalTypes } from "../../libs/types";
 const propTypes = {
   articles: PropType.array,
   articlesLoading: PropType.number,
+  isUserSecured: PropType.bool,
   loadingIndex: PropType.bool,
   pageName: PropType.string,
   title: PropType.string,
@@ -24,11 +26,13 @@ const useStyles = makeStyles(() => articleGridStyles);
 const ArticleSection = ({
   articles,
   articlesLoading,
+  isUserSecured,
   loadingIndex,
   pageName,
   title,
 }) => {
   const classes = useStyles();
+  const history = useHistory();
   const [sortFunction, setSortFunction] = useState(() => _sorts.sortByTitle);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -151,6 +155,17 @@ const ArticleSection = ({
     }
   };
 
+  const handleClickEditNote = (note) => {
+    const id = note?.id || "";
+    if (id) {
+      const pathname = "/edit";
+      const search = `id=${id}`;
+      history.push({ pathname, search });
+    } else {
+      console.error("ERROR - UNABLE TO ENTER EDIT MODE")
+    }
+  };
+
   const handleClickRemoveCurrentSelectedFilter = () => {
     if (!!currentSelectedFilterTag && !!currentSelectedFilterTag[0]) {
       setFilterTags([
@@ -177,7 +192,7 @@ const ArticleSection = ({
                 {
                   <Grid item sm={12} md={md}>
                     {note.journalType === journalTypes.BOOK && (
-                      <BookCard minHeight={minHeight} noteData={note} />
+                      <BookCard isEditable={isUserSecured} minHeight={minHeight} noteData={note} onClickEdit={() => handleClickEditNote(note)} />
                     )}
                     {note.journalType !== journalTypes.BOOK && (
                       <ArticleCard articleData={note} minHeight={minHeight} />
@@ -255,6 +270,7 @@ ArticleSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   articles: state.notes.list,
   articlesLoading: state.notes.articlesLoading,
+  isUserSecured: !!state.auth.token,
   loadingIndex: state.notes.isLoadingIndex,
 });
 export default connect(mapStateToProps, null)(ArticleSection);
