@@ -74,5 +74,5 @@
     "lint:fix": "eslint ./src/**/* ./webpack --fix",
     "start": "webpack-dev-server --open --config webpack/dev.babel.js"
   },
-  "version": "2.8.1"
+  "version": "2.9.0"
 }

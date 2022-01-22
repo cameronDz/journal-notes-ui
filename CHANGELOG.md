@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.9.0] 2022-01-22
+
+### Added
+
+- edit ability for book notes
+
 ## [2.8.1] 2022-01-02
 
 ### Changed
