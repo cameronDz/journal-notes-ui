@@ -9,6 +9,7 @@ import {
   SearchTwoTone,
   VpnKey,
 } from "@material-ui/icons";
+import { handleFunction } from "../../libs/eventUtil";
 import NavIcon from "./navIcon";
 import { navBarStyles as styles } from "./styles";
 
@@ -38,12 +39,6 @@ const icons = [
 const propTypes = { onClick: PropType.func };
 const useStyles = makeStyles(() => styles);
 const LeftNavBar = ({ onClick }) => {
-  const handleClick = (event) => {
-    if (typeof onClick === "function") {
-      onClick(event);
-    }
-  };
-
   const classes = useStyles();
   return (
     <Fragment>
@@ -56,7 +51,7 @@ const LeftNavBar = ({ onClick }) => {
                   <NavIcon
                     icon={icon?.icon}
                     name={icon?.name}
-                    onClick={handleClick}
+                    onClick={(event) => handleFunction(onClick, event)}
                   />
                 </Fragment>
               )
