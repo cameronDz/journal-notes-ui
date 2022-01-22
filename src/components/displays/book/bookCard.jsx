@@ -8,6 +8,7 @@ const propTypes = {
   isEditable: PropType.bool,
   minHeight: PropType.string,
   noteData: PropType.shape(propTypesBookV1),
+  onClickEdit: PropType.func,
   show: PropType.bool,
 };
 

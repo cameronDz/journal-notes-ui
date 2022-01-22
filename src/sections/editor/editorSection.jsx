@@ -82,21 +82,18 @@ const EditorSection = ({
         clearEditNote();
       });
     }
-  }, [editNote]);
+  }, [clearEditNote, editNote]);
 
   useEffect(() => {
     if (!isNew && isUserSecured && !!editId) {
       requestNoteGet(editId);
     }
-  }, [isNew, isUserSecured, editId]);
+  }, [editId, isNew, isUserSecured, requestNoteGet]);
 
   useEffect(() => {
-    setIsProcessing(
-      isLoadingEditNote ||
-        isLoadingIndex ||
-        isProcessingArticle ||
-        isProcessingIndex
-    );
+    const isLoad = isLoadingEditNote || isLoadingIndex;
+    const isProc = isProcessingArticle || isProcessingIndex;
+    setIsProcessing(isLoad || isProc);
   }, [
     isLoadingEditNote,
     isLoadingIndex,
@@ -113,6 +110,7 @@ const EditorSection = ({
       clearForm();
       setHasStartedIndexPut(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasStartedIndexPut, isProcessingIndex]);
 
   const clearForm = () => {
