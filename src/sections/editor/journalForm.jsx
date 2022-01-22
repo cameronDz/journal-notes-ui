@@ -6,19 +6,25 @@ import { handleFunction } from "../../libs/eventUtil";
 import InputContainer from "../../components/inputs/inputContainer";
 
 const propTypes = {
+  editValues: PropType.object,
   formValues: PropType.object,
   inputs: PropType.array,
   isDisabled: PropType.bool,
   name: PropType.string,
   onDirtiedForm: PropType.func,
+  reloadValues: PropType.bool,
+  setReloadValues: PropType.func,
   updateValues: PropType.func,
 };
 const JournalForm = ({
+  editValues = null,
   formValues = null,
   inputs = null,
   isDisabled = true,
   name = "",
   onDirtiedForm = null,
+  reloadValues = false,
+  setReloadValues = null,
   updateValues = null,
 }) => {
   const [hasSetValues, setHasSetValues] = useState(false);
@@ -27,6 +33,13 @@ const JournalForm = ({
   useEffect(() => {
     handleFunction(updateValues, values);
   }, [updateValues, values]);
+
+  useEffect(() => {
+    if (reloadValues && !!editValues) {
+      setValues(editValues);
+      handleFunction(setReloadValues, false);
+    }
+  }, [editValues, reloadValues, setReloadValues]);
 
   useEffect(() => {
     if (!hasSetValues || formValues === null) {

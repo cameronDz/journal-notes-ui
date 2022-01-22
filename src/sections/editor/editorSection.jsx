@@ -1,5 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
+import { useHistory } from "react-router-dom";
 import PropType from "prop-types";
+import { parse } from "query-string";
 import { connect } from "react-redux";
 import { Grid, makeStyles } from "@material-ui/core";
 import { ArticleCard } from "../../components/displays/article";
@@ -9,19 +11,25 @@ import StandardButton from "../../components/standardButton";
 import JournalForm from "./journalForm";
 import JournalFormRadioSelect from "./journalFormRadioSelect";
 
+import { generateDateString } from "../../libs/date";
 import { downloadJson } from "../../libs/download";
 import { journalForms, journalTypes } from "../../libs/types";
-import { postArticle, putIndex } from "./state/actions";
+import { clearNote, getNote, upsertNote, upsertIndex } from "./state/actions";
 import { editorSectionStyles as styles } from "./styles";
 
 const propTypes = {
+  clearEditNote: PropType.func,
+  editNote: PropType.object,
+  isLoadingEditNote: PropType.bool,
   isLoadingIndex: PropType.bool,
+  isNew: PropType.bool,
   isProcessingArticle: PropType.bool,
   isProcessingIndex: PropType.bool,
   isUserSecured: PropType.bool,
   indexList: PropType.arrayOf(PropType.string),
   pageTitle: PropType.string,
-  postNewArticle: PropType.func,
+  requestNoteGet: PropType.func,
+  requestNoteUpsert: PropType.func,
   updateArticleIndexList: PropType.func,
 };
 
@@ -32,29 +40,59 @@ const buttonTitleUpload = "Upload article notes to S3";
 
 const useStyles = makeStyles(() => styles);
 const EditorSection = ({
+  clearEditNote,
+  editNote,
+  isLoadingEditNote,
   isLoadingIndex,
+  isNew = true,
   isProcessingArticle,
   isProcessingIndex,
   isUserSecured,
   indexList,
   pageTitle,
-  postNewArticle,
+  requestNoteGet,
+  requestNoteUpsert,
   updateArticleIndexList,
 }) => {
+  const history = useHistory();
+  const [editId, setEditId] = useState("");
+  const [editValues, setEditValues] = useState(null);
   const [hasStartedIndexPut, setHasStartedIndexPut] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [isDirty, setIsDirty] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [reloadValues, setReloadValues] = useState(false);
   const [type, setType] = useState(journalTypes.ARTICLE);
   const [values, setValues] = useState({});
 
   useEffect(() => {
-    clearForm();
-  }, [type, isUserSecured]);
+    const parsedHash = parse(location?.hash);
+    const hashKey = "/edit?id";
+    const id = parsedHash?.[hashKey];
+    setEditId(id);
+  }, []);
 
   useEffect(() => {
-    setIsProcessing(isLoadingIndex || isProcessingArticle || isProcessingIndex);
-  }, [isLoadingIndex, isProcessingArticle, isProcessingIndex]);
+    if (!!editNote && typeof editNote === "object") {
+      setType(editNote.journalType);
+      setEditValues({...editNote});
+      setReloadValues(true);
+      setTimeout(() => {
+        setEditValues(null);
+        clearEditNote();
+      })
+    }
+  }, [editNote]);
+
+  useEffect(() => {
+    if (!isNew && isUserSecured && !!editId) {
+      requestNoteGet(editId);
+    }
+  }, [isNew, isUserSecured, editId]);
+
+  useEffect(() => {
+    setIsProcessing(isLoadingEditNote || isLoadingIndex || isProcessingArticle || isProcessingIndex);
+  }, [isLoadingEditNote, isLoadingIndex, isProcessingArticle, isProcessingIndex]);
 
   useEffect(() => {
     setIsDisabled(isProcessing || !isUserSecured);
@@ -70,10 +108,14 @@ const EditorSection = ({
   const clearForm = () => {
     setValues(null);
     setIsDirty(false);
+    if (!isNew) {
+      const pathname = "/create";
+      history.push({ pathname });
+    }
   };
 
   const fireIndexUpdate = () => {
-    if (!!values?.id && Array.isArray(indexList)) {
+    if (!!values?.id && Array.isArray(indexList) && isNew) {
       const newIndex = [...indexList, values?.id];
       updateArticleIndexList(newIndex);
       setHasStartedIndexPut(true);
@@ -87,7 +129,7 @@ const EditorSection = ({
   const handleUploadClick = () => {
     const payload = generateCardPayload();
     fireIndexUpdate();
-    postNewArticle(payload);
+    requestNoteUpsert(payload, isNew);
   };
 
   const handleDownloadClick = () => {
@@ -96,7 +138,11 @@ const EditorSection = ({
   };
 
   const generateCardPayload = () => {
-    return { ...(values || {}) };
+    const payload = { ...(values || {}) }
+    if (!isNew) {
+      payload.updatedDate = generateDateString();
+    }
+    return payload;
   };
 
   const updateValues = (updatedValues) => {
@@ -125,10 +171,13 @@ const EditorSection = ({
         </span>
       )}
       <JournalForm
+        editValues={editValues}
         formValues={values}
         inputs={journalForms?.[type]?.inputs}
         isDisabled={isDisabled}
         onDirtiedForm={handleDirtiedForm}
+        reloadValues={reloadValues}
+        setReloadValues={setReloadValues}
         updateValues={updateValues}
       />
       <Grid container spacing={0}>
@@ -177,14 +226,18 @@ const EditorSection = ({
 
 EditorSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
+  editNote: state.editor.editNote,
   indexList: state.notes.index,
+  isLoadingEditNote: state.editor.isLoadingEditNote,
   isLoadingIndex: state.editor.isLoadingIndex,
   isProcessingArticle: state.editor.isProcessingArticle,
   isProcessingIndex: state.editor.isProcessingIndex,
   isUserSecured: !!state.auth.token,
 });
 const mapDispatchToProps = {
-  postNewArticle: postArticle,
-  updateArticleIndexList: putIndex,
+  clearEditNote: clearNote,
+  requestNoteGet: getNote,
+  requestNoteUpsert: upsertNote,
+  updateArticleIndexList: upsertIndex,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(EditorSection);
