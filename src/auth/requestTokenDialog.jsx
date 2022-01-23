@@ -19,7 +19,7 @@ import {
   livenessCheck,
 } from "./state/actions";
 import { handleFunction } from "../libs/eventUtil";
-import { authText } from "../lib/text";
+import { authText } from "../libs/text";
 import { requestTokenDialogStyles as styles } from "./styles";
 
 const title = "Sign in with credentials";
