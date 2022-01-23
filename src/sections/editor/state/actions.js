@@ -55,7 +55,7 @@ export const upsertNote = (content, isNew = true) => {
   return (dispatch) => {
     const name = content?.id || getFullTimeStampString();
     const requestType = isNew ? "post" : "put";
-    const urlMethod = isNew ? "upload" : "updated";
+    const urlMethod = isNew ? "upload" : "update";
     const url = `${baseApiUrl}/${urlMethod}/${name}`;
     dispatch(startRequestType(_types.UPSERT_NOTE_START));
     return axios[requestType](url, content, config)
