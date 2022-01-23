@@ -23,7 +23,7 @@ const propTypes = {
   isLoadingEditNote: PropType.bool,
   isLoadingIndex: PropType.bool,
   isNew: PropType.bool,
-  isProcessingArticle: PropType.bool,
+  isProcessingNote: PropType.bool,
   isProcessingIndex: PropType.bool,
   isUserSecured: PropType.bool,
   indexList: PropType.arrayOf(PropType.string),
@@ -45,7 +45,7 @@ const EditorSection = ({
   isLoadingEditNote,
   isLoadingIndex,
   isNew = true,
-  isProcessingArticle,
+  isProcessingNote,
   isProcessingIndex,
   isUserSecured,
   indexList,
@@ -57,7 +57,7 @@ const EditorSection = ({
   const history = useHistory();
   const [editId, setEditId] = useState("");
   const [editValues, setEditValues] = useState(null);
-  const [hasStartedIndexPut, setHasStartedIndexPut] = useState(false);
+  const [hasStartedUpsert, setHasStartedUpsert] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [isDirty, setIsDirty] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -92,12 +92,12 @@ const EditorSection = ({
 
   useEffect(() => {
     const isLoad = isLoadingEditNote || isLoadingIndex;
-    const isProc = isProcessingArticle || isProcessingIndex;
+    const isProc = isProcessingNote || isProcessingIndex;
     setIsProcessing(isLoad || isProc);
   }, [
     isLoadingEditNote,
     isLoadingIndex,
-    isProcessingArticle,
+    isProcessingNote,
     isProcessingIndex,
   ]);
 
@@ -106,12 +106,12 @@ const EditorSection = ({
   }, [isProcessing, isUserSecured]);
 
   useEffect(() => {
-    if (hasStartedIndexPut && !isProcessingIndex) {
+    if (hasStartedUpsert && !isProcessingIndex && !isProcessingNote) {
       clearForm();
-      setHasStartedIndexPut(false);
+      setHasStartedUpsert(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasStartedIndexPut, isProcessingIndex]);
+  }, [hasStartedUpsert, isProcessingNote, isProcessingIndex]);
 
   const clearForm = () => {
     setValues(null);
@@ -123,10 +123,12 @@ const EditorSection = ({
   };
 
   const fireIndexUpdate = () => {
-    if (!!values?.id && Array.isArray(indexList) && isNew) {
-      const newIndex = [...indexList, values?.id];
-      updateArticleIndexList(newIndex);
-      setHasStartedIndexPut(true);
+    if (!!values?.id && Array.isArray(indexList)) {
+      if (isNew) {
+        const newIndex = [...indexList, values?.id];
+        updateArticleIndexList(newIndex);
+      }
+      setHasStartedUpsert(true);
     }
   };
 
@@ -238,7 +240,7 @@ const mapStateToProps = (state) => ({
   indexList: state.notes.index,
   isLoadingEditNote: state.editor.isLoadingEditNote,
   isLoadingIndex: state.editor.isLoadingIndex,
-  isProcessingArticle: state.editor.isProcessingArticle,
+  isProcessingNote: state.editor.isProcessingNote,
   isProcessingIndex: state.editor.isProcessingIndex,
   isUserSecured: !!state.auth.token,
 });

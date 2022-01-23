@@ -4,7 +4,7 @@ const initialState = {
   editNote: null,
   isLoadingEditNote: false,
   isLoadingIndex: false,
-  isProcessingArticle: false,
+  isProcessingNote: false,
   isProcessingIndex: false,
   latestIndex: null,
   latestUploadKey: null,
@@ -66,7 +66,7 @@ const reducer = (state = initialState, action = null) => {
 
       /* upload a new article data storage */
       case types.UPSERT_NOTE_START:
-        newState = { ...state, isProcessingArticle: true };
+        newState = { ...state, isProcessingNote: true };
         break;
       case types.UPSERT_NOTE_SUCCESSFUL:
         newState = {
@@ -83,7 +83,7 @@ const reducer = (state = initialState, action = null) => {
         };
         break;
       case types.UPSERT_NOTE_COMPLETED:
-        newState = { ...state, isProcessingArticle: false };
+        newState = { ...state, isProcessingNote: false };
         break;
 
       /* update index with new article key */

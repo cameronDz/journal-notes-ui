@@ -43,7 +43,7 @@ const propTypes = {
   articlesLoadingCount: PropType.number,
   isArticleIndexLoading: PropType.bool,
   isInputIndexLoading: PropType.bool,
-  isProcessingArticle: PropType.bool,
+  isProcessingNote: PropType.bool,
   isProcessingIndex: PropType.bool,
 };
 const useStyles = makeStyles(() => contentStyles);
@@ -51,7 +51,7 @@ const NavTabs = ({
   articlesLoadingCount,
   isArticleIndexLoading,
   isInputIndexLoading,
-  isProcessingArticle,
+  isProcessingNote,
   isProcessingIndex,
 }) => {
   const classes = useStyles();
@@ -61,7 +61,7 @@ const NavTabs = ({
     setIsLoading(
       isArticleIndexLoading ||
         isInputIndexLoading ||
-        isProcessingArticle ||
+        isProcessingNote ||
         isProcessingIndex ||
         articlesLoadingCount > 0
     );
@@ -69,7 +69,7 @@ const NavTabs = ({
     articlesLoadingCount,
     isArticleIndexLoading,
     isInputIndexLoading,
-    isProcessingArticle,
+    isProcessingNote,
     isProcessingIndex,
   ]);
 
@@ -127,7 +127,7 @@ const mapStateToProps = (state) => ({
   articlesLoadingCount: state.notes.articlesLoading,
   isArticleIndexLoading: state.notes.isLoadingIndex,
   isInputIndexLoading: state.editor.isLoadingIndex,
-  isProcessingArticle: state.editor.isProcessingArticle,
+  isProcessingNote: state.editor.isProcessingNote,
   isProcessingIndex: state.editor.isProcessingIndex,
 });
 export default connect(mapStateToProps)(NavTabs);
