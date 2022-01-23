@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - clear editor form after edit call has returned
 - set card button to say Show Less when expanded
 
+### Fixed
+
+- security vulnerabilities in node packages
+
 ## [2.9.1] 2022-01-22
 
 ### Fixed
