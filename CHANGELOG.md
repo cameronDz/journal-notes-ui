@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- state mgmt folder structure
+
 ### Removed
 
 - webpack configuration for dealing with images (none currently in app)

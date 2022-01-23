@@ -4,12 +4,11 @@ import { useHistory } from "react-router-dom";
 import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core";
-
+import { fetchArticles } from "../state/notes/actions";
 import { AppFooter } from "../components/footer";
 import { LeftNavBar } from "../components/navbar";
 import { NavTabs } from "./tabs";
 import { RequestTokenDialog } from "../auth";
-import { fetchArticles } from "./notes/state/actions";
 import { appContainerStyles } from "./styles";
 
 const propTypes = { callFetchArticles: PropType.func };

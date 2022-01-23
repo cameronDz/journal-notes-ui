@@ -1,10 +1,10 @@
 import axios from "axios";
 import * as _types from "./types";
-import { getFullTimeStampString } from "../../../libs/date";
+import { getFullTimeStampString } from "../../libs/date";
 import {
   baseApiUrl as baseApiUrl,
   baseApiConfig as config,
-} from "../../../libs/apiConfig";
+} from "../../libs/apiConfig";
 
 export const clearNote = () => {
   return (dispatch) => {

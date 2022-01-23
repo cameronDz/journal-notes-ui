@@ -3,7 +3,7 @@ import * as _types from "./types";
 import {
   baseApiUrl as baseApiUrl,
   baseApiConfig as config,
-} from "../../../libs/apiConfig";
+} from "../../libs/apiConfig";
 
 const fetchArticle = (articleId) => {
   return (dispatch) => {

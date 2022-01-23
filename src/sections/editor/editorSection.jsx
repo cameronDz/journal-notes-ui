@@ -14,7 +14,12 @@ import JournalFormRadioSelect from "./journalFormRadioSelect";
 import { generateDateString } from "../../libs/date";
 import { downloadJson } from "../../libs/download";
 import { journalForms, journalTypes } from "../../libs/types";
-import { clearNote, getNote, upsertNote, upsertIndex } from "./state/actions";
+import {
+  clearNote,
+  getNote,
+  upsertNote,
+  upsertIndex,
+} from "../../state/editor/actions";
 import { editorSectionStyles as styles } from "./styles";
 
 const propTypes = {
