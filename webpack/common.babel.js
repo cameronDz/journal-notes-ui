@@ -20,12 +20,6 @@ module.exports = {
           loader: "html-loader",
         },
       },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: {
-          loader: "file-loader",
-        },
-      },
     ],
   },
   output: {
@@ -36,10 +30,6 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        {
-          from: resolve(__dirname, "..", "./src/assets/images"),
-          to: "images",
-        },
         {
           from: resolve(__dirname, "..", "./src/assets/favicon.ico"),
           to: "favicon.ico",
