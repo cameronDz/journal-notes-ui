@@ -20,7 +20,7 @@ import { editorSectionStyles as styles } from "./styles";
 const propTypes = {
   clearEditNote: PropType.func,
   editNote: PropType.object,
-  isLoadingEditNote: PropType.bool,
+  isLoadingNote: PropType.bool,
   isLoadingIndex: PropType.bool,
   isNew: PropType.bool,
   isProcessingNote: PropType.bool,
@@ -42,7 +42,7 @@ const useStyles = makeStyles(() => styles);
 const EditorSection = ({
   clearEditNote,
   editNote,
-  isLoadingEditNote,
+  isLoadingNote,
   isLoadingIndex,
   isNew = true,
   isProcessingNote,
@@ -91,15 +91,10 @@ const EditorSection = ({
   }, [editId, isNew, isUserSecured, requestNoteGet]);
 
   useEffect(() => {
-    const isLoad = isLoadingEditNote || isLoadingIndex;
+    const isLoad = isLoadingNote || isLoadingIndex;
     const isProc = isProcessingNote || isProcessingIndex;
     setIsProcessing(isLoad || isProc);
-  }, [
-    isLoadingEditNote,
-    isLoadingIndex,
-    isProcessingNote,
-    isProcessingIndex,
-  ]);
+  }, [isLoadingNote, isLoadingIndex, isProcessingNote, isProcessingIndex]);
 
   useEffect(() => {
     setIsDisabled(isProcessing || !isUserSecured);
@@ -236,9 +231,9 @@ const EditorSection = ({
 
 EditorSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
-  editNote: state.editor.editNote,
+  editNote: state.editor.note,
   indexList: state.notes.index,
-  isLoadingEditNote: state.editor.isLoadingEditNote,
+  isLoadingNote: state.editor.isLoadingNote,
   isLoadingIndex: state.editor.isLoadingIndex,
   isProcessingNote: state.editor.isProcessingNote,
   isProcessingIndex: state.editor.isProcessingIndex,

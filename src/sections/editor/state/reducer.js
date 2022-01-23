@@ -1,8 +1,8 @@
 import * as types from "./types";
 
 const initialState = {
-  editNote: null,
-  isLoadingEditNote: false,
+  note: null,
+  isLoadingNote: false,
   isLoadingIndex: false,
   isProcessingNote: false,
   isProcessingIndex: false,
@@ -41,27 +41,27 @@ const reducer = (state = initialState, action = null) => {
 
       /* fetch latest index from data storage */
       case types.GET_EDIT_NOTE_START:
-        newState = { ...state, isLoadingEditNote: true };
+        newState = { ...state, isLoadingNote: true };
         break;
       case types.GET_EDIT_NOTE_SUCCESSFUL:
         newState = {
           ...state,
-          editNote: action.note || null,
+          note: action.note || null,
           loadingEditNoteError: null,
         };
         break;
       case types.GET_EDIT_NOTE_ERROR:
         newState = {
           ...state,
-          editNote: null,
+          note: null,
           loadingEditNoteError: action.error || "ERROR",
         };
         break;
       case types.GET_EDIT_NOTE_COMPLETED:
-        newState = { ...state, isLoadingEditNote: false };
+        newState = { ...state, isLoadingNote: false };
         break;
       case types.CLEAR_EDIT_NOTE:
-        newState = { ...state, editNote: null };
+        newState = { ...state, note: null };
         break;
 
       /* upload a new article data storage */
