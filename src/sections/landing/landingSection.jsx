@@ -9,37 +9,42 @@ import RouteTitle from "../../components/routeTitle";
 import { latestArticle } from "../../libs/latestArticle";
 import { landingText } from "../../libs/text";
 import { journalTypes } from "../../libs/types";
-import { landingStyles } from "./styles";
+import { landingStyles as styles } from "./styles";
 
 const propTypes = {
-  articles: PropType.array,
-  articlesLoading: PropType.number,
-  loadingIndex: PropType.bool,
+  isLoadingIndex: PropType.bool,
+  isLoadingNotes: PropType.number,
+  notes: PropType.array,
   title: PropType.string,
 };
-const useStyles = makeStyles(() => landingStyles);
-const LandingSection = ({ articles, articlesLoading, loadingIndex, title }) => {
+const useStyles = makeStyles(() => styles);
+const LandingSection = ({ isLoadingIndex, isLoadingNotes, notes, title }) => {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(!!loadingIndex || articlesLoading > 0);
-  }, [articlesLoading, loadingIndex]);
+    setIsLoading(isLoadingIndex || isLoadingNotes);
+  }, [isLoadingIndex, isLoadingNotes]);
 
   const displayLatestCardSection = () => {
     const text = isLoading ? landingText.loading : landingText.noArticles;
-    const article = latestArticle(articles);
-    return !isLoading && !!article ? (
+    const article = latestArticle(notes);
+    return (
       <Fragment>
-        {article.journalType === journalTypes.BOOK && (
-          <BookCard noteData={article} />
+        {(isLoading || !notes) && (
+          <span className={classNames(classes.simpleLandingText)}>{text}</span>
         )}
-        {article.journalType !== journalTypes.BOOK && (
-          <ArticleCard articleData={article} />
+        {!isLoading && !!notes && (
+          <Fragment>
+            {article.journalType === journalTypes.BOOK && (
+              <BookCard noteData={article} />
+            )}
+            {article.journalType !== journalTypes.BOOK && (
+              <ArticleCard articleData={article} />
+            )}
+          </Fragment>
         )}
       </Fragment>
-    ) : (
-      <span className={classNames(classes.simpleLandingText)}>{text}</span>
     );
   };
 
@@ -54,8 +59,8 @@ const LandingSection = ({ articles, articlesLoading, loadingIndex, title }) => {
 
 LandingSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
-  articles: state.notes.list,
-  articlesLoading: state.notes.articlesLoading,
-  loadingIndex: state.notes.isLoadingIndex,
+  isLoadingIndex: state.notes.isLoadingIndex,
+  isLoadingNotes: !!state.notes.articlesLoading,
+  notes: state.notes.list,
 });
 export default connect(mapStateToProps, {})(LandingSection);
