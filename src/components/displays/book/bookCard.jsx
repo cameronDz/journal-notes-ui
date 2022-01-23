@@ -32,7 +32,7 @@ const BookCard = ({
   return (
     <NoteCard
       isEditable={isEditable}
-      isFullView={null}
+      isFullView={showFull}
       minHeight={minHeight}
       onClickFull={handleClick}
       onClickEdit={onClickEdit}
