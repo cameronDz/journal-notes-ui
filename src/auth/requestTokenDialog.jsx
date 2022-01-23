@@ -7,11 +7,11 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   TextField,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { Alert } from "@material-ui/lab";
 import {
   clearError,
   clearToken,
@@ -19,7 +19,8 @@ import {
   livenessCheck,
 } from "./state/actions";
 import { handleFunction } from "../libs/eventUtil";
-import { requestTokenDialogStyles } from "./styles";
+import { authText } from "../lib/text";
+import { requestTokenDialogStyles as styles } from "./styles";
 
 const title = "Sign in with credentials";
 const propTypes = {
@@ -34,7 +35,7 @@ const propTypes = {
   onClose: PropType.func,
   token: PropType.any,
 };
-const useStyles = makeStyles(() => requestTokenDialogStyles);
+const useStyles = makeStyles(() => styles);
 const RequestTokenDialog = ({
   clearTokenError,
   clearTokenUser,
@@ -48,8 +49,21 @@ const RequestTokenDialog = ({
   token,
 }) => {
   const classes = useStyles();
+  const [dialogSeverity, setDialogSeverity] = useState("");
+  const [dialogText, setDialogText] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    let status = "info";
+    if (!!token) {
+      status = "success";
+    } else if (!!error) {
+      status = "error";
+    }
+    setDialogSeverity(status);
+    setDialogText(authText[status]);
+  }, [error, token]);
 
   useEffect(() => {
     if (isOpen) {
@@ -84,26 +98,15 @@ const RequestTokenDialog = ({
     }
   };
 
-  const getText = () => {
-    let text = `To create new journal notes, please log in with valid credentials.`;
-    if (!!token) {
-      text = `You're credentials are valid.`;
-    } else if (!!error) {
-      text = `Unable to verify credentials. Please, try again.`;
-    }
-    return text;
-  };
-
   return (
     <Dialog onClose={handleClose} open={isOpen}>
       <div className={classes.dialogContainer}>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
           <div className={classes.dialogContentContainer}>
-            {isProcessingRequest ? (
-              <CircularProgress />
-            ) : (
-              <DialogContentText>{getText()}</DialogContentText>
+            {isProcessingRequest && <CircularProgress />}
+            {!isProcessingRequest && (
+              <Alert severity={dialogSeverity}>{dialogText}</Alert>
             )}
           </div>
 

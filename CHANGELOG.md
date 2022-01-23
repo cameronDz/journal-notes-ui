@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- article types can be edited
+- article types edittable through search tab
+- auth dialog using mui alert for messaging
 
 ### Changed
 

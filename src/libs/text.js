@@ -1,3 +1,9 @@
+const authText = {
+  error: `Unable to validate credentials. Please try again!`,
+  info: `To create new journal notes, please log in with valid credentials.`,
+  success: `Successfully validated credentials!`,
+};
+
 const genericText = {
   colonSpace: `: `,
   comma: `,`,
@@ -16,4 +22,4 @@ const overviewText = {
   source: `Source`,
 };
 
-export { genericText, landingText, overviewText };
+export { authText, genericText, landingText, overviewText };
