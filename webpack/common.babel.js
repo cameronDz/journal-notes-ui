@@ -1,6 +1,7 @@
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import HtmlWebPackPlugin from "html-webpack-plugin";
 import { resolve } from "path";
+import _package from "../package";
 
 module.exports = {
   entry: "./src/index.js",
@@ -29,7 +30,7 @@ module.exports = {
   },
   output: {
     filename: "bundle.js",
-    path: resolve(__dirname, "..", "./dist"),
+    path: resolve(__dirname, "..", "dist", _package.version),
     publicPath: "",
   },
   plugins: [
