@@ -200,7 +200,12 @@ const ArticleSection = ({
                       />
                     )}
                     {note.journalType !== journalTypes.BOOK && (
-                      <ArticleCard articleData={note} minHeight={minHeight} />
+                      <ArticleCard
+                        articleData={note}
+                        isEditable={isUserSecured}
+                        minHeight={minHeight}
+                        onClickEdit={() => handleClickEditNote(note)}
+                      />
                     )}
                   </Grid>
                 }

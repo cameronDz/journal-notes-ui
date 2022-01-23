@@ -7,16 +7,23 @@ const propTypes = {
   articleData: PropType.object,
   isEditable: PropType.bool,
   minHeight: PropType.string,
+  onClickEdit: PropType.func,
   show: PropType.bool,
 };
-const ArticleCard = ({ articleData, isEditable, minHeight, show }) => {
+const ArticleCard = ({
+  articleData,
+  isEditable,
+  minHeight,
+  onClickEdit,
+  show,
+}) => {
   const [showFull, setShowFull] = useState(false);
 
   useEffect(() => {
     setShowFull(!!show);
   }, [show]);
 
-  const handleClick = () => {
+  const handleClickFull = () => {
     setShowFull((prev) => !prev);
   };
 
@@ -25,7 +32,8 @@ const ArticleCard = ({ articleData, isEditable, minHeight, show }) => {
       isEditable={isEditable}
       isFullView={showFull}
       minHeight={minHeight}
-      onClickFull={handleClick}
+      onClickEdit={onClickEdit}
+      onClickFull={handleClickFull}
     >
       <Article {...articleData} showFull={showFull} />
     </NoteCard>

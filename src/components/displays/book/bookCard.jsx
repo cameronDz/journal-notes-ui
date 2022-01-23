@@ -34,8 +34,8 @@ const BookCard = ({
       isEditable={isEditable}
       isFullView={showFull}
       minHeight={minHeight}
-      onClickFull={handleClick}
       onClickEdit={onClickEdit}
+      onClickFull={handleClick}
     >
       <BookView note={noteData} showFull={showFull} />
     </NoteCard>
