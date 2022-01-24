@@ -17,7 +17,7 @@ import {
   clearToken,
   fetchToken,
   livenessCheck,
-} from "../../state/auth/actions";
+} from "../state/auth/actions";
 import { handleFunction } from "../libs/eventUtil";
 import { authText } from "../libs/text";
 import { requestTokenDialogStyles as styles } from "./styles";

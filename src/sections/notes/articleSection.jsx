@@ -16,18 +16,18 @@ import { journalTypes } from "../../libs/types";
 
 const propTypes = {
   articles: PropType.array,
-  articlesLoading: PropType.number,
+  isLoadingIndex: PropType.bool,
+  isLoadingNotes: PropType.bool,
   isUserSecured: PropType.bool,
-  loadingIndex: PropType.bool,
   pageName: PropType.string,
   title: PropType.string,
 };
 const useStyles = makeStyles(() => articleGridStyles);
 const ArticleSection = ({
   articles,
-  articlesLoading,
+  isLoadingIndex,
+  isLoadingNotes,
   isUserSecured,
-  loadingIndex,
   pageName,
   title,
 }) => {
@@ -49,15 +49,15 @@ const ArticleSection = ({
   const [checkedCreatedDate, setCheckedCreatedDate] = useState(true);
 
   useEffect(() => {
-    if (!articlesLoading) {
+    if (!isLoadingNotes) {
       setFilterTags([]);
       collectTagList();
     }
-  }, [articlesLoading, collectTagList]);
+  }, [isLoadingNotes, collectTagList]);
 
   useEffect(() => {
-    setIsLoading(!!loadingIndex || articlesLoading > 0);
-  }, [articlesLoading, loadingIndex]);
+    setIsLoading(!!isLoadingIndex || isLoadingNotes);
+  }, [isLoadingIndex, isLoadingNotes]);
 
   useEffect(() => {
     if (orderType) {
@@ -279,8 +279,8 @@ const ArticleSection = ({
 ArticleSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   articles: state.notes.list,
-  articlesLoading: state.notes.articlesLoading,
+  isLoadingIndex: state.notes.isLoadingIndex,
+  isLoadingNotes: state.notes.isLoadingNotes,
   isUserSecured: !!state.auth.token,
-  loadingIndex: state.notes.isLoadingIndex,
 });
 export default connect(mapStateToProps, null)(ArticleSection);

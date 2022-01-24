@@ -13,7 +13,7 @@ import { landingStyles as styles } from "./styles";
 
 const propTypes = {
   isLoadingIndex: PropType.bool,
-  isLoadingNotes: PropType.number,
+  isLoadingNotes: PropType.bool,
   notes: PropType.array,
   title: PropType.string,
 };
@@ -26,33 +26,27 @@ const LandingSection = ({ isLoadingIndex, isLoadingNotes, notes, title }) => {
     setIsLoading(isLoadingIndex || isLoadingNotes);
   }, [isLoadingIndex, isLoadingNotes]);
 
-  const displayLatestCardSection = () => {
-    const text = isLoading ? landingText.loading : landingText.noArticles;
-    const article = latestArticle(notes);
-    return (
-      <Fragment>
+  const text = isLoading ? landingText.loading : landingText.noArticles;
+  const note = latestArticle(notes) || {};
+  return (
+    <Fragment>
+      <RouteTitle title={title} />
+      <div>{landingText.overview}</div>
+      <div>
         {(isLoading || !notes) && (
           <span className={classNames(classes.simpleLandingText)}>{text}</span>
         )}
         {!isLoading && !!notes && (
           <Fragment>
-            {article.journalType === journalTypes.BOOK && (
-              <BookCard noteData={article} />
+            {note.journalType === journalTypes.BOOK && (
+              <BookCard noteData={note} />
             )}
-            {article.journalType !== journalTypes.BOOK && (
-              <ArticleCard articleData={article} />
+            {note.journalType !== journalTypes.BOOK && (
+              <ArticleCard articleData={note} />
             )}
           </Fragment>
         )}
-      </Fragment>
-    );
-  };
-
-  return (
-    <Fragment>
-      <RouteTitle title={title} />
-      <div>{landingText.overview}</div>
-      <div>{displayLatestCardSection()}</div>
+      </div>
     </Fragment>
   );
 };
@@ -60,7 +54,7 @@ const LandingSection = ({ isLoadingIndex, isLoadingNotes, notes, title }) => {
 LandingSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   isLoadingIndex: state.notes.isLoadingIndex,
-  isLoadingNotes: !!state.notes.articlesLoading,
+  isLoadingNotes: state.notes.isLoadingNotes,
   notes: state.notes.list,
 });
 export default connect(mapStateToProps, {})(LandingSection);

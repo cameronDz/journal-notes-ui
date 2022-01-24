@@ -40,37 +40,33 @@ const pages = [
 ];
 
 const propTypes = {
-  articlesLoadingCount: PropType.number,
-  isArticleIndexLoading: PropType.bool,
   isInputIndexLoading: PropType.bool,
+  isNoteIndexLoading: PropType.bool,
+  isNotesLoading: PropType.bool,
   isProcessingNote: PropType.bool,
   isProcessingIndex: PropType.bool,
 };
 const useStyles = makeStyles(() => contentStyles);
 const NavTabs = ({
-  articlesLoadingCount,
-  isArticleIndexLoading,
   isInputIndexLoading,
-  isProcessingNote,
+  isNoteIndexLoading,
+  isNotesLoading,
   isProcessingIndex,
+  isProcessingNote,
 }) => {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(
-      isArticleIndexLoading ||
-        isInputIndexLoading ||
-        isProcessingNote ||
-        isProcessingIndex ||
-        articlesLoadingCount > 0
-    );
+    const isNotes = isNoteIndexLoading || isNotesLoading;
+    const isProc = isProcessingIndex || isProcessingNote;
+    setIsLoading(isInputIndexLoading || isNotes || isProc);
   }, [
-    articlesLoadingCount,
-    isArticleIndexLoading,
     isInputIndexLoading,
-    isProcessingNote,
+    isNoteIndexLoading,
+    isNotesLoading,
     isProcessingIndex,
+    isProcessingNote,
   ]);
 
   const displayProgressBar = () => {
@@ -124,10 +120,10 @@ const NavTabs = ({
 
 NavTabs.propTypes = propTypes;
 const mapStateToProps = (state) => ({
-  articlesLoadingCount: state.notes.articlesLoading,
-  isArticleIndexLoading: state.notes.isLoadingIndex,
   isInputIndexLoading: state.editor.isLoadingIndex,
-  isProcessingNote: state.editor.isProcessingNote,
+  isNoteIndexLoading: state.notes.isLoadingNotes,
+  isNotesLoading: state.notes.isNotesLoading,
   isProcessingIndex: state.editor.isProcessingIndex,
+  isProcessingNote: state.editor.isProcessingNote,
 });
 export default connect(mapStateToProps)(NavTabs);
