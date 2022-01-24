@@ -27,7 +27,7 @@ const fetchEntireListPayload = (dispatch, index) => {
     });
 };
 
-export const fetchArticles = () => {
+const fetchArticles = () => {
   return (dispatch) => {
     const url = `${baseApiUrl}/object/index`;
     dispatch(shipEvent(_types.GET_NOTE_INDEX_START));
@@ -47,3 +47,5 @@ export const fetchArticles = () => {
       });
   };
 };
+
+export { fetchArticles };

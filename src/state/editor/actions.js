@@ -10,13 +10,13 @@ const startRequestType = (type) => {
   return { type };
 };
 
-export const clearNote = () => {
+const clearNote = () => {
   return (dispatch) => {
     dispatch(startRequestType(_types.CLEAR_EDIT_NOTE));
   };
 };
 
-export const getIndex = () => {
+const getIndex = () => {
   return (dispatch) => {
     const url = `${baseApiUrl}/object/index`;
     dispatch(startRequestType(_types.GET_INDEX_START));
@@ -37,7 +37,7 @@ export const getIndex = () => {
   };
 };
 
-export const getNote = (id) => {
+const getNote = (id) => {
   return (dispatch) => {
     const url = `${baseApiUrl}/object/${id}`;
     dispatch(startRequestType(_types.GET_EDIT_NOTE_START));
@@ -57,7 +57,27 @@ export const getNote = (id) => {
   };
 };
 
-export const upsertNote = (content, isNew = true) => {
+const upsertIndex = (updatedIndex) => {
+  const index = { list: updatedIndex };
+  return (dispatch) => {
+    const url = `${baseApiUrl}/update/index`;
+    dispatch(startRequestType(_types.UPSERT_INDEX_START));
+    return axios
+      .put(url, index, config)
+      .then(() => {
+        return dispatch({ type: _types.UPSERT_INDEX_SUCCESSFUL });
+      })
+      .catch((error) => {
+        console.error("UPSERT_INDEX_SUCCESSFUL", error);
+        return dispatch({ error, type: _types.UPSERT_INDEX_SUCCESSFUL });
+      })
+      .finally(() => {
+        return dispatch({ type: _types.UPSERT_INDEX_COMPLETED });
+      });
+  };
+};
+
+const upsertNote = (content, isNew = true) => {
   return (dispatch) => {
     const name = content?.id || getFullTimeStampString();
     const requestType = isNew ? "post" : "put";
@@ -79,22 +99,4 @@ export const upsertNote = (content, isNew = true) => {
   };
 };
 
-export const upsertIndex = (updatedIndex) => {
-  const index = { list: updatedIndex };
-  return (dispatch) => {
-    const url = `${baseApiUrl}/update/index`;
-    dispatch(startRequestType(_types.UPSERT_INDEX_START));
-    return axios
-      .put(url, index, config)
-      .then(() => {
-        return dispatch({ type: _types.UPSERT_INDEX_SUCCESSFUL });
-      })
-      .catch((error) => {
-        console.error("UPSERT_INDEX_SUCCESSFUL", error);
-        return dispatch({ error, type: _types.UPSERT_INDEX_SUCCESSFUL });
-      })
-      .finally(() => {
-        return dispatch({ type: _types.UPSERT_INDEX_COMPLETED });
-      });
-  };
-};
+export { clearNote, getIndex, getNote, upsertIndex, upsertNote };
