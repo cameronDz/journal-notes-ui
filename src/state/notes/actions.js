@@ -16,14 +16,14 @@ const fetchEntireListPayload = (dispatch, index) => {
     .post(url, index, config)
     .then((payload) => {
       const list = payload?.data?.payload?.list || [];
-      dispatch(shipEvent(_types.GET_NOTES_ALL_SUCCESS, { list }));
+      return dispatch({ list, type: _types.GET_NOTES_ALL_SUCCESS });
     })
     .catch((error) => {
       console.error("GET_NOTES_ALL_ERROR", error);
-      dispatch(shipEvent(_types.GET_NOTES_ALL_ERROR, { error }));
+      return dispatch({ error, type: _types.GET_NOTES_ALL_ERROR });
     })
     .finally(() => {
-      dispatch(shipEvent(_types.GET_NOTES_ALL_COMPLETED));
+      return dispatch({ type: _types.GET_NOTES_ALL_COMPLETED });
     });
 };
 
@@ -36,14 +36,14 @@ export const fetchArticles = () => {
       .then((payload) => {
         const index = payload?.data?.payload?.list || [];
         fetchEntireListPayload(dispatch, index);
-        dispatch(shipEvent(_types.GET_NOTE_INDEX_SUCCESS, { index }));
+        return dispatch({ index, type: _types.GET_NOTE_INDEX_SUCCESS });
       })
       .catch((error) => {
         console.error("GET_NOTE_INDEX_ERROR", error);
-        dispatch(shipEvent(_types.GET_NOTE_INDEX_ERROR, { error }));
+        return dispatch({ error, type: _types.GET_NOTE_INDEX_ERROR });
       })
       .finally(() => {
-        dispatch(shipEvent(_types.GET_NOTE_INDEX_COMPLETED));
+        return dispatch({ type: _types.GET_NOTE_INDEX_COMPLETED });
       });
   };
 };

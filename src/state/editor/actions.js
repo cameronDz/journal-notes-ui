@@ -6,6 +6,10 @@ import {
   baseApiConfig as config,
 } from "../../libs/apiConfig";
 
+const startRequestType = (type) => {
+  return { type };
+};
+
 export const clearNote = () => {
   return (dispatch) => {
     dispatch(startRequestType(_types.CLEAR_EDIT_NOTE));
@@ -24,6 +28,7 @@ export const getIndex = () => {
         return dispatch({ index, type: _types.GET_INDEX_SUCCESSFUL });
       })
       .catch((error) => {
+        console.error("GET_INDEX_ERROR", error);
         return dispatch({ error, type: _types.GET_INDEX_ERROR });
       })
       .finally(() => {
@@ -43,6 +48,7 @@ export const getNote = (id) => {
         return dispatch({ note, type: _types.GET_EDIT_NOTE_SUCCESSFUL });
       })
       .catch((error) => {
+        console.error("GET_EDIT_NOTE_ERROR", error);
         return dispatch({ error, type: _types.GET_EDIT_NOTE_ERROR });
       })
       .finally(() => {
@@ -64,6 +70,7 @@ export const upsertNote = (content, isNew = true) => {
         return dispatch({ key, type: _types.UPSERT_NOTE_SUCCESSFUL });
       })
       .catch((error) => {
+        console.error("UPSERT_NOTE_ERROR", error);
         return dispatch({ error, type: _types.UPSERT_NOTE_ERROR });
       })
       .finally(() => {
@@ -83,14 +90,11 @@ export const upsertIndex = (updatedIndex) => {
         return dispatch({ type: _types.UPSERT_INDEX_SUCCESSFUL });
       })
       .catch((error) => {
+        console.error("UPSERT_INDEX_SUCCESSFUL", error);
         return dispatch({ error, type: _types.UPSERT_INDEX_SUCCESSFUL });
       })
       .finally(() => {
         return dispatch({ type: _types.UPSERT_INDEX_COMPLETED });
       });
   };
-};
-
-const startRequestType = (type) => {
-  return { type };
 };

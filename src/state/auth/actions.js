@@ -34,15 +34,15 @@ const fetchToken = (credentials) => {
     return axios
       .post(url, credentials, config)
       .then((payload) => {
-        const type = _types.GET_TOKEN_SUCCESS;
-        return dispatch({ data: payload?.data, type });
+        const data = payload?.data || "";
+        return dispatch({ type: _types.GET_TOKEN_SUCCESS, data });
       })
       .catch((error) => {
-        const type = _types.GET_TOKEN_ERROR;
-        return dispatch({ error, type });
+        console.error("GET_TOKEN_ERROR", error);
+        return dispatch({ type: _types.GET_TOKEN_ERROR, error });
       })
       .finally(() => {
-        dispatch({ type: _types.GET_TOKEN_COMPLETED });
+        return dispatch({ type: _types.GET_TOKEN_COMPLETED });
       });
   };
 };

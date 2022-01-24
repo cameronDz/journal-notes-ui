@@ -1,113 +1,108 @@
 import * as types from "./types";
 
 const initialState = {
-  note: null,
-  isLoadingNote: false,
+  errorLoadIndex: null,
+  errorLoadNote: null,
+  errorProcessIndex: null,
+  errorProcessNote: null,
   isLoadingIndex: false,
-  isProcessingNote: false,
+  isLoadingNote: false,
   isProcessingIndex: false,
+  isProcessingNote: false,
   latestIndex: null,
   latestUploadKey: null,
-  loadingIndexError: null,
-  processingArticleError: null,
-  processingIndexError: null,
+  note: null,
 };
 
 const reducer = (state = initialState, action = null) => {
   let newState;
-  if (action) {
-    switch (action?.type) {
-      /* fetch latest index from data storage */
-      case types.GET_INDEX_START:
-        newState = { ...state, isLoadingIndex: true };
-        break;
-      case types.GET_INDEX_SUCCESSFUL:
-        newState = {
-          ...state,
-          latestIndex: action.index,
-          loadingIndexError: null,
-        };
-        break;
-      case types.GET_INDEX_ERROR:
-        newState = {
-          ...state,
-          latestIndex: null,
-          loadingIndexError: action.error,
-        };
-        break;
-      case types.GET_INDEX_COMPLETED:
-        newState = { ...state, isLoadingIndex: false };
-        break;
+  switch (action?.type) {
+    /* fetch latest index from data storage */
+    case types.GET_INDEX_START:
+      newState = { ...(!!state ? state : {}) };
+      newState.isLoadingIndex = true;
+      break;
+    case types.GET_INDEX_SUCCESSFUL:
+      newState = { ...(!!state ? state : {}) };
+      newState.latestIndex = action.index;
+      newState.errorLoadIndex = null;
+      break;
+    case types.GET_INDEX_ERROR:
+      newState = { ...(!!state ? state : {}) };
+      newState.latestIndex = null;
+      newState.errorLoadIndex = action.error || "GENERAL ERROR";
+      break;
+    case types.GET_INDEX_COMPLETED:
+      newState = { ...(!!state ? state : {}) };
+      newState.isLoadingIndex = false;
+      break;
 
-      /* fetch latest index from data storage */
-      case types.GET_EDIT_NOTE_START:
-        newState = { ...state, isLoadingNote: true };
-        break;
-      case types.GET_EDIT_NOTE_SUCCESSFUL:
-        newState = {
-          ...state,
-          note: action.note || null,
-          loadingEditNoteError: null,
-        };
-        break;
-      case types.GET_EDIT_NOTE_ERROR:
-        newState = {
-          ...state,
-          note: null,
-          loadingEditNoteError: action.error || "ERROR",
-        };
-        break;
-      case types.GET_EDIT_NOTE_COMPLETED:
-        newState = { ...state, isLoadingNote: false };
-        break;
-      case types.CLEAR_EDIT_NOTE:
-        newState = { ...state, note: null };
-        break;
+    /* fetch latest index from data storage */
+    case types.CLEAR_EDIT_NOTE:
+      newState = { ...(!!state ? state : {}) };
+      newState.note = null;
+      break;
+    case types.GET_EDIT_NOTE_START:
+      newState = { ...(!!state ? state : {}) };
+      newState.isLoadingNote = true;
+      break;
+    case types.GET_EDIT_NOTE_SUCCESSFUL:
+      newState = { ...(!!state ? state : {}) };
+      newState.note = action.note || null;
+      newState.errorLoadNote = null;
+      break;
+    case types.GET_EDIT_NOTE_ERROR:
+      newState = { ...(!!state ? state : {}) };
+      newState.note = null;
+      newState.errorLoadNote = action.error || "GENERAL ERROR";
+      break;
+    case types.GET_EDIT_NOTE_COMPLETED:
+      newState = { ...(!!state ? state : {}) };
+      newState.isLoadingNote = false;
+      break;
 
-      /* upload a new article data storage */
-      case types.UPSERT_NOTE_START:
-        newState = { ...state, isProcessingNote: true };
-        break;
-      case types.UPSERT_NOTE_SUCCESSFUL:
-        newState = {
-          ...state,
-          latestUploadKey: action.key,
-          processingArticleError: null,
-        };
-        break;
-      case types.UPSERT_NOTE_ERROR:
-        newState = {
-          ...state,
-          latestUploadKey: null,
-          processingArticleError: action.error,
-        };
-        break;
-      case types.UPSERT_NOTE_COMPLETED:
-        newState = { ...state, isProcessingNote: false };
-        break;
+    /* upload a new article data storage */
+    case types.UPSERT_NOTE_START:
+      newState = { ...(!!state ? state : {}) };
+      newState.isProcessingNote = true;
+      break;
+    case types.UPSERT_NOTE_SUCCESSFUL:
+      newState = { ...(!!state ? state : {}) };
+      newState.latestUploadKey = action.key || null;
+      newState.errorProcessNote = null;
+      break;
+    case types.UPSERT_NOTE_ERROR:
+      newState = { ...(!!state ? state : {}) };
+      newState.latestUploadKey = null;
+      newState.errorProcessNote = action.error || "GENERAL ERROR";
+      break;
+    case types.UPSERT_NOTE_COMPLETED:
+      newState = { ...(!!state ? state : {}) };
+      newState.isProcessingNote = false;
+      break;
 
-      /* update index with new article key */
-      case types.UPSERT_INDEX_START:
-        newState = { ...state, isProcessingIndex: true };
-        break;
-      case types.UPSERT_INDEX_SUCCESSFUL:
-        newState = { ...state, processingIndexError: null };
-        break;
-      case types.UPSERT_INDEX_ERROR:
-        newState = { ...state, processingIndexError: action.error };
-        break;
-      case types.UPSERT_INDEX_COMPLETED:
-        newState = {
-          ...state,
-          isProcessingIndex: false,
-          latestIndex: null,
-          latestUploadKey: null,
-        };
-        break;
+    /* update index with new article key */
+    case types.UPSERT_INDEX_START:
+      newState = { ...(!!state ? state : {}) };
+      newState.isProcessingIndex = true;
+      break;
+    case types.UPSERT_INDEX_SUCCESSFUL:
+      newState = { ...(!!state ? state : {}) };
+      newState.errorProcessIndex = null;
+      break;
+    case types.UPSERT_INDEX_ERROR:
+      newState = { ...(!!state ? state : {}) };
+      newState.errorProcessIndex = action.error || "GENERAL ERROR";
+      break;
+    case types.UPSERT_INDEX_COMPLETED:
+      newState = { ...(!!state ? state : {}) };
+      newState.isProcessingIndex = false;
+      newState.latestIndex = null;
+      newState.latestUploadKey = null;
+      break;
 
-      default:
-        newState = state;
-    }
+    default:
+      newState = state;
   }
   return newState;
 };
