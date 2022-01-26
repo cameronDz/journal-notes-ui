@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - state mgmt folder structure
 
+### Fixed
+
+- changing type on editor updates the underlying form payload, not just fields
+
 ### Removed
 
 - webpack configuration for dealing with images (none currently in app)
