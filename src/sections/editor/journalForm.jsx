@@ -12,7 +12,9 @@ const propTypes = {
   isDisabled: PropType.bool,
   name: PropType.string,
   onDirtiedForm: PropType.func,
+  reloadInputs: PropType.bool,
   reloadValues: PropType.bool,
+  setReloadInputs: PropType.func,
   setReloadValues: PropType.func,
   updateValues: PropType.func,
 };
@@ -23,7 +25,9 @@ const JournalForm = ({
   isDisabled = true,
   name = "",
   onDirtiedForm = null,
+  reloadInputs = false,
   reloadValues = false,
+  setReloadInputs = null,
   setReloadValues = null,
   updateValues = null,
 }) => {
@@ -40,6 +44,14 @@ const JournalForm = ({
       handleFunction(setReloadValues, false);
     }
   }, [editValues, reloadValues, setReloadValues]);
+
+  useEffect(() => {
+    if (reloadInputs && !!inputs) {
+      const generatedValues = generateFormValues(inputs);
+      handleFunction(setReloadInputs, false);
+      setValues(generatedValues);
+    }
+  }, [inputs, reloadInputs, setReloadInputs]);
 
   useEffect(() => {
     if (!hasSetValues || formValues === null) {

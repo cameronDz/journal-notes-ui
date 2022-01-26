@@ -66,6 +66,7 @@ const EditorSection = ({
   const [isDisabled, setIsDisabled] = useState(true);
   const [isDirty, setIsDirty] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [reloadInputs, setReloadInputs] = useState(false);
   const [reloadValues, setReloadValues] = useState(false);
   const [type, setType] = useState(journalTypes.ARTICLE);
   const [values, setValues] = useState({});
@@ -163,6 +164,12 @@ const EditorSection = ({
     setIsDirty(val);
   };
 
+  const handleChangeType = (event) => {
+    const newType = event?.target?.value || "";
+    setType(newType);
+    setReloadInputs(true);
+  };
+
   const classes = useStyles();
   return (
     <Fragment>
@@ -172,7 +179,7 @@ const EditorSection = ({
           availableTypes={availableTypes}
           currentType={type}
           isDisabled={isDirty}
-          onTypeChange={(event) => setType(event?.target?.value)}
+          onTypeChange={handleChangeType}
         />
       </div>
       {!isUserSecured && (
@@ -186,7 +193,9 @@ const EditorSection = ({
         inputs={journalForms?.[type]?.inputs}
         isDisabled={isDisabled}
         onDirtiedForm={handleDirtiedForm}
+        reloadInputs={reloadInputs}
         reloadValues={reloadValues}
+        setReloadInputs={setReloadInputs}
         setReloadValues={setReloadValues}
         updateValues={updateValues}
       />
