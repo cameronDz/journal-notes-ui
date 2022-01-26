@@ -178,7 +178,7 @@ const EditorSection = ({
         <JournalFormRadioSelect
           availableTypes={availableTypes}
           currentType={type}
-          isDisabled={isDirty}
+          isDisabled={isDirty && isNew}
           onTypeChange={handleChangeType}
         />
       </div>

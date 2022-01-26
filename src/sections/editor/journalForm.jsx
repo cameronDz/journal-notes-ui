@@ -47,11 +47,11 @@ const JournalForm = ({
 
   useEffect(() => {
     if (reloadInputs && !!inputs) {
-      const generatedValues = generateFormValues(inputs);
+      const generatedValues = generateFormValues(inputs, formValues);
       handleFunction(setReloadInputs, false);
       setValues(generatedValues);
     }
-  }, [inputs, reloadInputs, setReloadInputs]);
+  }, [formValues, inputs, reloadInputs, setReloadInputs]);
 
   useEffect(() => {
     if (!hasSetValues || formValues === null) {
