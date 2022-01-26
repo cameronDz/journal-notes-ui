@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- when editing existing notes, can switch note type
 - state mgmt folder structure
 
 ### Fixed
