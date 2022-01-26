@@ -7,6 +7,7 @@ import {
   RadioGroup,
   Switch,
 } from "@material-ui/core";
+import { handleFunction } from "../../libs/eventUtil";
 import FilterTitle from "./filterTitle";
 
 const propTypes = {
@@ -30,18 +31,6 @@ const FilterSortOrder = ({
   onTypeChange = null,
   orderType = "title",
 }) => {
-  const handleChangeOrderType = (event) => {
-    if (typeof onTypeChange === "function") {
-      onTypeChange(event);
-    }
-  };
-
-  const handleChangeChecked = (event) => {
-    if (typeof onOrderChange === "function") {
-      onOrderChange(event);
-    }
-  };
-
   const getDisplayLabel = (type, checked) => {
     const title = checked ? textAscend : textDescend;
     return orderType === type ? title : ``;
@@ -55,7 +44,7 @@ const FilterSortOrder = ({
           checked={orderType === keyName && checkValue}
           color={"primary"}
           disabled={orderType !== keyName}
-          onChange={() => handleChangeChecked(checkName)}
+          onChange={() => handleFunction(onOrderChange, checkName)}
           value={checkName}
         />
       )
@@ -71,7 +60,7 @@ const FilterSortOrder = ({
           style={{ marginRight: "16px" }}
           title={"Order Type"}
           value={orderType}
-          onChange={handleChangeOrderType}
+          onChange={(event) => handleFunction(onTypeChange, event)}
         >
           <FormControlLabel
             control={<Radio color={"primary"} />}
