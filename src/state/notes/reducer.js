@@ -37,7 +37,7 @@ const reducer = (state = initialState, action = null) => {
       break;
     case types.GET_NOTE_INDEX_SUCCESS:
       newState = { ...(!!state ? state : {}) };
-      newState.notes = [Array.isArray(action.index) ? action.index : []];
+      newState.index = [Array.isArray(action.index) ? action.index : []];
       break;
     case types.GET_NOTE_INDEX_ERROR:
       newState = { ...(!!state ? state : {}) };

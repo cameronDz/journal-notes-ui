@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.11.2] 2022-01-29
+
+### Fixed
+
+- index update issue when saving
+
 ## [2.11.1] 2022-01-29
 
 ### Fixed
