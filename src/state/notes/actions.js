@@ -5,8 +5,8 @@ import {
   baseApiConfig as config,
 } from "../../libs/apiConfig";
 
-const shipEvent = (type, payload) => {
-  return { type, ...(!!payload ? payload : {}) };
+const shipEvent = (type) => {
+  return { type };
 };
 
 const fetchEntireListPayload = (dispatch, index) => {

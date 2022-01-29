@@ -69,19 +69,13 @@ const NavTabs = ({
     isProcessingNote,
   ]);
 
-  const displayProgressBar = () => {
-    return isLoading ? (
-      <LinearProgress
-        className={classNames(classes.contentTop, classes.contentLoader)}
-      />
-    ) : (
-      <div className={classNames(classes.contentTop)}></div>
-    );
-  };
-
   return (
     <div className={classNames(classes.contentRoot)}>
-      {displayProgressBar()}
+      <div className={classNames(classes.contentTop)}>
+        {isLoading && (
+          <LinearProgress className={classNames(classes.contentLoader)} />
+        )}
+      </div>
       <Grid className="nssd-grid-wrapper" container spacing={0}>
         <Grid item xs={12} sm={12}>
           <Panel>
@@ -121,7 +115,7 @@ const NavTabs = ({
 NavTabs.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   isInputIndexLoading: state.editor.isLoadingIndex,
-  isNoteIndexLoading: state.notes.isLoadingNotes,
+  isNoteIndexLoading: state.notes.isLoadingIndex,
   isNotesLoading: state.notes.isNotesLoading,
   isProcessingIndex: state.editor.isProcessingIndex,
   isProcessingNote: state.editor.isProcessingNote,
