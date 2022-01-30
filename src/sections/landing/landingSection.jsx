@@ -55,6 +55,6 @@ LandingSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   isLoadingIndex: state.notes.isLoadingIndex,
   isLoadingNotes: state.notes.isLoadingNotes,
-  notes: state.notes.list,
+  notes: state.notes.notes,
 });
 export default connect(mapStateToProps, {})(LandingSection);

@@ -6,6 +6,8 @@ import {
   baseApiConfig as config,
 } from "../../libs/apiConfig";
 
+const noteIdKey = "newObjectKeyName";
+
 const startRequestType = (type) => {
   return { type };
 };
@@ -22,9 +24,9 @@ const getIndex = () => {
     dispatch(startRequestType(_types.GET_INDEX_START));
     return axios
       .get(url, config)
-      .then((data) => {
-        const extractedData = data?.data?.payload?.list || [];
-        const index = Array.isArray(extractedData) ? extractedData : [];
+      .then((response) => {
+        const list = response?.data?.payload?.list || [];
+        const index = Array.isArray(list) ? list : [];
         return dispatch({ index, type: _types.GET_INDEX_SUCCESSFUL });
       })
       .catch((error) => {
@@ -43,8 +45,8 @@ const getNote = (id) => {
     dispatch(startRequestType(_types.GET_EDIT_NOTE_START));
     return axios
       .get(url, config)
-      .then((data) => {
-        const note = data?.data?.payload || null;
+      .then((response) => {
+        const note = response?.data?.payload || null;
         return dispatch({ note, type: _types.GET_EDIT_NOTE_SUCCESSFUL });
       })
       .catch((error) => {
@@ -86,8 +88,8 @@ const upsertNote = (content, isNew = true) => {
     const url = `${baseApiUrl}/${urlMethod}/${name}`;
     dispatch(startRequestType(_types.UPSERT_NOTE_START));
     return axios[requestType](url, content, config)
-      .then((payload) => {
-        const key = payload?.data?.newObjectKeyName || "";
+      .then((response) => {
+        const key = response?.data?.[noteIdKey] || "";
         return dispatch({ key, type: _types.UPSERT_NOTE_SUCCESSFUL });
       })
       .catch((error) => {

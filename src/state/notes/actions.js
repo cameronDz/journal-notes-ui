@@ -15,8 +15,8 @@ const fetchEntireListPayload = (dispatch, index) => {
   return axios
     .post(url, index, config)
     .then((payload) => {
-      const list = payload?.data?.payload?.list || [];
-      return dispatch({ list, type: _types.GET_NOTES_ALL_SUCCESS });
+      const notes = payload?.data?.payload?.list || [];
+      return dispatch({ notes, type: _types.GET_NOTES_ALL_SUCCESS });
     })
     .catch((error) => {
       console.error("GET_NOTES_ALL_ERROR", error);

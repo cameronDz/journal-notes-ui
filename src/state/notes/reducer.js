@@ -6,7 +6,7 @@ const initialState = {
   index: [],
   isLoadingIndex: false,
   isLoadingNotes: false,
-  list: [],
+  notes: [],
 };
 
 const reducer = (state = initialState, action = null) => {
@@ -20,7 +20,7 @@ const reducer = (state = initialState, action = null) => {
     case types.GET_NOTES_ALL_SUCCESS:
       newState = { ...(!!state ? state : {}) };
       newState.errorNotes = null;
-      newState.list = [...(Array.isArray(action.list) ? action.list : [])];
+      newState.notes = [...(Array.isArray(action.notes) ? action.notes : [])];
       break;
     case types.GET_NOTES_ALL_ERROR:
       newState = { ...(!!state ? state : {}) };
@@ -37,7 +37,7 @@ const reducer = (state = initialState, action = null) => {
       break;
     case types.GET_NOTE_INDEX_SUCCESS:
       newState = { ...(!!state ? state : {}) };
-      newState.index = [Array.isArray(action.index) ? action.index : []];
+      newState.index = [...(Array.isArray(action.index) ? action.index : [])];
       break;
     case types.GET_NOTE_INDEX_ERROR:
       newState = { ...(!!state ? state : {}) };

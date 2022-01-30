@@ -33,8 +33,8 @@ const fetchToken = (credentials) => {
     const url = `${authApiUrl}/${endpointToken}`;
     return axios
       .post(url, credentials, config)
-      .then((payload) => {
-        const data = payload?.data || "";
+      .then((response) => {
+        const data = response?.data || "";
         return dispatch({ type: _types.GET_TOKEN_SUCCESS, data });
       })
       .catch((error) => {

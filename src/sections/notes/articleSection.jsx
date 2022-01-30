@@ -271,7 +271,7 @@ const ArticleSection = ({
 
 ArticleSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
-  articles: state.notes.list,
+  articles: state.notes.notes,
   isLoadingIndex: state.notes.isLoadingIndex,
   isLoadingNotes: state.notes.isLoadingNotes,
   isUserSecured: !!state.auth.token,
