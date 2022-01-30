@@ -14,8 +14,8 @@ const fetchEntireListPayload = (dispatch, index) => {
   dispatch(shipEvent(_types.GET_NOTES_ALL_START));
   return axios
     .post(url, index, config)
-    .then((payload) => {
-      const notes = payload?.data?.payload?.list || [];
+    .then((response) => {
+      const notes = response?.data?.payload?.list || [];
       return dispatch({ notes, type: _types.GET_NOTES_ALL_SUCCESS });
     })
     .catch((error) => {
@@ -33,8 +33,8 @@ const fetchArticles = () => {
     dispatch(shipEvent(_types.GET_NOTE_INDEX_START));
     return axios
       .get(url, config)
-      .then((payload) => {
-        const index = payload?.data?.payload?.list || [];
+      .then((response) => {
+        const index = response?.data?.payload?.list || [];
         fetchEntireListPayload(dispatch, index);
         return dispatch({ index, type: _types.GET_NOTE_INDEX_SUCCESS });
       })
