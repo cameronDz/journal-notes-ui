@@ -10,7 +10,6 @@ import RouteTitle from "../../components/routeTitle";
 import StandardButton from "../../components/standardButton";
 import JournalForm from "./journalForm";
 import JournalFormRadioSelect from "./journalFormRadioSelect";
-
 import { generateDateString } from "../../libs/date";
 import { downloadJson } from "../../libs/download";
 import { journalForms, journalTypes } from "../../libs/types";
@@ -31,7 +30,6 @@ const propTypes = {
   isProcessingNote: PropType.bool,
   isProcessingIndex: PropType.bool,
   isUserSecured: PropType.bool,
-  indexList: PropType.arrayOf(PropType.string),
   pageTitle: PropType.string,
   requestNoteGet: PropType.func,
   requestNoteUpsert: PropType.func,
@@ -53,7 +51,6 @@ const EditorSection = ({
   isProcessingNote,
   isProcessingIndex,
   isUserSecured,
-  indexList,
   pageTitle,
   requestNoteGet,
   requestNoteUpsert,
@@ -124,10 +121,9 @@ const EditorSection = ({
   };
 
   const fireIndexUpdate = () => {
-    if (!!values?.id && Array.isArray(indexList)) {
+    if (!!values?.id) {
       if (isNew) {
-        const newIndex = [...indexList, values?.id];
-        updateArticleIndexList(newIndex);
+        updateArticleIndexList(values.id);
       }
       setHasStartedUpsert(true);
     }
@@ -246,7 +242,6 @@ const EditorSection = ({
 EditorSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   editNote: state.editor.note,
-  indexList: state.notes.index,
   isLoadingNote: state.editor.isLoadingNote,
   isLoadingIndex: state.editor.isLoadingIndex,
   isProcessingNote: state.editor.isProcessingNote,
