@@ -89,14 +89,7 @@ const ArticleSection = ({
   }, [articles]);
 
   const isArticleDisplayable = (article = null) => {
-    return (
-      !!article &&
-      !!article.title &&
-      !!(
-        (!!article.comments && !!article.comments.length) ||
-        (!!article.quotes && !!article.quotes.length)
-      )
-    );
+    return !!article?.comments?.length > 0 || !!article?.quotes?.length > 0;
   };
 
   const filterFunction = (article) => {
