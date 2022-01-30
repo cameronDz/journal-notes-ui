@@ -60,11 +60,11 @@ const getNote = (id) => {
 const upsertIndex = (item) => {
   return (dispatch, getState) => {
     const currIndex = getState().notes?.index || [];
-    const list = [...currIndex, item];
+    const payload = { list: [...currIndex, item] };
     const url = `${baseApiUrl}/update/index`;
     dispatch(startRequestType(_types.UPSERT_INDEX_START));
     return axios
-      .put(url, { list }, config)
+      .put(url, payload, config)
       .then(() => {
         return dispatch({ type: _types.UPSERT_INDEX_SUCCESSFUL });
       })
