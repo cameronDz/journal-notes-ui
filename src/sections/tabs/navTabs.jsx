@@ -40,33 +40,37 @@ const pages = [
 ];
 
 const propTypes = {
-  isInputIndexLoading: PropType.bool,
-  isNoteIndexLoading: PropType.bool,
-  isNotesLoading: PropType.bool,
-  isProcessingNote: PropType.bool,
-  isProcessingIndex: PropType.bool,
+  isLoadingEditIndex: PropType.bool,
+  isLoadingEditNote: PropType.bool,
+  isLoadingNoteIndex: PropType.bool,
+  isLoadingNoteNotes: PropType.bool,
+  isProcessingEditIndex: PropType.bool,
+  isProcessingEditNote: PropType.bool,
 };
 const useStyles = makeStyles(() => contentStyles);
 const NavTabs = ({
-  isInputIndexLoading,
-  isNoteIndexLoading,
-  isNotesLoading,
-  isProcessingIndex,
-  isProcessingNote,
+  isLoadingEditIndex = false,
+  isLoadingEditNote = false,
+  isLoadingNoteIndex = false,
+  isLoadingNoteNotes = false,
+  isProcessingEditIndex = false,
+  isProcessingEditNote = false,
 }) => {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const isNotes = isNoteIndexLoading || isNotesLoading;
-    const isProc = isProcessingIndex || isProcessingNote;
-    setIsLoading(isInputIndexLoading || isNotes || isProc);
+    const isLoadEdit = isLoadingEditIndex || isLoadingEditNote;
+    const isLoadNote = isLoadingNoteIndex || isLoadingNoteNotes;
+    const isProcEdit = isProcessingEditIndex || isProcessingEditNote;
+    setIsLoading(isLoadEdit || isLoadNote || isProcEdit);
   }, [
-    isInputIndexLoading,
-    isNoteIndexLoading,
-    isNotesLoading,
-    isProcessingIndex,
-    isProcessingNote,
+    isLoadingEditIndex,
+    isLoadingEditNote,
+    isLoadingNoteIndex,
+    isLoadingNoteNotes,
+    isProcessingEditIndex,
+    isProcessingEditNote,
   ]);
 
   return (
@@ -114,10 +118,11 @@ const NavTabs = ({
 
 NavTabs.propTypes = propTypes;
 const mapStateToProps = (state) => ({
-  isInputIndexLoading: state.editor.isLoadingIndex,
-  isNoteIndexLoading: state.notes.isLoadingIndex,
-  isNotesLoading: state.notes.isNotesLoading,
-  isProcessingIndex: state.editor.isProcessingIndex,
-  isProcessingNote: state.editor.isProcessingNote,
+  isLoadingEditIndex: state.editor.isLoadingIndex,
+  isLoadingEditNote: state.editor.isLoadingNote,
+  isLoadingNoteIndex: state.notes.isLoadingIndex,
+  isLoadingNoteNotes: state.notes.isLoadingNotes,
+  isProcessingEditIndex: state.editor.isProcessingIndex,
+  isProcessingEditNote: state.editor.isProcessingNote,
 });
 export default connect(mapStateToProps)(NavTabs);
