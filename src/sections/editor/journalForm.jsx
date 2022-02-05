@@ -3,6 +3,7 @@ import PropType from "prop-types";
 import { Grid } from "@material-ui/core";
 import { generateFormValues } from "../../libs/generateFormValues";
 import { handleFunction } from "../../libs/eventUtil";
+import { transformValuesToCurrentVersion } from "../../libs/transformer";
 import InputContainer from "../../components/inputs/inputContainer";
 
 const propTypes = {
@@ -40,7 +41,8 @@ const JournalForm = ({
 
   useEffect(() => {
     if (reloadValues && !!editValues) {
-      setValues(editValues);
+      const transValues = transformValuesToCurrentVersion(editValues);
+      setValues(transValues);
       handleFunction(setReloadValues, false);
     }
   }, [editValues, reloadValues, setReloadValues]);

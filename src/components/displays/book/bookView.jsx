@@ -81,6 +81,20 @@ const BookView = ({ note = null, showFull = false }) => {
                 title="Quotes"
               />
             )}
+            {note.definitions?.length > 0 && (
+              <ListBulletpoints
+                keyName="definition"
+                points={note.definitions}
+                title="Definitions"
+              />
+            )}
+            {note.resources?.length > 0 && (
+              <ListBulletpoints
+                keyName="resource"
+                points={note.resources}
+                title="Resources"
+              />
+            )}
             <TagsDisplay tags={note.tags} />
           </Fragment>
         )}

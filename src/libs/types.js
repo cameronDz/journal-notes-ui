@@ -390,13 +390,27 @@ const journalForms = {
         title: "Quotes",
       },
       {
+        elementName: "definition",
+        generationType: generationTypes.EMPTY_ARRAY,
+        inputType: inputTypes.TEXT_AREA_LIST,
+        name: "definitions",
+        title: "Definition",
+      },
+      {
+        elementName: "resource",
+        generationType: generationTypes.EMPTY_ARRAY,
+        inputType: inputTypes.TEXT_AREA_LIST,
+        name: "resources",
+        title: "Resource",
+      },
+      {
         generationType: generationTypes.EMPTY_ARRAY,
         inputType: inputTypes.TEXT_FIELD_LIST,
         name: "tags",
         title: "Tag",
       },
       {
-        defaultValue: "1.0.0",
+        defaultValue: "1.1.0",
         generateOn: generateOnTypes.CREATE,
         generationType: generationTypes.PRESET,
         inputType: inputTypes.HIDDEN,
