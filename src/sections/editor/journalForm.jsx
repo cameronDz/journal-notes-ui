@@ -49,7 +49,7 @@ const JournalForm = ({
 
   useEffect(() => {
     if (reloadInputs && !!inputs) {
-      const { journalType, ...remaining } = formValues || {};
+      const { journalType, _version, ...remaining } = formValues || {};
       const generatedValues = generateFormValues(inputs, remaining);
       handleFunction(setReloadInputs, false);
       setValues(generatedValues);
