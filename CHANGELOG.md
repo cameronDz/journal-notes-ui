@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.12.5] 2022-02-05
+## [2.12.1] 2022-02-09
+
+### Fixed
+
+- set book version correctly when changing types
+
+## [2.12.0] 2022-02-05
 
 ### Added
 
