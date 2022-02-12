@@ -32,7 +32,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.21.4",
     "eslint-plugin-standard": "^4.0.1",
-    "follow-redirects": "^1.14.7",
+    "follow-redirects": "^1.14.8",
     "glob-parent": "^5.1.2",
     "hosted-git-info": "^3.0.8",
     "html-loader": "^0.5.5",
