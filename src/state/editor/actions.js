@@ -1,6 +1,8 @@
 import axios from "axios";
 import * as _types from "./types";
+import { refreshIndex, refreshNotes } from "../notes/actions";
 import { getFullTimeStampString } from "../../libs/date";
+import { defaultUniqueArray } from "../../libs/defaults";
 import {
   baseApiUrl as baseApiUrl,
   baseApiConfig as config,
@@ -38,13 +40,15 @@ const getNote = (id) => {
 
 const upsertIndex = (item) => {
   return (dispatch, getState) => {
-    const currIndex = getState().notes?.index || [];
-    const payload = { list: [...currIndex, item] };
+    const currIndex = defaultUniqueArray(getState().notes?.index);
+    const newIndex = defaultUniqueArray([...currIndex, item]);
+    const payload = { list: newIndex };
     const url = `${baseApiUrl}/update/index`;
     dispatch(startRequestType(_types.UPSERT_INDEX_START));
     return axios
       .put(url, payload, config)
       .then(() => {
+        refreshIndex(dispatch, newIndex);
         return dispatch({ type: _types.UPSERT_INDEX_SUCCESSFUL });
       })
       .catch((error) => {
@@ -58,7 +62,7 @@ const upsertIndex = (item) => {
 };
 
 const upsertNote = (content, isNew = true) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const name = content?.id || getFullTimeStampString();
     const requestType = isNew ? "post" : "put";
     const urlMethod = isNew ? "upload" : "update";
@@ -66,6 +70,9 @@ const upsertNote = (content, isNew = true) => {
     dispatch(startRequestType(_types.UPSERT_NOTE_START));
     return axios[requestType](url, content, config)
       .then(() => {
+        const currNotes = defaultUniqueArray(getState().notes?.notes);
+        const newNotes = [...currNotes, content];
+        refreshNotes(dispatch, newNotes);
         return dispatch({ type: _types.UPSERT_NOTE_SUCCESSFUL });
       })
       .catch((error) => {

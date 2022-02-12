@@ -1,3 +1,4 @@
+import { defaultUniqueArray } from "../../libs/defaults";
 import * as types from "./types";
 
 const initialState = {
@@ -20,7 +21,7 @@ const reducer = (state = initialState, action = null) => {
     case types.GET_NOTES_ALL_SUCCESS:
       newState = { ...(!!state ? state : {}) };
       newState.errorNotes = null;
-      newState.notes = [...(Array.isArray(action.notes) ? action.notes : [])];
+      newState.notes = defaultUniqueArray(action.notes);
       break;
     case types.GET_NOTES_ALL_ERROR:
       newState = { ...(!!state ? state : {}) };
@@ -37,7 +38,7 @@ const reducer = (state = initialState, action = null) => {
       break;
     case types.GET_NOTE_INDEX_SUCCESS:
       newState = { ...(!!state ? state : {}) };
-      newState.index = [...(Array.isArray(action.index) ? action.index : [])];
+      newState.index = defaultUniqueArray(action.index);
       break;
     case types.GET_NOTE_INDEX_ERROR:
       newState = { ...(!!state ? state : {}) };
@@ -46,6 +47,15 @@ const reducer = (state = initialState, action = null) => {
     case types.GET_NOTE_INDEX_COMPLETED:
       newState = { ...(!!state ? state : {}) };
       newState.isLoadingIndex = false;
+      break;
+
+    case types.ADD_NOTE_INDEX_ID:
+      newState = { ...(!!state ? state : {}) };
+      newState.index = defaultUniqueArray(action.index);
+      break;
+    case types.ADD_NOTES_ALL_NOTE:
+      newState = { ...(!!state ? state : {}) };
+      newState.notes = defaultUniqueArray(action.notes);
       break;
 
     default:

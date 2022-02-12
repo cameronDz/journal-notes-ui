@@ -48,4 +48,12 @@ const fetchArticles = () => {
   };
 };
 
-export { fetchArticles };
+const refreshIndex = (dispatch, index) => {
+  return dispatch({ index, type: _types.ADD_NOTE_INDEX_ID });
+};
+
+const refreshNotes = (dispatch, notes) => {
+  return dispatch({ notes, type: _types.ADD_NOTES_ALL_NOTE });
+};
+
+export { fetchArticles, refreshIndex, refreshNotes };
