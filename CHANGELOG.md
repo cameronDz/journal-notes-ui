@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.13.0] 2022-02-12
+
+### Changed
+
+- internal article list of IDs updated after each create, avoids need to refresh in order to submit multiple articles
+
+### Security
+
+- updated follow-redirects vulnerability
+
 ## [2.12.1] 2022-02-09
 
 ### Fixed
