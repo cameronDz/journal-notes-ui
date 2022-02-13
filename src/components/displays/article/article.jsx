@@ -7,6 +7,7 @@ const propTypes = {
   author: PropType.string,
   comments: PropType.array,
   createdDate: PropType.string,
+  defintions: PropType.array,
   description: PropType.string,
   publishDate: PropType.string,
   publisher: PropType.string,
@@ -21,6 +22,7 @@ const Article = ({
   author,
   comments,
   createdDate,
+  defintions,
   description,
   publishDate,
   publisher,
@@ -42,7 +44,12 @@ const Article = ({
         url={url}
       />
       {!!showFull && (
-        <ArticleDetails comments={comments} quotes={quotes} tags={tags} />
+        <ArticleDetails
+          comments={comments}
+          definitions={defintions}
+          quotes={quotes}
+          tags={tags}
+        />
       )}
     </Fragment>
   );
