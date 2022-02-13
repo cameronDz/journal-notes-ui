@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.14.1] 2022-02-13
+
+### Fixed
+
+- issue with displaying new defintions field for articles
+
 ## [2.14.0] 2022-02-13
 
 ### Changed

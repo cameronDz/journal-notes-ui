@@ -7,7 +7,7 @@ const propTypes = {
   author: PropType.string,
   comments: PropType.array,
   createdDate: PropType.string,
-  defintions: PropType.array,
+  definitions: PropType.array,
   description: PropType.string,
   publishDate: PropType.string,
   publisher: PropType.string,
@@ -22,7 +22,7 @@ const Article = ({
   author,
   comments,
   createdDate,
-  defintions,
+  definitions,
   description,
   publishDate,
   publisher,
@@ -46,7 +46,7 @@ const Article = ({
       {!!showFull && (
         <ArticleDetails
           comments={comments}
-          definitions={defintions}
+          definitions={definitions}
           quotes={quotes}
           tags={tags}
         />
