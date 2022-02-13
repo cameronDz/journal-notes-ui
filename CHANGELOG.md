@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - article notes added definition
 
+### Fixed
+
+- updated caniuse package
+
 ## [2.13.0] 2022-02-12
 
 ### Changed
