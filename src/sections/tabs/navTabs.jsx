@@ -37,6 +37,11 @@ const pages = [
     title: "Note Review Editor",
     index: 4,
   },
+  {
+    name: "clone",
+    title: "Note Review Creator",
+    index: 5,
+  },
 ];
 
 const propTypes = {
@@ -107,6 +112,9 @@ const NavTabs = ({
               </Route>
               <Route exact path={`/${pages[4].name}`}>
                 <EditorSection isNew={false} pageTitle={pages[4].title} />
+              </Route>
+              <Route exact path={`/${pages[5].name}`}>
+                <EditorSection isNew={false} pageTitle={pages[5].title} />
               </Route>
             </RouterSwitch>
           </Panel>

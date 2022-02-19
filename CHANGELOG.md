@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.15.0] 2022-02-19
+
+### Added
+
+- ability to clone general information about a book note
+
 ## [2.14.1] 2022-02-13
 
 ### Fixed

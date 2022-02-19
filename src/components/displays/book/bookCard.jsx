@@ -5,17 +5,21 @@ import BookView from "./bookView";
 import { propTypesBookV1 } from "./types";
 
 const propTypes = {
+  isClonable: PropType.bool,
   isEditable: PropType.bool,
   minHeight: PropType.string,
   noteData: PropType.shape(propTypesBookV1),
+  onClickClone: PropType.func,
   onClickEdit: PropType.func,
   show: PropType.bool,
 };
 
 const BookCard = ({
+  isClonable = false,
   isEditable = false,
   minHeight = null,
   noteData = null,
+  onClickClone = null,
   onClickEdit = null,
   show = false,
 }) => {
@@ -31,9 +35,11 @@ const BookCard = ({
 
   return (
     <NoteCard
+      isClonable={isClonable}
       isEditable={isEditable}
       isFullView={showFull}
       minHeight={minHeight}
+      onClickClone={onClickClone}
       onClickEdit={onClickEdit}
       onClickFull={handleClick}
     >

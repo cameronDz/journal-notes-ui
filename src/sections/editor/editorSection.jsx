@@ -11,7 +11,9 @@ import StandardButton from "../../components/standardButton";
 import JournalForm from "./journalForm";
 import JournalFormRadioSelect from "./journalFormRadioSelect";
 import { generateDateString } from "../../libs/date";
+import { defaultEmptyString, defaultUniqueArray } from "../../libs/defaults";
 import { downloadJson } from "../../libs/download";
+import { generateFormValues } from "../../libs/generateFormValues";
 import { journalForms, journalTypes } from "../../libs/types";
 import {
   clearNote,
@@ -41,6 +43,9 @@ const buttonTitleDownload = "Download article notes in JSON format";
 const buttonTitleReset = "Clear input of article notes";
 const buttonTitleUpload = "Upload article notes to S3";
 
+const cloneKey = "/clone?id";
+const editKey = "/edit?id";
+
 const useStyles = makeStyles(() => styles);
 const EditorSection = ({
   clearEditNote,
@@ -57,6 +62,7 @@ const EditorSection = ({
   updateArticleIndexList,
 }) => {
   const history = useHistory();
+  const [cloneId, setCloneId] = useState("");
   const [editId, setEditId] = useState("");
   const [editValues, setEditValues] = useState(null);
   const [hasStartedUpsert, setHasStartedUpsert] = useState(false);
@@ -70,28 +76,49 @@ const EditorSection = ({
 
   useEffect(() => {
     const parsedHash = parse(location?.hash);
-    const hashKey = "/edit?id";
-    const id = parsedHash?.[hashKey];
-    setEditId(id);
+    if (parsedHash?.[editKey]) {
+      setEditId(parsedHash?.[editKey]);
+    } else if (parsedHash?.[cloneKey]) {
+      setCloneId(parsedHash?.[cloneKey]);
+    }
   }, []);
 
   useEffect(() => {
     if (!!editNote && typeof editNote === "object") {
       setType(editNote.journalType);
-      setEditValues({ ...editNote });
+      if (!!cloneId) {
+        const cloneValues = {
+          author: defaultEmptyString(editNote.author),
+          bookDescription: defaultEmptyString(editNote.bookDescription),
+          bookSource: defaultEmptyString(editNote.bookSource),
+          journalType: defaultEmptyString(editNote.journalType),
+          pageCount: defaultEmptyString(editNote.pageCount),
+          publishDate: defaultEmptyString(editNote.publishDate),
+          publisher: defaultEmptyString(editNote.publisher),
+          tags: defaultUniqueArray(editNote.tags),
+          title: defaultEmptyString(editNote.title),
+          _version: defaultEmptyString(editNote._version),
+        };
+        const cloneInputs = journalForms?.[editNote.journalType]?.inputs || {};
+        const clonedNote = generateFormValues(cloneInputs, cloneValues);
+        setEditValues(clonedNote);
+      } else {
+        setEditValues({ ...editNote });
+      }
       setReloadValues(true);
       setTimeout(() => {
         setEditValues(null);
         clearEditNote();
       });
     }
-  }, [clearEditNote, editNote]);
+  }, [clearEditNote, cloneId, editNote]);
 
   useEffect(() => {
-    if (!isNew && isUserSecured && !!editId) {
-      requestNoteGet(editId);
+    const id = editId || cloneId;
+    if (!isNew && isUserSecured && !!id) {
+      requestNoteGet(id);
     }
-  }, [editId, isNew, isUserSecured, requestNoteGet]);
+  }, [cloneId, editId, isNew, isUserSecured, requestNoteGet]);
 
   useEffect(() => {
     const isLoad = isLoadingNote || isLoadingIndex;

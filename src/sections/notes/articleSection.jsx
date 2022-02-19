@@ -159,6 +159,17 @@ const ArticleSection = ({
     }
   };
 
+  const handleClickCloneNote = (note) => {
+    const id = note?.id || "";
+    if (id) {
+      const pathname = "/clone";
+      const search = `id=${id}`;
+      history.push({ pathname, search });
+    } else {
+      console.error("ERROR - UNABLE TO ENTER CLONE MODE");
+    }
+  };
+
   const handleClickRemoveCurrentSelectedFilter = () => {
     if (!!currentSelectedFilterTag && !!currentSelectedFilterTag[0]) {
       setFilterTags([
@@ -186,9 +197,11 @@ const ArticleSection = ({
                   <Grid item sm={12} md={md}>
                     {note.journalType === journalTypes.BOOK && (
                       <BookCard
+                        isClonable={isUserSecured}
                         isEditable={isUserSecured}
                         minHeight={minHeight}
                         noteData={note}
+                        onClickClone={() => handleClickCloneNote(note)}
                         onClickEdit={() => handleClickEditNote(note)}
                       />
                     )}
