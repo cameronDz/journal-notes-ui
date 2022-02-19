@@ -11,7 +11,11 @@ import StandardButton from "../../components/standardButton";
 import JournalForm from "./journalForm";
 import JournalFormRadioSelect from "./journalFormRadioSelect";
 import { generateDateString } from "../../libs/date";
-import { defaultEmptyString, defaultUniqueArray } from "../../libs/defaults";
+import {
+  defaultEmptyString,
+  defaultEventEmptyString,
+  defaultUniqueArray,
+} from "../../libs/defaults";
 import { downloadJson } from "../../libs/download";
 import { generateFormValues } from "../../libs/generateFormValues";
 import { journalForms, journalTypes } from "../../libs/types";
@@ -39,9 +43,8 @@ const propTypes = {
 };
 
 const availableTypes = Object.values(journalTypes);
-const buttonTitleDownload = "Download article notes in JSON format";
-const buttonTitleReset = "Clear input of article notes";
-const buttonTitleUpload = "Upload article notes to S3";
+const buttonTitleReset = "Clear note inputs";
+const buttonTitleUpload = "Save note";
 
 const cloneKey = "/clone?id";
 const editKey = "/edit?id";
@@ -162,13 +165,9 @@ const EditorSection = ({
 
   const handleUploadClick = () => {
     const payload = generateCardPayload();
+    downloadJson(JSON.stringify(payload), values?.id || "data");
     fireIndexUpdate();
     requestNoteUpsert(payload, isNew);
-  };
-
-  const handleDownloadClick = () => {
-    const payload = generateCardPayload();
-    downloadJson(JSON.stringify(payload), values?.id || "data");
   };
 
   const generateCardPayload = () => {
@@ -188,7 +187,7 @@ const EditorSection = ({
   };
 
   const handleChangeType = (event) => {
-    const newType = event?.target?.value || "";
+    const newType = defaultEventEmptyString(event);
     setType(newType);
     setReloadInputs(true);
   };
@@ -242,16 +241,9 @@ const EditorSection = ({
           <StandardButton
             disabled={isDisabled}
             isFat={true}
-            label="Upload"
+            label="Save"
             onClick={handleUploadClick}
             title={buttonTitleUpload}
-          />
-          <StandardButton
-            disabled={isDisabled}
-            isFat={true}
-            label="Download"
-            onClick={handleDownloadClick}
-            title={buttonTitleDownload}
           />
           <StandardButton
             disabled={isDisabled}

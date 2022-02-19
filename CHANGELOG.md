@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.16.0] 2022-02-19
+
+### Changed
+
+- save button now also downloads JSON version
+- JSON download no longer stringifies object before downloading, no longer opens to new page
+
+### Removed
+
+- download note button (not needed since edit functionality exists)
+
 ## [2.15.0] 2022-02-19
 
 ### Added

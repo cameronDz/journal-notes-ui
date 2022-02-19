@@ -6,6 +6,7 @@ import { defaultUniqueArray } from "../../libs/defaults";
 import {
   baseApiUrl as baseApiUrl,
   baseApiConfig as config,
+  disableSave,
 } from "../../libs/apiConfig";
 
 const startRequestType = (type) => {
@@ -44,20 +45,25 @@ const upsertIndex = (item) => {
     const newIndex = defaultUniqueArray([...currIndex, item]);
     const payload = { list: newIndex };
     const url = `${baseApiUrl}/update/index`;
-    dispatch(startRequestType(_types.UPSERT_INDEX_START));
-    return axios
-      .put(url, payload, config)
-      .then(() => {
-        refreshIndex(dispatch, newIndex);
-        return dispatch({ type: _types.UPSERT_INDEX_SUCCESSFUL });
-      })
-      .catch((error) => {
-        console.error("UPSERT_INDEX_SUCCESSFUL", error);
-        return dispatch({ error, type: _types.UPSERT_INDEX_SUCCESSFUL });
-      })
-      .finally(() => {
-        return dispatch({ type: _types.UPSERT_INDEX_COMPLETED });
-      });
+    if (!disableSave) {
+      dispatch(startRequestType(_types.UPSERT_INDEX_START));
+      return axios
+        .put(url, payload, config)
+        .then(() => {
+          refreshIndex(dispatch, newIndex);
+          return dispatch({ type: _types.UPSERT_INDEX_SUCCESSFUL });
+        })
+        .catch((error) => {
+          console.error("UPSERT_INDEX_SUCCESSFUL", error);
+          return dispatch({ error, type: _types.UPSERT_INDEX_SUCCESSFUL });
+        })
+        .finally(() => {
+          return dispatch({ type: _types.UPSERT_INDEX_COMPLETED });
+        });
+    } else {
+      console.warn("SAVING disabled - url: ", url);
+      console.warn("SAVING disabled - payload: ", payload);
+    }
   };
 };
 
@@ -67,21 +73,26 @@ const upsertNote = (content, isNew = true) => {
     const requestType = isNew ? "post" : "put";
     const urlMethod = isNew ? "upload" : "update";
     const url = `${baseApiUrl}/${urlMethod}/${name}`;
-    dispatch(startRequestType(_types.UPSERT_NOTE_START));
-    return axios[requestType](url, content, config)
-      .then(() => {
-        const currNotes = defaultUniqueArray(getState().notes?.notes);
-        const newNotes = [...currNotes, content];
-        refreshNotes(dispatch, newNotes);
-        return dispatch({ type: _types.UPSERT_NOTE_SUCCESSFUL });
-      })
-      .catch((error) => {
-        console.error("UPSERT_NOTE_ERROR", error);
-        return dispatch({ error, type: _types.UPSERT_NOTE_ERROR });
-      })
-      .finally(() => {
-        return dispatch({ type: _types.UPSERT_NOTE_COMPLETED });
-      });
+    if (!disableSave) {
+      dispatch(startRequestType(_types.UPSERT_NOTE_START));
+      return axios[requestType](url, content, config)
+        .then(() => {
+          const currNotes = defaultUniqueArray(getState().notes?.notes);
+          const newNotes = [...currNotes, content];
+          refreshNotes(dispatch, newNotes);
+          return dispatch({ type: _types.UPSERT_NOTE_SUCCESSFUL });
+        })
+        .catch((error) => {
+          console.error("UPSERT_NOTE_ERROR", error);
+          return dispatch({ error, type: _types.UPSERT_NOTE_ERROR });
+        })
+        .finally(() => {
+          return dispatch({ type: _types.UPSERT_NOTE_COMPLETED });
+        });
+    } else {
+      console.warn("SAVING disabled - url: ", url);
+      console.warn("SAVING disabled - content: ", content);
+    }
   };
 };
 
