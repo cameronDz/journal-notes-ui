@@ -8,21 +8,24 @@ import { fetchArticles } from "../state/notes/actions";
 import { AppFooter } from "../components/footer";
 import { LeftNavBar } from "../components/navbar";
 import { NavTabs } from "./tabs";
+import { handleFunction } from "../libs/eventUtil";
 import { RequestTokenDialog } from "../auth";
 import { appContainerStyles } from "./styles";
 
-const propTypes = { callFetchArticles: PropType.func };
+let abortCtrlFetchAll = null;
+const propTypes = { getAllNotes: PropType.func };
 const useStyles = makeStyles(() => appContainerStyles);
-const AppContainer = ({ callFetchArticles }) => {
+const AppContainer = ({ getAllNotes }) => {
   const classes = useStyles();
   const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if (typeof callFetchArticles === "function") {
-      callFetchArticles();
-    }
-  }, [callFetchArticles]);
+    abortCtrlFetchAll?.abort();
+    abortCtrlFetchAll = new AbortController();
+    const config = { signal: abortCtrlFetchAll.signal };
+    handleFunction(getAllNotes, config);
+  }, [getAllNotes]);
 
   const handleIconClick = (name) => {
     if (name !== "signin") {
@@ -55,5 +58,5 @@ const AppContainer = ({ callFetchArticles }) => {
 
 AppContainer.propTypes = propTypes;
 const mapStateToProps = () => ({});
-const mapDispatchToProps = { callFetchArticles: fetchArticles };
+const mapDispatchToProps = { getAllNotes: fetchArticles };
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

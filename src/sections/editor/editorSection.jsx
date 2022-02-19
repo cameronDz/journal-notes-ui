@@ -49,6 +49,10 @@ const buttonTitleUpload = "Save note";
 const cloneKey = "/clone?id";
 const editKey = "/edit?id";
 
+let abortCtrlIndexUpsert = null;
+let abortCtrlNoteGet = null;
+let abortCtrlNoteUpsert = null;
+
 const useStyles = makeStyles(() => styles);
 const EditorSection = ({
   clearEditNote,
@@ -84,6 +88,11 @@ const EditorSection = ({
     } else if (parsedHash?.[cloneKey]) {
       setCloneId(parsedHash?.[cloneKey]);
     }
+    return () => {
+      abortCtrlNoteGet?.abort();
+      abortCtrlNoteUpsert?.abort();
+      abortCtrlIndexUpsert?.abort();
+    };
   }, []);
 
   useEffect(() => {
@@ -119,7 +128,9 @@ const EditorSection = ({
   useEffect(() => {
     const id = editId || cloneId;
     if (!isNew && isUserSecured && !!id) {
-      requestNoteGet(id);
+      abortCtrlNoteGet?.abort();
+      abortCtrlNoteGet = new AbortController();
+      requestNoteGet(id, { signal: abortCtrlNoteGet.signal });
     }
   }, [cloneId, editId, isNew, isUserSecured, requestNoteGet]);
 
@@ -153,7 +164,10 @@ const EditorSection = ({
   const fireIndexUpdate = () => {
     if (!!values?.id) {
       if (isNew) {
-        updateArticleIndexList(values.id);
+        abortCtrlIndexUpsert?.abort();
+        abortCtrlIndexUpsert = new AbortController();
+        const config = { signal: abortCtrlIndexUpsert.signal };
+        updateArticleIndexList(values.id, config);
       }
       setHasStartedUpsert(true);
     }
@@ -165,9 +179,12 @@ const EditorSection = ({
 
   const handleUploadClick = () => {
     const payload = generateCardPayload();
-    downloadJson(JSON.stringify(payload), values?.id || "data");
+    downloadJson(payload, values?.id || "data");
     fireIndexUpdate();
-    requestNoteUpsert(payload, isNew);
+    abortCtrlNoteUpsert?.abort();
+    abortCtrlNoteUpsert = new AbortController();
+    const config = { signal: abortCtrlNoteUpsert.signal };
+    requestNoteUpsert(payload, isNew, config);
   };
 
   const generateCardPayload = () => {

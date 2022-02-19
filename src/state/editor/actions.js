@@ -2,10 +2,10 @@ import axios from "axios";
 import * as _types from "./types";
 import { refreshIndex, refreshNotes } from "../notes/actions";
 import { getFullTimeStampString } from "../../libs/date";
-import { defaultUniqueArray } from "../../libs/defaults";
+import { defaultEmptyObject, defaultUniqueArray } from "../../libs/defaults";
 import {
   baseApiUrl as baseApiUrl,
-  baseApiConfig as config,
+  baseApiConfig as baseConfig,
   disableSave,
 } from "../../libs/apiConfig";
 
@@ -19,12 +19,12 @@ const clearNote = () => {
   };
 };
 
-const getNote = (id) => {
+const getNote = (id, config = {}) => {
   return (dispatch) => {
     const url = `${baseApiUrl}/object/${id}`;
     dispatch(startRequestType(_types.GET_EDIT_NOTE_START));
     return axios
-      .get(url, config)
+      .get(url, setConfig(config))
       .then((response) => {
         const note = response?.data?.payload || null;
         return dispatch({ note, type: _types.GET_EDIT_NOTE_SUCCESSFUL });
@@ -39,7 +39,7 @@ const getNote = (id) => {
   };
 };
 
-const upsertIndex = (item) => {
+const upsertIndex = (item, config = {}) => {
   return (dispatch, getState) => {
     const currIndex = defaultUniqueArray(getState().notes?.index);
     const newIndex = defaultUniqueArray([...currIndex, item]);
@@ -48,7 +48,7 @@ const upsertIndex = (item) => {
     if (!disableSave) {
       dispatch(startRequestType(_types.UPSERT_INDEX_START));
       return axios
-        .put(url, payload, config)
+        .put(url, payload, setConfig(config))
         .then(() => {
           refreshIndex(dispatch, newIndex);
           return dispatch({ type: _types.UPSERT_INDEX_SUCCESSFUL });
@@ -67,7 +67,7 @@ const upsertIndex = (item) => {
   };
 };
 
-const upsertNote = (content, isNew = true) => {
+const upsertNote = (content, isNew = true, config = {}) => {
   return (dispatch, getState) => {
     const name = content?.id || getFullTimeStampString();
     const requestType = isNew ? "post" : "put";
@@ -75,7 +75,7 @@ const upsertNote = (content, isNew = true) => {
     const url = `${baseApiUrl}/${urlMethod}/${name}`;
     if (!disableSave) {
       dispatch(startRequestType(_types.UPSERT_NOTE_START));
-      return axios[requestType](url, content, config)
+      return axios[requestType](url, content, setConfig(config))
         .then(() => {
           const currNotes = defaultUniqueArray(getState().notes?.notes);
           const newNotes = [...currNotes, content];
@@ -94,6 +94,10 @@ const upsertNote = (content, isNew = true) => {
       console.warn("SAVING disabled - content: ", content);
     }
   };
+};
+
+const setConfig = (config = {}) => {
+  return { ...baseConfig, ...defaultEmptyObject(config) };
 };
 
 export { clearNote, getNote, upsertIndex, upsertNote };

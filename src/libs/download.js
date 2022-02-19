@@ -5,7 +5,7 @@ const downloadJson = (object = "", name = "") => {
   const prefix = !!name ? name : new Date().getTime();
   const filename = prefix + ".json";
   const hrefConfig = "data:application/json;charset=utf-8;,";
-  const href = hrefConfig + encodeURIComponent(object);
+  const href = hrefConfig + encodeURIComponent(JSON.stringify(object));
 
   // fake a click to download file
   const element = document.createElement("a");

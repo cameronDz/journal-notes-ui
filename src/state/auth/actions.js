@@ -4,8 +4,9 @@ import {
   authApiBaseUrl as authApiUrl,
   authApiEndpointLiveness as endpointLiveness,
   authApiEndpointToken as endpointToken,
-  baseApiConfig as config,
+  baseApiConfig as baseConfig,
 } from "../../libs/apiConfig";
+import { defaultEmptyObject, defaultEmptyString } from "../../libs/defaults";
 
 const startLiveness = () => {
   return { type: _types.LIVENESS_PROBE };
@@ -27,14 +28,14 @@ const clearToken = () => {
   };
 };
 
-const fetchToken = (credentials) => {
+const fetchToken = (credentials, config = {}) => {
   return (dispatch) => {
     dispatch(startRequest());
     const url = `${authApiUrl}/${endpointToken}`;
     return axios
-      .post(url, credentials, config)
+      .post(url, credentials, { ...baseConfig, ...defaultEmptyObject(config) })
       .then((response) => {
-        const data = response?.data || "";
+        const data = defaultEmptyString(response?.data?.token);
         return dispatch({ type: _types.GET_TOKEN_SUCCESS, data });
       })
       .catch((error) => {
@@ -51,7 +52,7 @@ const livenessCheck = () => {
   return (dispatch) => {
     dispatch(startLiveness());
     const url = `${authApiUrl}/${endpointLiveness}`;
-    return axios.post(url, {}, config);
+    return axios.post(url, {}, baseConfig);
   };
 };
 

@@ -22,6 +22,7 @@ import { handleFunction } from "../libs/eventUtil";
 import { authText } from "../libs/text";
 import { requestTokenDialogStyles as styles } from "./styles";
 
+let abortCtrlPostCredentials = null;
 const title = "Sign in with credentials";
 const propTypes = {
   clearTokenError: PropType.func,
@@ -55,6 +56,12 @@ const RequestTokenDialog = ({
   const [username, setUsername] = useState("");
 
   useEffect(() => {
+    return () => {
+      abortCtrlPostCredentials?.abort();
+    };
+  }, []);
+
+  useEffect(() => {
     let status = "info";
     if (!!token) {
       status = "success";
@@ -81,8 +88,11 @@ const RequestTokenDialog = ({
     if (!!token) {
       handleFunction(clearTokenUser);
     } else {
+      abortCtrlPostCredentials?.abort();
+      abortCtrlPostCredentials = new AbortController();
+      const config = { signal: abortCtrlPostCredentials.signal };
       const credentials = { username, password };
-      handleFunction(fetchUserToken, credentials);
+      handleFunction(fetchUserToken, credentials, config);
     }
   };
 

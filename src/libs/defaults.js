@@ -2,6 +2,10 @@ const defaultUniqueArray = (arr) => {
   return [...new Set(Array.isArray(arr) ? arr : [])];
 };
 
+const defaultEmptyObject = (obj) => {
+  return !!obj && typeof obj === "object" && !Array.isArray(obj) ? obj : {};
+};
+
 const defaultEmptyString = (str) => {
   return !!str && typeof str === "string" ? str : "";
 };
@@ -11,4 +15,9 @@ const defaultEventEmptyString = (evt) => {
   return defaultEmptyString(str);
 };
 
-export { defaultEmptyString, defaultEventEmptyString, defaultUniqueArray };
+export {
+  defaultEmptyObject,
+  defaultEmptyString,
+  defaultEventEmptyString,
+  defaultUniqueArray,
+};

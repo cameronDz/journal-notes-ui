@@ -1,21 +1,22 @@
 import axios from "axios";
 import * as _types from "./types";
 import {
-  baseApiUrl as baseApiUrl,
-  baseApiConfig as config,
+  baseApiUrl as baseUrl,
+  baseApiConfig as baseConfig,
 } from "../../libs/apiConfig";
+import { defaultEmptyObject, defaultUniqueArray } from "../../libs/defaults";
 
 const shipEvent = (type) => {
   return { type };
 };
 
-const fetchEntireListPayload = (dispatch, index) => {
-  const url = `${baseApiUrl}/objects`;
+const fetchEntireListPayload = (dispatch, index, apiConfig = {}) => {
+  const url = `${baseUrl}/objects`;
   dispatch(shipEvent(_types.GET_NOTES_ALL_START));
   return axios
-    .post(url, index, config)
+    .post(url, index, setConfig(apiConfig))
     .then((response) => {
-      const notes = response?.data?.payload?.list || [];
+      const notes = defaultUniqueArray(response?.data?.payload?.list);
       return dispatch({ notes, type: _types.GET_NOTES_ALL_SUCCESS });
     })
     .catch((error) => {
@@ -27,15 +28,15 @@ const fetchEntireListPayload = (dispatch, index) => {
     });
 };
 
-const fetchArticles = () => {
+const fetchArticles = (apiConfig = {}) => {
   return (dispatch) => {
-    const url = `${baseApiUrl}/object/index`;
+    const url = `${baseUrl}/object/index`;
     dispatch(shipEvent(_types.GET_NOTE_INDEX_START));
     return axios
-      .get(url, config)
+      .get(url, setConfig(apiConfig))
       .then((response) => {
-        const index = response?.data?.payload?.list || [];
-        fetchEntireListPayload(dispatch, index);
+        const index = defaultUniqueArray(response?.data?.payload?.list);
+        fetchEntireListPayload(dispatch, index, apiConfig);
         return dispatch({ index, type: _types.GET_NOTE_INDEX_SUCCESS });
       })
       .catch((error) => {
@@ -54,6 +55,10 @@ const refreshIndex = (dispatch, index) => {
 
 const refreshNotes = (dispatch, notes) => {
   return dispatch({ notes, type: _types.ADD_NOTES_ALL_NOTE });
+};
+
+const setConfig = (config = {}) => {
+  return { ...baseConfig, ...defaultEmptyObject(config) };
 };
 
 export { fetchArticles, refreshIndex, refreshNotes };
