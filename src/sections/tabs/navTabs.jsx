@@ -114,7 +114,7 @@ const NavTabs = ({
                 <EditorSection isNew={false} pageTitle={pages[4].title} />
               </Route>
               <Route exact path={`/${pages[5].name}`}>
-                <EditorSection isNew={false} pageTitle={pages[5].title} />
+                <EditorSection isNew={true} pageTitle={pages[5].title} />
               </Route>
             </RouterSwitch>
           </Panel>

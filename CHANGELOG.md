@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.17.1] 2022-02-20
+
+### Fixed
+
+- set cloned notes to be new to add generated id to index
+
 ## [2.17.0] 2022-02-19
 
 ### Added
