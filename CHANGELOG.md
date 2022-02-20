@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.17.2] 2022-02-20
+
+### Fixed
+
+- fix logic for clone notes when moving over to edit mode
+
 ## [2.17.1] 2022-02-20
 
 ### Fixed

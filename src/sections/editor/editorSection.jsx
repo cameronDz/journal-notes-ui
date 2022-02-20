@@ -127,12 +127,12 @@ const EditorSection = ({
 
   useEffect(() => {
     const id = editId || cloneId;
-    if (!isNew && isUserSecured && !!id) {
+    if (isUserSecured && !!id) {
       abortCtrlNoteGet?.abort();
       abortCtrlNoteGet = new AbortController();
       requestNoteGet(id, { signal: abortCtrlNoteGet.signal });
     }
-  }, [cloneId, editId, isNew, isUserSecured, requestNoteGet]);
+  }, [cloneId, editId, isUserSecured, requestNoteGet]);
 
   useEffect(() => {
     const isLoad = isLoadingNote || isLoadingIndex;
@@ -155,7 +155,9 @@ const EditorSection = ({
   const clearForm = () => {
     setValues(null);
     setIsDirty(false);
-    if (!isNew) {
+    if (!!cloneId || !!editId) {
+      setCloneId("");
+      setEditId("");
       const pathname = "/create";
       history.push({ pathname });
     }
