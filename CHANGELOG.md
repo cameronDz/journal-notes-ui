@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- basic unit test config and tests for lib files
+
+### Changed
+
+- sort order now puts null values for name/date in back of ordered list
+
 ## [2.17.2] 2022-02-20
 
 ### Fixed

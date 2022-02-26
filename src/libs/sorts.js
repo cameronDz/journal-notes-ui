@@ -42,11 +42,13 @@ const sortByReversePublishDate = (a, b) => {
 const sortByReverseTitle = (a, b) => {
   const aValue = a?.title || "";
   const bValue = b?.title || "";
-  let sortValue = NEUTRAL;
-  if (aValue < bValue) {
-    sortValue = SECOND_VALUE_GREATER;
-  } else if (aValue > bValue) {
-    sortValue = FIRST_VALUE_GREATER;
+  let sortValue = sortByBooleanValues(bValue, aValue);
+  if (sortValue === NEUTRAL) {
+    if (aValue < bValue) {
+      sortValue = SECOND_VALUE_GREATER;
+    } else if (aValue > bValue) {
+      sortValue = FIRST_VALUE_GREATER;
+    }
   }
   return sortValue;
 };
@@ -58,7 +60,7 @@ const sortByTitle = (a, b) => {
 const sortByBooleanValues = (a, b) => {
   let sortValue = NEUTRAL;
   if (!!a !== !!b) {
-    sortValue = a ? FIRST_VALUE_GREATER : SECOND_VALUE_GREATER;
+    sortValue = !!a ? FIRST_VALUE_GREATER : SECOND_VALUE_GREATER;
   }
   return sortValue;
 };

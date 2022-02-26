@@ -11,7 +11,7 @@ import { ArticleCard } from "../../components/displays/article";
 import { BookCard } from "../../components/displays/book";
 import RouteTitle from "../../components/routeTitle";
 import { articleGridStyles } from "./styles";
-import * as _sorts from "../../libs/articleSorts";
+import * as _sorts from "../../libs/sorts";
 import { journalTypes } from "../../libs/types";
 
 const propTypes = {
