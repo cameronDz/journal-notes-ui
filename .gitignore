@@ -1,13 +1,8 @@
 # standard ignore file
 *.log
 
-# ide ignores
 .project
 .settings/
-dist/
-
-# node ignores
-node_modules/
-
-# notes for projects not needed for source control
 assets/markdown/
+dist/
+node_modules/

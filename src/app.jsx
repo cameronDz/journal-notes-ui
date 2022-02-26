@@ -2,8 +2,8 @@ import React from "react";
 import { Provider } from "react-redux";
 import { HashRouter } from "react-router-dom";
 import {
-  StylesProvider,
   createGenerateClassName,
+  StylesProvider,
 } from "@material-ui/core/styles";
 import { configureStore } from "./state/store";
 import AppContainer from "./sections/appContainer";

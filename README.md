@@ -4,6 +4,13 @@ Create and track notes from various articles/journal entires. Basic input sectio
 
 ## TODO List
 
+- [ ] Upgrade to MUI v5
+- [ ] Finish README
+- [ ] Upgrade cards to support multiple types
+- [ ] Move types to API/storage
+- [ ] Move large dependencies (react-dom, material-ui) to assets S3 bucket
+- [ ] Fix sort options on mobile/tablet view
+- [x] Create notes-access-api for enforcing auth at API level
 - [x] Add page routing
   - [x] Set "src="/bundle.js" to not include "/"
   - [x] Include a `<base>` tag element for configuring `href` attribute
@@ -11,51 +18,6 @@ Create and track notes from various articles/journal entires. Basic input sectio
 - [x] Arrow indicators on sort
 - [x] Material UI on Form
 - [x] Add JSS
-- [ ] Upgrade to MUI v5
-- [ ] Finish README
-- [ ] Upgrade cards to support multiple types
-- [ ] Move types to API/storage
-- [ ] Move large dependencies (react-dom, material-ui) to assets S3 bucket
-- [ ] Create notes-access-api for enforcing auth at API level
-- [ ] Fix sort options on mobile/tablet view
-
-### Sample Article JSON
-
-```javascript
-{
-    "title": String,
-    "author": String,
-    "description": String,
-    "publishDate": xxx,
-    "publisher": String,
-    "url": String,
-    "quotes": [
-        {
-            "quote ": String,
-            "page": Number,
-            "line": Number,
-            "id": Number
-        }
-    ],
-    "comments": [
-        {
-        "comment": String,
-        "id": Number,
-        "createdBy": String,
-        "createdDate": xxx,
-        "updatedBy": String,
-        "updatedDate": xxx
-        }
-    ],
-    "tags": [
-        Strings
-    ],
-    "createdBy": String,
-    "createdDate": xxx,
-    "updatedBy": String,
-    "updatedDate": xxx
-}
-```
 
 ## S3 Bucket Sample Configuration
 

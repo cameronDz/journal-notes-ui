@@ -13,8 +13,8 @@
     "semi-spacing": [
       "error",
       {
-        "before": false,
-        "after": true
+        "after": true,
+        "before": false
       }
     ],
     "no-self-compare": 0

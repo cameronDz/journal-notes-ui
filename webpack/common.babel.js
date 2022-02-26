@@ -8,8 +8,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
         exclude: /node_module/,
+        test: /\.(js|jsx)$/,
         use: {
           loader: "babel-loader",
         },
@@ -37,8 +37,8 @@ module.exports = {
       ],
     }),
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
       filename: "./index.html",
+      template: "./src/index.html",
     }),
   ],
   resolve: {

@@ -1,8 +1,8 @@
 .gitignore
 .prettierignore
-yarn.lock
-yarn-error.log
-package-lock.json
 dist
 coverage
+package-lock.json
 pnpm-lock.yaml
+yarn.lock
+yarn-error.log
