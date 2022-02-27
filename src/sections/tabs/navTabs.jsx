@@ -7,7 +7,7 @@ import { Grid, LinearProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { EditorSection } from "../editor";
 import { LandingSection } from "../landing";
-import { ArticleSection } from "../notes";
+import { DisplayAllSection } from "../notes";
 import Panel from "./panel";
 import { contentStyles } from "./styles";
 
@@ -96,13 +96,13 @@ const NavTabs = ({
                 <LandingSection title={pages[0].title} />
               </Route>
               <Route exact path={`/${pages[1].name}`}>
-                <ArticleSection
+                <DisplayAllSection
                   pageName={pages[1].name}
                   title={pages[1].title}
                 />
               </Route>
               <Route exact path={`/${pages[2].name}`}>
-                <ArticleSection
+                <DisplayAllSection
                   pageName={pages[2].name}
                   title={pages[2].title}
                 />

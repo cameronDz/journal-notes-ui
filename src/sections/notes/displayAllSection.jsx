@@ -10,47 +10,51 @@ import { FilterSortOrder, FilterTagSelector } from "../../components/filters";
 import { ArticleCard } from "../../components/displays/article";
 import { BookCard } from "../../components/displays/book";
 import RouteTitle from "../../components/routeTitle";
-import { articleGridStyles } from "./styles";
-import * as _sorts from "../../libs/sorts";
+import { notesGridStyles as styles } from "./styles";
+import { generateTagsFromList } from "../../libs/generateTagList";
 import { journalTypes } from "../../libs/types";
+import * as _sorts from "../../libs/sorts";
+
+const orderTypes = {
+  createdDate: "createdDate",
+  publishedDate: "publishedDate",
+  title: "title",
+};
 
 const propTypes = {
-  articles: PropType.array,
+  notes: PropType.array,
   isLoadingIndex: PropType.bool,
   isLoadingNotes: PropType.bool,
   isUserSecured: PropType.bool,
   pageName: PropType.string,
   title: PropType.string,
 };
-const useStyles = makeStyles(() => articleGridStyles);
-const ArticleSection = ({
-  articles,
-  isLoadingIndex,
-  isLoadingNotes,
-  isUserSecured,
-  pageName,
-  title,
+const useStyles = makeStyles(() => styles);
+const DisplayAllSection = ({
+  notes = null,
+  isLoadingIndex = false,
+  isLoadingNotes = false,
+  isUserSecured = false,
+  pageName = "",
+  title = "",
 }) => {
   const classes = useStyles();
   const history = useHistory();
-  const [sortFunction, setSortFunction] = useState(() => _sorts.sortByTitle);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const [availableTags, setAvailableTags] = useState([]);
-  const [filterTags, setFilterTags] = useState([]);
-  const [currentAvailableFilterTag, setCurrentAvailableFilterTag] = useState(
-    []
-  );
-  const [currentSelectedFilterTag, setCurrentSelectedFilterTag] = useState([]);
-
-  const [orderType, setOrderType] = useState("title");
-  const [checkedTitle, setCheckedTitle] = useState(true);
-  const [checkedPublishDate, setCheckedPublishDate] = useState(true);
   const [checkedCreatedDate, setCheckedCreatedDate] = useState(true);
+  const [checkedPublishDate, setCheckedPublishDate] = useState(true);
+  const [checkedTitle, setCheckedTitle] = useState(true);
+  const [filterTagAvailable, setFilterTagAvailable] = useState([]);
+  const [filterTagSelected, setFilterTagSelected] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [orderType, setOrderType] = useState(orderTypes.createdDate);
+  const [sortFunc, setSortFunc] = useState(() => _sorts.sortByCreatedDate);
+  const [tagsAvailable, setTagsAvailable] = useState([]);
+  const [tagsFilter, setTagsFilter] = useState([]);
 
   useEffect(() => {
     if (!isLoadingNotes) {
-      setFilterTags([]);
+      setTagsFilter([]);
       collectTagList();
     }
   }, [isLoadingNotes, collectTagList]);
@@ -62,31 +66,25 @@ const ArticleSection = ({
   useEffect(() => {
     if (orderType) {
       let newSort = null;
-      if (orderType === "title") {
+      if (orderType === orderTypes.title) {
         newSort = checkedTitle ? _sorts.sortByTitle : _sorts.sortByReverseTitle;
-      } else if (orderType === "createdDate") {
+      } else if (orderType === orderTypes.createdDate) {
         newSort = checkedCreatedDate
           ? _sorts.sortByCreatedDate
           : _sorts.sortByReverseCreatedDate;
-      } else if (orderType === "publishDate") {
+      } else if (orderType === orderTypes.publishDate) {
         newSort = checkedPublishDate
           ? _sorts.sortByPublishDate
           : _sorts.sortByReversePublishDate;
       }
-      setSortFunction(() => newSort);
+      setSortFunc(() => newSort);
     }
   }, [orderType, checkedCreatedDate, checkedPublishDate, checkedTitle]);
 
   const collectTagList = useCallback(() => {
-    const tags = [];
-    const length = Array.isArray(articles) ? articles.length : 0;
-    for (let idx = 0; idx < length; idx++) {
-      if (!!articles[idx] && Array.isArray(articles[idx].tags)) {
-        tags.push(...articles[idx].tags);
-      }
-    }
-    setAvailableTags([...new Set(tags)].sort());
-  }, [articles]);
+    const tags = generateTagsFromList(notes);
+    setTagsAvailable(tags);
+  }, [notes]);
 
   const isArticleDisplayable = (article = null) => {
     return !!article?.comments?.length > 0 || !!article?.quotes?.length > 0;
@@ -96,15 +94,15 @@ const ArticleSection = ({
     let isPassingFilter = !!article;
     if (
       !!isPassingFilter &&
-      Array.isArray(filterTags) &&
-      filterTags.length !== 0
+      Array.isArray(tagsFilter) &&
+      tagsFilter.length !== 0
     ) {
       if (Array.isArray(article.tags)) {
-        const { length } = filterTags;
+        const { length } = tagsFilter;
         for (let idx = 0; idx < length; idx++) {
           if (
-            !!filterTags[idx] &&
-            article.tags.indexOf(filterTags[idx]) === -1
+            !!tagsFilter[idx] &&
+            article.tags.indexOf(tagsFilter[idx]) === -1
           ) {
             isPassingFilter = false;
             break;
@@ -119,7 +117,7 @@ const ArticleSection = ({
 
   const handleChangeOrderType = (event = {}) => {
     const newType = event?.target?.value || "title";
-    setOrderType(newType);
+    setOrderType(orderTypes[newType]);
   };
 
   const handleChangeChecked = (value = "") => {
@@ -133,18 +131,18 @@ const ArticleSection = ({
   };
 
   const handleChangeAvailableFilter = (value) => {
-    setCurrentAvailableFilterTag([value || ""]);
+    setFilterTagAvailable([value || ""]);
   };
 
   const handleChangeSelectFilter = (value) => {
-    setCurrentSelectedFilterTag([value || ""]);
+    setFilterTagSelected([value || ""]);
   };
 
   const handleClickAddCurrentAvailableFilter = () => {
-    if (!!currentAvailableFilterTag && !!currentAvailableFilterTag[0]) {
-      const filters = [...filterTags, currentAvailableFilterTag[0]];
-      setFilterTags([...new Set(filters)].sort());
-      setCurrentAvailableFilterTag([]);
+    if (!!filterTagAvailable && !!filterTagAvailable[0]) {
+      const filters = [...tagsFilter, filterTagAvailable[0]];
+      setTagsFilter([...new Set(filters)].sort());
+      setFilterTagAvailable([]);
     }
   };
 
@@ -171,11 +169,11 @@ const ArticleSection = ({
   };
 
   const handleClickRemoveCurrentSelectedFilter = () => {
-    if (!!currentSelectedFilterTag && !!currentSelectedFilterTag[0]) {
-      setFilterTags([
-        ...filterTags.filter((tag) => tag !== currentSelectedFilterTag[0]),
+    if (!!filterTagSelected && !!filterTagSelected[0]) {
+      setTagsFilter([
+        ...tagsFilter.filter((tag) => tag !== filterTagSelected[0]),
       ]);
-      setCurrentSelectedFilterTag([]);
+      setFilterTagSelected([]);
     }
   };
 
@@ -185,10 +183,10 @@ const ArticleSection = ({
     const minHeight = isView ? "120px" : null;
     return (
       !isLoading &&
-      Array.isArray(articles) &&
-      articles
+      Array.isArray(notes) &&
+      notes
         .filter(filterFunction)
-        .sort(sortFunction)
+        .sort(sortFunc)
         .map((note, index) => {
           return (
             !!isArticleDisplayable(note) && (
@@ -265,10 +263,10 @@ const ArticleSection = ({
               </Grid>
               <Grid item xs={12} sm={12} md={7}>
                 <FilterTagSelector
-                  availableTags={availableTags}
-                  currentAvailableFilterTag={currentAvailableFilterTag}
-                  currentSelectedFilterTag={currentSelectedFilterTag}
-                  filterTags={filterTags}
+                  tagsAvailable={tagsAvailable}
+                  filterTagAvailable={filterTagAvailable}
+                  filterTagSelected={filterTagSelected}
+                  tagsFilter={tagsFilter}
                   onButtonClick={handleTagButtonClick}
                   onSelectChange={handleTagSelectChange}
                 />
@@ -282,11 +280,11 @@ const ArticleSection = ({
   );
 };
 
-ArticleSection.propTypes = propTypes;
+DisplayAllSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
-  articles: state.notes.notes,
+  notes: state.notes.notes,
   isLoadingIndex: state.notes.isLoadingIndex,
   isLoadingNotes: state.notes.isLoadingNotes,
   isUserSecured: !!state.auth.token,
 });
-export default connect(mapStateToProps, null)(ArticleSection);
+export default connect(mapStateToProps, null)(DisplayAllSection);

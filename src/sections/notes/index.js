@@ -1,3 +1,3 @@
-import ArticleSection from "./articleSection";
+import DisplayAllSection from "./displayAllSection";
 
-export { ArticleSection };
+export { DisplayAllSection };

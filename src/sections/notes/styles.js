@@ -1,6 +1,6 @@
 import { basicColorPalette } from "../../libs/colors";
 
-const articleGridStyles = {
+const notesGridStyles = {
   filterGridWrapper: {
     borderRadius: "8px",
     margin: "8px 24px",
@@ -24,4 +24,4 @@ const filterTitleStyles = {
   filterTitleHeader: { fontSize: "20px", fontWeight: "700" },
 };
 
-export { articleGridStyles, filterTagListStyles, filterTitleStyles };
+export { filterTagListStyles, filterTitleStyles, notesGridStyles };
