@@ -86,10 +86,6 @@ const DisplayAllSection = ({
     setTagsAvailable(tags);
   }, [notes]);
 
-  const isArticleDisplayable = (article = null) => {
-    return !!article?.comments?.length > 0 || !!article?.quotes?.length > 0;
-  };
-
   const filterFunction = (article) => {
     let isPassingFilter = !!article;
     if (
@@ -146,25 +142,14 @@ const DisplayAllSection = ({
     }
   };
 
-  const handleClickEditNote = (note) => {
-    const id = note?.id || "";
-    if (id) {
-      const pathname = "/edit";
+  const handleClickBtn = (data = {}, type = "") => {
+    const id = data?.id || "";
+    if (!!id && ["clone", "edit"].indexOf(type) > -1) {
       const search = `id=${id}`;
+      const pathname = `/${type}`;
       history.push({ pathname, search });
     } else {
-      console.error("ERROR - UNABLE TO ENTER EDIT MODE");
-    }
-  };
-
-  const handleClickCloneNote = (note) => {
-    const id = note?.id || "";
-    if (id) {
-      const pathname = "/clone";
-      const search = `id=${id}`;
-      history.push({ pathname, search });
-    } else {
-      console.error("ERROR - UNABLE TO ENTER CLONE MODE");
+      console.error("ERROR - UNABLE TO FIRE ACTION MODE");
     }
   };
 
@@ -175,49 +160,6 @@ const DisplayAllSection = ({
       ]);
       setFilterTagSelected([]);
     }
-  };
-
-  const renderData = () => {
-    const isView = pageName === "view";
-    const md = isView ? 12 : 6;
-    const minHeight = isView ? "120px" : null;
-    return (
-      !isLoading &&
-      Array.isArray(notes) &&
-      notes
-        .filter(filterFunction)
-        .sort(sortFunc)
-        .map((note, index) => {
-          return (
-            !!isArticleDisplayable(note) && (
-              <Fragment key={note.id || index}>
-                {
-                  <Grid item sm={12} md={md}>
-                    {note.journalType === journalTypes.BOOK && (
-                      <BookCard
-                        isClonable={isUserSecured}
-                        isEditable={isUserSecured}
-                        minHeight={minHeight}
-                        noteData={note}
-                        onClickClone={() => handleClickCloneNote(note)}
-                        onClickEdit={() => handleClickEditNote(note)}
-                      />
-                    )}
-                    {note.journalType !== journalTypes.BOOK && (
-                      <ArticleCard
-                        articleData={note}
-                        isEditable={isUserSecured}
-                        minHeight={minHeight}
-                        onClickEdit={() => handleClickEditNote(note)}
-                      />
-                    )}
-                  </Grid>
-                }
-              </Fragment>
-            )
-          );
-        })
-    );
   };
 
   const handleTagButtonClick = (name) => {
@@ -236,16 +178,19 @@ const DisplayAllSection = ({
     }
   };
 
-  const loadingClass = isLoading
-    ? classes.filterLoadingWrapper
-    : classes.filterLoadedWrapper;
+  const isView = pageName === "view";
+  const minHeight = isView ? "120px" : null;
   return (
     <Fragment>
       <RouteTitle title={title} />
       <Grid container spacing={0}>
         {pageName !== "view" && (
           <Grid
-            className={classNames(classes.filterGridWrapper, loadingClass)}
+            className={classNames(
+              classes.filterGridWrapper,
+              isLoading && classes.filterLoadingWrapper,
+              !isLoading && classes.filterLoadedWrapper
+            )}
             item
             sm={12}
           >
@@ -274,7 +219,41 @@ const DisplayAllSection = ({
             </Grid>
           </Grid>
         )}
-        {renderData()}
+        {!isLoading &&
+          Array.isArray(notes) &&
+          notes
+            .filter(filterFunction)
+            .sort(sortFunc)
+            .map((note, index) => {
+              return (
+                !!note && (
+                  <Fragment key={note.id || index}>
+                    {
+                      <Grid item sm={12} md={isView ? 12 : 6}>
+                        {note.journalType === journalTypes.BOOK && (
+                          <BookCard
+                            isClonable={isUserSecured}
+                            isEditable={isUserSecured}
+                            minHeight={minHeight}
+                            noteData={note}
+                            onClickClone={() => handleClickBtn(note, "clone")}
+                            onClickEdit={() => handleClickBtn(note, "edit")}
+                          />
+                        )}
+                        {note.journalType !== journalTypes.BOOK && (
+                          <ArticleCard
+                            articleData={note}
+                            isEditable={isUserSecured}
+                            minHeight={minHeight}
+                            onClickEdit={() => handleClickBtn(note, "edit")}
+                          />
+                        )}
+                      </Grid>
+                    }
+                  </Fragment>
+                )
+              );
+            })}
       </Grid>
     </Fragment>
   );

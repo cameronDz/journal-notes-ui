@@ -1,5 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -14,17 +15,36 @@ import { landingStyles as styles } from "./styles";
 const propTypes = {
   isLoadingIndex: PropType.bool,
   isLoadingNotes: PropType.bool,
+  isUserSecured: PropType.bool,
   notes: PropType.array,
   title: PropType.string,
 };
 const useStyles = makeStyles(() => styles);
-const LandingSection = ({ isLoadingIndex, isLoadingNotes, notes, title }) => {
+const LandingSection = ({
+  isLoadingIndex = false,
+  isLoadingNotes = false,
+  isUserSecured = false,
+  notes = [],
+  title = "",
+}) => {
   const classes = useStyles();
+  const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(isLoadingIndex || isLoadingNotes);
   }, [isLoadingIndex, isLoadingNotes]);
+
+  const handleClickBtn = (data = {}, type = "") => {
+    const id = data?.id || "";
+    if (!!id && ["clone", "edit"].indexOf(type) > -1) {
+      const search = `id=${id}`;
+      const pathname = `/${type}`;
+      history.push({ pathname, search });
+    } else {
+      console.error("ERROR - UNABLE TO FIRE ACTION MODE");
+    }
+  };
 
   const text = isLoading ? landingText.loading : landingText.noArticles;
   const note = latestArticle(notes) || {};
@@ -39,10 +59,20 @@ const LandingSection = ({ isLoadingIndex, isLoadingNotes, notes, title }) => {
         {!isLoading && !!notes && (
           <Fragment>
             {note.journalType === journalTypes.BOOK && (
-              <BookCard noteData={note} />
+              <BookCard
+                isClonable={isUserSecured}
+                isEditable={isUserSecured}
+                noteData={note}
+                onClickClone={() => handleClickBtn(note, "clone")}
+                onClickEdit={() => handleClickBtn(note, "edit")}
+              />
             )}
             {note.journalType !== journalTypes.BOOK && (
-              <ArticleCard articleData={note} />
+              <ArticleCard
+                articleData={note}
+                isEditable={isUserSecured}
+                onClickEdit={() => handleClickBtn(note, "edit")}
+              />
             )}
           </Fragment>
         )}
@@ -55,6 +85,7 @@ LandingSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   isLoadingIndex: state.notes.isLoadingIndex,
   isLoadingNotes: state.notes.isLoadingNotes,
+  isUserSecured: !!state.auth.token,
   notes: state.notes.notes,
 });
 export default connect(mapStateToProps, {})(LandingSection);
