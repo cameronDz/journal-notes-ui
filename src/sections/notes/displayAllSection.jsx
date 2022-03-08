@@ -72,7 +72,7 @@ const DisplayAllSection = ({
         newSort = checkedCreatedDate
           ? _sorts.sortByCreatedDate
           : _sorts.sortByReverseCreatedDate;
-      } else if (orderType === orderTypes.publishDate) {
+      } else if (orderType === orderTypes.publishedDate) {
         newSort = checkedPublishDate
           ? _sorts.sortByPublishDate
           : _sorts.sortByReversePublishDate;
@@ -208,12 +208,12 @@ const DisplayAllSection = ({
               </Grid>
               <Grid item xs={12} sm={12} md={7}>
                 <FilterTagSelector
-                  tagsAvailable={tagsAvailable}
                   filterTagAvailable={filterTagAvailable}
                   filterTagSelected={filterTagSelected}
-                  tagsFilter={tagsFilter}
                   onButtonClick={handleTagButtonClick}
                   onSelectChange={handleTagSelectChange}
+                  tagsAvailable={tagsAvailable}
+                  tagsFilter={tagsFilter}
                 />
               </Grid>
             </Grid>

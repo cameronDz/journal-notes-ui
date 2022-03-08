@@ -4,6 +4,14 @@ const authText = {
   success: `Successfully validated credentials!`,
 };
 
+const filterText = {
+  add: `Add Filter`,
+  available: `Available Tags`,
+  current: `Current Filter`,
+  remove: `Remove Filter`,
+  title: `Tag Filters`,
+};
+
 const genericText = {
   colonSpace: `: `,
   comma: `,`,
@@ -22,4 +30,17 @@ const overviewText = {
   source: `Source`,
 };
 
-export { authText, genericText, landingText, overviewText };
+const sortText = {
+  ascend: `Ascending`,
+  descend: `Desending`,
+  title: `Sort Order`,
+};
+
+export {
+  authText,
+  filterText,
+  genericText,
+  landingText,
+  overviewText,
+  sortText,
+};

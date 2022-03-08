@@ -3,7 +3,8 @@ import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, FormControl, InputLabel, Select } from "@material-ui/core";
-import { filterTagListStyles } from "./styles";
+import { handleFunction } from "../../libs/eventUtil";
+import { filterTagListStyles as styles } from "./styles";
 
 const propTypes = {
   disabled: PropType.bool,
@@ -15,7 +16,7 @@ const propTypes = {
   tagsCurrent: PropType.array,
   tagsSelectable: PropType.array,
 };
-const useStyles = makeStyles(() => filterTagListStyles);
+const useStyles = makeStyles(() => styles);
 const FilterTagList = ({
   disabled = true,
   id = "",
@@ -26,18 +27,6 @@ const FilterTagList = ({
   tagsCurrent = [],
   tagsSelectable = [],
 }) => {
-  const handleButtonClick = (event) => {
-    if (typeof onButtonClick === "function") {
-      onButtonClick(event);
-    }
-  };
-
-  const handleSelectChange = (event) => {
-    if (typeof onSelectChange === "function") {
-      onSelectChange(event);
-    }
-  };
-
   const classes = useStyles();
   return (
     <Fragment>
@@ -50,7 +39,7 @@ const FilterTagList = ({
           inputProps={{ id }}
           multiple
           native
-          onChange={handleSelectChange}
+          onChange={(event) => handleFunction(onSelectChange, event)}
           value={tagsCurrent}
         >
           {Array.isArray(tagsSelectable) &&
@@ -68,7 +57,7 @@ const FilterTagList = ({
           className={classNames(classes.tagButton)}
           color="primary"
           disabled={disabled}
-          onClick={handleButtonClick}
+          onClick={(event) => handleFunction(onButtonClick, event)}
           variant="outlined"
         >
           {labelButton}

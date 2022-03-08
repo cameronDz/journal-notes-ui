@@ -1,76 +1,63 @@
 import React, { Fragment } from "react";
 import PropType from "prop-types";
+import { defaultEventEmptyString } from "../../libs/defaults";
+import { filterText } from "../../libs/text";
+import { handleFunction } from "../../libs/eventUtil";
+import { hasItems } from "../../libs/arrays";
 import FilterTagList from "./filterTagList";
 import FilterTitle from "./filterTitle";
 
-const hasItems = (array) => {
-  return Array.isArray(array) && array.length > 0;
-};
-
 const propTypes = {
-  availableTags: PropType.array,
-  currentAvailableFilterTag: PropType.array,
-  currentSelectedFilterTag: PropType.array,
-  filterTags: PropType.array,
+  filterTagAvailable: PropType.arrayOf(PropType.string),
+  filterTagSelected: PropType.arrayOf(PropType.string),
   onButtonClick: PropType.func,
   onSelectChange: PropType.func,
+  tagsAvailable: PropType.arrayOf(PropType.string),
+  tagsFilter: PropType.arrayOf(PropType.string),
 };
-const textAdd = `Add Filter`;
-const textAvailable = `Available Tags`;
-const textCurrent = `Current Filter`;
-const textRemove = `Remove Filter`;
-const textTitle = `Tag Filters`;
 const FilterTagSelector = ({
-  availableTags = [],
-  currentAvailableFilterTag = [],
-  currentSelectedFilterTag = [],
-  filterTags = [],
+  filterTagAvailable = [],
+  filterTagSelected = [],
   onButtonClick = null,
   onSelectChange = null,
+  tagsAvailable = [],
+  tagsFilter = [],
 }) => {
-  const handleButtonClick = (name) => {
-    if (typeof onButtonClick === "function") {
-      onButtonClick(name);
-    }
+  const handleChangeSelect = (event, name) => {
+    const value = defaultEventEmptyString(event);
+    handleFunction(onSelectChange, value, name);
   };
 
-  const handleSelectChange = (event, name) => {
-    const value = event?.target?.value || "";
-    if (value && typeof onSelectChange === "function") {
-      onSelectChange(value, name);
-    }
-  };
-
+  const seletableTags = Array.isArray(tagsAvailable)
+    ? tagsAvailable.filter((tag) => {
+        return (
+          !!tag &&
+          (!Array.isArray(tagsFilter) || tagsFilter.indexOf(tag) === -1)
+        );
+      })
+    : [];
   return (
     <Fragment>
-      <FilterTitle title={textTitle} />
+      <FilterTitle title={filterText.title} />
       <FilterTagList
-        disabled={!hasItems(currentAvailableFilterTag)}
+        disabled={!hasItems(filterTagAvailable)}
         id="available-tag-filters"
-        labelButton={textAdd}
-        labelList={textAvailable}
-        onButtonClick={() => handleButtonClick("add")}
-        onSelectChange={(event) => handleSelectChange(event, "add")}
-        tagsCurrent={currentAvailableFilterTag}
-        tagsSelectable={
-          Array.isArray(availableTags) &&
-          availableTags.filter((tag) => {
-            return (
-              !!tag &&
-              (!Array.isArray(filterTags) || filterTags.indexOf(tag) === -1)
-            );
-          })
-        }
+        labelButton={filterText.add}
+        labelList={filterText.available}
+        onButtonClick={() => handleFunction(onButtonClick, "add")}
+        onSelectChange={(event) => handleChangeSelect(event, "add")}
+        tagsCurrent={filterTagAvailable}
+        tagsSelectable={seletableTags}
       />
       <FilterTagList
-        disabled={!hasItems(currentSelectedFilterTag)}
+        disabled={!hasItems(filterTagSelected)}
         id="current-tag-filters"
-        labelButton={textRemove}
-        labelList={textCurrent}
-        onButtonClick={() => handleButtonClick("remove")}
-        onSelectChange={(event) => handleSelectChange(event, "remove")}
-        tagsCurrent={currentSelectedFilterTag}
-        tagsSelectable={filterTags}
+        labelButton={filterText.remove}
+        labelList={filterText.current}
+        onButtonClick={() => handleFunction(onButtonClick, "remove")}
+        onSelectChange={(event) => handleChangeSelect(event, "remove")}
+        tagsCurrent={filterTagSelected}
+        tagsSelectable={tagsFilter}
       />
     </Fragment>
   );

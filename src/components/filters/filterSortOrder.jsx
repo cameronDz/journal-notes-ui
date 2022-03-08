@@ -8,6 +8,7 @@ import {
   Switch,
 } from "@material-ui/core";
 import { handleFunction } from "../../libs/eventUtil";
+import { sortText } from "../../libs/text";
 import FilterTitle from "./filterTitle";
 
 const propTypes = {
@@ -19,9 +20,6 @@ const propTypes = {
   onTypeChange: PropType.func,
   orderType: PropType.string,
 };
-const textAscend = `Ascending`;
-const textDescend = `Desending`;
-const textTitle = `Sort Order`;
 const FilterSortOrder = ({
   checkedCreatedDate = false,
   checkedPublishDate = false,
@@ -32,7 +30,7 @@ const FilterSortOrder = ({
   orderType = "title",
 }) => {
   const getDisplayLabel = (type, checked) => {
-    const title = checked ? textAscend : textDescend;
+    const title = checked ? sortText.ascend : sortText.descend;
     return orderType === type ? title : ``;
   };
 
@@ -53,7 +51,7 @@ const FilterSortOrder = ({
 
   return (
     <Fragment>
-      <FilterTitle title={textTitle} />
+      <FilterTitle title={sortText.title} />
       <FormControl>
         <RadioGroup
           name={"orderType"}
@@ -78,7 +76,7 @@ const FilterSortOrder = ({
             control={<Radio color={"primary"} />}
             disabled={isLoading}
             label={"Publish Date"}
-            value={"publishDate"}
+            value={"publishedDate"}
           />
         </RadioGroup>
       </FormControl>
@@ -101,12 +99,12 @@ const FilterSortOrder = ({
         />
         <FormControlLabel
           control={getSwitch(
-            "publishDate",
+            "publishedDate",
             "checkedPublishDate",
             checkedPublishDate
           )}
-          disabled={isLoading || orderType !== "publishDate"}
-          label={getDisplayLabel("publishDate", checkedPublishDate)}
+          disabled={isLoading || orderType !== "publishedDate"}
+          label={getDisplayLabel("publishedDate", checkedPublishDate)}
           style={{ padding: "2px" }}
         />
       </FormControl>
