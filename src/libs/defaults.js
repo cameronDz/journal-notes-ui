@@ -1,3 +1,7 @@
+const defaultDuplicateArray = (arr) => {
+  return Array.isArray(arr) ? [...arr] : [];
+};
+
 const defaultUniqueArray = (arr) => {
   return [...new Set(Array.isArray(arr) ? arr : [])];
 };
@@ -16,6 +20,7 @@ const defaultEventEmptyString = (evt) => {
 };
 
 export {
+  defaultDuplicateArray,
   defaultEmptyObject,
   defaultEmptyString,
   defaultEventEmptyString,

@@ -2,6 +2,7 @@ import React, { useState, Fragment } from "react";
 import PropType from "prop-types";
 import StandardButton from "../standardButton";
 import SimpleTextField from "./simpleTextField";
+import { defaultDuplicateArray, defaultUniqueArray } from "../../libs/defaults";
 import { handleFunction } from "../../libs/eventUtil";
 import { inputTypes } from "../../libs/types";
 
@@ -13,6 +14,7 @@ const propTypes = {
   label: PropType.string,
   name: PropType.string,
   onUpdate: PropType.func,
+  options: PropType.object,
 };
 
 const ListField = ({
@@ -23,17 +25,21 @@ const ListField = ({
   label = "",
   name = "",
   onUpdate = null,
+  options = {},
 }) => {
   const [display, setDisplay] = useState("");
 
   const handleAdd = () => {
-    const clone = Array.isArray(items) ? [...items] : [];
+    let clone = defaultDuplicateArray(items);
     if (!!elementName) {
       const data = { createDate: new Date() };
       data[elementName] = display;
       clone.push(data);
     } else {
       clone.push(display);
+      if (options?.isUniqueSimpleList) {
+        clone = defaultUniqueArray(clone);
+      }
     }
     handleFunction(onUpdate, clone);
     setDisplay("");
@@ -64,6 +70,7 @@ const ListField = ({
           label={label}
           name={name}
           onUpdate={(event) => setDisplay(event)}
+          options={options}
           value={display}
         />
       )}

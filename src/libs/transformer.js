@@ -1,4 +1,4 @@
-import { defaultUniqueArray } from "./defaults";
+import { defaultEmptyString, defaultUniqueArray } from "./defaults";
 import { journalTypes } from "./types";
 
 const transformValuesToCurrentVersion = (values = null) => {
@@ -24,6 +24,10 @@ const transformBookValues = (values) => {
     transformedValues.resources = defaultUniqueArray(values.resources);
     transformedValues._version = "1.1.0";
   }
+  if (version === "1.1.0") {
+    transformedValues.tags = transformTagsTrimReplaceWithSpace(values.tags);
+    transformedValues._version = "1.1.1";
+  }
   return transformedValues;
 };
 
@@ -34,7 +38,23 @@ const transformArticleValues = (values) => {
     transformedValues.definitions = defaultUniqueArray(values.definitions);
     transformedValues._version = "1.1.0";
   }
+  if (version === "1.1.0") {
+    transformedValues.tags = transformTagsTrimReplaceWithSpace(values.tags);
+    transformedValues._version = "1.1.1";
+  }
   return transformedValues;
+};
+
+const transformTagsTrimReplaceWithSpace = (tags) => {
+  const transfromedTags = [];
+  const length = Array.isArray(tags) ? tags.length : 0;
+  for (let idx = 0; idx > length; idx++) {
+    const tag = defaultEmptyString(tags[idx]).trim();
+    if (tag) {
+      transfromedTags.push(tag.replace(/ /g, `-`));
+    }
+  }
+  return defaultUniqueArray(transfromedTags);
 };
 
 export { transformValuesToCurrentVersion };

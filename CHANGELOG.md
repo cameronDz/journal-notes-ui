@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.20.0]
+
+### Added
+
+- options for simple text inputs to trim white space and replace white space with dash
+- options for simple list text inputs to be unique values
+- note type transformation for articles and book, both from 1.1.0 to 1.1.1 versions
+
+### Changed
+
+- tag inputs for all note types now have trim, replace white space, and unique list option
+
 ## [2.19.1] 2022-03-08
 
 ### Fixed

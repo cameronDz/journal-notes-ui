@@ -78,5 +78,5 @@
     "start": "webpack-dev-server --open --config webpack/dev.babel.js",
     "test": "jest"
   },
-  "version": "2.19.1"
+  "version": "2.20.0"
 }

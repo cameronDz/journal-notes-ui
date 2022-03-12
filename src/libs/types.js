@@ -137,6 +137,11 @@ const journalForms = {
         generationType: generationTypes.EMPTY_ARRAY,
         inputType: inputTypes.TEXT_FIELD_LIST,
         name: "tags",
+        options: {
+          isTrimmed: true,
+          isUniqueSimpleList: true,
+          isWhitespaceReplaced: true,
+        },
         title: "Tag",
       },
       {
@@ -161,7 +166,7 @@ const journalForms = {
         title: "Definition",
       },
       {
-        defaultValue: "1.1.0",
+        defaultValue: "1.1.1",
         generateOn: generateOnTypes.CREATE,
         generationType: generationTypes.PRESET,
         inputType: inputTypes.HIDDEN,
@@ -285,10 +290,15 @@ const journalForms = {
         generationType: generationTypes.EMPTY_ARRAY,
         inputType: inputTypes.TEXT_FIELD_LIST,
         name: "tags",
+        options: {
+          isTrimmed: true,
+          isUniqueSimpleList: true,
+          isWhitespaceReplaced: true,
+        },
         title: "Tag",
       },
       {
-        defaultValue: "1.0.0",
+        defaultValue: "1.0.1",
         generateOn: generateOnTypes.CREATE,
         generationType: generationTypes.PRESET,
         inputType: inputTypes.HIDDEN,
@@ -414,10 +424,15 @@ const journalForms = {
         generationType: generationTypes.EMPTY_ARRAY,
         inputType: inputTypes.TEXT_FIELD_LIST,
         name: "tags",
+        options: {
+          isTrimmed: true,
+          isUniqueSimpleList: true,
+          isWhitespaceReplaced: true,
+        },
         title: "Tag",
       },
       {
-        defaultValue: "1.1.0",
+        defaultValue: "1.1.1",
         generateOn: generateOnTypes.CREATE,
         generationType: generationTypes.PRESET,
         inputType: inputTypes.HIDDEN,
@@ -499,10 +514,15 @@ const journalForms = {
         generationType: generationTypes.EMPTY_ARRAY,
         inputType: inputTypes.TEXT_FIELD_LIST,
         name: "tags",
+        options: {
+          isTrimmed: true,
+          isUniqueSimpleList: true,
+          isWhitespaceReplaced: true,
+        },
         title: "Tag",
       },
       {
-        defaultValue: "1.0.0",
+        defaultValue: "1.0.1",
         generateOn: generateOnTypes.CREATE,
         generationType: generationTypes.PRESET,
         inputType: inputTypes.HIDDEN,
@@ -557,6 +577,11 @@ const journalForms = {
         generationType: generationTypes.EMPTY_ARRAY,
         inputType: inputTypes.TEXT_FIELD_LIST,
         name: "tags",
+        options: {
+          isTrimmed: true,
+          isUniqueSimpleList: true,
+          isWhitespaceReplaced: true,
+        },
         title: "Tag",
       },
       {
@@ -581,7 +606,7 @@ const journalForms = {
         title: "Suggested Resource",
       },
       {
-        defaultValue: "1.0.0",
+        defaultValue: "1.0.1",
         generateOn: generateOnTypes.CREATE,
         generationType: generationTypes.PRESET,
         inputType: inputTypes.HIDDEN,
@@ -676,10 +701,15 @@ const journalForms = {
         generationType: generationTypes.EMPTY_ARRAY,
         inputType: inputTypes.TEXT_FIELD_LIST,
         name: "tags",
+        options: {
+          isTrimmed: true,
+          isUniqueSimpleList: true,
+          isWhitespaceReplaced: true,
+        },
         title: "Tag",
       },
       {
-        defaultValue: "1.0.0",
+        defaultValue: "1.0.1",
         generateOn: generateOnTypes.CREATE,
         generationType: generationTypes.PRESET,
         inputType: inputTypes.HIDDEN,
@@ -753,10 +783,15 @@ const journalForms = {
         generationType: generationTypes.EMPTY_ARRAY,
         inputType: inputTypes.TEXT_FIELD_LIST,
         name: "tags",
+        options: {
+          isTrimmed: true,
+          isUniqueSimpleList: true,
+          isWhitespaceReplaced: true,
+        },
         title: "Tag",
       },
       {
-        defaultValue: "1.0.0",
+        defaultValue: "1.0.1",
         generateOn: generateOnTypes.CREATE,
         generationType: generationTypes.PRESET,
         inputType: inputTypes.HIDDEN,

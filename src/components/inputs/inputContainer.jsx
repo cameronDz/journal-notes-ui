@@ -8,8 +8,9 @@ import { handleFunction } from "../../libs/eventUtil";
 const propTypes = {
   elementName: PropType.string,
   isDisabled: PropType.bool,
-  onUpdate: PropType.func,
   name: PropType.string,
+  onUpdate: PropType.func,
+  options: PropType.object,
   title: PropType.string,
   type: PropType.oneOf(Object.values(inputTypes)),
   value: PropType.any,
@@ -22,13 +23,14 @@ const simpleFields = [
 ];
 const listFields = [inputTypes.TEXT_AREA_LIST, inputTypes.TEXT_FIELD_LIST];
 const InputContainer = ({
-  elementName,
-  isDisabled,
+  elementName = "",
+  isDisabled = true,
+  name = "",
   onUpdate,
-  name,
-  title,
-  type,
-  value,
+  options = {},
+  title = "",
+  type = "",
+  value = null,
 }) => {
   return (
     <Fragment>
@@ -39,6 +41,7 @@ const InputContainer = ({
           label={title}
           name={name}
           onUpdate={(update) => handleFunction(onUpdate, update)}
+          options={options}
           value={value}
         />
       )}
@@ -51,6 +54,7 @@ const InputContainer = ({
           label={title}
           name={name}
           onUpdate={onUpdate}
+          options={options}
         />
       )}
     </Fragment>

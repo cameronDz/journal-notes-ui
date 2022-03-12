@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
 import PropType from "prop-types";
 import { TextField } from "@material-ui/core";
+import { defaultEventEmptyString } from "../../libs/defaults";
 import { handleFunction } from "../../libs/eventUtil";
 import { inputTypes } from "../../libs/types";
 
 const propTypes = {
+  inputType: PropType.oneOf(Object.values(inputTypes)),
   isDisabled: PropType.bool,
   label: PropType.string,
   name: PropType.string,
   onUpdate: PropType.func,
-  inputType: PropType.oneOf(Object.values(inputTypes)),
+  options: PropType.object,
   value: PropType.any,
 };
 const SimpleTextField = ({
+  inputType = "",
   isDisabled = false,
   label = "",
   name = "",
   onUpdate = null,
-  inputType,
+  options = {},
   value = "",
 }) => {
   const [display, setDisplay] = useState("");
@@ -38,17 +41,24 @@ const SimpleTextField = ({
   }, [inputType]);
 
   const handleBlur = (event) => {
-    const newDisplay = updateDisplay(event);
+    const newDisplay = handleTextOptions(event);
+    setDisplay(newDisplay);
     handleFunction(onUpdate, newDisplay);
   };
 
   const handleChange = (event) => {
-    updateDisplay(event);
+    const newDisplay = handleTextOptions(event);
+    setDisplay(newDisplay);
   };
 
-  const updateDisplay = (event) => {
-    const newDisplay = event?.target?.value || "";
-    setDisplay(newDisplay);
+  const handleTextOptions = (event) => {
+    let newDisplay = defaultEventEmptyString(event);
+    if (options?.isTrimmed) {
+      newDisplay = newDisplay.trim();
+    }
+    if (options?.isWhitespaceReplaced) {
+      newDisplay = newDisplay.replace(/ /g, `-`);
+    }
     return newDisplay;
   };
 

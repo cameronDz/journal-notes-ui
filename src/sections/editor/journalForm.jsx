@@ -89,6 +89,7 @@ const JournalForm = ({
                     isDisabled={isDisabled}
                     name={input.name}
                     onUpdate={(update) => handleUpdate(update, input.name)}
+                    options={input.options}
                     title={input.title}
                     type={input.inputType}
                     value={values?.[input.name]}
