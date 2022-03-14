@@ -619,6 +619,13 @@ const journalForms = {
         title: "Quote",
       },
       {
+        elementName: "resource",
+        generationType: generationTypes.EMPTY_ARRAY,
+        inputType: inputTypes.TEXT_AREA_LIST,
+        name: "resource",
+        title: "Resource",
+      },
+      {
         elementName: "definition",
         generationType: generationTypes.EMPTY_ARRAY,
         inputType: inputTypes.TEXT_AREA_LIST,

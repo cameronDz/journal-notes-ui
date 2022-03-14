@@ -9,15 +9,28 @@ const propTypes = {
   comments: PropType.array,
   definitions: PropType.array,
   quotes: PropType.array,
+  resources: PropType.array,
   tags: PropType.array,
   terms: PropType.array,
 };
 const textNoContent = "No Comment or Quote content to display.";
-const ArticleDetails = ({ comments, definitions, quotes, tags, terms }) => {
+const ArticleDetails = ({
+  comments = [],
+  definitions = [],
+  quotes = [],
+  resources = [],
+  tags = [],
+  terms = [],
+}) => {
   return (
     <Fragment>
       <ListBulletpoints keyName="comment" points={comments} title="Comments" />
       <ListBulletpoints keyName="quote" points={quotes} title="Quotes" />
+      <ListBulletpoints
+        keyName="resource"
+        points={resources}
+        title="Resources"
+      />
       <ListBulletpoints
         keyName="definition"
         points={definitions}

@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - journal note type PAPER for white papers
 
+### Fixed
+
+- Quotes display from plural to single on
+
 ## [2.20.0]
 
 ### Added
