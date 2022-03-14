@@ -14,6 +14,7 @@ const propTypes = {
   quotes: PropType.array,
   showFull: PropType.bool,
   tags: PropType.array,
+  terms: PropType.array,
   title: PropType.string,
   url: PropType.string,
 };
@@ -29,6 +30,7 @@ const Article = ({
   quotes,
   showFull,
   tags,
+  terms,
   title,
   url,
 }) => {
@@ -49,6 +51,7 @@ const Article = ({
           definitions={definitions}
           quotes={quotes}
           tags={tags}
+          terms={terms}
         />
       )}
     </Fragment>

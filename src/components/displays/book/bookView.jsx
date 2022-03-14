@@ -3,8 +3,7 @@ import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { getDateDisplay } from "../../../libs/date";
-import ListBulletpoints from "../listBulletpoints";
-import TagsDisplay from "../tagsDisplay";
+import BookLists from "../bookLists";
 import { bookViewStyles as styles } from "./styles";
 import { propTypesBookV1 } from "./types";
 
@@ -66,37 +65,13 @@ const BookView = ({ note = null, showFull = false }) => {
           )}
         </div>
         {showFull && (
-          <Fragment>
-            {note.comments?.length > 0 && (
-              <ListBulletpoints
-                keyName="comment"
-                points={note.comments}
-                title="Comments"
-              />
-            )}
-            {note.quotes?.length > 0 && (
-              <ListBulletpoints
-                keyName="quote"
-                points={note.quotes}
-                title="Quotes"
-              />
-            )}
-            {note.definitions?.length > 0 && (
-              <ListBulletpoints
-                keyName="definition"
-                points={note.definitions}
-                title="Definitions"
-              />
-            )}
-            {note.resources?.length > 0 && (
-              <ListBulletpoints
-                keyName="resource"
-                points={note.resources}
-                title="Resources"
-              />
-            )}
-            <TagsDisplay tags={note.tags} />
-          </Fragment>
+          <BookLists
+            comments={note.comments}
+            definitions={note.definitions}
+            quotes={note.quotes}
+            resources={note.resources}
+            tags={note.tags}
+          />
         )}
       </Fragment>
     )
