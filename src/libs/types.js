@@ -157,7 +157,7 @@ const journalForms = {
         generationType: generationTypes.EMPTY_ARRAY,
         inputType: inputTypes.TEXT_AREA_LIST,
         name: "quotes",
-        title: "Quotes",
+        title: "Quote",
       },
       {
         elementName: "definition",
@@ -285,7 +285,7 @@ const journalForms = {
         generationType: generationTypes.EMPTY_ARRAY,
         inputType: inputTypes.TEXT_AREA_LIST,
         name: "quotes",
-        title: "Quotes",
+        title: "Quote",
       },
       {
         generationType: generationTypes.EMPTY_ARRAY,
@@ -405,7 +405,7 @@ const journalForms = {
         generationType: generationTypes.EMPTY_ARRAY,
         inputType: inputTypes.TEXT_AREA_LIST,
         name: "quotes",
-        title: "Quotes",
+        title: "Quote",
       },
       {
         elementName: "definition",
@@ -616,7 +616,7 @@ const journalForms = {
         generationType: generationTypes.EMPTY_ARRAY,
         inputType: inputTypes.TEXT_AREA_LIST,
         name: "quotes",
-        title: "Quotes",
+        title: "Quote",
       },
       {
         elementName: "definition",

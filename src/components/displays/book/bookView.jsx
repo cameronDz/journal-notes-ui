@@ -3,7 +3,7 @@ import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { getDateDisplay } from "../../../libs/date";
-import BookLists from "../bookLists";
+import BookLists from "./bookLists";
 import { bookViewStyles as styles } from "./styles";
 import { propTypesBookV1 } from "./types";
 
