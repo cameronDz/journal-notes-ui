@@ -4,6 +4,7 @@ import PropType from "prop-types";
 import { parse } from "query-string";
 import { connect } from "react-redux";
 import { Grid, makeStyles } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import { ArticleCard } from "../../components/displays/article";
 import { BookCard } from "../../components/displays/book";
 import RouteTitle from "../../components/routeTitle";
@@ -224,9 +225,9 @@ const EditorSection = ({
         />
       </div>
       {!isUserSecured && (
-        <span className={classes.unauthWarning}>
-          * Must log in with user credentials in order to create journal notes.
-        </span>
+        <Alert severity="error">
+          Must log in with user credentials in order to create journal notes.
+        </Alert>
       )}
       <JournalForm
         editValues={editValues}

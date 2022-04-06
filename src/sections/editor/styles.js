@@ -4,10 +4,11 @@ const editorSectionStyles = {
     padding: "4px",
     textAlign: "center",
   },
-  titleContainer: {},
-  unauthWarning: {
-    color: "red",
-    display: "block",
+  radioContainer: {
+    marginBottom: "6px",
+    "& label span.MuiTypography-root.MuiFormControlLabel-label::first-letter": {
+      textTransform: "capitalize",
+    },
   },
 };
 
