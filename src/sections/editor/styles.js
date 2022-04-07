@@ -6,8 +6,11 @@ const editorSectionStyles = {
   },
   radioContainer: {
     marginBottom: "6px",
-    "& label span.MuiTypography-root.MuiFormControlLabel-label::first-letter": {
-      textTransform: "capitalize",
+    "& label span.MuiTypography-root.MuiFormControlLabel-label": {
+      textTransform: "lowercase",
+      "&::first-letter": {
+        textTransform: "capitalize",
+      },
     },
   },
 };

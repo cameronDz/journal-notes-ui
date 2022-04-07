@@ -4,6 +4,8 @@ const authApiEndpointToken = "token";
 const baseApiUrl = "https://journal-notes-storage-api.herokuapp.com/json";
 const baseApiConfig = { header: { "Content-Type": "application/json" } };
 const disableSave = false;
+const partialLoad = true;
+const partialLoadCount = 25;
 
 export {
   authApiBaseUrl,
@@ -12,4 +14,6 @@ export {
   baseApiUrl,
   baseApiConfig,
   disableSave,
+  partialLoad,
+  partialLoadCount,
 };

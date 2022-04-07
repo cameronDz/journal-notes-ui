@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.22.0]
+
 ### Changed
 
+- partially load index of 25 notes, rather than entire notes for perf issues
 - warning on note editor page uses Alert instead of red text
 
 ## [2.21.0]
