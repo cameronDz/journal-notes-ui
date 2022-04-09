@@ -3,7 +3,8 @@ import classNames from "classnames";
 import PropType from "prop-types";
 import { Button as MuiButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { standardButtonStyles } from "./styles";
+import { handleFunction } from "../libs/eventUtil";
+import { standardButtonStyles as styles } from "./styles";
 
 const propTypes = {
   disabled: PropType.bool,
@@ -13,8 +14,7 @@ const propTypes = {
   title: PropType.string,
   variant: PropType.string,
 };
-
-const useStyles = makeStyles(() => standardButtonStyles);
+const useStyles = makeStyles(() => styles);
 const StandardButton = ({
   disabled = false,
   isFat = false,
@@ -24,16 +24,11 @@ const StandardButton = ({
   variant = "outlined",
 }) => {
   const classes = useStyles();
-  const handleClick = (event) => {
-    if (typeof onClick === "function") {
-      onClick(event);
-    }
-  };
   return (
     <div className={classNames(classes.stdBtnRoot, isFat && classes.fatBtn)}>
       <MuiButton
         disabled={disabled}
-        onClick={handleClick}
+        onClick={(event) => handleFunction(onClick, event)}
         title={title}
         variant={variant}
       >
