@@ -22,7 +22,6 @@ const fetchEntireListPayload = (dispatch, index, apiConfig = {}) => {
       return dispatch({ notes, type: _types.GET_NOTES_ALL_SUCCESS });
     })
     .catch((error) => {
-      console.error("GET_NOTES_ALL_ERROR", error);
       return dispatch({ error, type: _types.GET_NOTES_ALL_ERROR });
     })
     .finally(() => {
@@ -46,7 +45,6 @@ const fetchArticles = (apiConfig = {}) => {
         return dispatch({ index, type: _types.GET_NOTE_INDEX_SUCCESS });
       })
       .catch((error) => {
-        console.error("GET_NOTE_INDEX_ERROR", error);
         return dispatch({ error, type: _types.GET_NOTE_INDEX_ERROR });
       })
       .finally(() => {

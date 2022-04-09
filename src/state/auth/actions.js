@@ -39,7 +39,6 @@ const fetchToken = (credentials, config = {}) => {
         return dispatch({ type: _types.GET_TOKEN_SUCCESS, data });
       })
       .catch((error) => {
-        console.error("GET_TOKEN_ERROR", error);
         return dispatch({ type: _types.GET_TOKEN_ERROR, error });
       })
       .finally(() => {

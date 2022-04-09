@@ -147,17 +147,26 @@ const RequestTokenDialog = ({
           />
         </DialogContent>
         <DialogActions>
-          <Button disabled={isProcessingRequest} onClick={handleClose}>
+          <Button
+            disabled={isProcessingRequest}
+            onClick={handleClose}
+            title={!!token ? `Close` : `Cancel`}
+          >
             {!!token ? `Close` : `Cancel`}
           </Button>
           {!!token ? (
-            <Button disabled={isProcessingRequest} onClick={handleActionClick}>
+            <Button
+              disabled={isProcessingRequest}
+              onClick={handleActionClick}
+              title="clear"
+            >
               Clear Credentials
             </Button>
           ) : (
             <Button
               disabled={isProcessingRequest || !username || !password}
               onClick={handleActionClick}
+              title="sign in"
             >
               Signin
             </Button>

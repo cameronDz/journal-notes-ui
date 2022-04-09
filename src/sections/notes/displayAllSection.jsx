@@ -148,8 +148,6 @@ const DisplayAllSection = ({
       const search = `id=${id}`;
       const pathname = `/${type}`;
       history.push({ pathname, search });
-    } else {
-      console.error("ERROR - UNABLE TO FIRE ACTION MODE");
     }
   };
 

@@ -30,7 +30,6 @@ const getNote = (id, config = {}) => {
         return dispatch({ note, type: _types.GET_EDIT_NOTE_SUCCESSFUL });
       })
       .catch((error) => {
-        console.error("GET_EDIT_NOTE_ERROR", error);
         return dispatch({ error, type: _types.GET_EDIT_NOTE_ERROR });
       })
       .finally(() => {
@@ -54,7 +53,6 @@ const upsertIndex = (item, config = {}) => {
           return dispatch({ type: _types.UPSERT_INDEX_SUCCESSFUL });
         })
         .catch((error) => {
-          console.error("UPSERT_INDEX_SUCCESSFUL", error);
           return dispatch({ error, type: _types.UPSERT_INDEX_SUCCESSFUL });
         })
         .finally(() => {
@@ -83,7 +81,6 @@ const upsertNote = (content, isNew = true, config = {}) => {
           return dispatch({ type: _types.UPSERT_NOTE_SUCCESSFUL });
         })
         .catch((error) => {
-          console.error("UPSERT_NOTE_ERROR", error);
           return dispatch({ error, type: _types.UPSERT_NOTE_ERROR });
         })
         .finally(() => {
