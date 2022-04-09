@@ -32,7 +32,7 @@ const icons = [
   },
   {
     icon: <VpnKey />,
-    name: "signin",
+    name: "sign-in",
   },
 ];
 
@@ -47,10 +47,10 @@ const LeftNavBar = ({ onClick }) => {
           icons.map((icon) => {
             return (
               icon && (
-                <Fragment key={icon?.name}>
+                <Fragment key={icon.name}>
                   <NavIcon
-                    icon={icon?.icon}
-                    name={icon?.name}
+                    icon={icon.icon}
+                    name={icon.name}
                     onClick={(event) => handleFunction(onClick, event)}
                   />
                 </Fragment>

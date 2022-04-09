@@ -1,17 +1,24 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropType from "prop-types";
+import { makeStyles } from "@material-ui/core";
 
+const styles = {
+  headerContainer: {
+    marginTop: "12px",
+  },
+  textTitle: {
+    fontSize: "16px",
+    fontWeight: 700,
+  },
+};
 const propTypes = { title: PropType.string };
+const useStyles = makeStyles(() => styles);
 const SectionHeader = ({ title }) => {
+  const classes = useStyles();
   return (
-    <Fragment>
-      <br />
-      {!!title && (
-        <div>
-          <strong style={{ fontSize: "16px" }}>{title}</strong>
-        </div>
-      )}
-    </Fragment>
+    <div className={classes.headerContainer}>
+      {!!title && <span className={classes.textTitle}>{title}</span>}
+    </div>
   );
 };
 

@@ -18,9 +18,8 @@ const ListBulletpoints = ({ keyName = "", points = [], title = "" }) => {
         {!!keyName &&
           points.map((point, index) => {
             return (
-              point &&
               point?.[keyName] && (
-                <div key={point?.id || index}>
+                <div key={point.id || index}>
                   {bullet} {point[keyName]}
                 </div>
               )

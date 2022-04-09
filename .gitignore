@@ -4,5 +4,6 @@
 .project
 .settings/
 assets/markdown/
+coverage/
 dist/
 node_modules/
