@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.23.0]
+
+### Added
+
+- load all button on view tab to refresh the notes list and load all notes instead of just the first 25 like on initial load
+
 ## [2.22.0]
 
 ### Changed

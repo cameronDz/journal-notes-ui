@@ -23,13 +23,16 @@ const AppContainer = ({ getAllNotes }) => {
   useEffect(() => {
     abortCtrlFetchAll?.abort();
     abortCtrlFetchAll = new AbortController();
-    const config = { signal: abortCtrlFetchAll.signal };
+    const config = { limit: true, signal: abortCtrlFetchAll.signal };
     handleFunction(getAllNotes, config);
   }, [getAllNotes]);
 
   const handleIconClick = (name) => {
-    if (name !== "signin") {
-      history.push(`/${name}`);
+    const path = `/${name}`;
+    if (name !== "sign-in") {
+      if (history.location.pathname !== path) {
+        history.push(path);
+      }
     } else {
       setIsOpen(true);
     }

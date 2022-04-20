@@ -10,10 +10,13 @@ import { FilterSortOrder, FilterTagSelector } from "../../components/filters";
 import { ArticleCard } from "../../components/displays/article";
 import { BookCard } from "../../components/displays/book";
 import RouteTitle from "../../components/routeTitle";
-import { notesGridStyles as styles } from "./styles";
+import StandardButton from "../../components/standardButton";
+import { handleFunction } from "../../libs/eventUtil";
 import { generateTagsFromList } from "../../libs/generateTagList";
 import { journalTypes } from "../../libs/types";
 import * as _sorts from "../../libs/sorts";
+import { fetchArticles } from "../../state/notes/actions";
+import { notesGridStyles as styles } from "./styles";
 
 const orderTypes = {
   createdDate: "createdDate",
@@ -21,20 +24,23 @@ const orderTypes = {
   title: "title",
 };
 
+let abortCtrlFetchAll = null;
 const propTypes = {
-  notes: PropType.array,
+  getAllNotes: PropType.func,
   isLoadingIndex: PropType.bool,
   isLoadingNotes: PropType.bool,
   isUserSecured: PropType.bool,
+  notes: PropType.array,
   pageName: PropType.string,
   title: PropType.string,
 };
 const useStyles = makeStyles(() => styles);
 const DisplayAllSection = ({
-  notes = null,
+  getAllNotes = null,
   isLoadingIndex = false,
   isLoadingNotes = false,
   isUserSecured = false,
+  notes = null,
   pageName = "",
   title = "",
 }) => {
@@ -151,6 +157,13 @@ const DisplayAllSection = ({
     }
   };
 
+  const handleClickLoadAll = () => {
+    abortCtrlFetchAll?.abort();
+    abortCtrlFetchAll = new AbortController();
+    const config = { signal: abortCtrlFetchAll.signal };
+    handleFunction(getAllNotes, config);
+  };
+
   const handleClickRemoveCurrentSelectedFilter = () => {
     if (!!filterTagSelected && !!filterTagSelected[0]) {
       setTagsFilter([
@@ -217,6 +230,15 @@ const DisplayAllSection = ({
             </Grid>
           </Grid>
         )}
+        {pageName === "view" && (
+          <div style={{ margin: 12 }}>
+            <StandardButton
+              disabled={isLoading}
+              label="Load All"
+              onClick={handleClickLoadAll}
+            />
+          </div>
+        )}
         {!isLoading &&
           Array.isArray(notes) &&
           notes
@@ -264,4 +286,5 @@ const mapStateToProps = (state) => ({
   isLoadingNotes: state.notes.isLoadingNotes,
   isUserSecured: !!state.auth.token,
 });
-export default connect(mapStateToProps, null)(DisplayAllSection);
+const mapDispatchToProps = { getAllNotes: fetchArticles };
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayAllSection);

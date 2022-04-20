@@ -3,7 +3,6 @@ import * as _types from "./types";
 import {
   baseApiUrl as baseUrl,
   baseApiConfig as baseConfig,
-  partialLoad,
   partialLoadCount,
 } from "../../libs/apiConfig";
 import { defaultEmptyObject, defaultUniqueArray } from "../../libs/defaults";
@@ -38,7 +37,7 @@ const fetchArticles = (apiConfig = {}) => {
       .then((response) => {
         const index = defaultUniqueArray(response?.data?.payload?.list);
         let payload = [...(index || [])];
-        if (partialLoad && payload.length > partialLoadCount) {
+        if (apiConfig.limit && payload.length > partialLoadCount) {
           payload = [...payload.slice(-partialLoadCount)];
         }
         fetchEntireListPayload(dispatch, payload, apiConfig);
