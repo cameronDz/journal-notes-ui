@@ -3,6 +3,7 @@ import classNames from "classnames";
 import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import {
+  BookOutlined,
   DescriptionTwoTone,
   Edit,
   HomeTwoTone,
@@ -25,6 +26,10 @@ const icons = [
   {
     icon: <SearchTwoTone />,
     name: "search",
+  },
+  {
+    icon: <BookOutlined />,
+    name: "books",
   },
   {
     icon: <Edit />,

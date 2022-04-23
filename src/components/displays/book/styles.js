@@ -1,8 +1,4 @@
-const bookViewStyles = {
-  bookSubText: {
-    fontSize: "14px",
-    lineHeight: "130%",
-  },
+const bookTitleSectionStyles = {
   bookHeaderText: {
     fontSize: "20px",
     fontWeight: "700",
@@ -13,9 +9,16 @@ const bookViewStyles = {
     fontWeight: "600",
     lineHeight: "130%",
   },
+  bookSubText: {
+    fontSize: "14px",
+    lineHeight: "130%",
+  },
+};
+
+const bookViewStyles = {
   bookSessionDescription: {
     marginTop: "16px",
   },
 };
 
-export { bookViewStyles };
+export { bookTitleSectionStyles, bookViewStyles };

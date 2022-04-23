@@ -5,6 +5,7 @@ import BookView from "./bookView";
 import { propTypesBookV1 } from "./types";
 
 const propTypes = {
+  isChild: PropType.bool,
   isClonable: PropType.bool,
   isEditable: PropType.bool,
   minHeight: PropType.string,
@@ -15,6 +16,7 @@ const propTypes = {
 };
 
 const BookCard = ({
+  isChild = false,
   isClonable = false,
   isEditable = false,
   minHeight = null,
@@ -33,17 +35,19 @@ const BookCard = ({
     setShowFull((prev) => !prev);
   };
 
+  const slimHeight = isChild ? "45px" : null;
+  const calcMinHeight = minHeight || slimHeight;
   return (
     <NoteCard
       isClonable={isClonable}
       isEditable={isEditable}
       isFullView={showFull}
-      minHeight={minHeight}
+      minHeight={calcMinHeight}
       onClickClone={onClickClone}
       onClickEdit={onClickEdit}
       onClickFull={handleClick}
     >
-      <BookView note={noteData} showFull={showFull} />
+      <BookView isChild={isChild} note={noteData} showFull={showFull} />
     </NoteCard>
   );
 };

@@ -4,49 +4,37 @@ import PropType from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { getDateDisplay } from "../../../libs/date";
 import BookLists from "./bookLists";
+import BookTitleSection from "./bookTitleSection";
 import { bookViewStyles as styles } from "./styles";
 import { propTypesBookV1 } from "./types";
 
 const propTypes = {
+  isChild: PropType.bool,
   note: PropType.shape(propTypesBookV1),
   showFull: PropType.bool,
 };
 
 const useStyles = makeStyles(() => styles);
-const BookView = ({ note = null, showFull = false }) => {
+const BookView = ({ isChild = false, note = null, showFull = false }) => {
   const classes = useStyles();
   return (
     !!note && (
       <Fragment>
-        {!!note.title && (
-          <div>
-            <span className={classNames(classes.bookHeaderText)}>
-              {note.title}
-            </span>
-            <span>. {note.author}</span>
-          </div>
+        {!isChild && (
+          <BookTitleSection
+            author={note.author}
+            bookDescription={note.bookDescription}
+            bookSource={note.bookSource}
+            pageCount={note.pageCount}
+            publishDate={note.publishDate}
+            publisher={note.publisher}
+            title={note.title}
+          />
         )}
-        {!!note.bookDescription && (
-          <div className={classNames(classes.bookSubHeaderText)}>
-            {note.bookDescription}
-          </div>
-        )}
-        <div className={classNames(classes.bookSubText)}>
-          {!!note.bookSource && <span>{note.bookSource}</span>}
-          {!!note.bookSource && !!note.pageCount && <span> </span>}
-          {!!note.pageCount && <span>({note.pageCount} pgs)</span>}
-          {(!!note.bookSource || !!note.pageCount) && <span>. </span>}
-          {!!note.publisher && <span>{note.publisher}</span>}
-          {!!note.publisher && !!note.publishDate && <span>, </span>}
-          {!!note.publishDate && (
-            <span>{getDateDisplay(note.publishDate)}</span>
-          )}
-          {(!!note.publisher || !!note.publishDate) && <span>.</span>}
-        </div>
         <div
           className={classNames(
             classes.bookSubHeaderText,
-            classes.bookSessionDescription
+            !isChild && classes.bookSessionDescription
           )}
         >
           {note.readDescription}
