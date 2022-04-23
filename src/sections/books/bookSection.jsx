@@ -4,10 +4,11 @@ import { v4 as uuidv4 } from "uuid";
 import PropType from "prop-types";
 import { Button } from "@material-ui/core";
 import RouteTitle from "../../components/routeTitle";
-import { BookCard } from "../../components/displays/book";
+import { BookCard, BookTitleSection } from "../../components/displays/book";
 import { handleFunction } from "../../libs/eventUtil";
 import { fetchArticles } from "../../state/notes/actions";
 
+const styleButton = { margin: "12px" };
 const styleHeader = { display: "inline-block", marginRight: "12px" };
 const styleSpan = { display: "inline-block" };
 const textHideEntires = "Hide Entries";
@@ -91,11 +92,19 @@ const BookSection = ({ getAllNotes = null, notes = [], title = "" }) => {
         const isChild = entries > 1;
         return (
           <div key={tempBookId}>
-            <h3 style={styleHeader}>{meta[tempBookId].title}</h3>
+            <BookTitleSection
+              author={meta[tempBookId].author}
+              bookDescription={meta[tempBookId].bookDescription}
+              bookSource={meta[tempBookId].bookSource}
+              pageCount={meta[tempBookId].pageCount}
+              publishDate={meta[tempBookId].publishDate}
+              publisher={meta[tempBookId].publisher}
+              title={meta[tempBookId].title}
+            />
             <Button
               onClick={() => handleClickShowEntries(tempBookId)}
               size="small"
-              style={styleSpan}
+              style={styleButton}
               variant="outlined"
             >
               {showEntry[tempBookId] ? textHideEntires : textShowEntries}

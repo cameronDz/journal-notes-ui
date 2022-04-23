@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropType from "prop-types";
 import {
   Button,
@@ -18,6 +18,7 @@ const propTypes = {
   isClonable: PropType.bool,
   isEditable: PropType.bool,
   isFullView: PropType.bool,
+  maxHeight: PropType.string,
   minHeight: PropType.string,
   onClickClone: PropType.func,
   onClickEdit: PropType.func,
@@ -28,23 +29,21 @@ const NoteCard = ({
   isClonable = false,
   isEditable = false,
   isFullView = false,
+  maxHeight = null,
   minHeight = null,
   onClickClone = null,
   onClickEdit = null,
   onClickFull = null,
 }) => {
-  const [cardActionText, setCardActionText] = useState("");
-
-  useEffect(() => {
-    const text = isFullView ? RETRACT : EXPAND;
-    setCardActionText(text);
-  }, [isFullView]);
-
+  const calcMaxHeight = maxHeight || "unset";
+  const height = isFullView ? "unset" : calcMaxHeight;
+  const cardActionText = isFullView ? RETRACT : EXPAND;
   return (
     <MuiCard style={{ margin: "6px" }}>
       <CardContent
         style={{
           margin: "6px",
+          maxHeight: height,
           minHeight: minHeight || "180px",
           paddingBottom: "6px",
         }}

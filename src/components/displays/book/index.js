@@ -1,3 +1,3 @@
 import BookCard from "./bookCard";
-
-export { BookCard };
+import BookTitleSection from "./bookTitleSection";
+export { BookCard, BookTitleSection };

@@ -35,13 +35,15 @@ const BookCard = ({
     setShowFull((prev) => !prev);
   };
 
-  const slimHeight = isChild ? "45px" : null;
-  const calcMinHeight = minHeight || slimHeight;
+  const maxHeight = isChild ? "12px" : "unset";
+  const slimMinHeight = isChild ? "12px" : null;
+  const calcMinHeight = minHeight || slimMinHeight;
   return (
     <NoteCard
       isClonable={isClonable}
       isEditable={isEditable}
       isFullView={showFull}
+      maxHeight={maxHeight}
       minHeight={calcMinHeight}
       onClickClone={onClickClone}
       onClickEdit={onClickEdit}
