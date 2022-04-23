@@ -5,32 +5,43 @@ import PropType from "prop-types";
 import { Button } from "@material-ui/core";
 import RouteTitle from "../../components/routeTitle";
 import { BookCard, BookTitleSection } from "../../components/displays/book";
+import StandardButton from "../../components/standardButton";
 import { handleFunction } from "../../libs/eventUtil";
 import { fetchArticles } from "../../state/notes/actions";
 
 const styleButton = { margin: "12px" };
 const styleHeader = { display: "inline-block", marginRight: "12px" };
-const styleSpan = { display: "inline-block" };
+const styleInline = { display: "inline-block" };
 const textHideEntires = "Hide Entries";
 const textShowEntries = "Show Entries";
 
+let abortCtrlFetchAll = null;
 const propTypes = {
   getAllNotes: PropType.func,
+  isLoading: PropType.bool,
   notes: PropType.array,
   title: PropType.string,
 };
-const BookSection = ({ getAllNotes = null, notes = [], title = "" }) => {
+const BookSection = ({
+  getAllNotes = null,
+  isLoading = false,
+  notes = [],
+  title = "",
+}) => {
   const [meta, setMeta] = useState({});
   const [showEntry, setShowEntry] = useState({});
 
   useEffect(() => {
-    const abortCtrlFetchAll = new AbortController();
-    const config = { signal: abortCtrlFetchAll.signal };
-    handleFunction(getAllNotes, config);
     return () => {
       abortCtrlFetchAll?.abort();
     };
-  }, [getAllNotes]);
+  }, []);
+
+  const handleClickLoadAll = () => {
+    abortCtrlFetchAll = new AbortController();
+    const config = { signal: abortCtrlFetchAll.signal };
+    handleFunction(getAllNotes, config);
+  };
 
   useEffect(() => {
     const metaData = {};
@@ -85,7 +96,14 @@ const BookSection = ({ getAllNotes = null, notes = [], title = "" }) => {
       <RouteTitle title={title} />
       <div>
         <h4 style={styleHeader}>{`Total Books:`}</h4>
-        <span style={styleSpan}>{Object.keys(meta).length || `0`}</span>
+        <span style={styleInline}>{Object.keys(meta).length || `0`}</span>
+        <div style={{ ...styleInline, margin: 12 }}>
+          <StandardButton
+            disabled={isLoading}
+            label="Load All"
+            onClick={handleClickLoadAll}
+          />
+        </div>
       </div>
       {Object.keys(meta).map((tempBookId) => {
         const entries = meta[tempBookId].entryIds.length || 0;
@@ -133,6 +151,7 @@ const BookSection = ({ getAllNotes = null, notes = [], title = "" }) => {
 
 BookSection.propTypes = propTypes;
 const mapStateToProps = (state) => ({
+  isLoading: !!state.notes.isLoadingIndex || !!state.notes.isLoadingNotes,
   notes: state.notes.notes,
 });
 const mapDispatchToProps = { getAllNotes: fetchArticles };
