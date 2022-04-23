@@ -18,6 +18,7 @@ const propTypes = {
   isClonable: PropType.bool,
   isEditable: PropType.bool,
   isFullView: PropType.bool,
+  hasBorder: PropType.bool,
   maxHeight: PropType.string,
   minHeight: PropType.string,
   onClickClone: PropType.func,
@@ -29,6 +30,7 @@ const NoteCard = ({
   isClonable = false,
   isEditable = false,
   isFullView = false,
+  hasBorder = false,
   maxHeight = null,
   minHeight = null,
   onClickClone = null,
@@ -38,8 +40,12 @@ const NoteCard = ({
   const calcMaxHeight = maxHeight || "unset";
   const height = isFullView ? "unset" : calcMaxHeight;
   const cardActionText = isFullView ? RETRACT : EXPAND;
+  const stylesCard = { margin: "6px" };
+  if (hasBorder) {
+    stylesCard.border = "1px solid black";
+  }
   return (
-    <MuiCard style={{ margin: "6px" }}>
+    <MuiCard style={stylesCard}>
       <CardContent
         style={{
           margin: "6px",

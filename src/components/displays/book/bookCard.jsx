@@ -8,6 +8,7 @@ const propTypes = {
   isChild: PropType.bool,
   isClonable: PropType.bool,
   isEditable: PropType.bool,
+  hasBorder: PropType.bool,
   minHeight: PropType.string,
   noteData: PropType.shape(propTypesBookV1),
   onClickClone: PropType.func,
@@ -19,6 +20,7 @@ const BookCard = ({
   isChild = false,
   isClonable = false,
   isEditable = false,
+  hasBorder = false,
   minHeight = null,
   noteData = null,
   onClickClone = null,
@@ -43,6 +45,7 @@ const BookCard = ({
       isClonable={isClonable}
       isEditable={isEditable}
       isFullView={showFull}
+      hasBorder={hasBorder}
       maxHeight={maxHeight}
       minHeight={calcMinHeight}
       onClickClone={onClickClone}

@@ -115,7 +115,14 @@ const BookSection = ({ getAllNotes = null, notes = [], title = "" }) => {
                 const data = notes.find((note) => {
                   return note.id === id;
                 });
-                return <BookCard key={id} isChild={isChild} noteData={data} />;
+                return (
+                  <BookCard
+                    key={id}
+                    hasBorder={true}
+                    isChild={isChild}
+                    noteData={data}
+                  />
+                );
               })}
           </div>
         );
