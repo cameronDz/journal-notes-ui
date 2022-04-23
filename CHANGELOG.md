@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.24.0]
+
+### Added
+
+- books section
+
+### Changed
+
+- flags and options for note and book card
+
 ## [2.23.0]
 
 ### Added
