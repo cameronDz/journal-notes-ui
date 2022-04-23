@@ -19,6 +19,11 @@ const bookViewStyles = {
   bookSessionDescription: {
     marginTop: "16px",
   },
+  bookSubHeaderText: {
+    fontSize: "16px",
+    fontWeight: "600",
+    lineHeight: "130%",
+  },
 };
 
 export { bookTitleSectionStyles, bookViewStyles };
