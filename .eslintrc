@@ -3,12 +3,14 @@
     "node": true
   },
   "extends": [
+    "eslint:recommended",
+    "plugin:import/recommended",
     "plugin:prettier/recommended",
     "plugin:react/recommended",
     "react-important-stuff"
   ],
-  "parser": "babel-eslint",
-  "rules": {
+  "parser": "babel-eslint","rules": {
+    "no-self-compare": 0,
     "semi": [2, "always"],
     "semi-spacing": [
       "error",
@@ -16,10 +18,18 @@
         "after": true,
         "before": false
       }
-    ],
-    "no-self-compare": 0
+    ]
   },
   "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".json",
+          ".jsx"
+        ]
+      }
+    },
     "react": {
       "version": "detect"
     }
