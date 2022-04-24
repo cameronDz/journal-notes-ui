@@ -26,16 +26,16 @@ const propTypes = {
   isLoading: PropType.bool,
   isUserSecured: PropType.bool,
   notes: PropType.array,
+  pageTitle: PropType.string,
   requestNoteUpsert: PropType.func,
-  title: PropType.string,
 };
 const BookSection = ({
   getAllNotes = null,
   isLoading = false,
   isUserSecured = false,
   notes = [],
+  pageTitle = "",
   requestNoteUpsert = null,
-  title = "",
 }) => {
   const history = useHistory();
   const [meta, setMeta] = useState({});
@@ -53,42 +53,33 @@ const BookSection = ({
     const open = {};
     const length = notes?.length || 0;
     for (let idx = 0; idx < length; idx++) {
-      if (notes?.[idx]?.journalType === "BOOK") {
-        const title = notes[idx].title;
-        if (title) {
-          const existingId = Object.keys(metaData).find((datum) => {
-            return metaData[datum].title === title;
-          });
-          if (!existingId) {
-            const tempId = uuidv4();
-            const {
-              author,
-              bookId,
-              bookDescription,
-              bookSource,
-              id,
-              pageCount,
-              publisher,
-            } = notes[idx];
-            metaData[tempId] = {
+      if (notes[idx].journalType === "BOOK") {
+        const {
+          author,
+          bookId,
+          bookDescription,
+          bookSource,
+          id,
+          pageCount,
+          publisher,
+          title,
+        } = notes[idx];
+        if (bookId) {
+          if (!metaData[bookId]) {
+            metaData[bookId] = {
               author,
               bookDescription,
               bookId,
               bookSource,
-              entryIds: [id],
-              id: tempId,
+              entryIds: [],
+              id: bookId,
               pageCount,
               publisher,
               title,
             };
-            open[tempId] = false;
-          } else {
-            const { bookId, id } = notes[idx];
-            metaData[existingId].entryIds.push(id);
-            if (!metaData[existingId].bookId && bookId) {
-              metaData[existingId].bookId = bookId;
-            }
+            open[bookId] = false;
           }
+          metaData[bookId].entryIds.push(id);
         }
       }
     }
@@ -137,7 +128,7 @@ const BookSection = ({
 
   return (
     <div>
-      <RouteTitle title={title} />
+      <RouteTitle title={pageTitle} />
       <div>
         <h4 style={styleHeader}>{`Total Books:`}</h4>
         <span style={styleInline}>{Object.keys(meta).length || `0`}</span>
