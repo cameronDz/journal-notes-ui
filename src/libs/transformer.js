@@ -28,6 +28,10 @@ const transformBookValues = (values) => {
     transformedValues.tags = transformTagsTrimReplaceWithSpace(values.tags);
     transformedValues._version = "1.1.1";
   }
+  if (version === "1.1.1") {
+    transformedValues.bookId = "";
+    transformedValues._version = "1.2.0";
+  }
   return transformedValues;
 };
 

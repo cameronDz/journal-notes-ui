@@ -320,6 +320,13 @@ const journalForms = {
         title: "Journal Type",
       },
       {
+        generateOn: generateOnTypes.CREATE,
+        generationType: generationTypes.UUID,
+        inputType: inputTypes.HIDDEN,
+        name: "boodId",
+        title: "BOOK_ID",
+      },
+      {
         generationType: generationTypes.EMPTY_STRING,
         inputType: inputTypes.TEXT_FIELD,
         name: "title",
@@ -433,7 +440,7 @@ const journalForms = {
         title: "Tag",
       },
       {
-        defaultValue: "1.1.1",
+        defaultValue: "1.2.0",
         generateOn: generateOnTypes.CREATE,
         generationType: generationTypes.PRESET,
         inputType: inputTypes.HIDDEN,

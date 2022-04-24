@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropType from "prop-types";
 import {
   Button,
@@ -15,18 +15,22 @@ const RETRACT = "Show less";
 
 const propTypes = {
   children: PropType.node,
+  isButtonMisc: PropType.bool,
   isClonable: PropType.bool,
   isEditable: PropType.bool,
   isFullView: PropType.bool,
   hasBorder: PropType.bool,
   maxHeight: PropType.string,
   minHeight: PropType.string,
+  onClickButtonMisc: PropType.func,
   onClickClone: PropType.func,
   onClickEdit: PropType.func,
   onClickFull: PropType.func,
+  textButtonMisc: PropType.string,
 };
 const NoteCard = ({
   children = null,
+  isButtonMisc = false,
   isClonable = false,
   isEditable = false,
   isFullView = false,
@@ -34,8 +38,10 @@ const NoteCard = ({
   maxHeight = null,
   minHeight = null,
   onClickClone = null,
+  onClickButtonMisc = null,
   onClickEdit = null,
   onClickFull = null,
+  textButtonMisc = "",
 }) => {
   const calcMaxHeight = maxHeight || "unset";
   const height = isFullView ? "unset" : calcMaxHeight;
@@ -76,6 +82,15 @@ const NoteCard = ({
             variant="outlined"
           >
             {CLONE}
+          </Button>
+        )}
+        {isButtonMisc && (
+          <Button
+            onClick={() => handleFunction(onClickButtonMisc)}
+            size="small"
+            variant="outlined"
+          >
+            {textButtonMisc}
           </Button>
         )}
       </CardActions>

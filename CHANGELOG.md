@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- book id to book journal type
+- book ID generator on book tab, with button to align
+
 ## [2.24.0]
 
 ### Added

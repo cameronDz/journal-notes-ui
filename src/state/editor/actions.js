@@ -87,7 +87,7 @@ const upsertNote = (content, isNew = true, config = {}) => {
           return dispatch({ type: _types.UPSERT_NOTE_COMPLETED });
         });
     } else {
-      console.warn("SAVING disabled - url: ", url);
+      console.warn("SAVING disabled - url: ", requestType, url);
       console.warn("SAVING disabled - content: ", content);
     }
   };
