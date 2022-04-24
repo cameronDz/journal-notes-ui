@@ -7,16 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.25.0] 2022-04-23
+## [2.25.0] 2022-04-24
 
 ### Added
 
 - book id to book journal type
 - book ID generator on book tab, with button to align book notes
-
+- new linter rules for eslint recommended
 ### Changed
 
 - edit and clone buttons include on book tab notes
+- updated code with new linter rules implemented
 
 ## [2.24.0] 2022-04-23
 
