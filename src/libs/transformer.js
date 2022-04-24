@@ -52,7 +52,7 @@ const transformArticleValues = (values) => {
 const transformTagsTrimReplaceWithSpace = (tags) => {
   const transfromedTags = [];
   const length = Array.isArray(tags) ? tags.length : 0;
-  for (let idx = 0; idx > length; idx++) {
+  for (let idx = 0; idx < length; idx++) {
     const tag = defaultEmptyString(tags[idx]).trim();
     if (tag) {
       transfromedTags.push(tag.replace(/ /g, `-`));

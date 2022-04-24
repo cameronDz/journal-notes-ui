@@ -99,7 +99,7 @@ const EditorSection = ({
   useEffect(() => {
     if (!!editNote && typeof editNote === "object") {
       setType(editNote.journalType);
-      if (!!cloneId) {
+      if (cloneId) {
         const cloneValues = {
           author: defaultEmptyString(editNote.author),
           bookDescription: defaultEmptyString(editNote.bookDescription),
@@ -166,7 +166,7 @@ const EditorSection = ({
   };
 
   const fireIndexUpdate = () => {
-    if (!!values?.id) {
+    if (values?.id) {
       if (isNew) {
         abortCtrlIndexUpsert?.abort();
         abortCtrlIndexUpsert = new AbortController();

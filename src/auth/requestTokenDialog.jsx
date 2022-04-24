@@ -63,9 +63,9 @@ const RequestTokenDialog = ({
 
   useEffect(() => {
     let status = "info";
-    if (!!token) {
+    if (token) {
       status = "success";
-    } else if (!!error) {
+    } else if (error) {
       status = "error";
     }
     setDialogSeverity(status);
@@ -85,7 +85,7 @@ const RequestTokenDialog = ({
   }, [clearTokenError, isAuthLive, isOpen, livenessTokenCheck]);
 
   const handleActionClick = () => {
-    if (!!token) {
+    if (token) {
       handleFunction(clearTokenUser);
     } else {
       abortCtrlPostCredentials?.abort();
@@ -150,11 +150,11 @@ const RequestTokenDialog = ({
           <Button
             disabled={isProcessingRequest}
             onClick={handleClose}
-            title={!!token ? `Close` : `Cancel`}
+            title={token ? `Close` : `Cancel`}
           >
-            {!!token ? `Close` : `Cancel`}
+            {token ? `Close` : `Cancel`}
           </Button>
-          {!!token ? (
+          {token ? (
             <Button
               disabled={isProcessingRequest}
               onClick={handleActionClick}

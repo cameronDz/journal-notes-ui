@@ -31,7 +31,7 @@ const ListField = ({
 
   const handleAdd = () => {
     let clone = defaultDuplicateArray(items);
-    if (!!elementName) {
+    if (elementName) {
       const data = { createDate: new Date() };
       data[elementName] = display;
       clone.push(data);
@@ -50,7 +50,7 @@ const ListField = ({
     if (!display) {
       const clone = Array.isArray(items) ? [...items] : [];
       const removedElement = clone.pop();
-      newDisplay = !!elementName ? removedElement[elementName] : removedElement;
+      newDisplay = elementName ? removedElement[elementName] : removedElement;
       handleFunction(onUpdate, clone);
     }
     setDisplay(newDisplay);
@@ -82,7 +82,7 @@ const ListField = ({
       />
       <StandardButton
         disabled={isDisabled || (!display && !items?.length)}
-        label={`${!!display ? "Clear" : "Remove"} ${label}`}
+        label={`${display ? "Clear" : "Remove"} ${label}`}
         onClick={handleRemove}
         variant="text"
       />

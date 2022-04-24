@@ -2,7 +2,7 @@ const downloadJson = (object = "", name = "") => {
   if (!object) {
     return;
   }
-  const prefix = !!name ? name : new Date().getTime();
+  const prefix = name ? name : new Date().getTime();
   const filename = prefix + ".json";
   const hrefConfig = "data:application/json;charset=utf-8;,";
   const href = hrefConfig + encodeURIComponent(JSON.stringify(object));

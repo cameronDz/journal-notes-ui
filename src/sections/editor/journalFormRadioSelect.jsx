@@ -19,7 +19,7 @@ const JournalFormRadioSelect = ({
   const buttons = [];
   const length = availableTypes?.length || 0;
   for (let idx = 0; idx < length; idx++) {
-    if (!!availableTypes[idx]) {
+    if (availableTypes[idx]) {
       const label = availableTypes[idx].replace(/_/g, ` `);
       buttons.push(
         <FormControlLabel

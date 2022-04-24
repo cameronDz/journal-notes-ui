@@ -3,7 +3,7 @@ import HtmlWebPackPlugin from "html-webpack-plugin";
 import { resolve } from "path";
 import _package from "../package";
 
-module.exports = {
+const common = {
   entry: "./src/index.js",
   module: {
     rules: [
@@ -45,3 +45,5 @@ module.exports = {
     extensions: ["*", ".js", ".jsx"],
   },
 };
+
+export default common;

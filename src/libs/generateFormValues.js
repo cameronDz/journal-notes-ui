@@ -8,7 +8,7 @@ const generateFormValues = (inputs, defaultValues = {}) => {
   for (let idx = 0; idx < length; idx++) {
     const name = inputs[idx]?.name;
     const value = defaultValues?.[name];
-    if (!!name) {
+    if (name) {
       values[name] = value || inputs[idx].defaultValue;
       if (isUndefined(values[name])) {
         values[name] = defaultType(

@@ -68,7 +68,7 @@ const JournalForm = ({
   const handleUpdate = (updateValue, updateName) => {
     if (values?.[updateName] !== undefined) {
       setValues((prev) => {
-        return { ...(!!prev ? prev : {}), [updateName]: updateValue };
+        return { ...(prev ? prev : {}), [updateName]: updateValue };
       });
       handleFunction(onDirtiedForm, true);
     }

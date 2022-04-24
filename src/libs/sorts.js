@@ -60,7 +60,7 @@ const sortByTitle = (a, b) => {
 const sortByBooleanValues = (a, b) => {
   let sortValue = NEUTRAL;
   if (!!a !== !!b) {
-    sortValue = !!a ? FIRST_VALUE_GREATER : SECOND_VALUE_GREATER;
+    sortValue = a ? FIRST_VALUE_GREATER : SECOND_VALUE_GREATER;
   }
   return sortValue;
 };
