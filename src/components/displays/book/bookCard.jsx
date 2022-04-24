@@ -41,8 +41,8 @@ const BookCard = ({
     setShowFull((prev) => !prev);
   };
 
-  const maxHeight = isChild ? "12px" : "unset";
-  const slimMinHeight = isChild ? "12px" : null;
+  const maxHeight = isChild ? "20px" : "unset";
+  const slimMinHeight = isChild ? "20px" : null;
   const calcMinHeight = minHeight || slimMinHeight;
   return (
     <NoteCard

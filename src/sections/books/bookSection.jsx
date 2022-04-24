@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import PropType from "prop-types";
 import { Button } from "@material-ui/core";
@@ -15,26 +16,9 @@ import { fetchArticles } from "../../state/notes/actions";
 const styleButton = { margin: "12px" };
 const styleHeader = { display: "inline-block", marginRight: "12px" };
 const styleInline = { display: "inline-block" };
-const textAlignAllIds = "Align All Book IDs";
 const textGenerateBookId = "Generate Book ID";
 const textHideEntires = "Hide Entries";
 const textShowEntries = "Show Entries";
-
-const hasMisalignedIds = (meta, notes) => {
-  let isMisaligned = false;
-  const { length } = meta.entryIds;
-  const metaId = meta.bookId;
-  for (let idx = 0; idx < length; idx++) {
-    const { bookId } = notes.find((note) => {
-      return note.id === meta.entryIds[idx];
-    });
-    if (bookId !== metaId) {
-      isMisaligned = true;
-      break;
-    }
-  }
-  return isMisaligned;
-};
 
 let abortCtrlFetchAll = null;
 const propTypes = {
@@ -53,6 +37,7 @@ const BookSection = ({
   requestNoteUpsert = null,
   title = "",
 }) => {
+  const history = useHistory();
   const [meta, setMeta] = useState({});
   const [showEntry, setShowEntry] = useState({});
   const [updatedNotesKeys, setUpdatedNotesKeys] = useState({});
@@ -111,15 +96,6 @@ const BookSection = ({
     setShowEntry(open);
   }, [notes]);
 
-  const handleClickAlignAllBookId = (tempBookId) => {
-    const { length } = meta[tempBookId].entryIds;
-    for (let idx = 0; idx < length; idx++) {
-      setTimeout(() => {
-        handleClickAlignBookId(tempBookId, meta[tempBookId].entryIds[idx]);
-      }, 350);
-    }
-  };
-
   const handleClickAlignBookId = (tempBookId, noteId) => {
     const aligningNote = notes.find((note) => {
       return note.id === noteId;
@@ -133,10 +109,18 @@ const BookSection = ({
     });
   };
 
-  const handleClickShowEntries = (id) => {
-    const open = { ...showEntry };
-    open[id] = !open[id];
-    setShowEntry(open);
+  const handleClickCardBtn = (id, type = "") => {
+    if (!!id && ["clone", "edit"].indexOf(type) > -1) {
+      const search = `id=${id}`;
+      const pathname = `/${type}`;
+      history.push({ pathname, search });
+    }
+  };
+
+  const handleClickGenerateId = (id) => {
+    const clonedMeta = JSON.parse(JSON.stringify(meta));
+    clonedMeta[id].bookId = uuidv4();
+    setMeta(clonedMeta);
   };
 
   const handleClickLoadAll = () => {
@@ -145,10 +129,10 @@ const BookSection = ({
     handleFunction(getAllNotes, config);
   };
 
-  const handleClickGenerateId = (id) => {
-    const clonedMeta = JSON.parse(JSON.stringify(meta));
-    clonedMeta[id].bookId = uuidv4();
-    setMeta(clonedMeta);
+  const handleClickShowEntries = (id) => {
+    const open = { ...showEntry };
+    open[id] = !open[id];
+    setShowEntry(open);
   };
 
   return (
@@ -198,18 +182,6 @@ const BookSection = ({
                 {textGenerateBookId}
               </Button>
             )}
-            {isUserSecured &&
-              meta[tempBookId].bookId &&
-              hasMisalignedIds(meta[tempBookId], notes) && (
-                <Button
-                  onClick={() => handleClickAlignAllBookId(tempBookId)}
-                  size="small"
-                  style={styleButton}
-                  variant="outlined"
-                >
-                  {textAlignAllIds}
-                </Button>
-              )}
             {showEntry[tempBookId] &&
               meta[tempBookId].entryIds.map((id) => {
                 const data = notes.find((note) => {
@@ -226,8 +198,12 @@ const BookSection = ({
                       data.bookId !== meta[tempBookId].bookId
                     }
                     isChild={isChild}
+                    isClonable={isUserSecured}
+                    isEditable={isUserSecured}
                     noteData={data}
                     onClickBookId={() => handleClickAlignBookId(tempBookId, id)}
+                    onClickClone={() => handleClickCardBtn(id, "clone")}
+                    onClickEdit={() => handleClickCardBtn(id, "edit")}
                   />
                 );
               })}
