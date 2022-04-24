@@ -103,6 +103,7 @@ const EditorSection = ({
         const cloneValues = {
           author: defaultEmptyString(editNote.author),
           bookDescription: defaultEmptyString(editNote.bookDescription),
+          bookId: defaultEmptyString(editNote.bookId),
           bookSource: defaultEmptyString(editNote.bookSource),
           journalType: defaultEmptyString(editNote.journalType),
           pageCount: defaultEmptyString(editNote.pageCount),

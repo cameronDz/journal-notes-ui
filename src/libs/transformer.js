@@ -29,7 +29,7 @@ const transformBookValues = (values) => {
     transformedValues._version = "1.1.1";
   }
   if (version === "1.1.1") {
-    transformedValues.bookId = "";
+    transformedValues.bookId = defaultEmptyString(transformedValues.bookId);
     transformedValues._version = "1.2.0";
   }
   return transformedValues;

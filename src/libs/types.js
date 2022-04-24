@@ -323,7 +323,7 @@ const journalForms = {
         generateOn: generateOnTypes.CREATE,
         generationType: generationTypes.UUID,
         inputType: inputTypes.HIDDEN,
-        name: "boodId",
+        name: "bookId",
         title: "BOOK_ID",
       },
       {
