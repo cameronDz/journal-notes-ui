@@ -140,41 +140,31 @@ const BookSection = ({
           />
         </div>
       </div>
-      {Object.keys(meta).map((tempBookId) => {
-        const entries = meta[tempBookId].entryIds.length || 0;
+      {Object.keys(meta).map((bookId) => {
+        const entries = meta[bookId].entryIds.length || 0;
         const isChild = entries > 1;
         return (
-          <div key={tempBookId}>
+          <div key={bookId}>
             <BookTitleSection
-              author={meta[tempBookId].author}
-              bookDescription={meta[tempBookId].bookDescription}
-              bookSource={meta[tempBookId].bookSource}
-              pageCount={meta[tempBookId].pageCount}
-              publishDate={meta[tempBookId].publishDate}
-              publisher={meta[tempBookId].publisher}
-              title={meta[tempBookId].title}
+              author={meta[bookId].author}
+              bookDescription={meta[bookId].bookDescription}
+              bookSource={meta[bookId].bookSource}
+              pageCount={meta[bookId].pageCount}
+              publishDate={meta[bookId].publishDate}
+              publisher={meta[bookId].publisher}
+              title={meta[bookId].title}
             />
             <Button
-              onClick={() => handleClickShowEntries(tempBookId)}
+              onClick={() => handleClickShowEntries(bookId)}
               size="small"
               style={styleButton}
               variant="outlined"
             >
-              {showEntry[tempBookId] ? textHideEntires : textShowEntries}
+              {showEntry[bookId] ? textHideEntires : textShowEntries}
               {`: ${entries}`}
             </Button>
-            {isUserSecured && !meta[tempBookId].bookId && (
-              <Button
-                onClick={() => handleClickGenerateId(tempBookId)}
-                size="small"
-                style={styleButton}
-                variant="outlined"
-              >
-                {textGenerateBookId}
-              </Button>
-            )}
-            {showEntry[tempBookId] &&
-              meta[tempBookId].entryIds.map((id) => {
+            {showEntry[bookId] &&
+              meta[bookId].entryIds.map((id) => {
                 const data = notes.find((note) => {
                   return note.id === id;
                 });
@@ -185,14 +175,13 @@ const BookSection = ({
                     isButtonMisc={
                       !updatedNotesKeys[id] &&
                       isUserSecured &&
-                      meta[tempBookId].bookId &&
-                      data.bookId !== meta[tempBookId].bookId
+                      data.bookId !== meta[bookId].bookId
                     }
                     isChild={isChild}
                     isClonable={isUserSecured}
                     isEditable={isUserSecured}
                     noteData={data}
-                    onClickBookId={() => handleClickAlignBookId(tempBookId, id)}
+                    onClickBookId={() => handleClickAlignBookId(bookId, id)}
                     onClickClone={() => handleClickCardBtn(id, "clone")}
                     onClickEdit={() => handleClickCardBtn(id, "edit")}
                   />
