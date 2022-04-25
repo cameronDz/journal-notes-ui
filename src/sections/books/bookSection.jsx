@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
@@ -38,8 +38,10 @@ const BookSection = ({
   requestNoteUpsert = null,
 }) => {
   const history = useHistory();
+  const [expandEntry, setExpandEntry] = useState({});
   const [meta, setMeta] = useState({});
-  const [showEntry, setShowEntry] = useState({});
+  const [showEntry, setShowEntry] = useState(true);
+  const [showResources, setShowResources] = useState(false);
   const [updatedNotesKeys, setUpdatedNotesKeys] = useState({});
 
   useEffect(() => {
@@ -84,7 +86,7 @@ const BookSection = ({
       }
     }
     setMeta(metaData);
-    setShowEntry(open);
+    setExpandEntry(open);
   }, [notes]);
 
   const handleClickAlignBookId = (tempBookId, noteId) => {
@@ -121,9 +123,14 @@ const BookSection = ({
   };
 
   const handleClickShowEntries = (id) => {
-    const open = { ...showEntry };
+    const open = { ...expandEntry };
     open[id] = !open[id];
-    setShowEntry(open);
+    setExpandEntry(open);
+  };
+
+  const handleClickToggleDisplay = () => {
+    setShowEntry((prev) => !prev);
+    setShowResources((prev) => !prev);
   };
 
   return (
@@ -137,6 +144,13 @@ const BookSection = ({
             disabled={isLoading}
             label="Load All"
             onClick={handleClickLoadAll}
+          />
+        </div>
+        <div style={{ ...styleInline, margin: 12 }}>
+          <StandardButton
+            disabled={isLoading}
+            label="Toggle Display"
+            onClick={handleClickToggleDisplay}
           />
         </div>
       </div>
@@ -160,31 +174,41 @@ const BookSection = ({
               style={styleButton}
               variant="outlined"
             >
-              {showEntry[bookId] ? textHideEntires : textShowEntries}
+              {expandEntry[bookId] ? textHideEntires : textShowEntries}
               {`: ${entries}`}
             </Button>
-            {showEntry[bookId] &&
+            {expandEntry[bookId] &&
               meta[bookId].entryIds.map((id) => {
                 const data = notes.find((note) => {
                   return note.id === id;
                 });
                 return (
-                  <BookCard
-                    key={id}
-                    hasBorder={true}
-                    isButtonMisc={
-                      !updatedNotesKeys[id] &&
-                      isUserSecured &&
-                      data.bookId !== meta[bookId].bookId
-                    }
-                    isChild={isChild}
-                    isClonable={isUserSecured}
-                    isEditable={isUserSecured}
-                    noteData={data}
-                    onClickBookId={() => handleClickAlignBookId(bookId, id)}
-                    onClickClone={() => handleClickCardBtn(id, "clone")}
-                    onClickEdit={() => handleClickCardBtn(id, "edit")}
-                  />
+                  <Fragment key={id}>
+                    {showEntry && (
+                      <BookCard
+                        hasBorder={true}
+                        isButtonMisc={
+                          !updatedNotesKeys[id] &&
+                          isUserSecured &&
+                          data.bookId !== meta[bookId].bookId
+                        }
+                        isChild={isChild}
+                        isClonable={isUserSecured}
+                        isEditable={isUserSecured}
+                        noteData={data}
+                        onlickBookId={() => handleClickAlignBookId(bookId, id)}
+                        onCClickClone={() => handleClickCardBtn(id, "clone")}
+                        onClickEdit={() => handleClickCardBtn(id, "edit")}
+                      />
+                    )}
+                    {showResources && (
+                      <ul>
+                        {data.resources?.map((res, idx) => {
+                          return <li key={res.id || idx}>{res.resource}</li>;
+                        })}
+                      </ul>
+                    )}
+                  </Fragment>
                 );
               })}
           </div>

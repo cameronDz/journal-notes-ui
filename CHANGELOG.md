@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.26.0] 2022-04-24
+
+### Added
+
+- toggle button for seeing resources on books tab
+
 ## [2.25.0] 2022-04-24
 
 ### Added
