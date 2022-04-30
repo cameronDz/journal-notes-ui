@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - load all tab button for loading all notes
+- flag to determine when load all has occured successfully
 
 ### Changed
 

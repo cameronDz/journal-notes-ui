@@ -21,6 +21,7 @@ const reducer = (state = initialState, action = null) => {
     case types.GET_NOTES_ALL_SUCCESS:
       newState = { ...(state ? state : {}) };
       newState.errorNotes = null;
+      newState.isLoadedAll = action.isLoadedAll;
       newState.notes = defaultUniqueArray(action.notes);
       break;
     case types.GET_NOTES_ALL_ERROR:

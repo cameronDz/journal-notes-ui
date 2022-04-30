@@ -15,12 +15,14 @@ import { appContainerStyles } from "./styles";
 let abortCtrlFetchAll = null;
 const propTypes = {
   getAllNotes: PropType.func,
+  isLoadedAll: PropType.bool,
   isLoadingNoteIndex: PropType.bool,
   isLoadingNoteNotes: PropType.bool,
 };
 const useStyles = makeStyles(() => appContainerStyles);
 const AppContainer = ({
   getAllNotes = null,
+  isLoadedAll = false,
   isLoadingNoteIndex = false,
   isLoadingNoteNotes = false,
 }) => {
@@ -37,8 +39,8 @@ const AppContainer = ({
   }, [getAllNotes]);
 
   useEffect(() => {
-    setIsLoading(isLoadingNoteIndex || isLoadingNoteNotes);
-  }, [isLoadingNoteIndex, isLoadingNoteNotes]);
+    setIsLoading(isLoadedAll || isLoadingNoteIndex || isLoadingNoteNotes);
+  }, [isLoadedAll, isLoadingNoteIndex, isLoadingNoteNotes]);
 
   const handleLoadAll = () => {
     abortCtrlFetchAll?.abort();
@@ -64,7 +66,7 @@ const AppContainer = ({
     <Fragment>
       <div className={classNames(classes.appWrapper)}>
         <div className={classNames(classes.appNavBarWrapper)}>
-          <LeftNavBar onClick={handleIconClick} isLoading={isLoading} />
+          <LeftNavBar onClick={handleIconClick} isDisabled={isLoading} />
         </div>
         <div className={classNames(classes.appContentOuterWrapper)}>
           <div className={classNames(classes.appContentInnerWrapper)}>
@@ -83,6 +85,7 @@ const AppContainer = ({
 
 AppContainer.propTypes = propTypes;
 const mapStateToProps = (state) => ({
+  isLoadedAll: state.notes.isLoadedAll,
   isLoadingNoteIndex: state.notes.isLoadingIndex,
   isLoadingNoteNotes: state.notes.isLoadingNotes,
 });

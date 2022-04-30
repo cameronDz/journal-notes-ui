@@ -47,9 +47,9 @@ const icons = [
   },
 ];
 
-const propTypes = { isLoading: PropType.bool, onClick: PropType.func };
+const propTypes = { isDisabled: PropType.bool, onClick: PropType.func };
 const useStyles = makeStyles(() => styles);
-const LeftNavBar = ({ isLoading = false, onClick = null }) => {
+const LeftNavBar = ({ isDisabled = false, onClick = null }) => {
   const classes = useStyles();
   return (
     <Fragment>
@@ -61,7 +61,7 @@ const LeftNavBar = ({ isLoading = false, onClick = null }) => {
                 <Fragment key={icon.name}>
                   <NavIcon
                     icon={icon.icon}
-                    isDisabled={icon.isDisabledable && isLoading}
+                    isDisabled={icon.isDisabledable && isDisabled}
                     name={icon.name}
                     onClick={(event) => handleFunction(onClick, event)}
                   />

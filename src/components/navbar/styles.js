@@ -28,6 +28,7 @@ const navBarIconStyles = {
     "&$iconWrapper": {
       "& .MuiButtonBase-root:hover": {
         backgroundColor: "unset",
+        cursor: "default",
       },
       "& svg:hover": {
         cursor: "default",

@@ -18,7 +18,12 @@ const fetchEntireListPayload = (dispatch, index, apiConfig = {}) => {
     .post(url, index, setConfig(apiConfig))
     .then((response) => {
       const notes = defaultUniqueArray(response?.data?.payload?.list);
-      return dispatch({ notes, type: _types.GET_NOTES_ALL_SUCCESS });
+      const isLoadedAll = !apiConfig.limit;
+      return dispatch({
+        isLoadedAll,
+        notes,
+        type: _types.GET_NOTES_ALL_SUCCESS,
+      });
     })
     .catch((error) => {
       return dispatch({ error, type: _types.GET_NOTES_ALL_ERROR });
