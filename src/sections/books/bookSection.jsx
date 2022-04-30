@@ -10,13 +10,13 @@ import StandardButton from "../../components/standardButton";
 import { generateDateString } from "../../libs/date";
 import { downloadJson } from "../../libs/download";
 import { handleFunction } from "../../libs/eventUtil";
+import { sortByCreatedDate as sortFunc } from "../../libs/sorts";
 import { upsertNote } from "../../state/editor/actions";
 import { fetchArticles } from "../../state/notes/actions";
 
 const styleButton = { margin: "12px" };
 const styleHeader = { display: "inline-block", marginRight: "12px" };
 const styleInline = { display: "inline-block" };
-const textGenerateBookId = "Generate Book ID";
 const textHideEntires = "Hide Entries";
 const textShowEntries = "Show Entries";
 
@@ -51,11 +51,12 @@ const BookSection = ({
   }, []);
 
   useEffect(() => {
+    const clonedNotes = JSON.parse(JSON.stringify(notes || [])).sort(sortFunc);
     const metaData = {};
     const open = {};
-    const length = notes?.length || 0;
+    const length = clonedNotes?.length || 0;
     for (let idx = 0; idx < length; idx++) {
-      if (notes[idx].journalType === "BOOK") {
+      if (clonedNotes[idx].journalType === "BOOK") {
         const {
           author,
           bookId,
@@ -65,7 +66,7 @@ const BookSection = ({
           pageCount,
           publisher,
           title,
-        } = notes[idx];
+        } = clonedNotes[idx];
         if (bookId) {
           if (!metaData[bookId]) {
             metaData[bookId] = {

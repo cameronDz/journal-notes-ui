@@ -9,7 +9,8 @@
     "plugin:react/recommended",
     "react-important-stuff"
   ],
-  "parser": "babel-eslint","rules": {
+  "parser": "babel-eslint",
+  "rules": {
     "no-self-compare": 0,
     "semi": [2, "always"],
     "semi-spacing": [
@@ -23,11 +24,7 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [
-          ".js",
-          ".json",
-          ".jsx"
-        ]
+        "extensions": [".js", ".json", ".jsx"]
       }
     },
     "react": {

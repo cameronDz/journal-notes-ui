@@ -1,6 +1,8 @@
-const NEUTRAL = 0;
-const FIRST_VALUE_GREATER = -1;
-const SECOND_VALUE_GREATER = 1;
+const order = {
+  neutral: 0,
+  firstValueGreater: -1,
+  secondValueGreater: 1,
+};
 
 const sortByDate = (a = "", b = "") => {
   let sortValue = sortByBooleanValues(a, b);
@@ -10,9 +12,9 @@ const sortByDate = (a = "", b = "") => {
     sortValue = sortNaNValues(aTime, bTime);
     if (!sortValue) {
       if (aTime > bTime) {
-        sortValue = FIRST_VALUE_GREATER;
+        sortValue = order.firstValueGreater;
       } else if (aTime < bTime) {
-        sortValue = SECOND_VALUE_GREATER;
+        sortValue = order.secondValueGreater;
       }
     }
   }
@@ -20,6 +22,7 @@ const sortByDate = (a = "", b = "") => {
 };
 
 const sortByCreatedDate = (a = "", b = "") => {
+  console.info("a: ", a, "b: ", b);
   const aValue = a?.createdDate || "";
   const bValue = b?.createdDate || "";
   return sortByDate(aValue, bValue);
@@ -43,11 +46,11 @@ const sortByReverseTitle = (a, b) => {
   const aValue = a?.title || "";
   const bValue = b?.title || "";
   let sortValue = sortByBooleanValues(bValue, aValue);
-  if (sortValue === NEUTRAL) {
+  if (sortValue === order.neutral) {
     if (aValue < bValue) {
-      sortValue = SECOND_VALUE_GREATER;
+      sortValue = order.secondValueGreater;
     } else if (aValue > bValue) {
-      sortValue = FIRST_VALUE_GREATER;
+      sortValue = order.firstValueGreater;
     }
   }
   return sortValue;
@@ -58,19 +61,19 @@ const sortByTitle = (a, b) => {
 };
 
 const sortByBooleanValues = (a, b) => {
-  let sortValue = NEUTRAL;
+  let sortValue = order.neutral;
   if (!!a !== !!b) {
-    sortValue = a ? FIRST_VALUE_GREATER : SECOND_VALUE_GREATER;
+    sortValue = a ? order.firstValueGreater : order.secondValueGreater;
   }
   return sortValue;
 };
 
 const sortNaNValues = (a, b) => {
-  let sortValue = NEUTRAL;
+  let sortValue = order.neutral;
   if (!isNaN(a) && isNaN(b)) {
-    sortValue = FIRST_VALUE_GREATER;
+    sortValue = order.firstValueGreater;
   } else if (isNaN(a) && !isNaN(b)) {
-    sortValue = SECOND_VALUE_GREATER;
+    sortValue = order.secondValueGreater;
   }
   return sortValue;
 };
