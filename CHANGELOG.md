@@ -20,6 +20,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - book section prop name for clone function
+
+### Removed
+
+- load all buttons from individual pages
+
 ## [2.26.0] 2022-04-24
 
 ### Added
