@@ -135,9 +135,9 @@ const BookSection = ({
   };
 
   return (
-    <div>
+    <section>
       <RouteTitle title={pageTitle} />
-      <div>
+      <section>
         <h4 style={styleHeader}>{`Total Books:`}</h4>
         <span style={styleInline}>{Object.keys(meta).length || `0`}</span>
         <div style={{ ...styleInline, margin: 12 }}>
@@ -154,12 +154,12 @@ const BookSection = ({
             onClick={handleClickToggleDisplay}
           />
         </div>
-      </div>
+      </section>
       {Object.keys(meta).map((bookId) => {
         const entries = meta[bookId].entryIds.length || 0;
         const isChild = entries > 1;
         return (
-          <div key={bookId}>
+          <section key={bookId}>
             <BookTitleSection
               author={meta[bookId].author}
               bookDescription={meta[bookId].bookDescription}
@@ -197,8 +197,8 @@ const BookSection = ({
                         isClonable={isUserSecured}
                         isEditable={isUserSecured}
                         noteData={data}
-                        onlickBookId={() => handleClickAlignBookId(bookId, id)}
-                        onCClickClone={() => handleClickCardBtn(id, "clone")}
+                        onClickBookId={() => handleClickAlignBookId(bookId, id)}
+                        onClickClone={() => handleClickCardBtn(id, "clone")}
                         onClickEdit={() => handleClickCardBtn(id, "edit")}
                       />
                     )}
@@ -212,10 +212,10 @@ const BookSection = ({
                   </Fragment>
                 );
               })}
-          </div>
+          </section>
         );
       })}
-    </div>
+    </section>
   );
 };
 

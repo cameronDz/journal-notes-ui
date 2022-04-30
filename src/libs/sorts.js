@@ -22,7 +22,6 @@ const sortByDate = (a = "", b = "") => {
 };
 
 const sortByCreatedDate = (a = "", b = "") => {
-  console.info("a: ", a, "b: ", b);
   const aValue = a?.createdDate || "";
   const bValue = b?.createdDate || "";
   return sortByDate(aValue, bValue);
