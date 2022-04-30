@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- book toggle entry/view button replaced with switch and UI changes
+- book show hide button switched to be flexed inline icon expand/collapse arrows
 - sort order of book entries by last created on book page
 - upgraded to the latest react linter plugin
 - switched divs for sections
