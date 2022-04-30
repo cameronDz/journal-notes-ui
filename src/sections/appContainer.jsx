@@ -13,11 +13,20 @@ import { RequestTokenDialog } from "../auth";
 import { appContainerStyles } from "./styles";
 
 let abortCtrlFetchAll = null;
-const propTypes = { getAllNotes: PropType.func };
+const propTypes = {
+  getAllNotes: PropType.func,
+  isLoadingNoteIndex: PropType.bool,
+  isLoadingNoteNotes: PropType.bool,
+};
 const useStyles = makeStyles(() => appContainerStyles);
-const AppContainer = ({ getAllNotes }) => {
+const AppContainer = ({
+  getAllNotes = null,
+  isLoadingNoteIndex = false,
+  isLoadingNoteNotes = false,
+}) => {
   const classes = useStyles();
   const history = useHistory();
+  const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -27,9 +36,22 @@ const AppContainer = ({ getAllNotes }) => {
     handleFunction(getAllNotes, config);
   }, [getAllNotes]);
 
+  useEffect(() => {
+    setIsLoading(isLoadingNoteIndex || isLoadingNoteNotes);
+  }, [isLoadingNoteIndex, isLoadingNoteNotes]);
+
+  const handleLoadAll = () => {
+    abortCtrlFetchAll?.abort();
+    abortCtrlFetchAll = new AbortController();
+    const config = { signal: abortCtrlFetchAll.signal };
+    handleFunction(getAllNotes, config);
+  };
+
   const handleIconClick = (name) => {
     const path = `/${name}`;
-    if (name !== "sign-in") {
+    if (name === "load-all") {
+      handleLoadAll();
+    } else if (name !== "sign-in") {
       if (history.location.pathname !== path) {
         history.push(path);
       }
@@ -42,7 +64,7 @@ const AppContainer = ({ getAllNotes }) => {
     <Fragment>
       <div className={classNames(classes.appWrapper)}>
         <div className={classNames(classes.appNavBarWrapper)}>
-          <LeftNavBar onClick={handleIconClick} />
+          <LeftNavBar onClick={handleIconClick} isLoading={isLoading} />
         </div>
         <div className={classNames(classes.appContentOuterWrapper)}>
           <div className={classNames(classes.appContentInnerWrapper)}>
@@ -60,6 +82,9 @@ const AppContainer = ({ getAllNotes }) => {
 };
 
 AppContainer.propTypes = propTypes;
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => ({
+  isLoadingNoteIndex: state.notes.isLoadingIndex,
+  isLoadingNoteNotes: state.notes.isLoadingNotes,
+});
 const mapDispatchToProps = { getAllNotes: fetchArticles };
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

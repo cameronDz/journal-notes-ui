@@ -8,16 +8,33 @@ import { navBarIconStyles } from "./styles";
 
 const propTypes = {
   icon: PropType.element,
+  isDisabled: PropType.bool,
   name: PropType.string,
   onClick: PropType.func,
   size: PropType.string,
 };
 const useStyles = makeStyles(() => navBarIconStyles);
-const NavIcon = ({ icon, name, onClick, size = "large" }) => {
+const NavIcon = ({
+  icon = null,
+  isDisabled = false,
+  name = "",
+  onClick = null,
+  size = "large",
+}) => {
   const classes = useStyles();
+  const handleClick = () => {
+    if (!isDisabled) {
+      handleFunction(onClick, name);
+    }
+  };
   return (
-    <div className={classNames(classes.iconWrapper)}>
-      <IconButton onClick={() => handleFunction(onClick, name)} title={name}>
+    <div
+      className={classNames(
+        classes.iconWrapper,
+        isDisabled && classes.disabledBtn
+      )}
+    >
+      <IconButton onClick={handleClick} title={name}>
         <SvgIcon fontSize={size}>{icon}</SvgIcon>
       </IconButton>
     </div>

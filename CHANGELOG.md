@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- load all tab button for loading all notes
+
+### Changed
+
+- sort order of book entries by last created on book page
+- upgraded to the latest react linter plugin
+- switched divs for sections
+
+### Fixed
+
+- book section prop name for clone function
 ## [2.26.0] 2022-04-24
 
 ### Added

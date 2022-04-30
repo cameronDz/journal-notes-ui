@@ -3,7 +3,7 @@ import { sophisticatedColorPalette } from "../../libs/colors";
 
 const navBarStyles = {
   navBarRoot: {
-    marginTop: globalDimensions?.appNavBarSize?.px,
+    marginTop: globalDimensions.appNavBarSize.px,
   },
 };
 
@@ -13,7 +13,7 @@ const navBarIconStyles = {
     "& .MuiButtonBase-root": {
       width: "100%",
       "&:hover": {
-        backgroundColor: sophisticatedColorPalette?.darkBlue?.hex,
+        backgroundColor: sophisticatedColorPalette.darkBlue.hex,
       },
     },
     "& svg": {
@@ -21,6 +21,16 @@ const navBarIconStyles = {
       width: "100%",
       "&:hover": {
         cursor: "pointer",
+      },
+    },
+  },
+  disabledBtn: {
+    "&$iconWrapper": {
+      "& .MuiButtonBase-root:hover": {
+        backgroundColor: "unset",
+      },
+      "& svg:hover": {
+        cursor: "default",
       },
     },
   },
