@@ -1,8 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import classNames from "classnames";
 import PropType from "prop-types";
-import { Button, FormControlLabel, Switch } from "@material-ui/core";
+import { FormControlLabel, makeStyles, Switch } from "@material-ui/core";
 import RouteTitle from "../../components/routeTitle";
 import { BookCard, BookTitleSection } from "../../components/displays/book";
 import { NavIcon } from "../../components/navbar";
@@ -11,11 +12,7 @@ import {
   ArrowDropDown as DownArrow,
   ArrowDropUp as UpArrow,
 } from "@material-ui/icons";
-const styleButton = { margin: "12px" };
-const styleHeader = { display: "inline-block", marginRight: "12px" };
-const styleInline = { display: "inline-block" };
-const textHideEntires = "Hide Entries";
-const textShowEntries = "Show Entries";
+import { bookSectionStyles as styles } from "./styles";
 
 const propTypes = {
   isLoading: PropType.bool,
@@ -23,12 +20,14 @@ const propTypes = {
   notes: PropType.array,
   pageTitle: PropType.string,
 };
+const useStyle = makeStyles(() => styles);
 const BookSection = ({
   isLoading = false,
   isUserSecured = false,
   notes = [],
   pageTitle = "",
 }) => {
+  const classes = useStyle();
   const history = useHistory();
   const [expandEntry, setExpandEntry] = useState({});
   const [meta, setMeta] = useState({});
@@ -99,10 +98,15 @@ const BookSection = ({
     <section>
       <RouteTitle title={pageTitle} />
       <section>
-        <h4 style={styleHeader}>{`Total Books:`}</h4>
-        <span style={styleInline}>{Object.keys(meta).length || `0`}</span>
-        <div style={{ ...styleInline, margin: 12 }}>
+        <h4 className={classNames(classes.inlineBlock, classes.marginR12)}>
+          Total Books:
+        </h4>
+        <span className={classNames(classes.inlineBlock)}>
+          {Object.keys(meta).length || `0`}
+        </span>
+        <div className={classNames(classes.inlineBlock, classes.margin12)}>
           <FormControlLabel
+            className={classNames(classes.padding2)}
             control={
               <Switch
                 checked={showEntry}
@@ -112,7 +116,6 @@ const BookSection = ({
             }
             disabled={isLoading}
             label={`Showing ${showEntry ? "entries" : "resources"}`}
-            style={{ padding: "2px" }}
           />
         </div>
       </section>
@@ -120,13 +123,17 @@ const BookSection = ({
         const entries = meta[bookId].entryIds.length || 0;
         const isChild = entries > 1;
         return (
-          <section key={bookId} style={{ paddingBottom: "6px" }}>
-            <div style={{ display: "flex" }}>
-              <div style={{ display: "inline-block", marginRight: "12px" }}>
+          <section key={bookId} className={classNames(classes.paddingB6)}>
+            <div className={classNames(classes.flex)}>
+              <div
+                className={classNames(classes.inlineBlock, classes.margin12)}
+              >
                 <div
-                  style={{ display: "block", width: "72px" }}
+                  className={classNames(classes.block, classes.width72)}
                 >{`Notes: ${entries}`}</div>
-                <div style={{ display: "block" }}>
+                <div
+                  className={classNames(classes.navIconWrapper, classes.block)}
+                >
                   <NavIcon
                     icon={expandEntry[bookId] ? <UpArrow /> : <DownArrow />}
                     name={expandEntry[bookId] ? "expand" : "collapse"}
@@ -134,7 +141,12 @@ const BookSection = ({
                   />
                 </div>
               </div>
-              <div style={{ display: "inline-block", overflowX: "hidden" }}>
+              <div
+                className={classNames(
+                  classes.inlineBlock,
+                  classes.overflowXHidden
+                )}
+              >
                 <BookTitleSection
                   author={meta[bookId].author}
                   bookDescription={meta[bookId].bookDescription}
