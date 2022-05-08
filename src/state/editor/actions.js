@@ -46,8 +46,10 @@ const upsertIndex = (item, config = {}) => {
     const url = `${baseApiUrl}/update/index`;
     if (!disableSave) {
       dispatch(startRequestType(_types.UPSERT_INDEX_START));
+      const axioxConfig = setConfig(config);
+      axioxConfig.headers.Authorization = getState().auth.token;
       return axios
-        .put(url, payload, setConfig(config))
+        .put(url, payload, axioxConfig)
         .then(() => {
           refreshIndex(dispatch, newIndex);
           return dispatch({ type: _types.UPSERT_INDEX_SUCCESSFUL });
@@ -73,7 +75,9 @@ const upsertNote = (content, isNew = true, config = {}) => {
     const url = `${baseApiUrl}/${urlMethod}/${name}`;
     if (!disableSave) {
       dispatch(startRequestType(_types.UPSERT_NOTE_START));
-      return axios[requestType](url, content, setConfig(config))
+      const axioxConfig = setConfig(config);
+      axioxConfig.headers.Authorization = getState().auth.token;
+      return axios[requestType](url, content, axioxConfig)
         .then(() => {
           const currNotes = defaultUniqueArray(getState().notes?.notes);
           const newNotes = [...currNotes, content];

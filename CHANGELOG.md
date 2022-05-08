@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.28.0]
+
+## Added
+
+- liveness check interval calls on both storage and auth api
+
+## Changed
+
+- token included as Bearer token in modification requests
+
 ## [2.27.1] 2022-04-31
 
 ### Fixed
