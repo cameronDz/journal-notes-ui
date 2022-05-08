@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.28.0]
+## [2.28.1] 2022-05-08
+
+### Fixed
+
+- axios request headers key name
+
+## [2.28.0] 2022-05-08
 
 ## Added
 
