@@ -3,7 +3,7 @@ const authApiEndpointLiveness = "liveness";
 const authApiEndpointToken = "token";
 const baseApiUrl = "https://journal-notes-storage-api.herokuapp.com/json";
 const baseApiLiveness = "liveness";
-const baseApiConfig = { header: { "Content-Type": "application/json" } };
+const baseApiConfig = { headers: { "Content-Type": "application/json" } };
 const disableSave = false;
 const partialLoadCount = 25;
 

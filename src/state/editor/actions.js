@@ -42,14 +42,14 @@ const upsertIndex = (item, config = {}) => {
   return (dispatch, getState) => {
     const currIndex = defaultUniqueArray(getState().notes?.index);
     const newIndex = defaultUniqueArray([...currIndex, item]);
-    const payload = { list: newIndex };
+    const content = { list: newIndex };
     const url = `${baseApiUrl}/update/index`;
+    const axioxConfig = setConfig(config);
+    axioxConfig.headers.Authorization = getState().auth.token;
     if (!disableSave) {
       dispatch(startRequestType(_types.UPSERT_INDEX_START));
-      const axioxConfig = setConfig(config);
-      axioxConfig.headers.Authorization = getState().auth.token;
       return axios
-        .put(url, payload, axioxConfig)
+        .put(url, content, axioxConfig)
         .then(() => {
           refreshIndex(dispatch, newIndex);
           return dispatch({ type: _types.UPSERT_INDEX_SUCCESSFUL });
@@ -62,7 +62,8 @@ const upsertIndex = (item, config = {}) => {
         });
     } else {
       console.warn("SAVING disabled - url: ", url);
-      console.warn("SAVING disabled - payload: ", payload);
+      console.warn("SAVING disabled - config: ", axioxConfig);
+      console.warn("SAVING disabled - content: ", content);
     }
   };
 };
@@ -73,10 +74,10 @@ const upsertNote = (content, isNew = true, config = {}) => {
     const requestType = isNew ? "post" : "put";
     const urlMethod = isNew ? "upload" : "update";
     const url = `${baseApiUrl}/${urlMethod}/${name}`;
+    const axioxConfig = setConfig(config);
+    axioxConfig.headers.Authorization = getState().auth.token;
     if (!disableSave) {
       dispatch(startRequestType(_types.UPSERT_NOTE_START));
-      const axioxConfig = setConfig(config);
-      axioxConfig.headers.Authorization = getState().auth.token;
       return axios[requestType](url, content, axioxConfig)
         .then(() => {
           const currNotes = defaultUniqueArray(getState().notes?.notes);
@@ -92,6 +93,7 @@ const upsertNote = (content, isNew = true, config = {}) => {
         });
     } else {
       console.warn("SAVING disabled - url: ", requestType, url);
+      console.warn("SAVING disabled - config: ", axioxConfig);
       console.warn("SAVING disabled - content: ", content);
     }
   };
