@@ -45,7 +45,7 @@ const upsertIndex = (item, config = {}) => {
     const content = { list: newIndex };
     const url = `${baseApiUrl}/update/index`;
     const axioxConfig = setConfig(config);
-    axioxConfig.headers.Authorization = getState().auth.token;
+    axioxConfig.headers.Authorization = `Bearer ${getState().auth.token}`;
     if (!disableSave) {
       dispatch(startRequestType(_types.UPSERT_INDEX_START));
       return axios
@@ -75,7 +75,7 @@ const upsertNote = (content, isNew = true, config = {}) => {
     const urlMethod = isNew ? "upload" : "update";
     const url = `${baseApiUrl}/${urlMethod}/${name}`;
     const axioxConfig = setConfig(config);
-    axioxConfig.headers.Authorization = getState().auth.token;
+    axioxConfig.headers.Authorization = `Bearer ${getState().auth.token}`;
     if (!disableSave) {
       dispatch(startRequestType(_types.UPSERT_NOTE_START));
       return axios[requestType](url, content, axioxConfig)
