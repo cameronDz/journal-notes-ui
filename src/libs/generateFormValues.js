@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { generateDateString } from "./date";
+import { generateTimeString } from "./time";
 import { generationTypes } from "./types";
 
 const generateFormValues = (inputs, defaultValues = {}) => {
@@ -30,6 +31,9 @@ const defaultType = (type, defValue = "") => {
   switch (type) {
     case generationTypes.CURRENT_DATE:
       value = generateDateString();
+      break;
+    case generationTypes.CURRENT_TIME:
+      value = generateTimeString();
       break;
     case generationTypes.EMPTY_ARRAY:
       value = [];

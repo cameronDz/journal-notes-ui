@@ -10,6 +10,7 @@ const dateTypes = {
 const generationTypes = {
   NONE: "",
   CURRENT_DATE: "CURRENT_DATE",
+  CURRENT_TIME: "CURRENT_TIME",
   EMPTY_ARRAY: "EMPTY_ARRAY",
   EMPTY_DATE: "EMPTY_DATE",
   EMPTY_STRING: "EMPTY_STRING",
@@ -33,6 +34,7 @@ const inputTypes = {
   DATE_FIELD: "DATE_FIELD",
   TEXT_AREA: "TEXT_AREA",
   TEXT_AREA_LIST: "TEXT_AREA_LIST",
+  TIME_FIELD: "TIME_FIELD",
 };
 
 const journalTypes = {
@@ -64,12 +66,28 @@ const defaultInputs = [
     title: "Created Date",
   },
   {
+    generateOn: generateOnTypes.CREATE,
+    generationType: generationTypes.CURRENT_DATE,
+    inputType: inputTypes.DATE_FIELD,
+    isHidden: true,
+    name: "createdTime",
+    title: "Created Time",
+  },
+  {
     generateOn: generateOnTypes.UPDATE,
     generationType: generationTypes.CURRENT_DATE,
     inputType: inputTypes.DATE_FIELD,
     isHidden: true,
     name: "updatedDate",
     title: "Updated Date",
+  },
+  {
+    generateOn: generateOnTypes.UPDATE,
+    generationType: generationTypes.CURRENT_DATE,
+    inputType: inputTypes.DATE_FIELD,
+    isHidden: true,
+    name: "updatedTime",
+    title: "Updated Time",
   },
 ];
 

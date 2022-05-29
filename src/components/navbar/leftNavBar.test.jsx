@@ -5,7 +5,7 @@ import LeftNavBar from "./leftNavBar";
 describe("# LeftNavBar tests", () => {
   it("## 01 - find icons by role, six total", async () => {
     render(<LeftNavBar />);
-    expect(await screen.findAllByRole("button")).toHaveLength(6);
+    expect(await screen.findAllByRole("button")).toHaveLength(7);
   });
 
   it("## 02 - find icon by title and click, callback sends back name", async () => {

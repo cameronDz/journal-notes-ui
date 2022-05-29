@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.29.0] 2022-05-28
+
+### Added
+
+- notes timestamp with datestamp for edit and create dates
+
 ## [2.28.1] 2022-05-08
 
 ### Fixed

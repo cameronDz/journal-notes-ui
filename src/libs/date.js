@@ -21,7 +21,7 @@ const getFullTimeStampString = () => {
 const getDateDisplay = (dateString = null) => {
   let display = "";
   const date = new Date(dateString);
-  if (isValidDate(date)) {
+  if (dateString && isValidDate(date)) {
     const year = date.getUTCFullYear();
     const day = date.getUTCDate();
     const month = dateFullMonths[date.getUTCMonth()];
@@ -50,7 +50,7 @@ const isValidDate = (date = null) => {
   return (
     typeof date === "object" &&
     typeof date.getTime === "function" &&
-    typeof date.getTime() === "number"
+    date.getTime() === date.getTime()
   );
 };
 
@@ -69,4 +69,9 @@ const dateFullMonths = {
   11: "December",
 };
 
-export { getDateDisplay, generateDateString, getFullTimeStampString };
+export {
+  getDateDisplay,
+  generateDateString,
+  getFullTimeStampString,
+  isValidDate,
+};
