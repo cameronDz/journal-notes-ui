@@ -1,6 +1,5 @@
 const generateDateString = () => {
-  const currDate = new Date();
-  return getYear(currDate) + "-" + getMonth(currDate) + "-" + getDay(currDate);
+  return new Date().toISOString().split("T")[0];
 };
 
 const getFullTimeStampString = () => {

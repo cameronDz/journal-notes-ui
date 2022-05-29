@@ -67,8 +67,8 @@ const defaultInputs = [
   },
   {
     generateOn: generateOnTypes.CREATE,
-    generationType: generationTypes.CURRENT_DATE,
-    inputType: inputTypes.DATE_FIELD,
+    generationType: generationTypes.CURRENT_TIME,
+    inputType: inputTypes.TIME_FIELD,
     isHidden: true,
     name: "createdTime",
     title: "Created Time",
@@ -83,8 +83,8 @@ const defaultInputs = [
   },
   {
     generateOn: generateOnTypes.UPDATE,
-    generationType: generationTypes.CURRENT_DATE,
-    inputType: inputTypes.DATE_FIELD,
+    generationType: generationTypes.CURRENT_TIME,
+    inputType: inputTypes.TIME_FIELD,
     isHidden: true,
     name: "updatedTime",
     title: "Updated Time",

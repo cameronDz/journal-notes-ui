@@ -27,6 +27,7 @@ import {
   upsertIndex,
 } from "../../state/editor/actions";
 import { editorSectionStyles as styles } from "./styles";
+import { generateTimeString } from "../../libs/time";
 
 const propTypes = {
   clearEditNote: PropType.func,
@@ -195,6 +196,7 @@ const EditorSection = ({
     const payload = { ...(values || {}) };
     if (!isNew) {
       payload.updatedDate = generateDateString();
+      payload.updatedTime = generateTimeString();
     }
     return payload;
   };
