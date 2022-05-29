@@ -24,7 +24,15 @@ const sortByDate = (a = "", b = "") => {
 const sortByCreatedDate = (a = "", b = "") => {
   const aValue = a?.createdDate || "";
   const bValue = b?.createdDate || "";
-  return sortByDate(aValue, bValue);
+  let val = sortByDate(aValue, bValue);
+  if (val === order.neutral) {
+    const aTime = a?.createdTime || "";
+    const bTime = b?.createdTime || "";
+    if (aTime && bTime) {
+      val = sortByDate(`${aValue} ${aTime}`, `${bValue} ${bTime}`);
+    }
+  }
+  return val;
 };
 
 const sortByReverseCreatedDate = (a, b) => {
