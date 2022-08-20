@@ -6,7 +6,11 @@ import {
   authApiEndpointToken as endpointToken,
   baseApiConfig as baseConfig,
 } from "../../libs/apiConfig";
+import { timing } from "../../libs/time";
 import { defaultEmptyObject, defaultEmptyString } from "../../libs/defaults";
+
+let hydrateTimer = -1;
+const hydrateIntervalAmount = timing.FIVE_MINUTES;
 
 const startLiveness = () => {
   return { type: _types.LIVENESS_PROBE };
@@ -23,6 +27,7 @@ const clearError = () => {
 };
 
 const clearToken = () => {
+  clearInterval(hydrateTimer);
   return (dispatch) => {
     return dispatch({ type: _types.CLEAR_TOKEN });
   };
@@ -36,6 +41,7 @@ const fetchToken = (credentials, config = {}) => {
       .post(url, credentials, { ...baseConfig, ...defaultEmptyObject(config) })
       .then((response) => {
         const data = defaultEmptyString(response?.data?.token);
+        dispatch(refreshToken(credentials));
         return dispatch({ type: _types.GET_TOKEN_SUCCESS, data });
       })
       .catch((error) => {
@@ -44,6 +50,26 @@ const fetchToken = (credentials, config = {}) => {
       .finally(() => {
         return dispatch({ type: _types.GET_TOKEN_COMPLETED });
       });
+  };
+};
+
+const hydrateToken = (credentials, config = {}) => {
+  return (dispatch) => {
+    hydrateTimer = setInterval(() => {
+      const url = `${authApiUrl}/${endpointToken}`;
+      return axios
+        .post(url, credentials, { ...baseConfig, ...defaultEmptyObject(config) })
+        .then((response) => {
+          const data = defaultEmptyString(response?.data?.token);
+          return dispatch({ type: _types.HYDRATE_TOKEN, data });
+        })
+        .catch((error) => {
+          console.warn("unable to hydrate token", error);
+        })
+        .finally(() => {
+          /* do nothing */
+        });
+    }, hydrateIntervalAmount);
   };
 };
 

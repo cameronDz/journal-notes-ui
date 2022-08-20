@@ -42,6 +42,10 @@ const reducer = (state = initialState, action = null) => {
       newState = { ...(state ? state : {}) };
       newState.isLive = true;
       break;
+    case _types.HYDRATE_TOKEN:
+      newState = { ...(state ? state : {}) };
+      newState.token = action.data;
+      break;
 
     default:
       newState = { ...state };

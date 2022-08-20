@@ -1,5 +1,12 @@
 import { isValidDate } from "./date";
 
+const timing = {
+  TEN_SECONDS: 10_000,
+  ONE_MINUTE: 60_000,
+  FIVE_MINUTES: 300_000,
+  TWENTY_FIVE_MINUTES: 1_500_000,
+};
+
 /**
  * formatted date into time stamp
  * @param {string} dateString date object string representation
@@ -23,4 +30,4 @@ const getValidDate = (dateString = null) => {
   return val;
 };
 
-export { generateTimeString };
+export { generateTimeString, timing };

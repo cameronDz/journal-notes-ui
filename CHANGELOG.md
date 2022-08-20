@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.31.0] 2022-08-20
+
+### Added
+
+- [auth] token hydration every five minutes once signed in
+
+### Changed
+
+- copyright date to current year
+
 ## [2.30.0] 2022-05-29
 
 ### Changed
