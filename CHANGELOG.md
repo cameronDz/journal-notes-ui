@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.31.1] 2023-11-25
+
+### Fixed
+
+- base href path for subdomain pathing
+
+### Security
+
+- babel minor version updates
+
 ## [2.31.0] 2022-08-20
 
 ### Added
