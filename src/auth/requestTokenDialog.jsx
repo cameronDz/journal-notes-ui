@@ -75,10 +75,10 @@ const RequestTokenDialog = ({
   useEffect(() => {
     if (isOpen) {
       if (!isAuthLive) {
-        handleFunction(livenessTokenCheck);
+        livenessTokenCheck();
       }
     } else {
-      handleFunction(clearTokenError);
+      clearTokenError();
       setPassword("");
       setUsername("");
     }
@@ -86,13 +86,13 @@ const RequestTokenDialog = ({
 
   const handleActionClick = () => {
     if (token) {
-      handleFunction(clearTokenUser);
+      clearTokenUser();
     } else {
       abortCtrlPostCredentials?.abort();
       abortCtrlPostCredentials = new AbortController();
       const config = { signal: abortCtrlPostCredentials.signal };
       const credentials = { username, password };
-      handleFunction(fetchUserToken, credentials, config);
+      fetchUserToken(credentials, config);
     }
   };
 

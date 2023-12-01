@@ -37,11 +37,12 @@ const fetchToken = (credentials, config = {}) => {
   return (dispatch) => {
     dispatch(startRequest());
     const url = `${authApiUrl}/${endpointToken}`;
+    const configuration = { ...baseConfig, ...defaultEmptyObject(config) };
     return axios
-      .post(url, credentials, { ...baseConfig, ...defaultEmptyObject(config) })
+      .post(url, credentials, configuration)
       .then((response) => {
         const data = defaultEmptyString(response?.data?.token);
-        dispatch(refreshToken(credentials));
+        dispatch(hydrateToken(credentials, config));
         return dispatch({ type: _types.GET_TOKEN_SUCCESS, data });
       })
       .catch((error) => {
@@ -57,8 +58,9 @@ const hydrateToken = (credentials, config = {}) => {
   return (dispatch) => {
     hydrateTimer = setInterval(() => {
       const url = `${authApiUrl}/${endpointToken}`;
+      const configuration = { ...baseConfig, ...defaultEmptyObject(config) };
       return axios
-        .post(url, credentials, { ...baseConfig, ...defaultEmptyObject(config) })
+        .post(url, credentials, configuration)
         .then((response) => {
           const data = defaultEmptyString(response?.data?.token);
           return dispatch({ type: _types.HYDRATE_TOKEN, data });
