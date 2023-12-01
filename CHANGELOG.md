@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.31.2 2023-12-01]
+
+### Fixed
+
+- issue with hydration of auth token resolved and implemented correctly
+
 ## [2.31.1] 2023-11-25
 
 ### Fixed
