@@ -11,26 +11,31 @@ const shipEvent = (type) => {
   return { type };
 };
 
-const fetchEntireListPayload = (dispatch, index, apiConfig = {}) => {
+const CHUNK_SIZE = 100;
+const splitListIntoHundreds = (list = []) => {
+  const chunkList = [];
+  for (let i = 0; i < list.length; i += CHUNK_SIZE) {
+    chunkList.push(list.slice(i, i + CHUNK_SIZE));
+  }
+  return chunkList;
+};
+
+const fetchEntireListPayload = async (dispatch, index, apiConfig = {}) => {
   const url = `${baseUrl}/objects`;
+  const idLists = splitListIntoHundreds(index);
   dispatch(shipEvent(_types.GET_NOTES_ALL_START));
-  return axios
-    .post(url, index, setConfig(apiConfig))
-    .then((response) => {
-      const notes = defaultUniqueArray(response?.data?.payload?.list);
-      const isLoadedAll = !apiConfig.limit;
-      return dispatch({
-        isLoadedAll,
-        notes,
-        type: _types.GET_NOTES_ALL_SUCCESS,
-      });
-    })
-    .catch((error) => {
-      return dispatch({ error, type: _types.GET_NOTES_ALL_ERROR });
-    })
-    .finally(() => {
-      return dispatch({ type: _types.GET_NOTES_ALL_COMPLETED });
-    });
+  const notes = [];
+  try {
+    for (const ids of idLists) {
+      const response = await axios.post(url, ids, setConfig(apiConfig));
+      notes.push(...(response?.data?.payload?.list || []));
+    }
+    const isLoadedAll = !apiConfig.limit;
+    dispatch({ isLoadedAll, notes, type: _types.GET_NOTES_ALL_SUCCESS });
+  } catch (err) {
+    return dispatch({ err, type: _types.GET_NOTES_ALL_ERROR });
+  }
+  return dispatch({ type: _types.GET_NOTES_ALL_COMPLETED });
 };
 
 const fetchArticles = (apiConfig = {}) => {
