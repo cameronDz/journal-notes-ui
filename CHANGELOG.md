@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.32.0 2024-07-24]
+
+### Changed
+
+- [api] api request broken into chunks of 100 when more than 100 records requested
+
 ## [2.31.2 2023-12-01]
 
 ### Fixed
