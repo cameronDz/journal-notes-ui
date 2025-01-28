@@ -45,13 +45,15 @@ const ListField = ({
     setDisplay("");
   };
 
-  const handleRemove = () => {
+  const handleRemove = async () => {
     let newDisplay = "";
     if (!display) {
       const clone = Array.isArray(items) ? [...items] : [];
       const removedElement = clone.pop();
       newDisplay = elementName ? removedElement[elementName] : removedElement;
       handleFunction(onUpdate, clone);
+    } else {
+      await navigator.clipboard.writeText(display);
     }
     setDisplay(newDisplay);
   };

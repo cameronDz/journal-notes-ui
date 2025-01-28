@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.32.0 2025-01-28]
+
+### Added
+
+- push any clear button press from a list input text field into the clipboard, mimicing a cut action
+
 ## [2.32.0 2024-07-24]
 
 ### Changed
