@@ -1,41 +1,26 @@
+/* eslint-disable prettier/prettier */
 import React from "react";
 import { Provider } from "react-redux";
-import { fireEvent, queryByText, render, screen } from "@testing-library/react";
-import { rest } from "msw";
-import { setupServer } from "msw/node";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { configureStore } from "../state/store";
 import RequestTokenDialog from "./requestTokenDialog";
 
-const urlLiveness = "https://jwt-auth-access-api.herokuapp.com/liveness";
-const urlToken = "https://jwt-auth-access-api.herokuapp.com/token";
-const server = setupServer(
-  rest.post(urlLiveness, (_req, res, ctx) => {
-    return res(ctx.json({}));
-  }),
-  rest.post(urlToken, (req, res, ctx) => {
-    if (req.body.username === "dog" && req.body.password === "good") {
-      return res(ctx.status(201), ctx.json({ token: "abc-123" }));
-    } else {
-      return res(ctx.status(401), ctx.json({}));
-    }
-  })
-);
+window.fetch = jest.fn();
 
 const wrapper = ({ children }) => {
   return <Provider store={configureStore()}>{children}</Provider>;
 };
+const livenessResponse = { ok: true, status: 200, json: async () => undefined };
 
 describe("# RequestTokenDialog tests", () => {
-  beforeAll(() => server.listen());
-  afterEach(() => server.resetHandlers());
-  afterAll(() => server.close());
-
   it("## 01 - show request dialog, sign in button is disabled", async () => {
+    jest.mocked(window.fetch).mockResolvedValueOnce(livenessResponse);
     render(<RequestTokenDialog isOpen={true} />, { wrapper });
     expect(await screen.findByTitle("sign in")).toBeDisabled();
   });
 
   it("## 02 - show request dialog, cancel button calls close callback", async () => {
+    jest.mocked(window.fetch).mockResolvedValueOnce(livenessResponse);
     const mockCb = jest.fn();
     const opts = { wrapper };
     render(<RequestTokenDialog isOpen={true} onClose={mockCb} />, opts);
@@ -45,6 +30,7 @@ describe("# RequestTokenDialog tests", () => {
   });
 
   it("## 03 - enter username and password, signin enabled", async () => {
+    jest.mocked(window.fetch).mockResolvedValueOnce(livenessResponse);
     render(<RequestTokenDialog isOpen={true} />, { wrapper });
 
     const textFieldName = await screen.findByLabelText("Username");
@@ -57,6 +43,10 @@ describe("# RequestTokenDialog tests", () => {
   });
 
   it("## 04 - enter valid username and password and press enter, see success message", async () => {
+    const response = { ok: true, status: 201, json: async () => ({ token: "abc-123" }) };
+    jest.mocked(window.fetch)
+      .mockResolvedValueOnce(livenessResponse)
+      .mockResolvedValueOnce(response);
     render(<RequestTokenDialog isOpen={true} />, { wrapper });
 
     const textFieldName = await screen.findByLabelText("Username");
@@ -73,6 +63,10 @@ describe("# RequestTokenDialog tests", () => {
   });
 
   it("## 05 - enter valid username and password and press enter, see success message", async () => {
+    const response = { ok: true, status: 201, json: async () => ({ token: "abc-123" }) };
+    jest.mocked(window.fetch)
+      .mockResolvedValueOnce(livenessResponse)
+      .mockResolvedValueOnce(response);
     render(<RequestTokenDialog isOpen={true} />, { wrapper });
 
     const textFieldName = await screen.findByLabelText("Username");
@@ -94,10 +88,14 @@ describe("# RequestTokenDialog tests", () => {
   });
 
   it("## 06 - enter invalid username and password and press enter, see error message", async () => {
+    const response = { ok: false, status: 401, json: async () => ({ error: true }) };
+    jest.mocked(window.fetch)
+      .mockResolvedValueOnce(livenessResponse)
+      .mockResolvedValueOnce(response);
     const mockCb = jest.fn();
     const { rerender } = render(
       <RequestTokenDialog isOpen={true} onClose={mockCb} />,
-      { wrapper }
+      { wrapper },
     );
 
     const textFieldName = await screen.findByLabelText("Username");

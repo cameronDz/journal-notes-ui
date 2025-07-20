@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - removed axios and replaced with fetch
+- removed msw from tests and mock fetch
 
 ## [3.0.0 2025-07-19]
 
