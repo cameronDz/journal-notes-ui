@@ -1,7 +1,5 @@
 import CopyWebpackPlugin from "copy-webpack-plugin";
-import HtmlWebPackPlugin from "html-webpack-plugin";
 import { resolve } from "path";
-import _package from "../package";
 
 const common = {
   entry: "./src/index.js",
@@ -24,8 +22,8 @@ const common = {
   },
   output: {
     filename: "bundle.js",
-    path: resolve(__dirname, "..", "dist", _package.version),
-    publicPath: "",
+    path: resolve(__dirname, "..", "dist"),
+    clean: true,
   },
   plugins: [
     new CopyWebpackPlugin({
@@ -35,10 +33,6 @@ const common = {
           to: "favicon.ico",
         },
       ],
-    }),
-    new HtmlWebPackPlugin({
-      filename: "./index.html",
-      template: "./src/index.html",
     }),
   ],
   resolve: {

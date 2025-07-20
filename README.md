@@ -19,6 +19,29 @@ Create and track notes from various articles/journal entires. Basic input sectio
 - [x] Material UI on Form
 - [x] Add JSS
 
+## Deployment
+
+This app is configured to deploy to GitHub Pages automatically via GitHub Actions when changes are pushed to the `master` branch.
+
+### Manual Deployment
+
+To deploy manually:
+
+```bash
+pnpm run deploy
+```
+
+This will build the production version and deploy it to the `gh-pages` branch.
+
+### GitHub Actions Deployment
+
+The repository includes a GitHub Actions workflow (`.github/workflows/deploy.yml`) that automatically:
+1. Runs tests
+2. Builds the production version
+3. Deploys to GitHub Pages
+
+The app will be available at: `https://cameronDz.github.io/journal-notes-ui/`
+
 ## S3 Bucket Sample Configuration
 
 ```
