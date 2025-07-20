@@ -2,6 +2,8 @@
 
 Create and track notes from various articles/journal entires. Basic input section for creating article reviews in JSON format, stored using S3 bucket as source with single index.json tracking each individual note JSON file.
 
+The app will be available at: `https://cameronDz.github.io/journal-notes-ui/`
+
 ## TODO List
 
 - [ ] Upgrade to MUI v5
@@ -39,17 +41,3 @@ The repository includes a GitHub Actions workflow (`.github/workflows/deploy.yml
 1. Runs tests
 2. Builds the production version
 3. Deploys to GitHub Pages
-
-The app will be available at: `https://cameronDz.github.io/journal-notes-ui/`
-
-## S3 Bucket Sample Configuration
-
-```
-<CORSConfiguration>
-  <CORSRule>
-    <AllowedOrigin>*</AllowedOrigin>
-    <AllowedMethod>GET</AllowedMethod>
-    <AllowedHeader>*</AllowedHeader>
-  </CORSRule>
-</CORSConfiguration>
-```
