@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import { Provider } from "react-redux";
 import { HashRouter } from "react-router-dom";
 import {
@@ -20,12 +19,17 @@ const generateClassName = createGenerateClassName({
 });
 
 const FOUR_MINUTES = 240_000;
-const livenessCheck = () => {
-  axios.post(`${authApiBaseUrl}/${authApiEndpointLiveness}`);
-  axios.get(`${baseApiUrl}/${baseApiLiveness}`);
-};
+
 const App = () => {
   useEffect(() => {
+    const livenessCheck = () => {
+      window.fetch(`${authApiBaseUrl}/${authApiEndpointLiveness}`, {
+        method: "POST",
+      });
+      window.fetch(`${baseApiUrl}/${baseApiLiveness}`, {
+        method: "GET",
+      });
+    };
     livenessCheck();
     setInterval(livenessCheck, FOUR_MINUTES);
   }, []);

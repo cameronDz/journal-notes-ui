@@ -1,4 +1,3 @@
-import axios from "axios";
 import * as _types from "./types";
 import { refreshIndex, refreshNotes } from "../notes/actions";
 import { getFullTimeStampString } from "../../libs/date";
@@ -21,86 +20,97 @@ const clearNote = () => {
 
 const getNote = (id, config = {}) => {
   return (dispatch) => {
-    const url = `${baseApiUrl}/object/${id}`;
     dispatch(startRequestType(_types.GET_EDIT_NOTE_START));
-    return axios
-      .get(url, setConfig(config))
-      .then((response) => {
-        const note = response?.data?.payload || null;
-        return dispatch({ note, type: _types.GET_EDIT_NOTE_SUCCESSFUL });
-      })
-      .catch((error) => {
-        return dispatch({ error, type: _types.GET_EDIT_NOTE_ERROR });
-      })
-      .finally(() => {
-        return dispatch({ type: _types.GET_EDIT_NOTE_COMPLETED });
-      });
+    return (async () => {
+      try {
+        const url = `${baseApiUrl}/object/${id}`;
+        const configuration = { ...baseConfig, ...defaultEmptyObject(config) };
+        const response = await window.fetch(url, {
+          ...configuration,
+          headers: { "Content-Type": "application/json" },
+          method: "GET",
+        });
+        if (!response.ok) {
+          throw new Error();
+        }
+        const data = await response.json();
+        const note = data?.payload || null;
+        dispatch({ note, type: _types.GET_EDIT_NOTE_SUCCESSFUL });
+      } catch (error) {
+        dispatch({ error, type: _types.GET_EDIT_NOTE_ERROR });
+      } finally {
+        dispatch({ type: _types.GET_EDIT_NOTE_COMPLETED });
+      }
+    })();
   };
 };
 
 const upsertIndex = (item, config = {}) => {
   return (dispatch, getState) => {
-    const currIndex = defaultUniqueArray(getState().notes?.index);
-    const newIndex = defaultUniqueArray([...currIndex, item]);
-    const content = { list: newIndex };
-    const url = `${baseApiUrl}/update/index`;
-    const axioxConfig = setConfig(config);
-    axioxConfig.headers.Authorization = `Bearer ${getState().auth.token}`;
-    if (!disableSave) {
+    return (async () => {
       dispatch(startRequestType(_types.UPSERT_INDEX_START));
-      return axios
-        .put(url, content, axioxConfig)
-        .then(() => {
-          refreshIndex(dispatch, newIndex);
-          return dispatch({ type: _types.UPSERT_INDEX_SUCCESSFUL });
-        })
-        .catch((error) => {
-          return dispatch({ error, type: _types.UPSERT_INDEX_SUCCESSFUL });
-        })
-        .finally(() => {
-          return dispatch({ type: _types.UPSERT_INDEX_COMPLETED });
+      try {
+        if (disableSave) {
+          throw new Error("Saving is disabled");
+        }
+        const currIndex = defaultUniqueArray(getState().notes?.index);
+        const newIndex = defaultUniqueArray([...currIndex, item]);
+        const body = { list: newIndex };
+        const url = `${baseApiUrl}/update/index`;
+        const configuration = { ...baseConfig, ...defaultEmptyObject(config) };
+        const auth = `Bearer ${getState().auth.token}`;
+        const response = await window.fetch(url, {
+          ...configuration,
+          body: JSON.stringify(body),
+          headers: { Authorization: auth, "Content-Type": "application/json" },
+          method: "PUT",
         });
-    } else {
-      console.warn("SAVING disabled - url: ", url);
-      console.warn("SAVING disabled - config: ", axioxConfig);
-      console.warn("SAVING disabled - content: ", content);
-    }
+        if (!response.ok) {
+          throw new Error();
+        }
+        const data = await response.json();
+        const index = data?.payload || null;
+        refreshIndex(dispatch, newIndex);
+        dispatch({ index, type: _types.UPSERT_INDEX_SUCCESSFUL });
+      } catch (error) {
+        dispatch({ error, type: _types.UPSERT_INDEX_ERROR });
+      } finally {
+        dispatch({ type: _types.UPSERT_INDEX_COMPLETED });
+      }
+    })();
   };
 };
 
 const upsertNote = (content, isNew = true, config = {}) => {
   return (dispatch, getState) => {
-    const name = content?.id || getFullTimeStampString();
-    const requestType = isNew ? "post" : "put";
-    const urlMethod = isNew ? "upload" : "update";
-    const url = `${baseApiUrl}/${urlMethod}/${name}`;
-    const axioxConfig = setConfig(config);
-    axioxConfig.headers.Authorization = `Bearer ${getState().auth.token}`;
-    if (!disableSave) {
-      dispatch(startRequestType(_types.UPSERT_NOTE_START));
-      return axios[requestType](url, content, axioxConfig)
-        .then(() => {
-          const currNotes = defaultUniqueArray(getState().notes?.notes);
-          const newNotes = [...currNotes, content];
-          refreshNotes(dispatch, newNotes);
-          return dispatch({ type: _types.UPSERT_NOTE_SUCCESSFUL });
-        })
-        .catch((error) => {
-          return dispatch({ error, type: _types.UPSERT_NOTE_ERROR });
-        })
-        .finally(() => {
-          return dispatch({ type: _types.UPSERT_NOTE_COMPLETED });
+    return (async () => {
+      try {
+        const name = content?.id || getFullTimeStampString();
+        const url = `${baseApiUrl}/${isNew ? "upload" : "update"}/${name}`;
+        const auth = `Bearer ${getState().auth.token}`;
+        const configuration = { ...baseConfig, ...defaultEmptyObject(config) };
+        const response = await window.fetch(url, {
+          ...configuration,
+          body: JSON.stringify(content),
+          headers: { Authorization: auth, "Content-Type": "application/json" },
+          method: isNew ? "POST" : "PUT",
         });
-    } else {
-      console.warn("SAVING disabled - url: ", requestType, url);
-      console.warn("SAVING disabled - config: ", axioxConfig);
-      console.warn("SAVING disabled - content: ", content);
-    }
+        if (!response.ok) {
+          throw new Error();
+        }
+        const data = await response.json();
+        const note = data?.payload || null;
+        const currNotes = defaultUniqueArray(getState().notes?.notes);
+        const newNotes = [...currNotes, content];
+        refreshNotes(dispatch, newNotes);
+        dispatch({ note, type: _types.UPSERT_NOTE_SUCCESSFUL });
+      } catch (error) {
+        dispatch({ error, type: _types.UPSERT_NOTE_ERROR });
+      } finally {
+        dispatch({ type: _types.UPSERT_NOTE_COMPLETED });
+      }
+    })();
   };
-};
-
-const setConfig = (config = {}) => {
-  return { ...baseConfig, ...defaultEmptyObject(config) };
 };
 
 export { clearNote, getNote, upsertIndex, upsertNote };

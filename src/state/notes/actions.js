@@ -1,11 +1,6 @@
-import axios from "axios";
 import * as _types from "./types";
-import {
-  baseApiUrl as baseUrl,
-  baseApiConfig as baseConfig,
-  partialLoadCount,
-} from "../../libs/apiConfig";
-import { defaultEmptyObject, defaultUniqueArray } from "../../libs/defaults";
+import { baseApiUrl as baseUrl, partialLoadCount } from "../../libs/apiConfig";
+import { defaultUniqueArray } from "../../libs/defaults";
 
 const shipEvent = (type) => {
   return { type };
@@ -27,38 +22,62 @@ const fetchEntireListPayload = async (dispatch, index, apiConfig = {}) => {
   const notes = [];
   try {
     for (const ids of idLists) {
-      const response = await axios.post(url, ids, setConfig(apiConfig));
-      notes.push(...(response?.data?.payload?.list || []));
+      try {
+        const response = await window.fetch(url, {
+          body: JSON.stringify(ids),
+          headers: { "Content-Type": "application/json" },
+          method: "POST",
+        });
+        if (!response.ok) {
+          throw new Error();
+        }
+        const data = await response.json();
+        notes.push(...(data?.payload?.list || []));
+      } catch (error) {
+        console.error("Error fetching notes:", { ids, error });
+      } finally {
+        // do nothing
+      }
     }
-    const isLoadedAll = !apiConfig.limit;
-    dispatch({ isLoadedAll, notes, type: _types.GET_NOTES_ALL_SUCCESS });
+    dispatch({
+      isLoadedAll: !apiConfig.limit,
+      notes,
+      type: _types.GET_NOTES_ALL_SUCCESS,
+    });
   } catch (err) {
-    return dispatch({ err, type: _types.GET_NOTES_ALL_ERROR });
+    dispatch({ err, type: _types.GET_NOTES_ALL_ERROR });
+  } finally {
+    dispatch({ type: _types.GET_NOTES_ALL_COMPLETED });
   }
-  return dispatch({ type: _types.GET_NOTES_ALL_COMPLETED });
 };
 
 const fetchArticles = (apiConfig = {}) => {
   return (dispatch) => {
     const url = `${baseUrl}/object/index`;
     dispatch(shipEvent(_types.GET_NOTE_INDEX_START));
-    return axios
-      .get(url, setConfig(apiConfig))
-      .then((response) => {
-        const index = defaultUniqueArray(response?.data?.payload?.list);
+    return (async () => {
+      try {
+        const response = await window.fetch(url, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+        if (!response.ok) {
+          throw new Error();
+        }
+        const data = await response.json();
+        const index = defaultUniqueArray(data?.payload?.list);
         let payload = [...(index || [])];
         if (apiConfig.limit && payload.length > partialLoadCount) {
           payload = [...payload.slice(-partialLoadCount)];
         }
         fetchEntireListPayload(dispatch, payload, apiConfig);
-        return dispatch({ index, type: _types.GET_NOTE_INDEX_SUCCESS });
-      })
-      .catch((error) => {
-        return dispatch({ error, type: _types.GET_NOTE_INDEX_ERROR });
-      })
-      .finally(() => {
-        return dispatch({ type: _types.GET_NOTE_INDEX_COMPLETED });
-      });
+        dispatch({ index, type: _types.GET_NOTE_INDEX_SUCCESS });
+      } catch (error) {
+        dispatch({ error, type: _types.GET_NOTE_INDEX_ERROR });
+      } finally {
+        dispatch({ type: _types.GET_NOTE_INDEX_COMPLETED });
+      }
+    })();
   };
 };
 
@@ -68,10 +87,6 @@ const refreshIndex = (dispatch, index) => {
 
 const refreshNotes = (dispatch, notes) => {
   return dispatch({ notes, type: _types.ADD_NOTES_ALL_NOTE });
-};
-
-const setConfig = (config = {}) => {
-  return { ...baseConfig, ...defaultEmptyObject(config) };
 };
 
 export { fetchArticles, refreshIndex, refreshNotes };
