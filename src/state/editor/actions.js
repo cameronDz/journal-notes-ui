@@ -54,7 +54,8 @@ const upsertIndex = (item, config = {}) => {
           throw new Error("Saving is disabled");
         }
         const currIndex = defaultUniqueArray(getState().notes?.index);
-        const newIndex = defaultUniqueArray([...currIndex, item]);
+        // eslint-disable-next-line prettier/prettier
+        const newIndex = defaultUniqueArray([...currIndex, item]).filter(i => i.id !== "041a65be-15a3-46f9-9d7e-35bb2dde00e8");
         const body = { list: newIndex };
         const url = `${baseApiUrl}/update/index`;
         const configuration = { ...baseConfig, ...defaultEmptyObject(config) };
