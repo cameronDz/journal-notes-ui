@@ -1,3 +1,4 @@
+/* global AbortController, location, setTimeout */
 import React, { useEffect, useState, Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import PropType from "prop-types";
