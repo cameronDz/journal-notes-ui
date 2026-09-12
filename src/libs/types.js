@@ -30,10 +30,12 @@ const inputTypes = {
   HIDDEN: "HIDDEN",
   TEXT_FIELD: "TEXT_FIELD",
   TEXT_FIELD_LIST: "TEXT_FIELD_LIST",
+  TEXT_FIELD_LIST_V2: "TEXT_FIELD_LIST_V2",
   PASSWORD_FIELD: "PASSWORD_FIELD",
   DATE_FIELD: "DATE_FIELD",
   TEXT_AREA: "TEXT_AREA",
   TEXT_AREA_LIST: "TEXT_AREA_LIST",
+  TEXT_AREA_LIST_V2: "TEXT_AREA_LIST_V2",
   TIME_FIELD: "TIME_FIELD",
 };
 
@@ -154,7 +156,7 @@ const journalForms = {
       },
       {
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_FIELD_LIST,
+        inputType: inputTypes.TEXT_FIELD_LIST_V2,
         name: "tags",
         options: {
           isTrimmed: true,
@@ -166,21 +168,21 @@ const journalForms = {
       {
         elementName: "comment",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "comments",
         title: "Comment",
       },
       {
         elementName: "quote",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "quotes",
         title: "Quote",
       },
       {
         elementName: "definition",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "definitions",
         title: "Definition",
       },
@@ -294,20 +296,20 @@ const journalForms = {
       {
         elementName: "comment",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "comments",
         title: "Comment",
       },
       {
         elementName: "quote",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "quotes",
         title: "Quote",
       },
       {
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_FIELD_LIST,
+        inputType: inputTypes.TEXT_FIELD_LIST_V2,
         name: "tags",
         options: {
           isTrimmed: true,
@@ -421,34 +423,34 @@ const journalForms = {
       {
         elementName: "comment",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "comments",
         title: "Comment",
       },
       {
         elementName: "quote",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "quotes",
         title: "Quote",
       },
       {
         elementName: "definition",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "definitions",
         title: "Definition",
       },
       {
         elementName: "resource",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "resources",
         title: "Resource",
       },
       {
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_FIELD_LIST,
+        inputType: inputTypes.TEXT_FIELD_LIST_V2,
         name: "tags",
         options: {
           isTrimmed: true,
@@ -525,20 +527,20 @@ const journalForms = {
       {
         elementName: "comment",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "comments",
         title: "Comment",
       },
       {
         elementName: "timestamp",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "timestamps",
         title: "Timestamp",
       },
       {
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_FIELD_LIST,
+        inputType: inputTypes.TEXT_FIELD_LIST_V2,
         name: "tags",
         options: {
           isTrimmed: true,
@@ -620,7 +622,7 @@ const journalForms = {
       },
       {
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_FIELD_LIST,
+        inputType: inputTypes.TEXT_FIELD_LIST_V2,
         name: "tags",
         options: {
           isTrimmed: true,
@@ -632,35 +634,35 @@ const journalForms = {
       {
         elementName: "comment",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "comments",
         title: "Comment",
       },
       {
         elementName: "quote",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "quotes",
         title: "Quote",
       },
       {
         elementName: "resource",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "resource",
         title: "Resource",
       },
       {
         elementName: "definition",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "definitions",
         title: "Definition",
       },
       {
         elementName: "term",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "terms",
         title: "Term",
       },
@@ -718,7 +720,7 @@ const journalForms = {
       },
       {
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_FIELD_LIST,
+        inputType: inputTypes.TEXT_FIELD_LIST_V2,
         name: "tags",
         options: {
           isTrimmed: true,
@@ -730,21 +732,21 @@ const journalForms = {
       {
         elementName: "comment",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "comments",
         title: "Comment",
       },
       {
         elementName: "quote",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "quotes",
         title: "Quote",
       },
       {
         elementName: "resources",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "suggestedResources",
         title: "Suggested Resource",
       },
@@ -790,7 +792,7 @@ const journalForms = {
       {
         elementName: "guest",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "guests",
         title: "Guest",
       },
@@ -803,14 +805,14 @@ const journalForms = {
       {
         elementName: "comment",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "comments",
         title: "Comment",
       },
       {
         elementName: "timestamp",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "timestamps",
         title: "Timestamp",
       },
@@ -842,7 +844,7 @@ const journalForms = {
       },
       {
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_FIELD_LIST,
+        inputType: inputTypes.TEXT_FIELD_LIST_V2,
         name: "tags",
         options: {
           isTrimmed: true,
@@ -918,13 +920,13 @@ const journalForms = {
       {
         elementName: "comment",
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_AREA_LIST,
+        inputType: inputTypes.TEXT_AREA_LIST_V2,
         name: "plotComments",
         title: "Plot Comment",
       },
       {
         generationType: generationTypes.EMPTY_ARRAY,
-        inputType: inputTypes.TEXT_FIELD_LIST,
+        inputType: inputTypes.TEXT_FIELD_LIST_V2,
         name: "tags",
         options: {
           isTrimmed: true,
