@@ -7,6 +7,7 @@ import { Grid, LinearProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { BookSection } from "../books";
 import { EditorSection } from "../editor";
+import EditorSectionVw from "../editor/editorSectionVw";
 import { LandingSection } from "../landing";
 import { DisplayAllSection } from "../notes";
 import Panel from "./panel";
@@ -47,6 +48,16 @@ const pages = [
     name: "books",
     title: "Note Review - Books",
     index: 6,
+  },
+  {
+    name: "create-vw",
+    title: "Note Review Creator (VW)",
+    index: 7,
+  },
+  {
+    name: "edit-vw",
+    title: "Note Review Editor (VW)",
+    index: 8,
   },
 ];
 
@@ -124,6 +135,12 @@ const NavTabs = ({
               </Route>
               <Route exact path={`/${pages[6].name}`}>
                 <BookSection pageTitle={pages[6].title} />
+              </Route>
+              <Route exact path={`/${pages[7].name}`}>
+                <EditorSectionVw isNew={true} pageTitle={pages[7].title} />
+              </Route>
+              <Route exact path={`/${pages[8].name}`}>
+                <EditorSectionVw isNew={false} pageTitle={pages[8].title} />
               </Route>
             </RouterSwitch>
           </Panel>
