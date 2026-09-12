@@ -41,7 +41,8 @@ const ListFieldV2 = ({
     }
   }, [items.length, selectedIndex]);
 
-  const getItemValue = (item) => (elementName ? item?.[elementName] || "" : item);
+  const getItemValue = (item) =>
+    elementName ? item?.[elementName] || "" : item;
 
   const handleSelect = (index) => {
     setSelectedIndex(index);
@@ -98,9 +99,7 @@ const ListFieldV2 = ({
               key={`${index}-${getItemValue(item)}`}
               label={`${index + 1}. ${getItemValue(item)}`}
               onClick={() => handleSelect(index)}
-              title={
-                selectedIndex === index ? "Selected item" : "Select item"
-              }
+              title={selectedIndex === index ? "Selected item" : "Select item"}
               variant={selectedIndex === index ? "contained" : "text"}
             />
           ))}
