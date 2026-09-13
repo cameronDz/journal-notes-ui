@@ -30,7 +30,7 @@ const ListFieldV2 = ({
   const [display, setDisplay] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(null);
   const textInputType =
-    inputType === inputTypes.TEXT_AREA_LIST_V2
+    inputType === inputTypes.TEXT_AREA_LIST
       ? inputTypes.TEXT_AREA
       : inputTypes.TEXT_FIELD;
 

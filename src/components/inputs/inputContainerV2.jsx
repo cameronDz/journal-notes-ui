@@ -24,8 +24,6 @@ const simpleFields = [
 const listFields = [
   inputTypes.TEXT_AREA_LIST,
   inputTypes.TEXT_FIELD_LIST,
-  inputTypes.TEXT_AREA_LIST_V2,
-  inputTypes.TEXT_FIELD_LIST_V2,
 ];
 const InputContainerV2 = ({
   elementName = "",
