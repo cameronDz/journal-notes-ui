@@ -10,7 +10,7 @@ import { ArticleCard } from "../../components/displays/article";
 import { BookCard } from "../../components/displays/book";
 import RouteTitle from "../../components/routeTitle";
 import StandardButton from "../../components/standardButton";
-import JournalFormVw from "./journalFormVw";
+import JournalFormV2 from "./journalFormV2";
 import JournalFormRadioSelect from "./journalFormRadioSelect";
 import { generateDateString } from "../../libs/date";
 import {
@@ -50,14 +50,14 @@ const buttonTitleReset = "Clear note inputs";
 const buttonTitleUpload = "Save note";
 
 const cloneKey = "/clone?id";
-const editKey = "/edit-vw?id";
+const editKey = "/edit-v2?id";
 
 let abortCtrlIndexUpsert = null;
 let abortCtrlNoteGet = null;
 let abortCtrlNoteUpsert = null;
 
 const useStyles = makeStyles(() => styles);
-const EditorSectionVw = ({
+const EditorSectionV2 = ({
   clearEditNote,
   editNote,
   isLoadingNote,
@@ -162,7 +162,7 @@ const EditorSectionVw = ({
     if (!!cloneId || !!editId) {
       setCloneId("");
       setEditId("");
-      const pathname = "/create-vw";
+      const pathname = "/create-v2";
       history.push({ pathname });
     }
   };
@@ -233,7 +233,7 @@ const EditorSectionVw = ({
           Must log in with user credentials in order to create journal notes.
         </Alert>
       )}
-      <JournalFormVw
+      <JournalFormV2
         editValues={editValues}
         formValues={values}
         inputs={journalForms?.[type]?.inputs}
@@ -282,7 +282,7 @@ const EditorSectionVw = ({
   );
 };
 
-EditorSectionVw.propTypes = propTypes;
+EditorSectionV2.propTypes = propTypes;
 const mapStateToProps = (state) => ({
   editNote: state.editor.note,
   isLoadingNote: state.editor.isLoadingNote,
@@ -297,4 +297,4 @@ const mapDispatchToProps = {
   requestNoteUpsert: upsertNote,
   updateArticleIndexList: upsertIndex,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(EditorSectionVw);
+export default connect(mapStateToProps, mapDispatchToProps)(EditorSectionV2);

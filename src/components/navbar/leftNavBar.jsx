@@ -39,11 +39,11 @@ const icons = [
   },
   {
     icon: <EditOutlined />,
-    name: "create-vw",
+    name: "create-v2",
   },
   {
     icon: <EditOutlined />,
-    name: "edit-vw",
+    name: "edit-v2",
   },
   {
     icon: <VpnKey />,

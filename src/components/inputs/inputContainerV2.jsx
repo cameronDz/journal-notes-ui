@@ -27,7 +27,7 @@ const listFields = [
   inputTypes.TEXT_AREA_LIST_V2,
   inputTypes.TEXT_FIELD_LIST_V2,
 ];
-const InputContainerVw = ({
+const InputContainerV2 = ({
   elementName = "",
   isDisabled = true,
   name = "",
@@ -66,5 +66,5 @@ const InputContainerVw = ({
   );
 };
 
-InputContainerVw.propTypes = propTypes;
-export default InputContainerVw;
+InputContainerV2.propTypes = propTypes;
+export default InputContainerV2;

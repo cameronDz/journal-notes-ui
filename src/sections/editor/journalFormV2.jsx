@@ -4,7 +4,7 @@ import { Grid } from "@material-ui/core";
 import { generateFormValues } from "../../libs/generateFormValues";
 import { handleFunction } from "../../libs/eventUtil";
 import { transformValuesToCurrentVersion } from "../../libs/transformer";
-import InputContainerVw from "../../components/inputs/inputContainerVw";
+import InputContainerV2 from "../../components/inputs/inputContainerV2";
 
 const propTypes = {
   editValues: PropType.object,
@@ -19,7 +19,7 @@ const propTypes = {
   setReloadValues: PropType.func,
   updateValues: PropType.func,
 };
-const JournalFormVw = ({
+const JournalFormV2 = ({
   editValues = null,
   formValues = null,
   inputs = null,
@@ -86,7 +86,7 @@ const JournalFormVw = ({
             !input.isHidden && (
               <Fragment key={input.id || index}>
                 <Grid item xs={12} sm={12} md={12}>
-                  <InputContainerVw
+                  <InputContainerV2
                     elementName={input.elementName}
                     isDisabled={isDisabled}
                     name={input.name}
@@ -105,5 +105,5 @@ const JournalFormVw = ({
   );
 };
 
-JournalFormVw.propTypes = propTypes;
-export default JournalFormVw;
+JournalFormV2.propTypes = propTypes;
+export default JournalFormV2;
