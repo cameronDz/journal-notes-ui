@@ -7,6 +7,7 @@ import {
   Cached,
   DescriptionTwoTone,
   Edit,
+  EditOutlined,
   HomeTwoTone,
   SearchTwoTone,
   VpnKey,
@@ -35,6 +36,14 @@ const icons = [
   {
     icon: <Edit />,
     name: "create",
+  },
+  {
+    icon: <EditOutlined />,
+    name: "create-v2",
+  },
+  {
+    icon: <EditOutlined />,
+    name: "edit-v2",
   },
   {
     icon: <VpnKey />,
