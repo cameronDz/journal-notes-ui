@@ -21,10 +21,7 @@ const simpleFields = [
   inputTypes.TEXT_AREA,
   inputTypes.TEXT_FIELD,
 ];
-const listFields = [
-  inputTypes.TEXT_AREA_LIST,
-  inputTypes.TEXT_FIELD_LIST,
-];
+const listFields = [inputTypes.TEXT_AREA_LIST, inputTypes.TEXT_FIELD_LIST];
 const InputContainerV2 = ({
   elementName = "",
   isDisabled = true,
