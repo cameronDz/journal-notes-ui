@@ -27,6 +27,7 @@ const ListFieldV2 = ({
   onUpdate = null,
   options = {},
 }) => {
+  const safeItems = Array.isArray(items) ? items : [];
   const [display, setDisplay] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(null);
   const textInputType =
@@ -35,22 +36,22 @@ const ListFieldV2 = ({
       : inputTypes.TEXT_FIELD;
 
   useEffect(() => {
-    if (selectedIndex !== null && selectedIndex >= items.length) {
+    if (selectedIndex !== null && selectedIndex >= safeItems.length) {
       setSelectedIndex(null);
       setDisplay("");
     }
-  }, [items.length, selectedIndex]);
+  }, [safeItems.length, selectedIndex]);
 
   const getItemValue = (item) =>
     elementName ? item?.[elementName] || "" : item;
 
   const handleSelect = (index) => {
     setSelectedIndex(index);
-    setDisplay(getItemValue(items[index]));
+    setDisplay(getItemValue(safeItems[index]));
   };
 
   const handleAdd = () => {
-    let clone = defaultDuplicateArray(items);
+    let clone = defaultDuplicateArray(safeItems);
     if (elementName) {
       clone.push({ createDate: new Date(), [elementName]: display });
     } else {
@@ -68,7 +69,7 @@ const ListFieldV2 = ({
     if (selectedIndex === null) {
       return;
     }
-    const clone = defaultDuplicateArray(items);
+    const clone = defaultDuplicateArray(safeItems);
     clone[selectedIndex] = elementName
       ? { ...clone[selectedIndex], [elementName]: display }
       : display;
@@ -81,7 +82,7 @@ const ListFieldV2 = ({
     if (selectedIndex === null) {
       return;
     }
-    const clone = defaultDuplicateArray(items);
+    const clone = defaultDuplicateArray(safeItems);
     clone.splice(selectedIndex, 1);
     handleFunction(onUpdate, clone);
     setDisplay("");
@@ -91,9 +92,9 @@ const ListFieldV2 = ({
   const hasDisplay = !!display;
   return (
     <Fragment>
-      {Array.isArray(items) && items.length > 0 && (
+      {safeItems.length > 0 && (
         <div style={{ maxHeight: "180px", overflowY: "auto" }}>
-          {items.map((item, index) => (
+          {safeItems.map((item, index) => (
             <StandardButton
               disabled={isDisabled}
               key={`${index}-${getItemValue(item)}`}
