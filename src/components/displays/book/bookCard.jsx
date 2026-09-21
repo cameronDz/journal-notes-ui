@@ -8,13 +8,17 @@ const propTypes = {
   isButtonMisc: PropType.bool,
   isChild: PropType.bool,
   isClonable: PropType.bool,
+  isClonableV2: PropType.bool,
   isEditable: PropType.bool,
+  isEditableV2: PropType.bool,
   hasBorder: PropType.bool,
   minHeight: PropType.string,
   noteData: PropType.shape(propTypesBookV1),
   onClickBookId: PropType.func,
   onClickClone: PropType.func,
+  onClickCloneV2: PropType.func,
   onClickEdit: PropType.func,
+  onClickEditV2: PropType.func,
   show: PropType.bool,
 };
 
@@ -22,13 +26,17 @@ const BookCard = ({
   isButtonMisc = false,
   isChild = false,
   isClonable = false,
+  isClonableV2 = false,
   isEditable = false,
+  isEditableV2 = false,
   hasBorder = false,
   minHeight = null,
   noteData = null,
   onClickBookId = null,
   onClickClone = null,
+  onClickCloneV2 = null,
   onClickEdit = null,
+  onClickEditV2 = null,
   show = false,
 }) => {
   const [showFull, setShowFull] = useState(false);
@@ -48,14 +56,18 @@ const BookCard = ({
     <NoteCard
       isButtonMisc={isButtonMisc}
       isClonable={isClonable}
+      isClonableV2={isClonableV2}
       isEditable={isEditable}
+      isEditableV2={isEditableV2}
       isFullView={showFull}
       hasBorder={hasBorder}
       maxHeight={maxHeight}
       minHeight={calcMinHeight}
       onClickButtonMisc={onClickBookId}
       onClickClone={onClickClone}
+      onClickCloneV2={onClickCloneV2}
       onClickEdit={onClickEdit}
+      onClickEditV2={onClickEditV2}
       onClickFull={handleClick}
       textButtonMisc="Align Book ID"
     >

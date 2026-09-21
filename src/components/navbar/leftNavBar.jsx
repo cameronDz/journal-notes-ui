@@ -6,6 +6,7 @@ import {
   BookOutlined,
   Cached,
   DescriptionTwoTone,
+  PostAdd,
   Edit,
   EditOutlined,
   HomeTwoTone,
@@ -38,7 +39,7 @@ const icons = [
     name: "create",
   },
   {
-    icon: <EditOutlined />,
+    icon: <PostAdd />,
     name: "create-v2",
   },
   {

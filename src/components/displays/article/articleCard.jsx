@@ -6,15 +6,19 @@ import Article from "./article";
 const propTypes = {
   articleData: PropType.object,
   isEditable: PropType.bool,
+  isEditableV2: PropType.bool,
   minHeight: PropType.string,
   onClickEdit: PropType.func,
+  onClickEditV2: PropType.func,
   show: PropType.bool,
 };
 const ArticleCard = ({
   articleData,
   isEditable,
+  isEditableV2,
   minHeight,
   onClickEdit,
+  onClickEditV2,
   show,
 }) => {
   const [showFull, setShowFull] = useState(false);
@@ -30,9 +34,11 @@ const ArticleCard = ({
   return (
     <NoteCard
       isEditable={isEditable}
+      isEditableV2={isEditableV2}
       isFullView={showFull}
       minHeight={minHeight}
       onClickEdit={onClickEdit}
+      onClickEditV2={onClickEditV2}
       onClickFull={handleClickFull}
     >
       <Article {...articleData} showFull={showFull} />

@@ -49,7 +49,8 @@ const availableTypes = Object.values(journalTypes);
 const buttonTitleReset = "Clear note inputs";
 const buttonTitleUpload = "Save note";
 
-const cloneKey = "/clone?id";
+const cloneKey = "/create-v2?id";
+const legacyCloneKey = "/clone?id";
 const editKey = "/edit-v2?id";
 
 let abortCtrlIndexUpsert = null;
@@ -88,8 +89,8 @@ const EditorSectionV2 = ({
     const parsedHash = parse(location?.hash);
     if (parsedHash?.[editKey]) {
       setEditId(parsedHash?.[editKey]);
-    } else if (parsedHash?.[cloneKey]) {
-      setCloneId(parsedHash?.[cloneKey]);
+    } else if (parsedHash?.[cloneKey] || parsedHash?.[legacyCloneKey]) {
+      setCloneId(parsedHash?.[cloneKey] || parsedHash?.[legacyCloneKey]);
     }
     return () => {
       abortCtrlNoteGet?.abort();

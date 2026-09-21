@@ -9,7 +9,9 @@ import {
 import { handleFunction } from "../../libs/eventUtil";
 
 const CLONE = "Clone Note";
+const CLONE_V2 = "Clone Note V2";
 const EDIT = "Edit Note";
+const EDIT_V2 = "Edit Note V2";
 const EXPAND = "Expand to see More";
 const RETRACT = "Show less";
 
@@ -17,14 +19,18 @@ const propTypes = {
   children: PropType.node,
   isButtonMisc: PropType.bool,
   isClonable: PropType.bool,
+  isClonableV2: PropType.bool,
   isEditable: PropType.bool,
+  isEditableV2: PropType.bool,
   isFullView: PropType.bool,
   hasBorder: PropType.bool,
   maxHeight: PropType.string,
   minHeight: PropType.string,
   onClickButtonMisc: PropType.func,
   onClickClone: PropType.func,
+  onClickCloneV2: PropType.func,
   onClickEdit: PropType.func,
+  onClickEditV2: PropType.func,
   onClickFull: PropType.func,
   textButtonMisc: PropType.string,
 };
@@ -32,14 +38,18 @@ const NoteCard = ({
   children = null,
   isButtonMisc = false,
   isClonable = false,
+  isClonableV2 = false,
   isEditable = false,
+  isEditableV2 = false,
   isFullView = false,
   hasBorder = false,
   maxHeight = null,
   minHeight = null,
   onClickClone = null,
+  onClickCloneV2 = null,
   onClickButtonMisc = null,
   onClickEdit = null,
+  onClickEditV2 = null,
   onClickFull = null,
   textButtonMisc = "",
 }) => {
@@ -75,6 +85,15 @@ const NoteCard = ({
             {EDIT}
           </Button>
         )}
+        {isEditableV2 && (
+          <Button
+            onClick={() => handleFunction(onClickEditV2)}
+            size="small"
+            variant="outlined"
+          >
+            {EDIT_V2}
+          </Button>
+        )}
         {isClonable && (
           <Button
             onClick={() => handleFunction(onClickClone)}
@@ -82,6 +101,15 @@ const NoteCard = ({
             variant="outlined"
           >
             {CLONE}
+          </Button>
+        )}
+        {isClonableV2 && (
+          <Button
+            onClick={() => handleFunction(onClickCloneV2)}
+            size="small"
+            variant="outlined"
+          >
+            {CLONE_V2}
           </Button>
         )}
         {isButtonMisc && (
