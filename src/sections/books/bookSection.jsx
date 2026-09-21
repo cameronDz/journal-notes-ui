@@ -33,7 +33,7 @@ const BookSection = ({
   const [meta, setMeta] = useState({});
   const [showEntry, setShowEntry] = useState(true);
   const [showResources, setShowResources] = useState(false);
-  const [updatedNotesKeys, setUpdatedNotesKeys] = useState({});
+  const updatedNotesKeys = {};
 
   useEffect(() => {
     const clonedNotes = JSON.parse(JSON.stringify(notes || [])).sort(sortFunc);
@@ -83,6 +83,14 @@ const BookSection = ({
     }
   };
 
+  const handleClickCardBtnV2 = (id, type = "") => {
+    if (!!id && ["clone", "edit"].indexOf(type) > -1) {
+      const search = `id=${id}`;
+      const pathname = type === "clone" ? "/create-v2" : "/edit-v2";
+      history.push({ pathname, search });
+    }
+  };
+
   const handleClickShowEntries = (id) => {
     const open = { ...expandEntry };
     open[id] = !open[id];
@@ -93,6 +101,7 @@ const BookSection = ({
     setShowEntry((prev) => !prev);
     setShowResources((prev) => !prev);
   };
+  const bookTitleWrapperClass = `${classes.inlineBlock} ${classes.overflowXHidden}`;
 
   return (
     <section>
@@ -102,7 +111,7 @@ const BookSection = ({
           Total Books:
         </h4>
         <span className={classNames(classes.inlineBlock)}>
-          {Object.keys(meta).length || `0`}
+          {Object.keys(meta).length || "0"}
         </span>
         <div className={classNames(classes.inlineBlock, classes.margin12)}>
           <FormControlLabel
@@ -110,7 +119,7 @@ const BookSection = ({
             control={
               <Switch
                 checked={showEntry}
-                color={"primary"}
+                color="primary"
                 onChange={handleClickToggleDisplay}
               />
             }
@@ -128,9 +137,9 @@ const BookSection = ({
               <div
                 className={classNames(classes.inlineBlock, classes.margin12)}
               >
-                <div
-                  className={classNames(classes.block, classes.width72)}
-                >{`Notes: ${entries}`}</div>
+                <div className={classNames(classes.block, classes.width72)}>
+                  {`Notes: ${entries}`}
+                </div>
                 <div
                   className={classNames(classes.navIconWrapper, classes.block)}
                 >
@@ -141,12 +150,7 @@ const BookSection = ({
                   />
                 </div>
               </div>
-              <div
-                className={classNames(
-                  classes.inlineBlock,
-                  classes.overflowXHidden
-                )}
-              >
+              <div className={bookTitleWrapperClass}>
                 <BookTitleSection
                   author={meta[bookId].author}
                   bookDescription={meta[bookId].bookDescription}
@@ -187,10 +191,14 @@ const BookSection = ({
                       }
                       isChild={isChild}
                       isClonable={isUserSecured}
+                      isClonableV2={isUserSecured}
                       isEditable={isUserSecured}
+                      isEditableV2={isUserSecured}
                       noteData={data}
                       onClickClone={() => handleClickCardBtn(id, "clone")}
+                      onClickCloneV2={() => handleClickCardBtnV2(id, "clone")}
                       onClickEdit={() => handleClickCardBtn(id, "edit")}
+                      onClickEditV2={() => handleClickCardBtnV2(id, "edit")}
                     />
                   </Fragment>
                 );

@@ -44,6 +44,15 @@ const LandingSection = ({
     }
   };
 
+  const handleClickV2Btn = (data = {}, type = "") => {
+    const id = data?.id || "";
+    if (!!id && ["clone", "edit"].indexOf(type) > -1) {
+      const search = `id=${id}`;
+      const pathname = type === "clone" ? "/create-v2" : "/edit-v2";
+      history.push({ pathname, search });
+    }
+  };
+
   const text = isLoading ? landingText.loading : landingText.noArticles;
   const note = latestArticle(notes) || {};
   return (
@@ -59,17 +68,23 @@ const LandingSection = ({
             {note.journalType === journalTypes.BOOK && (
               <BookCard
                 isClonable={isUserSecured}
+                isClonableV2={isUserSecured}
                 isEditable={isUserSecured}
+                isEditableV2={isUserSecured}
                 noteData={note}
                 onClickClone={() => handleClickBtn(note, "clone")}
+                onClickCloneV2={() => handleClickV2Btn(note, "clone")}
                 onClickEdit={() => handleClickBtn(note, "edit")}
+                onClickEditV2={() => handleClickV2Btn(note, "edit")}
               />
             )}
             {note.journalType !== journalTypes.BOOK && (
               <ArticleCard
                 articleData={note}
                 isEditable={isUserSecured}
+                isEditableV2={isUserSecured}
                 onClickEdit={() => handleClickBtn(note, "edit")}
+                onClickEditV2={() => handleClickV2Btn(note, "edit")}
               />
             )}
           </Fragment>

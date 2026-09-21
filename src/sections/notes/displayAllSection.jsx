@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import classNames from "classnames";
 import PropType from "prop-types";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -151,6 +150,15 @@ const DisplayAllSection = ({
     }
   };
 
+  const handleClickV2Btn = (data = {}, type = "") => {
+    const id = data?.id || "";
+    if (!!id && ["clone", "edit"].indexOf(type) > -1) {
+      const search = `id=${id}`;
+      const pathname = type === "clone" ? "/create-v2" : "/edit-v2";
+      history.push({ pathname, search });
+    }
+  };
+
   const handleClickRemoveCurrentSelectedFilter = () => {
     if (!!filterTagSelected && !!filterTagSelected[0]) {
       setTagsFilter([
@@ -178,20 +186,15 @@ const DisplayAllSection = ({
 
   const isView = pageName === "view";
   const minHeight = isView ? "120px" : null;
+  const filterGridClass = `${classes.filterGridWrapper} ${
+    isLoading && classes.filterLoadingWrapper
+  } ${!isLoading && classes.filterLoadedWrapper}`;
   return (
     <Fragment>
       <RouteTitle title={title} />
       <Grid container spacing={0}>
         {pageName !== "view" && (
-          <Grid
-            className={classNames(
-              classes.filterGridWrapper,
-              isLoading && classes.filterLoadingWrapper,
-              !isLoading && classes.filterLoadedWrapper
-            )}
-            item
-            sm={12}
-          >
+          <Grid className={filterGridClass} item sm={12}>
             <Grid container spacing={0}>
               <Grid item xs={12} sm={12} md={5}>
                 <FilterSortOrder
@@ -231,19 +234,27 @@ const DisplayAllSection = ({
                         {note.journalType === journalTypes.BOOK && (
                           <BookCard
                             isClonable={isUserSecured}
+                            isClonableV2={isUserSecured}
                             isEditable={isUserSecured}
+                            isEditableV2={isUserSecured}
                             minHeight={minHeight}
                             noteData={note}
                             onClickClone={() => handleClickBtn(note, "clone")}
+                            onClickCloneV2={() =>
+                              handleClickV2Btn(note, "clone")
+                            }
                             onClickEdit={() => handleClickBtn(note, "edit")}
+                            onClickEditV2={() => handleClickV2Btn(note, "edit")}
                           />
                         )}
                         {note.journalType !== journalTypes.BOOK && (
                           <ArticleCard
                             articleData={note}
                             isEditable={isUserSecured}
+                            isEditableV2={isUserSecured}
                             minHeight={minHeight}
                             onClickEdit={() => handleClickBtn(note, "edit")}
+                            onClickEditV2={() => handleClickV2Btn(note, "edit")}
                           />
                         )}
                       </Grid>
