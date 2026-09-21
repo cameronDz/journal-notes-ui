@@ -101,6 +101,7 @@ const BookSection = ({
     setShowEntry((prev) => !prev);
     setShowResources((prev) => !prev);
   };
+  const bookTitleWrapperClass = `${classes.inlineBlock} ${classes.overflowXHidden}`;
 
   return (
     <section>
@@ -110,13 +111,17 @@ const BookSection = ({
           Total Books:
         </h4>
         <span className={classNames(classes.inlineBlock)}>
-          {Object.keys(meta).length || `0`}
+          {Object.keys(meta).length || "0"}
         </span>
         <div className={classNames(classes.inlineBlock, classes.margin12)}>
           <FormControlLabel
             className={classNames(classes.padding2)}
             control={
-              <Switch checked={showEntry} color="primary" onChange={handleClickToggleDisplay} />
+              <Switch
+                checked={showEntry}
+                color="primary"
+                onChange={handleClickToggleDisplay}
+              />
             }
             disabled={isLoading}
             label={`Showing ${showEntry ? "entries" : "resources"}`}
@@ -132,9 +137,7 @@ const BookSection = ({
               <div
                 className={classNames(classes.inlineBlock, classes.margin12)}
               >
-                <div
-                  className={classNames(classes.block, classes.width72)}
-                >
+                <div className={classNames(classes.block, classes.width72)}>
                   {`Notes: ${entries}`}
                 </div>
                 <div
@@ -147,12 +150,7 @@ const BookSection = ({
                   />
                 </div>
               </div>
-              <div
-                className={classNames(
-                  classes.inlineBlock,
-                  classes.overflowXHidden,
-                )}
-              >
+              <div className={bookTitleWrapperClass}>
                 <BookTitleSection
                   author={meta[bookId].author}
                   bookDescription={meta[bookId].bookDescription}

@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState, Fragment } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import classNames from "classnames";
 import PropType from "prop-types";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -187,20 +186,15 @@ const DisplayAllSection = ({
 
   const isView = pageName === "view";
   const minHeight = isView ? "120px" : null;
+  const filterGridClass = `${classes.filterGridWrapper} ${
+    isLoading && classes.filterLoadingWrapper
+  } ${!isLoading && classes.filterLoadedWrapper}`;
   return (
     <Fragment>
       <RouteTitle title={title} />
       <Grid container spacing={0}>
         {pageName !== "view" && (
-          <Grid
-            className={classNames(
-              classes.filterGridWrapper,
-              isLoading && classes.filterLoadingWrapper,
-              !isLoading && classes.filterLoadedWrapper
-            )}
-            item
-            sm={12}
-          >
+          <Grid className={filterGridClass} item sm={12}>
             <Grid container spacing={0}>
               <Grid item xs={12} sm={12} md={5}>
                 <FilterSortOrder
